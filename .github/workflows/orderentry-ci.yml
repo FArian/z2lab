@@ -24,8 +24,8 @@ permissions:
 
 env:
   IMAGE_NAME: farian/orderentry
-  context: ./frontend/orderentry
-  file: ./frontend/orderentry/docker/Dockerfile
+  CONTEXT: ./frontend/orderentry
+  DOCKERFILE: docker/Dockerfile
 
 jobs:
   quality:
