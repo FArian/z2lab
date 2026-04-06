@@ -1,0 +1,49 @@
+{
+  "resourceType": "Practitioner",
+  "id": "prac-001",
+  "meta": {
+    "profile": ["http://hl7.org/fhir/StructureDefinition/Practitioner"]
+  },
+  "identifier": [
+    {
+      "system": "https://www.gs1.org/gln",
+      "value": "7601000000000"
+    }
+  ],
+  "active": true,
+  "name": [
+    {
+      "use": "official",
+      "family": "Müller",
+      "given": ["Hans"],
+      "prefix": ["Dr. med."]
+    }
+  ],
+  "telecom": [
+    {
+      "system": "email",
+      "value": "hans.mueller@hirslanden.ch",
+      "use": "work"
+    },
+    {
+      "system": "phone",
+      "value": "+41 44 387 21 11",
+      "use": "work"
+    }
+  ],
+  "gender": "male",
+  "qualification": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0360",
+            "code": "MD",
+            "display": "Doctor of Medicine"
+          }
+        ],
+        "text": "Facharzt für Innere Medizin"
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "resourceType": "Organization",
+  "id": "klinik-hirslanden",
+  "meta": {
+    "profile": ["http://hl7.org/fhir/StructureDefinition/Organization"]
+  },
+  "identifier": [
+    {
+      "system": "https://www.gs1.org/gln",
+      "value": "7601002074810"
+    }
+  ],
+  "active": true,
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/organization-type",
+          "code": "prov",
+          "display": "Healthcare Provider"
+        }
+      ],
+      "text": "Klinik"
+    }
+  ],
+  "name": "Klinik Hirslanden",
+  "alias": ["Hirslanden Zürich"],
+  "telecom": [
+    {
+      "system": "url",
+      "value": "https://www.hirslanden.ch",
+      "use": "work"
+    }
+  ]
+}

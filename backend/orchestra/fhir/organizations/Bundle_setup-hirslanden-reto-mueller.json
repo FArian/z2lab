@@ -1,0 +1,573 @@
+{
+  "resourceType": "Bundle",
+  "id": "bundle-setup-hirslanden-reto-mueller",
+  "type": "transaction",
+  "timestamp": "2026-04-04T00:00:00+02:00",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Organization",
+        "id": "zlz",
+        "identifier": [
+          { "system": "https://www.gs1.org/gln", "value": "7601009336904" }
+        ],
+        "active": true,
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/organization-type",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ],
+            "text": "Medizinisches Labor"
+          }
+        ],
+        "name": "ZLZ Zentrallabor AG",
+        "alias": ["ZLZ"],
+        "telecom": [
+          { "system": "url", "value": "https://www.zetlab.ch", "use": "work" }
+        ],
+        "address": [
+          {
+            "use": "work",
+            "type": "physical",
+            "line": ["Forchstrasse 454"],
+            "city": "Zollikon",
+            "state": "Zürich",
+            "postalCode": "8702",
+            "country": "CH"
+          }
+        ]
+      },
+      "request": { "method": "PUT", "url": "Organization/zlz" }
+    },
+    {
+      "resource": {
+        "resourceType": "Organization",
+        "id": "klinik-hirslanden",
+        "identifier": [
+          { "system": "https://www.gs1.org/gln", "value": "7601002074810" }
+        ],
+        "active": true,
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/organization-type",
+                "code": "prov",
+                "display": "Healthcare Provider"
+              }
+            ],
+            "text": "Klinik"
+          }
+        ],
+        "name": "Klinik Hirslanden",
+        "alias": ["Hirslanden Zürich"],
+        "telecom": [
+          { "system": "url", "value": "https://www.hirslanden.ch", "use": "work" },
+          { "system": "phone", "value": "+41 44 387 21 11", "use": "work" }
+        ],
+        "address": [
+          {
+            "use": "work",
+            "type": "physical",
+            "line": ["Witellikerstrasse 40"],
+            "city": "Zürich",
+            "state": "Zürich",
+            "postalCode": "8032",
+            "country": "CH"
+          }
+        ]
+      },
+      "request": { "method": "PUT", "url": "Organization/klinik-hirslanden" }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "id": "loc-hirslanden",
+        "identifier": [
+          { "system": "https://www.zetlab.ch/fhir/location", "value": "loc-hirslanden" }
+        ],
+        "status": "active",
+        "name": "Klinik Hirslanden",
+        "description": "Klinik Hirslanden — Hauptstandort Zürich",
+        "mode": "instance",
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
+                "code": "HOSP",
+                "display": "Hospital"
+              }
+            ]
+          }
+        ],
+        "address": {
+          "use": "work",
+          "line": ["Witellikerstrasse 40"],
+          "city": "Zürich",
+          "postalCode": "8032",
+          "country": "CH"
+        },
+        "managingOrganization": {
+          "reference": "Organization/klinik-hirslanden",
+          "display": "Klinik Hirslanden"
+        }
+      },
+      "request": { "method": "PUT", "url": "Location/loc-hirslanden" }
+    },
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "prac-reto-mueller",
+        "identifier": [
+          { "system": "https://www.gs1.org/gln", "value": "7601001775633" }
+        ],
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Müller",
+            "given": ["Reto"],
+            "prefix": ["Dr. med."]
+          }
+        ],
+        "telecom": [
+          { "system": "email", "value": "reto.mueller@hirslanden.ch", "use": "work" },
+          { "system": "phone", "value": "+41 44 387 21 11", "use": "work" }
+        ],
+        "gender": "male",
+        "qualification": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0360",
+                  "code": "MD",
+                  "display": "Doctor of Medicine"
+                }
+              ],
+              "text": "Facharzt für Innere Medizin FMH"
+            }
+          }
+        ]
+      },
+      "request": { "method": "PUT", "url": "Practitioner/prac-reto-mueller" }
+    },
+    {
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "role-reto-mueller-hirslanden",
+        "active": true,
+        "period": { "start": "2024-01-01" },
+        "practitioner": {
+          "reference": "Practitioner/prac-reto-mueller",
+          "display": "Dr. med. Reto Müller"
+        },
+        "organization": {
+          "reference": "Organization/klinik-hirslanden",
+          "display": "Klinik Hirslanden"
+        },
+        "code": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "59058001",
+                "display": "General physician"
+              }
+            ],
+            "text": "Facharzt Innere Medizin FMH"
+          }
+        ],
+        "specialty": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "419192003",
+                "display": "Internal medicine"
+              }
+            ]
+          }
+        ],
+        "location": [
+          {
+            "reference": "Location/loc-hirslanden",
+            "display": "Klinik Hirslanden"
+          }
+        ]
+      },
+      "request": { "method": "PUT", "url": "PractitionerRole/role-reto-mueller-hirslanden" }
+    },
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-hirslanden-001",
+        "identifier": [
+          {
+            "use": "usual",
+            "system": "https://www.hirslanden.ch/pid",
+            "value": "HIR-2026-0001"
+          },
+          {
+            "use": "official",
+            "system": "urn:oid:2.16.756.5.32",
+            "value": "756.9217.5600.35"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Keller",
+            "given": ["Hans", "Bernhard"]
+          }
+        ],
+        "telecom": [
+          { "system": "phone", "value": "+41 79 123 45 67", "use": "mobile" },
+          { "system": "email", "value": "h.keller@example.ch", "use": "home" }
+        ],
+        "gender": "male",
+        "birthDate": "1965-08-22",
+        "address": [
+          {
+            "use": "home",
+            "line": ["Seestrasse 12"],
+            "city": "Küsnacht",
+            "state": "Zürich",
+            "postalCode": "8700",
+            "country": "CH"
+          }
+        ],
+        "managingOrganization": {
+          "reference": "Organization/klinik-hirslanden",
+          "display": "Klinik Hirslanden"
+        },
+        "generalPractitioner": [
+          {
+            "reference": "Practitioner/prac-reto-mueller",
+            "display": "Dr. med. Reto Müller"
+          }
+        ]
+      },
+      "request": { "method": "PUT", "url": "Patient/pat-hirslanden-001" }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-BB",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": { "system": "https://www.zetlab.ch/fhir/specimen", "value": "16" }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/BB",
+        "subtitle": "Grosses Blutbild",
+        "status": "active",
+        "description": "Blutbild komplett mit Differentialblutbild",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": { "reference": "Organization/zlz" }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "#BB",
+              "display": "Grosses Blutbild"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "BB"
+          }
+        }
+      },
+      "request": { "method": "PUT", "url": "ActivityDefinition/actdef-BB" }
+    },
+    {
+      "resource": {
+        "resourceType": "SpecimenDefinition",
+        "id": "specdef-16",
+        "identifier": { "system": "https://www.zetlab.ch/fhir/specimen", "value": "16" },
+        "typeCollected": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/fhir/specimen-types",
+              "code": "16",
+              "display": "EDTA-Blut"
+            },
+            {
+              "system": "http://snomed.info/sct",
+              "code": "445295009",
+              "display": "Blood specimen with EDTA"
+            }
+          ],
+          "text": "EDTA-Blut (Lila Röhrchen)"
+        },
+        "typeTested": [
+          {
+            "preference": "preferred",
+            "container": {
+              "description": "EDTA-Röhrchen 2.7 mL (lila Verschluss)",
+              "minimumVolumeQuantity": {
+                "value": 1.0, "unit": "mL",
+                "system": "http://unitsofmeasure.org", "code": "mL"
+              }
+            },
+            "retentionTime": {
+              "value": 24, "unit": "h",
+              "system": "http://unitsofmeasure.org", "code": "h"
+            }
+          }
+        ]
+      },
+      "request": { "method": "PUT", "url": "SpecimenDefinition/specdef-16" }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-GLUK",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": { "system": "https://www.zetlab.ch/fhir/specimen", "value": "01" }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/GLUK",
+        "subtitle": "Glucose",
+        "status": "active",
+        "description": "Blutglukose (Nüchternwert)",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": { "reference": "Organization/zlz" }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "#GLUK",
+              "display": "Glucose"
+            },
+            {
+              "system": "http://loinc.org",
+              "code": "2345-7",
+              "display": "Glucose [Mass/volume] in Serum or Plasma"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "CLIN"
+          }
+        }
+      },
+      "request": { "method": "PUT", "url": "ActivityDefinition/actdef-GLUK" }
+    },
+    {
+      "resource": {
+        "resourceType": "SpecimenDefinition",
+        "id": "specdef-01",
+        "identifier": { "system": "https://www.zetlab.ch/fhir/specimen", "value": "01" },
+        "typeCollected": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/fhir/specimen-types",
+              "code": "01",
+              "display": "Serum"
+            },
+            {
+              "system": "http://snomed.info/sct",
+              "code": "119364003",
+              "display": "Serum specimen"
+            }
+          ],
+          "text": "Serum (Goldröhrchen / SST)"
+        },
+        "typeTested": [
+          {
+            "preference": "preferred",
+            "container": {
+              "description": "Serum-Gel-Röhrchen 5 mL (gold/rot Verschluss)",
+              "minimumVolumeQuantity": {
+                "value": 0.5, "unit": "mL",
+                "system": "http://unitsofmeasure.org", "code": "mL"
+              }
+            },
+            "retentionTime": {
+              "value": 48, "unit": "h",
+              "system": "http://unitsofmeasure.org", "code": "h"
+            }
+          }
+        ]
+      },
+      "request": { "method": "PUT", "url": "SpecimenDefinition/specdef-01" }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-KREA",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": { "system": "https://www.zetlab.ch/fhir/specimen", "value": "01" }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/KREA",
+        "subtitle": "Kreatinin",
+        "status": "active",
+        "description": "Kreatinin im Serum — Nierenfunktion",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": { "reference": "Organization/zlz" }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "#KREA",
+              "display": "Kreatinin"
+            },
+            {
+              "system": "http://loinc.org",
+              "code": "2160-0",
+              "display": "Creatinine [Mass/volume] in Serum or Plasma"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "CLIN"
+          }
+        }
+      },
+      "request": { "method": "PUT", "url": "ActivityDefinition/actdef-KREA" }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-TSH",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": { "system": "https://www.zetlab.ch/fhir/specimen", "value": "01" }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/TSH",
+        "subtitle": "TSH (Thyreoidea-stimulierendes Hormon)",
+        "status": "active",
+        "description": "Schilddrüsenfunktion — Screening",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": { "reference": "Organization/zlz" }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Endokrinologie",
+                "display": "Endokrinologie"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "#TSH",
+              "display": "TSH"
+            },
+            {
+              "system": "http://loinc.org",
+              "code": "3016-3",
+              "display": "Thyrotropin [Units/volume] in Serum or Plasma"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "ENDO"
+          }
+        }
+      },
+      "request": { "method": "PUT", "url": "ActivityDefinition/actdef-TSH" }
+    }
+  ]
+}

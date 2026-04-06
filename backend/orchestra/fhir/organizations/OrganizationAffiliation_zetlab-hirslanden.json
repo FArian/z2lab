@@ -1,0 +1,37 @@
+{
+  "resourceType": "OrganizationAffiliation",
+  "id": "aff-zetlab-hirslanden",
+  "meta": {
+    "profile": ["http://hl7.org/fhir/StructureDefinition/OrganizationAffiliation"]
+  },
+  "active": true,
+  "period": {
+    "start": "2024-01-01"
+  },
+  "organization": {
+    "reference": "Organization/zetlab",
+    "display": "ZetLab AG"
+  },
+  "participatingOrganization": {
+    "reference": "Organization/klinik-hirslanden",
+    "display": "Klinik Hirslanden"
+  },
+  "location": [
+    {
+      "reference": "Location/klinik-hirslanden",
+      "display": "Klinik Hirslanden"
+    }
+  ],
+  "code": [
+    {
+      "coding": [
+        {
+          "system": "http://hl7.org/fhir/organization-role",
+          "code": "laboratory",
+          "display": "Laboratory"
+        }
+      ],
+      "text": "Labor-Dienstleister"
+    }
+  ]
+}

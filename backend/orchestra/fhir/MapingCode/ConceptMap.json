@@ -1,0 +1,15 @@
+{
+  "resourceType": "ConceptMap",
+  "id": "zlz-loinc-zu-lis",
+  "sourceUri": "http://loinc.org",
+  "targetUri": "https://www.zetlab.ch/lis/codes",
+  "group": [{
+    "source": "http://loinc.org",
+    "target": "https://www.zetlab.ch/lis/codes",
+    "element": [
+      { "code": "624-7",  "target": [{ "code": "#ABAB", "equivalence": "equivalent" }] },
+      { "code": "6463-4", "target": [{ "code": "#AAUG", "equivalence": "equivalent" }] },
+      { "code": "33694-5","target": [{ "code": "#BAKPAU","equivalence": "equivalent" }] }
+    ]
+  }]
+}

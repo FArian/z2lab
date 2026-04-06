@@ -1,0 +1,18 @@
+MSH|^~\&|secureOrder^General|TESTDEV|LABZLZ|LAB|20260330083000||ORM^O01|MSG000001|P|2.5|||NE|NE|CH|UNICODE UTF-8
+PID|1||P43211^^^TESTDEV^PI||Musterfrau^Sabine^^^Frau||19700101|F|||Testgasse 1^^Wien^^1200^AT||0123456789^^^sabine@email.at||||||1234567890
+NTE|1|P|Bekannte Penicillin-Allergie
+PV1|1|A|TESTDEV||||12345^Müller^Hans|||A0||||
+IN1|1||CH12345678|Krankenkasse Muster||||||||20260101|20261231|||Musterfrau^Sabine||19700101|Testgasse 1^^Wien^^1200^CH|||||||||||||||||V98765
+IN2|1|7561234567890||||||756.1234.5678.90
+ORC|NW|7401010001||10093|IP||^^^20260330083000^^R||20260330082500|||TESTDEV
+NTE|1|P|V.a. Eisenmangelanämie, Fatigue seit 4 Wochen
+NTE|2|P|Aktuelle Medikation: Metformin 500mg 2x täglich
+OBR|1|||TRFS^Transferrinsättigung|||20260330082000||||||||7401010001|
+NTE|1|P|Patient seit 12h nüchtern
+OBX|1|NM|TRFS^Transferrinsättigung||18.5|%|20.0-50.0|L|||F|||20260330093000
+NTE|1|P|Transferrinsättigung erniedrigt, Eisenmangel wahrscheinlich
+OBR|2|||BLUTBILD^Grosses Blutbild|||20260330082000|
+OBX|2|NM|HB^Hämoglobin||11.2|g/dl|12.0-16.0|L|||F|||20260330093000
+OBX|3|NM|HKT^Hämatokrit||34.1|%|37.0-47.0|L|||F|||20260330093000
+OBX|4|NM|ERY^Erythrozyten||3.8|T/l|3.8-5.2||||F|||20260330093000
+SPM|1|7401010001|||SEGEL^Serum^LABOR||||||||||||20260330082000

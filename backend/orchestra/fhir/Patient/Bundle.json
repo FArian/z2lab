@@ -1,0 +1,358 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+
+    {
+      "resource": {
+        "resourceType": "Organization",
+        "id": "hirslanden",
+        "identifier": [{ "system": "urn:oid:2.51.1.3", "value": "7601002074810" }],
+        "name": "Hirslanden AG",
+        "address": [{
+          "line": ["Boulevard Lilienthal 2"],
+          "postalCode": "8152",
+          "city": "Glattpark (Opfikon)",
+          "country": "CH"
+        }]
+      },
+      "request": { "method": "PUT", "url": "Organization/hirslanden" }
+    },
+
+    {
+      "resource": {
+        "resourceType": "Organization",
+        "id": "zetlab",
+        "partOf": { "reference": "Organization/hirslanden" },
+        "identifier": [{ "system": "urn:oid:2.51.1.3", "value": "7601009336904" }],
+        "name": "ZetLab AG",
+        "address": [{
+          "line": ["Forchstrasse 454"],
+          "postalCode": "8702",
+          "city": "Zollikon",
+          "country": "CH"
+        }],
+        "telecom": [{ "system": "phone", "value": "+41441234567" }]
+      },
+      "request": { "method": "PUT", "url": "Organization/zetlab" }
+    },
+
+    {
+      "resource": {
+        "resourceType": "Organization",
+        "id": "zlz",
+        "partOf": { "reference": "Organization/hirslanden" },
+        "identifier": [{ "system": "urn:oid:2.51.1.3", "value": "7601009336904" }],
+        "name": "ZLZ AG",
+        "address": [{
+          "line": ["Forchstrasse 454"],
+          "postalCode": "8702",
+          "city": "Zollikon",
+          "country": "CH"
+        }]
+      },
+      "request": { "method": "PUT", "url": "Organization/zlz" }
+    },
+
+    {
+      "resource": {
+        "resourceType": "Organization",
+        "id": "css",
+        "identifier": [{ "system": "urn:oid:2.51.1.3", "value": "7601003001082" }],
+        "name": "CSS Versicherung"
+      },
+      "request": { "method": "PUT", "url": "Organization/css" }
+    },
+
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "ersin-dede",
+        "identifier": [{ "system": "urn:oid:2.51.1.3", "value": "7601001619241" }],
+        "name": [{ "family": "Dede", "given": ["Ersin"] }],
+        "telecom": [{ "system": "email", "value": "ersin.dede@lab.ch" }]
+      },
+      "request": { "method": "PUT", "url": "Practitioner/ersin-dede" }
+    },
+
+    {
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "ersin-role",
+        "practitioner": { "reference": "Practitioner/ersin-dede" },
+        "organization": { "reference": "Organization/zlz" },
+        "code": [{ "text": "Biomedical Lab Technician" }]
+      },
+      "request": { "method": "PUT", "url": "PractitionerRole/ersin-role" }
+    },
+
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "farhad-arian",
+        "identifier": [
+          { "system": "urn:oid:2.16.756.5.32", "value": "756.1234.5678.97" },
+          { "system": "urn:oid:2.16.756.5.30.1.123.1.1", "value": "80756001234567890123" }
+        ],
+        "name": [{ "family": "Arian", "given": ["Farhad"] }],
+        "gender": "male",
+        "birthDate": "1983-02-14",
+        "address": [{
+          "line": ["Forchstrasse 454"],
+          "postalCode": "8702",
+          "city": "Zollikon",
+          "country": "CH"
+        }],
+        "telecom": [
+          { "system": "phone", "value": "+41791234567" }
+        ]
+      },
+      "request": { "method": "PUT", "url": "Patient/farhad-arian" }
+    },
+
+    {
+      "resource": {
+        "resourceType": "Coverage",
+        "id": "coverage-1",
+        "status": "active",
+        "beneficiary": { "reference": "Patient/farhad-arian" },
+        "payor": [{ "reference": "Organization/css" }],
+        "identifier": [
+          {
+            "system": "urn:oid:2.16.756.5.30.1.123.1.1",
+            "value": "80756001234567890123"
+          }
+        ],
+        "type": { "text": "KVG Grundversicherung" }
+      },
+      "request": { "method": "PUT", "url": "Coverage/coverage-1" }
+    },
+
+    {
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "encounter-1",
+        "status": "in-progress",
+        "class": { "code": "AMB" },
+        "subject": { "reference": "Patient/farhad-arian" },
+        "serviceProvider": { "reference": "Organization/zlz" }
+      },
+      "request": { "method": "PUT", "url": "Encounter/encounter-1" }
+    },
+
+    {
+      "resource": {
+        "resourceType": "Specimen",
+        "id": "specimen-serum",
+        "identifier": [{ "system": "urn:oid:2.51.1.3", "value": "SPEC-2026-001" }],
+        "status": "available",
+        "type": {
+          "coding": [{
+            "system": "http://snomed.info/sct",
+            "code": "119364003",
+            "display": "Serum specimen"
+          }],
+          "text": "Serum"
+        },
+        "subject": { "reference": "Patient/farhad-arian" },
+        "collection": {
+          "collectedDateTime": "2026-03-29T09:30:00Z",
+          "bodySite": {
+            "coding": [{
+              "system": "http://snomed.info/sct",
+              "code": "368209003",
+              "display": "Right arm"
+            }]
+          }
+        }
+      },
+      "request": { "method": "PUT", "url": "Specimen/specimen-serum" }
+    },
+
+    {
+      "resource": {
+        "resourceType": "Specimen",
+        "id": "specimen-edta",
+        "identifier": [{ "system": "urn:oid:2.51.1.3", "value": "SPEC-2026-002" }],
+        "status": "available",
+        "type": {
+          "coding": [{
+            "system": "http://snomed.info/sct",
+            "code": "445295009",
+            "display": "Blood specimen with EDTA"
+          }],
+          "text": "EDTA-Blut"
+        },
+        "subject": { "reference": "Patient/farhad-arian" },
+        "collection": {
+          "collectedDateTime": "2026-03-29T09:30:00Z",
+          "bodySite": {
+            "coding": [{
+              "system": "http://snomed.info/sct",
+              "code": "368209003",
+              "display": "Right arm"
+            }]
+          }
+        }
+      },
+      "request": { "method": "PUT", "url": "Specimen/specimen-edta" }
+    },
+
+    {
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "order-crp",
+        "requisition": { "system": "urn:oid:2.51.1.3", "value": "order-1" },
+        "status": "active",
+        "intent": "order",
+        "priority": "routine",
+        "subject": { "reference": "Patient/farhad-arian" },
+        "encounter": { "reference": "Encounter/encounter-1" },
+        "requester": { "reference": "PractitionerRole/ersin-role" },
+        "performer": [{ "reference": "Organization/zetlab" }],
+        "specimen": [{ "reference": "Specimen/specimen-serum" }],
+        "authoredOn": "2026-03-29T10:00:00Z",
+        "code": {
+          "coding": [{
+            "system": "http://loinc.org",
+            "code": "1988-5",
+            "display": "C reactive protein [Mass/volume] in Serum or Plasma"
+          }],
+          "text": "CRP Analyse"
+        }
+      },
+      "request": { "method": "PUT", "url": "ServiceRequest/order-crp" }
+    },
+
+    {
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "order-blutbild",
+        "requisition": { "system": "urn:oid:2.51.1.3", "value": "order-1" },
+        "status": "active",
+        "intent": "order",
+        "priority": "routine",
+        "subject": { "reference": "Patient/farhad-arian" },
+        "encounter": { "reference": "Encounter/encounter-1" },
+        "requester": { "reference": "PractitionerRole/ersin-role" },
+        "performer": [{ "reference": "Organization/zetlab" }],
+        "specimen": [{ "reference": "Specimen/specimen-edta" }],
+        "authoredOn": "2026-03-29T10:00:00Z",
+        "code": {
+          "coding": [{
+            "system": "http://loinc.org",
+            "code": "58410-2",
+            "display": "CBC panel - Blood by Automated count"
+          }],
+          "text": "Blutbild (grosses)"
+        }
+      },
+      "request": { "method": "PUT", "url": "ServiceRequest/order-blutbild" }
+    },
+
+    {
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "order-tsh",
+        "requisition": { "system": "urn:oid:2.51.1.3", "value": "order-1" },
+        "status": "active",
+        "intent": "order",
+        "priority": "routine",
+        "subject": { "reference": "Patient/farhad-arian" },
+        "encounter": { "reference": "Encounter/encounter-1" },
+        "requester": { "reference": "PractitionerRole/ersin-role" },
+        "performer": [{ "reference": "Organization/zetlab" }],
+        "specimen": [{ "reference": "Specimen/specimen-serum" }],
+        "authoredOn": "2026-03-29T10:00:00Z",
+        "code": {
+          "coding": [{
+            "system": "http://loinc.org",
+            "code": "3016-3",
+            "display": "Thyrotropin [Units/volume] in Serum or Plasma"
+          }],
+          "text": "TSH"
+        }
+      },
+      "request": { "method": "PUT", "url": "ServiceRequest/order-tsh" }
+    },
+
+    {
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "order-kreatinin",
+        "requisition": { "system": "urn:oid:2.51.1.3", "value": "order-1" },
+        "status": "active",
+        "intent": "order",
+        "priority": "routine",
+        "subject": { "reference": "Patient/farhad-arian" },
+        "encounter": { "reference": "Encounter/encounter-1" },
+        "requester": { "reference": "PractitionerRole/ersin-role" },
+        "performer": [{ "reference": "Organization/zetlab" }],
+        "specimen": [{ "reference": "Specimen/specimen-serum" }],
+        "authoredOn": "2026-03-29T10:00:00Z",
+        "code": {
+          "coding": [{
+            "system": "http://loinc.org",
+            "code": "2160-0",
+            "display": "Creatinine [Mass/volume] in Serum or Plasma"
+          }],
+          "text": "Kreatinin"
+        }
+      },
+      "request": { "method": "PUT", "url": "ServiceRequest/order-kreatinin" }
+    },
+
+    {
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "order-got",
+        "requisition": { "system": "urn:oid:2.51.1.3", "value": "order-1" },
+        "status": "active",
+        "intent": "order",
+        "priority": "routine",
+        "subject": { "reference": "Patient/farhad-arian" },
+        "encounter": { "reference": "Encounter/encounter-1" },
+        "requester": { "reference": "PractitionerRole/ersin-role" },
+        "performer": [{ "reference": "Organization/zetlab" }],
+        "specimen": [{ "reference": "Specimen/specimen-serum" }],
+        "authoredOn": "2026-03-29T10:00:00Z",
+        "code": {
+          "coding": [{
+            "system": "http://loinc.org",
+            "code": "1920-8",
+            "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+          }],
+          "text": "GOT (AST)"
+        }
+      },
+      "request": { "method": "PUT", "url": "ServiceRequest/order-got" }
+    },
+
+    {
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "order-hba1c",
+        "requisition": { "system": "urn:oid:2.51.1.3", "value": "order-1" },
+        "status": "active",
+        "intent": "order",
+        "priority": "routine",
+        "subject": { "reference": "Patient/farhad-arian" },
+        "encounter": { "reference": "Encounter/encounter-1" },
+        "requester": { "reference": "PractitionerRole/ersin-role" },
+        "performer": [{ "reference": "Organization/zetlab" }],
+        "specimen": [{ "reference": "Specimen/specimen-edta" }],
+        "authoredOn": "2026-03-29T10:00:00Z",
+        "code": {
+          "coding": [{
+            "system": "http://loinc.org",
+            "code": "4548-4",
+            "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+          }],
+          "text": "HbA1c"
+        }
+      },
+      "request": { "method": "PUT", "url": "ServiceRequest/order-hba1c" }
+    }
+
+  ]
+}

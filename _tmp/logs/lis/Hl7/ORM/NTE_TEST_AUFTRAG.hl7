@@ -1,0 +1,18 @@
+MSH|^~\&|secureOrder^General|TESTDEV|Vianova|LABOR|20260325114313||ORM^O01|70e5146a12ed4f36acf44f9a2e3cf6f7|P|2.5|||NE|NE|CH|UNICODE UTF-8
+PID|1|P43211|TESTDEVP43211^^^TESTDEV^PI^&TESTDEV||Musterfrau^Sabine^^^Frau||19700101|F|||Testgasse 1^^Wien^^1200^AT||012312321^^^test@a.a||||||1111111111
+NTE|1|P|{base64_encoded}|RE^Begleitschein
+PV1|1|U|TESTDEV||||||||||||A0||||
+IN1|1|||Krankenkasse||||||||||||Musterfrau^Sabine||19700101|Testgasse 1^^Wien^^1200^CH|||||||||||||||||V12345|||||||F
+IN2|1|1111111111
+ORC|NW|7401010225||10093|CM||^^^20260325114200^^R||20260325114308|||TESTDEV
+OBR|1|||TRFS^TransferrinsÃ¤ttigung|||20260325114200||||||||740101022501|
+OBR|2|||REKK
+OBR|3|||KOPIEPAT
+OBR|4|||PATCON
+OBR|5|||KOPIE2
+OBX|1|TX|KOPIE2||||||||F|||20260325114308
+NTE|1|P|Herr TestVorname Test  Linke Zeile 1000  3500 Krems (AT)  test@test.test.at
+OBR|6|||KOPIE3
+OBX|2|TX|KOPIE3||||||||F|||20260325114308
+NTE|1|P|Frau Testa Testroin  Testgasse 99  1130 Wien (Ã–sterreich)  test@tme.co.at
+SPM|1|740101022501|||SEGEL^Serum^LABOR||||||||||||20260325114200

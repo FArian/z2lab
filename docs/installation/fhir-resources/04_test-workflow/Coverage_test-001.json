@@ -1,0 +1,57 @@
+{
+  "resourceType": "Coverage",
+  "id": "cov-test-001",
+  "meta": {
+    "profile": ["http://hl7.org/fhir/StructureDefinition/Coverage"]
+  },
+  "status": "active",
+  "type": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+        "code": "SUBSIDIZ",
+        "display": "Subsidized Health Program"
+      }
+    ],
+    "text": "Grundversicherung KVG"
+  },
+  "subscriberId": "CSS-123456789",
+  "beneficiary": {
+    "reference": "Patient/test-001",
+    "display": "Anna Testperson"
+  },
+  "relationship": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/subscriber-relationship",
+        "code": "self",
+        "display": "Self"
+      }
+    ]
+  },
+  "period": {
+    "start": "2024-01-01",
+    "end": "2026-12-31"
+  },
+  "payor": [
+    {
+      "reference": "Organization/versicherung-css",
+      "display": "CSS Versicherung AG"
+    }
+  ],
+  "class": [
+    {
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/coverage-class",
+            "code": "plan",
+            "display": "Plan"
+          }
+        ]
+      },
+      "value": "KVG-Allgemein",
+      "name": "KVG Allgemeine Abteilung"
+    }
+  ]
+}

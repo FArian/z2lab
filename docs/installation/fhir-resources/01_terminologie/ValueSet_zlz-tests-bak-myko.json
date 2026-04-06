@@ -1,0 +1,410 @@
+{
+  "resourceType": "ValueSet",
+  "id": "zlz-tests-bak-myko",
+  "url": "https://www.zetlab.ch/fhir/ValueSet/zlz-tests-bak-myko",
+  "name": "zlzTestsBakMyko",
+  "title": "ZLZ — Bakteriologie / Mykologie",
+  "status": "active",
+  "description": "Tests der Befundgruppe BAK/MYKO.",
+  "compose": {
+    "include": [
+      {
+        "system": "https://www.zetlab.ch/lis/codes",
+        "concept": [
+          {
+            "code": "ADVRSP",
+            "display": "'Adenovirus"
+          },
+          {
+            "code": "AREC",
+            "display": "Rektovaginal"
+          },
+          {
+            "code": "BKAE",
+            "display": "'Blutkultur aerob"
+          },
+          {
+            "code": "BKAECOM",
+            "display": "- Kommentar"
+          },
+          {
+            "code": "BKAEPOSR",
+            "display": "- weitere Massnahmen"
+          },
+          {
+            "code": "BKAEPZT",
+            "display": "- positiv nach (Tag:Std:Min)"
+          },
+          {
+            "code": "BKAET1",
+            "display": "Blutkultur aerob Startzeit"
+          },
+          {
+            "code": "BKAN",
+            "display": "'Blutkultur anaerob"
+          },
+          {
+            "code": "BKANCOM",
+            "display": "- Kommentar"
+          },
+          {
+            "code": "BKANPOSR",
+            "display": "- weitere Massnahmen"
+          },
+          {
+            "code": "BKANPZT",
+            "display": "- positiv nach (Tag:Std:Min)"
+          },
+          {
+            "code": "BKANT1",
+            "display": "Blutkultur anaerob Startzeit"
+          },
+          {
+            "code": "BKBEDATE",
+            "display": "Blutentnahmedatum"
+          },
+          {
+            "code": "BKBETIME",
+            "display": "Blutentnahmezeit"
+          },
+          {
+            "code": "BKDAUER",
+            "display": "vorgegebene Bebrütungsdauer (Tage)"
+          },
+          {
+            "code": "BKHER",
+            "display": "Blutkultur Herkunft"
+          },
+          {
+            "code": "BKKLANG",
+            "display": "Klinische Angaben"
+          },
+          {
+            "code": "BKKULT",
+            "display": "'Blutkultur aerob + anaerob"
+          },
+          {
+            "code": "BKNEGVER",
+            "display": "Blutkultur Verrechnung"
+          },
+          {
+            "code": "BKPED",
+            "display": "'Blutkultur Pediatric"
+          },
+          {
+            "code": "BKPEDCOM",
+            "display": "- Kommentar"
+          },
+          {
+            "code": "BKPEDF",
+            "display": "'Blutkultur Pediatric"
+          },
+          {
+            "code": "BKPEDPOS",
+            "display": "- weitere Massnahmen"
+          },
+          {
+            "code": "BKPEDPZT",
+            "display": "- positiv nach (Tag:Std:Min)"
+          },
+          {
+            "code": "BKPEDT1",
+            "display": "Blutkultur Pediatric Startzeit"
+          },
+          {
+            "code": "BKPIL",
+            "display": "'Blutkultur Pilze"
+          },
+          {
+            "code": "BKPILCOM",
+            "display": "- Kommentar"
+          },
+          {
+            "code": "BKPILPZT",
+            "display": "- positiv nach (Tage:Std:Min)"
+          },
+          {
+            "code": "BKPILT1",
+            "display": "Blutkultur Pilze Startzeit"
+          },
+          {
+            "code": "BKTHERAP",
+            "display": "Therapie/Medikamente"
+          },
+          {
+            "code": "BOCARSP",
+            "display": "'Bocavirus"
+          },
+          {
+            "code": "BOPERSP",
+            "display": "'Bordetella pertussis"
+          },
+          {
+            "code": "CGAPLI",
+            "display": "'Cryptococcus gatii/neoformans"
+          },
+          {
+            "code": "CHLT",
+            "display": "'Chlamydia trachomatis (PCR)"
+          },
+          {
+            "code": "CHLTCT",
+            "display": "'Chlamydia trachomatis CT"
+          },
+          {
+            "code": "CHPNRSP",
+            "display": "'Chlamydophila pneumoniae"
+          },
+          {
+            "code": "CMVPLI",
+            "display": "'Cytomegalievirus"
+          },
+          {
+            "code": "CO229RSP",
+            "display": "'Coronavirus 229E"
+          },
+          {
+            "code": "COHKRSP",
+            "display": "'Coronavirus HKU1"
+          },
+          {
+            "code": "CONLRSP",
+            "display": "'Coronavirus NL63"
+          },
+          {
+            "code": "COOCRSP",
+            "display": "'Coronavirus OC43"
+          },
+          {
+            "code": "COV1N",
+            "display": "COV1N"
+          },
+          {
+            "code": "COV1NCT",
+            "display": "COV1N Ct-Wert"
+          },
+          {
+            "code": "COV1NSP2",
+            "display": "COV1NSP2"
+          },
+          {
+            "code": "COV1NSPC",
+            "display": "COV2NSP2 Ct-Wert"
+          },
+          {
+            "code": "COV1RDCT",
+            "display": "COV1Rd CT-Wert"
+          },
+          {
+            "code": "COV1RDRP",
+            "display": "COV1RdRP"
+          },
+          {
+            "code": "COV2PCR",
+            "display": "'SARS-CoV-2 (2019-nCoV) RT-PCR"
+          },
+          {
+            "code": "COV2PCRB",
+            "display": "'SARS-CoV-2 PCR Bestätigungstest"
+          },
+          {
+            "code": "COV2PCRC",
+            "display": "'Ct-Wert"
+          },
+          {
+            "code": "COV2RSP",
+            "display": "'SARS-CoV-2"
+          },
+          {
+            "code": "COVPCR",
+            "display": "'SARS-CoV-2 PCR"
+          },
+          {
+            "code": "ECOPLI",
+            "display": "'Escherichia coli K1"
+          },
+          {
+            "code": "ENTPLI",
+            "display": "'Enterovirus"
+          },
+          {
+            "code": "GBSPCR",
+            "display": "'Streptokokken Gr.B (PCR)"
+          },
+          {
+            "code": "H1N1RSP",
+            "display": "'Influenza A, Subtyp H1N1"
+          },
+          {
+            "code": "HERMI",
+            "display": "Herkunft Material Mikrobiologie"
+          },
+          {
+            "code": "HHE6PLI",
+            "display": "'Human herpes virus 6"
+          },
+          {
+            "code": "HINPLI",
+            "display": "'Haemophilus influenzae"
+          },
+          {
+            "code": "HPAPLI",
+            "display": "'Human parechovirus"
+          },
+          {
+            "code": "HSI1PLI",
+            "display": "'Herpes simplex virus 1"
+          },
+          {
+            "code": "HSI2PLI",
+            "display": "'Herpes simplex virus 2"
+          },
+          {
+            "code": "HUMERSP",
+            "display": "'Humanes Metapneumonievirus A/B"
+          },
+          {
+            "code": "INAH1RSP",
+            "display": "'Influenza A, Subtyp H1"
+          },
+          {
+            "code": "INAH3RSP",
+            "display": "'Influenza A, Subtyp H3"
+          },
+          {
+            "code": "INFABPCR",
+            "display": "'Influenza Viren A,B RNA"
+          },
+          {
+            "code": "INFAPCR",
+            "display": "'Influenza Viren A (RNA)"
+          },
+          {
+            "code": "INFARSP",
+            "display": "'Influenza A"
+          },
+          {
+            "code": "INFBPCR",
+            "display": "'Influenza Viren B (RNA)"
+          },
+          {
+            "code": "INFBRSP",
+            "display": "'Influenza B"
+          },
+          {
+            "code": "LEPNRSP",
+            "display": "'Legionella pneumophila"
+          },
+          {
+            "code": "LMOPLI",
+            "display": "'Listeria monocytogenes"
+          },
+          {
+            "code": "MEENPLI",
+            "display": "*Meningitis Panel (PCR)"
+          },
+          {
+            "code": "MPNPLI",
+            "display": "'Mycoplasma pneumoniae"
+          },
+          {
+            "code": "MYPNRSP",
+            "display": "'Mycoplasma pneumoniae"
+          },
+          {
+            "code": "NEIGO",
+            "display": "'Gonokokken (PCR)"
+          },
+          {
+            "code": "NEIGOCT",
+            "display": "'Gonokokken CT"
+          },
+          {
+            "code": "NMEPLI",
+            "display": "'Neisseria meningitidis"
+          },
+          {
+            "code": "PAIN1RSP",
+            "display": "'Parainfluenza 1"
+          },
+          {
+            "code": "PAIN2RSP",
+            "display": "'Parainfluenza 2"
+          },
+          {
+            "code": "PAIN3RSP",
+            "display": "'Parainfluenza 3"
+          },
+          {
+            "code": "PAIN4RSP",
+            "display": "'Parainfluenza 4"
+          },
+          {
+            "code": "RESPIKL",
+            "display": "'Respiratorisches Panel (Covid/Influenza/RSV)"
+          },
+          {
+            "code": "RHENRSP",
+            "display": "'Rhinovirus/Enterovirus"
+          },
+          {
+            "code": "RSPPCR",
+            "display": "'Respiratorisches Panel"
+          },
+          {
+            "code": "RSVPCR",
+            "display": "'RSV Respiratory Syncytial Virus (RNA)"
+          },
+          {
+            "code": "RSVRSP",
+            "display": "'Respiratorisches Synzytial-Virus A/B"
+          },
+          {
+            "code": "SAGPLI",
+            "display": "'Streptococcus agalactiae"
+          },
+          {
+            "code": "SEQNRAE",
+            "display": "Sequenznummer aerob"
+          },
+          {
+            "code": "SEQNRAN",
+            "display": "Sequenznummer anaerob"
+          },
+          {
+            "code": "SPNPLI",
+            "display": "'Streptococcus pneumoniae"
+          },
+          {
+            "code": "SPYPLI",
+            "display": "'Streptococcus pyogenes"
+          },
+          {
+            "code": "TESTGR1",
+            "display": "Testgrund"
+          },
+          {
+            "code": "TESTGR2",
+            "display": "Testgrund"
+          },
+          {
+            "code": "TESTGR3",
+            "display": "Testgrund"
+          },
+          {
+            "code": "TESTGR4",
+            "display": "Testgrund"
+          },
+          {
+            "code": "TESTGR5",
+            "display": "Testgrund"
+          },
+          {
+            "code": "VZOPLI",
+            "display": "'Varicella-Zoster Virus"
+          }
+        ]
+      }
+    ]
+  }
+}

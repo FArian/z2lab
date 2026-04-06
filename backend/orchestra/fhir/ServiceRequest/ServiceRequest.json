@@ -1,0 +1,42 @@
+{
+  "resourceType": "ServiceRequest",
+  "id": "sr-ord-20260330-172751",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2026-03-30T15:27:51.888+00:00"
+  },
+  "identifier": [
+    {
+      "system": "https://zetlab.ch/fhir/order-numbers",
+      "value": "ord-20260330-172751"
+    },
+    {
+      "system": "urn:oid:2.16.756.5.32",
+      "value": "7561234567897"
+    }
+  ],
+  "status": "active",
+  "intent": "order",
+  "code": {
+    "text": "2 Untersuchungen"
+  },
+  "subject": {
+    "reference": "Patient/farhad-arian"
+  },
+  "specimen": [
+    {
+      "reference": "Specimen/spec-ord-20260330-172751-AA",
+      "identifier": {
+        "system": "https://zetlab.ch/fhir/specimen",
+        "value": "AA"
+      }
+    },
+    {
+      "reference": "Specimen/spec-ord-20260330-172751-60",
+      "identifier": {
+        "system": "https://zetlab.ch/fhir/specimen",
+        "value": "60"
+      }
+    }
+  ]
+}

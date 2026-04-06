@@ -1,0 +1,321 @@
+# =============================================================================
+# ZetLab OrderEntry — Docker Compose
+# -----------------------------------------------------------------------------
+# Solution for Praxen and Clinics to send laboratory orders digitally to
+# ZLZ Zentrallabor AG / ZetLab AG.
+#
+# Services overview:
+#   traefik     — Reverse proxy, HTTPS termination, Let's Encrypt certificates
+#   portainer   — Web UI for container management and monitoring
+#   postgres    — PostgreSQL database backend for HAPI FHIR
+#   hapi        — HAPI FHIR R4 server, backend for the OrderEntry application
+#                 Stores Patients, ServiceRequests and lab catalog resources
+#   orchestra   — Integration server (OIE Juno), receives FHIR subscription
+#                 notifications from HAPI and routes orders to the laboratory
+#                 (ZLZ) via HL7 / internal protocols
+#   orderentry  — Next.js web application used by clinicians to search patients,
+#                 browse the lab test catalog and submit diagnostic orders
+#   watchtower  — Monitors and auto-updates orderentry container daily at 03:00
+# =============================================================================
+
+volumes:
+  pgdata:
+  portainer-data:
+  orc-database:
+
+networks:
+  orderentry-orc-net:
+    name: orderentry-orc-net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.128.0/24
+
+services:
+
+  traefik:
+    image: traefik:v3.0
+    #user: "${UID}:${GID}"
+    container_name: traefik
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    command:
+      - "--api.dashboard=true"
+
+      # Docker provider: only expose containers with traefik.enable=true label
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=orderentry-orc-net"
+
+      # Entrypoints: HTTP (80) and HTTPS (443)
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+
+      # Redirect all HTTP traffic to HTTPS
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+
+      # Let's Encrypt certificate resolver (ACME_EMAIL set in .env)
+      - "--certificatesresolvers.le.acme.email=${ACME_EMAIL}"
+      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.le.acme.httpchallenge=true"
+      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
+      - "--log.level=INFO"
+      # Uncomment below to use Let's Encrypt staging server for testing (avoids rate limits)
+      # - "--certificatesresolvers.le.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      # Security Hardening
+      - "traefik.http.middlewares.secure.headers.stsSeconds=31536000"
+      - "traefik.http.middlewares.secure.headers.stsIncludeSubdomains=true"
+      - "traefik.http.middlewares.secure.headers.stsPreload=true"
+
+    ports:
+      - "80:80"
+      - "443:443"
+
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./data/traefik/letsencrypt:/letsencrypt"
+
+    networks:
+      - orderentry-orc-net
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`${TRAEFIK_DOMAIN}`)"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.tls.certresolver=le"
+      - "traefik.http.routers.traefik.service=api@internal"
+
+  watchtower:
+    # Watches for new images and auto-updates orderentry container daily at 03:00
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    environment:
+      WATCHTOWER_CLEANUP: "true"
+      WATCHTOWER_SCHEDULE: "0 0 3 * * *"
+      WATCHTOWER_NOTIFICATIONS_LEVEL: info
+      WATCHTOWER_LABEL_ENABLE: "true"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - orderentry-orc-net
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-data:/data
+    networks:
+      - orderentry-orc-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=orderentry-orc-net"
+      - "traefik.http.routers.portainer.rule=Host(`${PORTAINER_DOMAIN}`)"
+      - "traefik.http.routers.portainer.entrypoints=websecure"
+      - "traefik.http.routers.portainer.tls.certresolver=le"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - orderentry-orc-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  hapi:
+    image: hapiproject/hapi:latest
+    container_name: hapi-fhir
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "3"
+    volumes:
+      - ./data/hapi/config:/data
+    environment:
+      SPRING_CONFIG_ADDITIONAL_LOCATION: file:/data/
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    # Direct port exposure — allows access via IP: http://<server-ip>:8080/fhir/metadata
+    # Bypasses Traefik (no HTTPS, no domain needed — useful for internal/testing access)
+    #ports:
+      #- "8443:8443"
+      #- "8080:8080"
+    networks:
+      - orderentry-orc-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=orderentry-orc-net"
+      - "traefik.http.routers.hapi.rule=Host(`${HAPI_DOMAIN}`)"
+      - "traefik.http.routers.hapi.entrypoints=websecure"
+      - "traefik.http.routers.hapi.tls.certresolver=le"
+      - "traefik.http.services.hapi.loadbalancer.server.port=8080"
+
+  orchestra:
+    image: farian/oie-juno:4.10.1.1
+    #user: "${UID}:${GID}"
+    container_name: oie-juno
+    platform: linux/amd64  # OIE Juno is only available as amd64 image
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "3"
+    environment:
+      ORCHESTRA_CONTAINER_MODE_ACTIVE: 'true'
+
+      # Runtime database (Derby, persisted in named volume orc-database)
+      orchestra_settings_database_runtime_db_typ: Derby
+      orchestra_settings_database_runtime_url: jdbc:derby:/home/juno/database
+      orchestra_settings_database_runtime_user: ${ORCHESTRA_RT_DB_USER}
+      orchestra_settings_database_runtime_pwd: ${ORCHESTRA_RT_DB_PASSWORD}
+
+      # Archive database (Derby, stored in /tmp — not persisted across restarts)
+      orchestra_settings_database_archive_db_typ: Derby
+      orchestra_settings_database_archive_url: jdbc:derby:/tmp/orchestra/database
+      orchestra_settings_database_archive_user: ${ORCHESTRA_AR_DB_USER}
+      orchestra_settings_database_archive_pwd: ${ORCHESTRA_AR_DB_PASSWORD}
+
+      # Autodeployment: channels/scenarios dropped here are deployed automatically
+      orchestra_settings_runtime_autodeployment_dir: /tmp/orchestra/autodeployment
+      orchestra_settings_runtime_autodeployment_mode: external
+      orchestra_settings_runtime_autodeployment_recursive: true
+      orchestra_settings_longtimearchive_mode: inactive
+      orchestra_settings_runtime_language: en
+      orchestra_settings_runtime_nodeid: orderentry
+      orchestra_settings_runtime_node_label: orderentry
+      orchestra_settings_runtime_cellname: orderentry
+      # UI port (Monitor): 8090 — API/metrics port: 8019
+      orchestra_settings_ExtendedWebApp_servlet_port_http: 8090
+
+    volumes:
+      - ./data/orc/logs:/home/juno/logs
+      - orc-database:/home/juno/database # volume for juno DB
+      - ./data/orc/autodeployment:/tmp/orchestra/autodeployment
+      - ./data/orc/deploypath:/tmp/orchestra/deploypath
+      - ./data/orc/localpath:/tmp/orchestra/localpath
+      - ./data/orc/longtimearchive:/tmp/orchestra/longtimearchive
+      - ./data/orc/licensestore:/home/juno/base/licensestore
+
+    networks:
+      - orderentry-orc-net
+
+    # Health: Prometheus metrics endpoint confirms JVM and scenarios are running
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8019/Orchestra/default/RuntimeHealthMetrics/"]
+      interval: 30s
+      timeout: 20s
+      retries: 15
+      start_period: 180s  # OIE Juno takes ~2-3 min to fully start
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=orderentry-orc-net"
+      # UI (Orchestra Juno Monitor)
+      - "traefik.http.routers.orchestra.rule=Host(`${ORCHESTRA_DOMAIN}`)"
+      - "traefik.http.routers.orchestra.entrypoints=websecure"
+      - "traefik.http.routers.orchestra.tls.certresolver=le"
+      - "traefik.http.routers.orchestra.service=orchestra"
+      - "traefik.http.services.orchestra.loadbalancer.server.port=8090"
+      # API
+      - "traefik.http.routers.orchestra-api.rule=Host(`${ORCHESTRA_API_DOMAIN}`)"
+      - "traefik.http.routers.orchestra-api.entrypoints=websecure"
+      - "traefik.http.routers.orchestra-api.tls.certresolver=le"
+      - "traefik.http.routers.orchestra-api.service=orchestra-api"
+      - "traefik.http.services.orchestra-api.loadbalancer.server.port=8019"
+
+  orderentry:
+    image: farian/orderentry:latest
+    #user: "${UID}:${GID}"
+    platform: linux/amd64
+    container_name: orderentry
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    environment:
+      AUTH_SECRET: ${AUTH_SECRET}               # HMAC key for session cookies
+      ALLOW_LOCAL_AUTH: ${ALLOW_LOCAL_AUTH:-false}  # Enable browser-only auth fallback
+      FHIR_BASE_URL: ${FHIR_BASE_URL}           # Internal Docker network URL to HAPI
+      SASIS_API_BASE: ${SASIS_API_BASE}         # SASIS/OFAC insurance card lookup API
+      NEXT_PUBLIC_SASIS_ENABLED: ${NEXT_PUBLIC_SASIS_ENABLED:-false}  # Show VeKa lookup UI
+      GLN_API_BASE: ${GLN_API_BASE}             # Orchestra GLN/refdata lookup API
+      NEXT_PUBLIC_GLN_ENABLED: ${NEXT_PUBLIC_GLN_ENABLED:-false}      # Show GLN lookup UI
+    volumes:
+      - ./data/orderentry/data:/app/data
+    networks:
+      - orderentry-orc-net
+    labels:
+      # Traefik routing
+      - "traefik.enable=true"
+      - "traefik.docker.network=orderentry-orc-net"
+      - "traefik.http.routers.orderentry.rule=Host(`${ORDERENTRY_DOMAIN}`)"
+      - "traefik.http.routers.orderentry.entrypoints=websecure"
+      - "traefik.http.routers.orderentry.tls.certresolver=le"
+      - "traefik.http.services.orderentry.loadbalancer.server.port=3000"
+      # Watchtower: auto-update this container when a new image is available
+      - "com.centurylinklabs.watchtower.enable=true"
+
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0
+    container_name: keycloak
+    command: start-dev
+    restart: always
+    environment:
+      KC_DB: dev-mem
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN:-admin}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-admin}
+      KC_HTTP_ENABLED: "true"
+      KC_PROXY: edge
+    networks:
+      - orderentry-orc-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=orderentry-orc-net"
+      - "traefik.http.routers.keycloak.rule=Host(`${KEYCLOAK_DOMAIN}`)"
+      - "traefik.http.routers.keycloak.entrypoints=websecure"
+      - "traefik.http.routers.keycloak.tls.certresolver=le"
+      - "traefik.http.services.keycloak.loadbalancer.server.port=8080"

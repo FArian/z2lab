@@ -1,0 +1,39 @@
+{
+  "resourceType": "Organization",
+  "id": "versicherung-css",
+  "meta": {
+    "profile": ["http://hl7.org/fhir/StructureDefinition/Organization"]
+  },
+  "active": true,
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/organization-type",
+          "code": "ins",
+          "display": "Insurance Company"
+        }
+      ],
+      "text": "Krankenversicherung"
+    }
+  ],
+  "name": "CSS Versicherung AG",
+  "alias": ["CSS"],
+  "telecom": [
+    {
+      "system": "url",
+      "value": "https://www.css.ch",
+      "use": "work"
+    }
+  ],
+  "address": [
+    {
+      "use": "work",
+      "type": "postal",
+      "line": ["Tribschenstrasse 21"],
+      "city": "Luzern",
+      "postalCode": "6002",
+      "country": "CH"
+    }
+  ]
+}

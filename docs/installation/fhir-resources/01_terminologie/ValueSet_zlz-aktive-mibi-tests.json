@@ -1,0 +1,2602 @@
+{
+  "resourceType": "ValueSet",
+  "id": "zlz-aktive-mibi-tests",
+  "url": "https://www.zetlab.ch/fhir/ValueSet/zlz-aktive-mibi-tests",
+  "name": "zlzAktiveMibiTests",
+  "title": "ZLZ — Aktive Mikrobiologie-Tests",
+  "status": "active",
+  "description": "Alle aktiven mikrobiologischen Tests (Abstrich, Bakteriologie, PCR, Virologie).",
+  "compose": {
+    "include": [
+      {
+        "system": "https://www.zetlab.ch/lis/codes",
+        "concept": [
+          {
+            "code": "#AAUG",
+            "display": "Auge"
+          },
+          {
+            "code": "#ABAB",
+            "display": "Allgemeine Bakteriologie inkl. Pilze"
+          },
+          {
+            "code": "#ABANMO",
+            "display": "Allgemeine Bakteriologie"
+          },
+          {
+            "code": "#ABBI",
+            "display": "Allgemeine Bakteriologie"
+          },
+          {
+            "code": "#ABBK",
+            "display": "Allgemeine Bakteriologie"
+          },
+          {
+            "code": "#ABBRTR",
+            "display": "Allgemeine Bakteriologie"
+          },
+          {
+            "code": "#ABCER",
+            "display": "Allgemeine Bakteriologie"
+          },
+          {
+            "code": "#ABDU",
+            "display": "Allgemeine Bakteriologie"
+          },
+          {
+            "code": "#ABEIWU",
+            "display": "Allg. Bakteriologie inkl. Anaerobier"
+          },
+          {
+            "code": "#ABEJ",
+            "display": "Allgemeine Bakteriologie"
+          },
+          {
+            "code": "#ABFM",
+            "display": "Allgemeine Bakteriologie"
+          },
+          {
+            "code": "#ABGE",
+            "display": "Allgemeine Baktreriologie"
+          },
+          {
+            "code": "#ABHA",
+            "display": "Allgemeine Bakteriologie"
+          },
+          {
+            "code": "#ABHNS",
+            "display": "Allgemeine Bakteriologie"
+          },
+          {
+            "code": "#ABLI",
+            "display": "Allgemeine Bakteriologie"
+          },
+          {
+            "code": "#ABMU",
+            "display": "Allgemeine Bakteriologie"
+          },
+          {
+            "code": "#ABNA",
+            "display": "Allgemeine Bakteriologie"
+          },
+          {
+            "code": "#ABNS",
+            "display": "Allgemeine Bakteriologie"
+          },
+          {
+            "code": "#ABPIDU",
+            "display": "Allgemeine Bakteriologie (Pilze)"
+          },
+          {
+            "code": "#ABPIMU",
+            "display": "Allgemeine Bakteriologie (Pilze)"
+          },
+          {
+            "code": "#ABPUGE",
+            "display": "Allgemeine Bakteriologie inkl. Anaerobier"
+          },
+          {
+            "code": "#ABRA",
+            "display": "Allgemeine Bakteriologie( inkl. Sprosspilze)"
+          },
+          {
+            "code": "#ABRATO",
+            "display": "Allgemeine Bakteriologie"
+          },
+          {
+            "code": "#ABSP",
+            "display": "Allgemeine Bakteriologie"
+          },
+          {
+            "code": "#ABST",
+            "display": "Allg.Bakteriologie PCR(Salm/Camp/Shig/EIEC/EHEC)"
+          },
+          {
+            "code": "#ABUR",
+            "display": "Allgemeine Bakteriologie"
+          },
+          {
+            "code": "#ABURIC",
+            "display": "Allgemeine Bakteriologie"
+          },
+          {
+            "code": "#ABWU",
+            "display": "Allgemeine Baktreriologie"
+          },
+          {
+            "code": "#ACER",
+            "display": "Cervix"
+          },
+          {
+            "code": "#ACINETO",
+            "display": "Acinetobacter baumanii"
+          },
+          {
+            "code": "#ACV",
+            "display": "Cervix, Vaginalabstrich"
+          },
+          {
+            "code": "#ADENO",
+            "display": "Adenovirus"
+          },
+          {
+            "code": "#ADENOWA",
+            "display": "Adenovirus"
+          },
+          {
+            "code": "#ADENPAU",
+            "display": "Adenovirus"
+          },
+          {
+            "code": "#ADENPBR",
+            "display": "Adenovirus"
+          },
+          {
+            "code": "#ADENPGE",
+            "display": "Adenovirus"
+          },
+          {
+            "code": "#ADENPLI",
+            "display": "Adenovirus"
+          },
+          {
+            "code": "#ADENPMU",
+            "display": "Adenovirus"
+          },
+          {
+            "code": "#ADENPNA",
+            "display": "Adenovirus"
+          },
+          {
+            "code": "#ADENPRA",
+            "display": "Adenovirus"
+          },
+          {
+            "code": "#ADENPST",
+            "display": "Adenovirus"
+          },
+          {
+            "code": "#AEST",
+            "display": "Aeromonas"
+          },
+          {
+            "code": "#AM",
+            "display": "Entamoeba histolytica/dispar (Parasiten)"
+          },
+          {
+            "code": "#AMOPBI",
+            "display": "Entamoeba histolytica"
+          },
+          {
+            "code": "#AMOPST",
+            "display": "Entamoeba histolytica"
+          },
+          {
+            "code": "#AMUN",
+            "display": "Mund"
+          },
+          {
+            "code": "#ANAS",
+            "display": "Nase"
+          },
+          {
+            "code": "#ANP",
+            "display": "Nasopharyngeal"
+          },
+          {
+            "code": "#ANR",
+            "display": "Nase-/Rachen"
+          },
+          {
+            "code": "#AOH",
+            "display": "Ohr"
+          },
+          {
+            "code": "#APEN",
+            "display": "Glans penis"
+          },
+          {
+            "code": "#ARAC",
+            "display": "Rachen"
+          },
+          {
+            "code": "#AREC",
+            "display": "Rektovaginal"
+          },
+          {
+            "code": "#ATON",
+            "display": "Tonsillen"
+          },
+          {
+            "code": "#ATOPPBI",
+            "display": "Atopobium vaginae"
+          },
+          {
+            "code": "#ATOPPCE",
+            "display": "Atopobium vaginae"
+          },
+          {
+            "code": "#ATOPPDP",
+            "display": "Atopobium vaginae"
+          },
+          {
+            "code": "#ATOPPEI",
+            "display": "Atopobium vaginae"
+          },
+          {
+            "code": "#ATOPWA",
+            "display": "Atopobium vaginae"
+          },
+          {
+            "code": "#AURE",
+            "display": "Urethralabstrich"
+          },
+          {
+            "code": "#AVAG",
+            "display": "Vagina"
+          },
+          {
+            "code": "#AVR",
+            "display": "Rektalabstrich"
+          },
+          {
+            "code": "#AVUL",
+            "display": "Vulva"
+          },
+          {
+            "code": "#AWU",
+            "display": "Wunde tief"
+          },
+          {
+            "code": "#AWUO",
+            "display": "Wunde oberflächlich"
+          },
+          {
+            "code": "#BAKBRWA",
+            "display": "Bakterielle Breitband-PCR"
+          },
+          {
+            "code": "#BAKPAU",
+            "display": "Bakterielle Btreiband-PCR"
+          },
+          {
+            "code": "#BAKPBI",
+            "display": "Bakterielle Breitband-PCR"
+          },
+          {
+            "code": "#BAKPBK",
+            "display": "Bakterielle Breitband-PCR"
+          },
+          {
+            "code": "#BAKPDIV",
+            "display": "Bakterielle Breitband-PCR"
+          },
+          {
+            "code": "#BAKPDP",
+            "display": "Bakterielle Breitband-PCR"
+          },
+          {
+            "code": "#BAKPEI",
+            "display": "Bakterielle Breitband-PCR"
+          },
+          {
+            "code": "#BAKPGE",
+            "display": "Bakterielle Breitband-PCR"
+          },
+          {
+            "code": "#BAKPLI",
+            "display": "Bakterielle Breitband-PCR"
+          },
+          {
+            "code": "#BAKPLY",
+            "display": "Bakterielle Breitband-PCR"
+          },
+          {
+            "code": "#BAKPPL",
+            "display": "Bakterielle Breitband-PCR"
+          },
+          {
+            "code": "#BAL",
+            "display": "BAL"
+          },
+          {
+            "code": "#BARTBIO",
+            "display": "Bartonella henselae / quintana"
+          },
+          {
+            "code": "#BARTHWA",
+            "display": "Bartonella henselae / quintana"
+          },
+          {
+            "code": "#BARTPAU",
+            "display": "Bartonella hensalae / quintana"
+          },
+          {
+            "code": "#BARTPBI",
+            "display": "Bordetella pertussis"
+          },
+          {
+            "code": "#BARTPED",
+            "display": "Bartonella henselae / quintana"
+          },
+          {
+            "code": "#BARTPEI",
+            "display": "Bartonella pertussis"
+          },
+          {
+            "code": "#BARTPLY",
+            "display": "Bartonella henselae / quintana"
+          },
+          {
+            "code": "#BARTPWA",
+            "display": "Bordetella pertussis"
+          },
+          {
+            "code": "#BIOP",
+            "display": "Biopsie"
+          },
+          {
+            "code": "#BK",
+            "display": "Blutkulturset"
+          },
+          {
+            "code": "#BKA",
+            "display": "Blutkultur aerob bebrütet"
+          },
+          {
+            "code": "#BKAE",
+            "display": "Bei Endokarditis-Verdacht"
+          },
+          {
+            "code": "#BKAEBR",
+            "display": "Inkl. Brucellen"
+          },
+          {
+            "code": "#BKALT",
+            "display": "Identifikation &amp; Antibiogramm der angez. Keime"
+          },
+          {
+            "code": "#BKN",
+            "display": "Blutkultur anaerob bebrütet"
+          },
+          {
+            "code": "#BOBP",
+            "display": "Bordatella pertussis (PCR)"
+          },
+          {
+            "code": "#BOBPBI",
+            "display": "Borrelia burgdorferi sensu stricto / lato"
+          },
+          {
+            "code": "#BOBPED",
+            "display": "Borrelia burgdorferi sensu stricto / lato"
+          },
+          {
+            "code": "#BOBPGE",
+            "display": "Borrelia burgdorferi sensu stricto / lato"
+          },
+          {
+            "code": "#BOBPLI",
+            "display": "Borrelia burgdorferi sensu stricto / lato"
+          },
+          {
+            "code": "#BOBPMU",
+            "display": "Borrelia burgdorferi sensu stricto / lato"
+          },
+          {
+            "code": "#BOBWA",
+            "display": "Borrelia burgdorferi sensu stricto / lato"
+          },
+          {
+            "code": "#BOPAPBR",
+            "display": "Bordetella parapertussis"
+          },
+          {
+            "code": "#BOPAPNA",
+            "display": "Bordetella parapertussis"
+          },
+          {
+            "code": "#BOPAPRA",
+            "display": "Bordetella parapertussis"
+          },
+          {
+            "code": "#BOPAPSP",
+            "display": "Bordetella parapertussis"
+          },
+          {
+            "code": "#BOPAPWA",
+            "display": "Bordetella parapertussis"
+          },
+          {
+            "code": "#BOPPBR",
+            "display": "Bordetella pertussis/parap./holmesii"
+          },
+          {
+            "code": "#BOPPNA",
+            "display": "Bordetella pertussis/parap./holmesii"
+          },
+          {
+            "code": "#BOPPRA",
+            "display": "Bordetella pertussis/parap./holmesii"
+          },
+          {
+            "code": "#BOPPSP",
+            "display": "Bordetella pertussis/parap./holmesii"
+          },
+          {
+            "code": "#BRON",
+            "display": "Bronchialsekret"
+          },
+          {
+            "code": "#CANDAUR",
+            "display": "Candida auris"
+          },
+          {
+            "code": "#CARBRA",
+            "display": "MRGN Screening (ESBL/Carbapenemasen)"
+          },
+          {
+            "code": "#CHLPPAU",
+            "display": "Chlamydia pneumoniae"
+          },
+          {
+            "code": "#CHLPPBI",
+            "display": "Chlamydia pneumoniae"
+          },
+          {
+            "code": "#CHLPPBR",
+            "display": "Chlamydia pneumoniae"
+          },
+          {
+            "code": "#CHLPPGE",
+            "display": "Chlamydia pneumoniae"
+          },
+          {
+            "code": "#CHLPPLI",
+            "display": "Chlamydia pneumoniae"
+          },
+          {
+            "code": "#CHLPPNA",
+            "display": "Chlamydia pneumoniae"
+          },
+          {
+            "code": "#CHLPPPL",
+            "display": "Chlamydia pneumoniae"
+          },
+          {
+            "code": "#CHLPPRA",
+            "display": "Chlamydia pneumoniae"
+          },
+          {
+            "code": "#CHLPPSP",
+            "display": "Chlamydia pneumoniae"
+          },
+          {
+            "code": "#CHLPWA",
+            "display": "Chlamydia pneumoniae"
+          },
+          {
+            "code": "#CHLTA",
+            "display": "Chlam. Trachomatis (PCR)"
+          },
+          {
+            "code": "#CHLTAB",
+            "display": "Chlam.trachomatis (PCR)"
+          },
+          {
+            "code": "#CHLTEJ",
+            "display": "Chlamydia trachomatis (PCR)"
+          },
+          {
+            "code": "#CHLTEU",
+            "display": "Chlamydia trachomatis (PCR)"
+          },
+          {
+            "code": "#CHLTPAU",
+            "display": "Chlamydia trachomatis"
+          },
+          {
+            "code": "#CHLTPBI",
+            "display": "Chlamydia trachomatis"
+          },
+          {
+            "code": "#CHLTPCE",
+            "display": "Chlamydia trachomatis"
+          },
+          {
+            "code": "#CHLTPDP",
+            "display": "Chlamydia trachomatis"
+          },
+          {
+            "code": "#CHLTPEI",
+            "display": "Chlamydia trachomatis"
+          },
+          {
+            "code": "#CHLTPEJ",
+            "display": "Chlamydia trachomatis"
+          },
+          {
+            "code": "#CHLTPEU",
+            "display": "Chlamydia trachomatis"
+          },
+          {
+            "code": "#CHLTPGE",
+            "display": "Chlamydia trachomatis"
+          },
+          {
+            "code": "#CHLTPLY",
+            "display": "Chlamydia trachomatis"
+          },
+          {
+            "code": "#CHLTPUR",
+            "display": "Chlamydia trachomatis"
+          },
+          {
+            "code": "#CHLTWA",
+            "display": "Chlamydia trachomatis"
+          },
+          {
+            "code": "#CLDTAB",
+            "display": "Clostridium difficile Toxin-Nachweis"
+          },
+          {
+            "code": "#CLODPST",
+            "display": "Chlostridium difficile"
+          },
+          {
+            "code": "#CLOSDWA",
+            "display": "Chlostridium difficile"
+          },
+          {
+            "code": "#CMVPBI",
+            "display": "CMV Cytomegalivirus"
+          },
+          {
+            "code": "#CMVPBR",
+            "display": "CMV Cytomegalivirus"
+          },
+          {
+            "code": "#CMVPED",
+            "display": "CMV Cytomegalivirus"
+          },
+          {
+            "code": "#CMVPLI",
+            "display": "CMV Cytomegalivirus"
+          },
+          {
+            "code": "#CMVPMU",
+            "display": "CMV Cytomegalivirus"
+          },
+          {
+            "code": "#CMVPNA",
+            "display": "CMV Cytomegalivirus"
+          },
+          {
+            "code": "#CMVPRA",
+            "display": "CMV Cytomegalivirus"
+          },
+          {
+            "code": "#CMVWA",
+            "display": "CMV Cytomegalivirus"
+          },
+          {
+            "code": "#CORYDRA",
+            "display": "Corynebacterium diphteriae, Toxin-Gen"
+          },
+          {
+            "code": "#CORYDWA",
+            "display": "Corynebacterium diphteriae, Toxin-Gen"
+          },
+          {
+            "code": "#CRY",
+            "display": "Cryprosporidium parvum AG (Parasiten)"
+          },
+          {
+            "code": "#CRYPPBI",
+            "display": "Cryprosporidium parvum"
+          },
+          {
+            "code": "#CRYPPBR",
+            "display": "Cryptosporidium parvum"
+          },
+          {
+            "code": "#CRYPPST",
+            "display": "Cryprosporidium parvum"
+          },
+          {
+            "code": "#CRYPWA",
+            "display": "Cryprosporidium parvum"
+          },
+          {
+            "code": "#CYCL",
+            "display": "Cyclospora cayetanensis (Parasiten)"
+          },
+          {
+            "code": "#DENPED",
+            "display": "Dengue Virus (PCR)"
+          },
+          {
+            "code": "#DERMA",
+            "display": "Dermatomykosen (PCR)"
+          },
+          {
+            "code": "#DIARWA",
+            "display": "Diarrhoe"
+          },
+          {
+            "code": "#DIV",
+            "display": "Wurmteile"
+          },
+          {
+            "code": "#DSPI",
+            "display": "Drain"
+          },
+          {
+            "code": "#EAECPST",
+            "display": "EAEC Enteroaggregative E.coli"
+          },
+          {
+            "code": "#EAECWA",
+            "display": "EAEC Enteroaggregative E.coli"
+          },
+          {
+            "code": "#EHECPST",
+            "display": "EHEC / VTEC"
+          },
+          {
+            "code": "#EHECST",
+            "display": "EPEC (+ obligate EHEC / VTEC)"
+          },
+          {
+            "code": "#EHECWA",
+            "display": "EHEC / VTEC"
+          },
+          {
+            "code": "#EIECPST",
+            "display": "EIEC &amp; Shigellen"
+          },
+          {
+            "code": "#EIECWA",
+            "display": "EIEC &amp; Shigellen"
+          },
+          {
+            "code": "#ENTAHWA",
+            "display": "Entamoeba histolytica"
+          },
+          {
+            "code": "#ENTPAU",
+            "display": "Enteroviren"
+          },
+          {
+            "code": "#ENTPBL",
+            "display": "Enteroviren"
+          },
+          {
+            "code": "#ENTPED",
+            "display": "Enteroviren"
+          },
+          {
+            "code": "#ENTPGE",
+            "display": "Enteroviren"
+          },
+          {
+            "code": "#ENTPLI",
+            "display": "Enteroviren"
+          },
+          {
+            "code": "#ENTPMU",
+            "display": "Enteroviren"
+          },
+          {
+            "code": "#ENTPRA",
+            "display": "Enteroviren"
+          },
+          {
+            "code": "#ENTPST",
+            "display": "Enteroviren"
+          },
+          {
+            "code": "#ENTWA",
+            "display": "Enteroviren"
+          },
+          {
+            "code": "#EPECWA",
+            "display": "EPEC (+ obligate EHEC / VTEC)"
+          },
+          {
+            "code": "#ERHPED",
+            "display": "Ehrlichia spp."
+          },
+          {
+            "code": "#ERHWA",
+            "display": "Ehrlichia spp."
+          },
+          {
+            "code": "#ESBLRA",
+            "display": "MRGN Screening"
+          },
+          {
+            "code": "#ETECPST",
+            "display": "ETEC"
+          },
+          {
+            "code": "#ETECWA",
+            "display": "ETEC"
+          },
+          {
+            "code": "#GASEP",
+            "display": "Diarrhoe-Panel (PCR)"
+          },
+          {
+            "code": "#GASEPST",
+            "display": "Diarrhoe-Panel(PCR)"
+          },
+          {
+            "code": "#GIA",
+            "display": "Giardia lamblia AG (Parasiten)"
+          },
+          {
+            "code": "#GIAPST",
+            "display": "Giardia intestinalis (lamblia)"
+          },
+          {
+            "code": "#GIAWA",
+            "display": "Giardia intestinalis (lamblia)"
+          },
+          {
+            "code": "#GONANMO",
+            "display": "Gonokokken (Kultur)"
+          },
+          {
+            "code": "#GONRATO",
+            "display": "Gonokokken (Kultur)"
+          },
+          {
+            "code": "#HAAR",
+            "display": "Haare"
+          },
+          {
+            "code": "#HAEDCER",
+            "display": "Haemophilus ducreyi (PCR)"
+          },
+          {
+            "code": "#HAEDPAB",
+            "display": "Haemophilus ducreyi (PCR)"
+          },
+          {
+            "code": "#HAEDPBI",
+            "display": "Haemophilus ducreyi (PCR)"
+          },
+          {
+            "code": "#HAEDPEI",
+            "display": "Haemophilus ducreyi"
+          },
+          {
+            "code": "#HAEDPLY",
+            "display": "Haemophilus ducreyi"
+          },
+          {
+            "code": "#HAEDPRA",
+            "display": "Haemophilus ducreyi (PCR)"
+          },
+          {
+            "code": "#HAEDURE",
+            "display": "Haemophilus ducreyi (PCR)"
+          },
+          {
+            "code": "#HAEDWA",
+            "display": "Haemophilus ducreyi"
+          },
+          {
+            "code": "#HAUT",
+            "display": "Haut"
+          },
+          {
+            "code": "#HELIPBI",
+            "display": "Helicobacter pylori"
+          },
+          {
+            "code": "#HELIPST",
+            "display": "Helicobacter pylori"
+          },
+          {
+            "code": "#HELIWA",
+            "display": "Helicobacter pylori"
+          },
+          {
+            "code": "#HH6PBI",
+            "display": "HHV 6 Humanes Herpesvirus Typ 6"
+          },
+          {
+            "code": "#HH6PBR",
+            "display": "HHV 6 Humanes Herpesvirus Typ 6"
+          },
+          {
+            "code": "#HH6PED",
+            "display": "HHV 6 Humanes Herpesvirus Typ 6"
+          },
+          {
+            "code": "#HH6PLI",
+            "display": "HHV 6 Humanes Herpesvirus Typ 6"
+          },
+          {
+            "code": "#HHV6WA",
+            "display": "HHV 6 Humanes Herpesvirus Typ 6"
+          },
+          {
+            "code": "#HPAG",
+            "display": "Helicobacter pylori-AG"
+          },
+          {
+            "code": "#HPVAB",
+            "display": "Hum. Papillomaviren Screening (PCR)"
+          },
+          {
+            "code": "#HPVP",
+            "display": "Hum.Papillomaviren Typisierung (PCR)"
+          },
+          {
+            "code": "#HPVPBI",
+            "display": "HPV Humane Papilloma Viren"
+          },
+          {
+            "code": "#HPVPCE",
+            "display": "HPV Screening PCR"
+          },
+          {
+            "code": "#HPVPUR",
+            "display": "HPV Screening PCR"
+          },
+          {
+            "code": "#HPVWA",
+            "display": "HPV Screening PCR"
+          },
+          {
+            "code": "#HSVAB",
+            "display": "Herpes simplex 1+2 (PCR)"
+          },
+          {
+            "code": "#HSVANMO",
+            "display": "Herpes simplex 1+2 (PCR)"
+          },
+          {
+            "code": "#HSVCER",
+            "display": "Herpes simplex 1+2 (PCR)"
+          },
+          {
+            "code": "#HSVHA",
+            "display": "Herpers simplex 1+2 (PCR)"
+          },
+          {
+            "code": "#HSVPAU",
+            "display": "HSV Herpes simplex Virus 1+2"
+          },
+          {
+            "code": "#HSVPBI",
+            "display": "HSV Herpes simplex Virus 1+2"
+          },
+          {
+            "code": "#HSVPBL",
+            "display": "HSV Herpes simplex Virus 1+2"
+          },
+          {
+            "code": "#HSVPCE",
+            "display": "HSV Herpes simplex Virus 1+2"
+          },
+          {
+            "code": "#HSVPLI",
+            "display": "HSV Herpes simplex Virus 1+2"
+          },
+          {
+            "code": "#HSVPUR",
+            "display": "HSV Herpes simplex Virus 1+2"
+          },
+          {
+            "code": "#HSVRA",
+            "display": "Herpes simplex 1+2 (PCR)"
+          },
+          {
+            "code": "#HSVWA",
+            "display": "HSV Herpes simplex Virus 1+2"
+          },
+          {
+            "code": "#IMPL",
+            "display": "Implantate"
+          },
+          {
+            "code": "#INFAPRA",
+            "display": "Influenza A+B (inkl. H1N1)"
+          },
+          {
+            "code": "#INFAWA",
+            "display": "Influenza A+B (inkl. H1N1)"
+          },
+          {
+            "code": "#KACT",
+            "display": "Actinomyces"
+          },
+          {
+            "code": "#KBSTR",
+            "display": "Streptococcus agalactiae"
+          },
+          {
+            "code": "#KBSTWA",
+            "display": "Streptococcus agalactiae"
+          },
+          {
+            "code": "#KDERM",
+            "display": "Pilze"
+          },
+          {
+            "code": "#KGO",
+            "display": "Gonokokken (PCR)"
+          },
+          {
+            "code": "#KMU",
+            "display": "Myco-/ Ureaplama (Kultur)"
+          },
+          {
+            "code": "#KMU2",
+            "display": "Myco- /Ureaplasma (Kultur)"
+          },
+          {
+            "code": "#KMYC",
+            "display": "Myco-/ Ureaplasma (Kultur)"
+          },
+          {
+            "code": "#KNGON",
+            "display": "Gonokokken (Kultur)"
+          },
+          {
+            "code": "#KNOC",
+            "display": "Nocardia"
+          },
+          {
+            "code": "#KSPI",
+            "display": "Endovask. Katheter"
+          },
+          {
+            "code": "#KTBC",
+            "display": "M.tuberculosis (Kultur)"
+          },
+          {
+            "code": "#KTBC2",
+            "display": "M.tuberculosis / NTM (Kultur + Mik.)"
+          },
+          {
+            "code": "#KULFM",
+            "display": "Sonication (Implantat)"
+          },
+          {
+            "code": "#KVIB",
+            "display": "Vibrionen"
+          },
+          {
+            "code": "#KYER",
+            "display": "Yersinien"
+          },
+          {
+            "code": "#LEGPBI",
+            "display": "Legionella pneumophila"
+          },
+          {
+            "code": "#LEGPBR",
+            "display": "Legionella pneumophila"
+          },
+          {
+            "code": "#LEGPEU",
+            "display": "Legionella pneumophila"
+          },
+          {
+            "code": "#LEGPMU",
+            "display": "Legionella pneumophila"
+          },
+          {
+            "code": "#LEGPPL",
+            "display": "Legionella pneumophila"
+          },
+          {
+            "code": "#LEGPSP",
+            "display": "Legionella pneumophila"
+          },
+          {
+            "code": "#LEGPWA",
+            "display": "Legionella pneumophila"
+          },
+          {
+            "code": "#LGAG",
+            "display": "Legionellen AG"
+          },
+          {
+            "code": "#MASPLI",
+            "display": "Masern PCR"
+          },
+          {
+            "code": "#MASPRT",
+            "display": "Masern PCR"
+          },
+          {
+            "code": "#MEENPLI",
+            "display": "Menigitis / Encephalitis, akut"
+          },
+          {
+            "code": "#MEENWA",
+            "display": "Menigitis / Encephalitis, akut"
+          },
+          {
+            "code": "#MICPAU",
+            "display": "Microsporidien"
+          },
+          {
+            "code": "#MICPBI",
+            "display": "Microsporidien"
+          },
+          {
+            "code": "#MICPBR",
+            "display": "Microsporidien"
+          },
+          {
+            "code": "#MICPED",
+            "display": "Microsporidien"
+          },
+          {
+            "code": "#MICPLI",
+            "display": "Microsporidien"
+          },
+          {
+            "code": "#MICPMU",
+            "display": "Microsporidien"
+          },
+          {
+            "code": "#MICPNA",
+            "display": "Microsporidien"
+          },
+          {
+            "code": "#MICPRA",
+            "display": "Microsporidien"
+          },
+          {
+            "code": "#MICPSP",
+            "display": "Microsporidien"
+          },
+          {
+            "code": "#MICPST",
+            "display": "Microsporidien"
+          },
+          {
+            "code": "#MICWA",
+            "display": "Microsporidien"
+          },
+          {
+            "code": "#MRGNWA",
+            "display": "Multi-Resistent Gram negativ Keime - Screening"
+          },
+          {
+            "code": "#MRSA1HA",
+            "display": "MRSA-Screening (PCR)"
+          },
+          {
+            "code": "#MRSA1NP",
+            "display": "MRSA-Screening (PCR+Kultur)"
+          },
+          {
+            "code": "#MRSA2HA",
+            "display": "MRSA-Screening (Kultur)"
+          },
+          {
+            "code": "#MRSA2NP",
+            "display": "MRSA-Screening (Kultur)"
+          },
+          {
+            "code": "#MRSAWA",
+            "display": "MRSA Methicillin-res. S. aureus"
+          },
+          {
+            "code": "#MYKCER",
+            "display": "Myco- /Ureaplasma (PCR)"
+          },
+          {
+            "code": "#MYKGP",
+            "display": "Myco- /Ureaplasma (PCR)"
+          },
+          {
+            "code": "#MYKGPCE",
+            "display": "Mycoplasma genitalium"
+          },
+          {
+            "code": "#MYKGPDP",
+            "display": "Mycoplasma genitalium"
+          },
+          {
+            "code": "#MYKGPEJ",
+            "display": "Mycoplasma genitalium"
+          },
+          {
+            "code": "#MYKGPEU",
+            "display": "Mycoplasma genitalium"
+          },
+          {
+            "code": "#MYKGPGE",
+            "display": "Mycoplasma genitalium"
+          },
+          {
+            "code": "#MYKGPMU",
+            "display": "Mycoplasma genitalium"
+          },
+          {
+            "code": "#MYKGPUR",
+            "display": "Mycoplasma genitalium"
+          },
+          {
+            "code": "#MYKGRE",
+            "display": "Mycoplasma genitalium (PCR)"
+          },
+          {
+            "code": "#MYKGWA",
+            "display": "Mycoplasma genitalium"
+          },
+          {
+            "code": "#MYKHPCE",
+            "display": "Mycoplasma hominis"
+          },
+          {
+            "code": "#MYKHPDP",
+            "display": "Mycoplasma hominis"
+          },
+          {
+            "code": "#MYKHPEJ",
+            "display": "Mycoplamsa hominis"
+          },
+          {
+            "code": "#MYKHPEU",
+            "display": "Mycoplasma hominis"
+          },
+          {
+            "code": "#MYKHPGE",
+            "display": "Mycoplasma hominis"
+          },
+          {
+            "code": "#MYKHPMU",
+            "display": "Mycoplasma hominis"
+          },
+          {
+            "code": "#MYKHPUR",
+            "display": "Mycoplasma hominis"
+          },
+          {
+            "code": "#MYKHRE",
+            "display": "Mycoplasma hominis (PCR)"
+          },
+          {
+            "code": "#MYKHWA",
+            "display": "Mycoplamsa hominis"
+          },
+          {
+            "code": "#MYKPPBI",
+            "display": "Mycoplasma pneumoniae"
+          },
+          {
+            "code": "#MYKPPBR",
+            "display": "Mycoplasma pneumoniae"
+          },
+          {
+            "code": "#MYKPPGE",
+            "display": "Mycoplamsa pneumoniae"
+          },
+          {
+            "code": "#MYKPPLI",
+            "display": "Mycoplasma pneumoniae"
+          },
+          {
+            "code": "#MYKPPNA",
+            "display": "Mycoplasma pneumoniae"
+          },
+          {
+            "code": "#MYKPPPL",
+            "display": "Mycoplasma pneumoniae"
+          },
+          {
+            "code": "#MYKPPRA",
+            "display": "Mycoplasma pneumoniae"
+          },
+          {
+            "code": "#MYKPPSP",
+            "display": "Mycoplasma pneumoniae"
+          },
+          {
+            "code": "#MYKPWA",
+            "display": "Mycoplamsa pneumoniae"
+          },
+          {
+            "code": "#MYKURE",
+            "display": "Myco- /Ureaplasma (PCR)"
+          },
+          {
+            "code": "#MYURP",
+            "display": "Myco-/ Ureaplasma (PCR)"
+          },
+          {
+            "code": "#MYURP2",
+            "display": "Myco-/ Ureaplama (PCR)"
+          },
+          {
+            "code": "#NAG",
+            "display": "Nagel"
+          },
+          {
+            "code": "#NEIAB",
+            "display": "Gonokokken (PCR)"
+          },
+          {
+            "code": "#NEIANMO",
+            "display": "Gonokokken (PCR)"
+          },
+          {
+            "code": "#NEIEJ",
+            "display": "Gonokokken (PCR)"
+          },
+          {
+            "code": "#NEIEU",
+            "display": "Gonokokken (PCR)"
+          },
+          {
+            "code": "#NEIRATO",
+            "display": "Gonokokken (PCR)"
+          },
+          {
+            "code": "#NEISPAU",
+            "display": "Neisseria gonorrhoeae"
+          },
+          {
+            "code": "#NEISPBI",
+            "display": "Neisseria gonorrhoeae"
+          },
+          {
+            "code": "#NEISPCE",
+            "display": "Neisseria gonorrhoeae"
+          },
+          {
+            "code": "#NEISPDP",
+            "display": "Neisseria gonorrhoeae"
+          },
+          {
+            "code": "#NEISPEI",
+            "display": "Neisseria gonorrhoeae"
+          },
+          {
+            "code": "#NEISPEJ",
+            "display": "Neisseria gonorrhoeae"
+          },
+          {
+            "code": "#NEISPEU",
+            "display": "Neisseria gonorrhoeae"
+          },
+          {
+            "code": "#NEISPGE",
+            "display": "Neisseria gonorrhoeae"
+          },
+          {
+            "code": "#NEISPMU",
+            "display": "Neisseria gonorrhoeae"
+          },
+          {
+            "code": "#NEISPRA",
+            "display": "Neisseria gonorrhoeae"
+          },
+          {
+            "code": "#NEISPUR",
+            "display": "Neisseria gonorrhoeae"
+          },
+          {
+            "code": "#NEISWA",
+            "display": "Neisseria gonorrhoeae"
+          },
+          {
+            "code": "#NGON",
+            "display": "Gonokokken (Kultur)"
+          },
+          {
+            "code": "#NOROP",
+            "display": "Norovirus"
+          },
+          {
+            "code": "#NOROWA",
+            "display": "Noroviren"
+          },
+          {
+            "code": "#OXY",
+            "display": "Mikroskopie auf Oxyuren"
+          },
+          {
+            "code": "#PABS",
+            "display": "Abszess intraoperativ"
+          },
+          {
+            "code": "#PARVPBI",
+            "display": "Parvovirus B19"
+          },
+          {
+            "code": "#PARVPED",
+            "display": "Parvovirus B19"
+          },
+          {
+            "code": "#PARVPGE",
+            "display": "Parvovirus B19"
+          },
+          {
+            "code": "#PARVPLI",
+            "display": "Parvovirus B19"
+          },
+          {
+            "code": "#PARVWA",
+            "display": "Parvovirus B19"
+          },
+          {
+            "code": "#PBUR",
+            "display": "Bursa"
+          },
+          {
+            "code": "#PGEL",
+            "display": "Gelenk"
+          },
+          {
+            "code": "#PILANMO",
+            "display": "Pilze"
+          },
+          {
+            "code": "#PILBI",
+            "display": "Pilze"
+          },
+          {
+            "code": "#PILBRTR",
+            "display": "Pilze"
+          },
+          {
+            "code": "#PILEIWU",
+            "display": "Pilze"
+          },
+          {
+            "code": "#PILFM",
+            "display": "Pilze"
+          },
+          {
+            "code": "#PILGE",
+            "display": "Pilze"
+          },
+          {
+            "code": "#PILHA",
+            "display": "Pilze (Kultur)"
+          },
+          {
+            "code": "#PILLI",
+            "display": "Pilze"
+          },
+          {
+            "code": "#PILPUGE",
+            "display": "Pilze"
+          },
+          {
+            "code": "#PILRA",
+            "display": "Candida albicans"
+          },
+          {
+            "code": "#PILSP",
+            "display": "Pilze"
+          },
+          {
+            "code": "#PILST",
+            "display": "Candida"
+          },
+          {
+            "code": "#PILWU",
+            "display": "Pilze"
+          },
+          {
+            "code": "#PLIQ",
+            "display": "Liquor"
+          },
+          {
+            "code": "#PLST",
+            "display": "Plesiomonas"
+          },
+          {
+            "code": "#PNEUJWA",
+            "display": "Pneumocystis jirovecii (lamblia)"
+          },
+          {
+            "code": "#PNEUPBI",
+            "display": "Pneumocystis jirovecii (carinii)"
+          },
+          {
+            "code": "#PNEUPBR",
+            "display": "Pneumocystis jirovecii (carinii)"
+          },
+          {
+            "code": "#PNEUPNA",
+            "display": "Resp. Infektionen"
+          },
+          {
+            "code": "#PNEUPSP",
+            "display": "Pneumocystos jirovecii (carinii)"
+          },
+          {
+            "code": "#PPLE",
+            "display": "Pleura"
+          },
+          {
+            "code": "#PROS",
+            "display": "Prostataexprimat"
+          },
+          {
+            "code": "#PROTO",
+            "display": "Darmprotozoen (Parasiten)"
+          },
+          {
+            "code": "#PSIN",
+            "display": "Sinus"
+          },
+          {
+            "code": "#PUGEWA",
+            "display": "Punktate und Gewebe weitere Herkunft"
+          },
+          {
+            "code": "#PUN",
+            "display": "Eiter"
+          },
+          {
+            "code": "#PVF",
+            "display": "Plaut-Vincent Flora (mikroskopisch)"
+          },
+          {
+            "code": "#RESPBR",
+            "display": "Resp. Infektionen"
+          },
+          {
+            "code": "#RESPSP",
+            "display": "Resp. Infektionen"
+          },
+          {
+            "code": "#ROTA",
+            "display": "Rotavirus"
+          },
+          {
+            "code": "#RSVWA",
+            "display": "RSV Respiratory Syncytial Virus"
+          },
+          {
+            "code": "#SCHUP",
+            "display": "Schuppen"
+          },
+          {
+            "code": "#SCOT",
+            "display": "Klebestreifen"
+          },
+          {
+            "code": "#SNP",
+            "display": "Nasopharyngealsekret"
+          },
+          {
+            "code": "#SPER",
+            "display": "Ejakulat"
+          },
+          {
+            "code": "#SPU1",
+            "display": "Sputum 1"
+          },
+          {
+            "code": "#SPU2",
+            "display": "Sputum 2"
+          },
+          {
+            "code": "#SPU3",
+            "display": "Sputum 3"
+          },
+          {
+            "code": "#SPUT",
+            "display": "Sputum"
+          },
+          {
+            "code": "#ST",
+            "display": "Stuhl"
+          },
+          {
+            "code": "#ST1",
+            "display": "Stuhl 1"
+          },
+          {
+            "code": "#ST2",
+            "display": "Stuhl 2"
+          },
+          {
+            "code": "#ST3",
+            "display": "Stuhl 3"
+          },
+          {
+            "code": "#STD6EJ2",
+            "display": "STD-Screening PCR"
+          },
+          {
+            "code": "#STD6EU",
+            "display": "STD (sex trans. Dis) Screening (PCR)"
+          },
+          {
+            "code": "#STD6PAB",
+            "display": "STD-Screeing (PCR)"
+          },
+          {
+            "code": "#STD6PCE",
+            "display": "STD-Screening PCR"
+          },
+          {
+            "code": "#STD6PUR",
+            "display": "STD-Screening PCR"
+          },
+          {
+            "code": "#STD6WA",
+            "display": "STD-Screening (s.Vorderseite)"
+          },
+          {
+            "code": "#STMIK",
+            "display": "Mikrosporidien (Parasiten)"
+          },
+          {
+            "code": "#STRA",
+            "display": "Trachealsekret"
+          },
+          {
+            "code": "#STRB1RA",
+            "display": "B-Strept.-Screen (PCR + Kultur)"
+          },
+          {
+            "code": "#STRB2RA",
+            "display": "B-Strept.-Screen (Kultur)"
+          },
+          {
+            "code": "#STRPAG",
+            "display": "Pneumokokken AG"
+          },
+          {
+            "code": "#SWUN",
+            "display": "Wundsekret"
+          },
+          {
+            "code": "#TBCBRTR",
+            "display": "M.tuberculosis / NTM (Kultur + Mik.)"
+          },
+          {
+            "code": "#TBCPD",
+            "display": "M.tuberculosis (PCR + Kultur + Mik.)"
+          },
+          {
+            "code": "#TBCPDBI",
+            "display": "Mycobacterium tuberculosis-Komplex"
+          },
+          {
+            "code": "#TBCPDBR",
+            "display": "Mycobacterium tuberculosis-Komplex"
+          },
+          {
+            "code": "#TBCPDED",
+            "display": "Mycobacterium tuberculosis-Komplex"
+          },
+          {
+            "code": "#TBCPDEI",
+            "display": "Mycobacterium tuberculosis-Komplex"
+          },
+          {
+            "code": "#TBCPDEJ",
+            "display": "Mycobacterium tuberculosis-Komplex"
+          },
+          {
+            "code": "#TBCPDGE",
+            "display": "Mycobacterium tuberculosis-Komplex"
+          },
+          {
+            "code": "#TBCPDLI",
+            "display": "Mycobacterium tuberculosis-Komplex"
+          },
+          {
+            "code": "#TBCPDLY",
+            "display": "Mycobacterium tuberculosis-Komplex"
+          },
+          {
+            "code": "#TBCPDMU",
+            "display": "Mycobacterium tuberculosis-Komplex"
+          },
+          {
+            "code": "#TBCPDPL",
+            "display": "Mycobacterium tuberculosis-Komplex"
+          },
+          {
+            "code": "#TBCPDSP",
+            "display": "Mycobacterium tuberculosis-Komplex"
+          },
+          {
+            "code": "#TBCPSP",
+            "display": "M.tuberculosis (PCR + Kultur + Mik.)"
+          },
+          {
+            "code": "#TBCPUGE",
+            "display": "M. tuberculosis / NTM (Kultur + Mik.)"
+          },
+          {
+            "code": "#TBCSP",
+            "display": "M.tuberculosis/NMT (Kultur+Mik.)"
+          },
+          {
+            "code": "#TBCWA",
+            "display": "Mycobacterium tuberculosis-Komplex"
+          },
+          {
+            "code": "#TOXOGWA",
+            "display": "Toxoplasma gondii"
+          },
+          {
+            "code": "#TOXOPBI",
+            "display": "Toxoplasma gondii"
+          },
+          {
+            "code": "#TOXOPLI",
+            "display": "Toxoplasma gondii"
+          },
+          {
+            "code": "#TREPPBI",
+            "display": "Treponema pallidum"
+          },
+          {
+            "code": "#TREPPCE",
+            "display": "Treponema pallidum"
+          },
+          {
+            "code": "#TREPPLI",
+            "display": "Treponema pallidum"
+          },
+          {
+            "code": "#TREPPLY",
+            "display": "Treponema pallidum"
+          },
+          {
+            "code": "#TREPPRA",
+            "display": "Treponema pallidum"
+          },
+          {
+            "code": "#TREPPWA",
+            "display": "Treponema pallidum"
+          },
+          {
+            "code": "#TRICHBI",
+            "display": "Trichomonas vaginalis"
+          },
+          {
+            "code": "#TRICHCE",
+            "display": "Trichomonas vaginalis"
+          },
+          {
+            "code": "#TRICHMU",
+            "display": "Trichomonas vaginalis"
+          },
+          {
+            "code": "#TRICHP",
+            "display": "Trichomonas vaginalis (PCR)"
+          },
+          {
+            "code": "#TRICHUR",
+            "display": "Trichomonas vaginalis"
+          },
+          {
+            "code": "#TRICHWA",
+            "display": "Trichomonas vaginalis"
+          },
+          {
+            "code": "#TROPBI",
+            "display": "Tropheryma whipplei"
+          },
+          {
+            "code": "#TROPED",
+            "display": "Tropheryma whipplei"
+          },
+          {
+            "code": "#TROPGE",
+            "display": "Tropheryma whipplei"
+          },
+          {
+            "code": "#TROPLI",
+            "display": "Tropheryma whipplei"
+          },
+          {
+            "code": "#TROPLY",
+            "display": "Tropheryma whipplei"
+          },
+          {
+            "code": "#TROPST",
+            "display": "Tropheryma whipplei"
+          },
+          {
+            "code": "#TROPWA",
+            "display": "Tropheryma whipplei"
+          },
+          {
+            "code": "#UBCDK",
+            "display": "Uricult Dauerkatheterurin"
+          },
+          {
+            "code": "#UBCEK",
+            "display": "Uricult Einmalkatheterurin"
+          },
+          {
+            "code": "#UBCMI",
+            "display": "Uricult Mittelstrahlurin"
+          },
+          {
+            "code": "#UCDK",
+            "display": "Uricult unbebrütet v. Dauerkatheterurin"
+          },
+          {
+            "code": "#UCEK",
+            "display": "Uricult unbebrütet v. Einmalkatheterurin"
+          },
+          {
+            "code": "#UCMI",
+            "display": "Uricult unbebrütet v. Mittelstrahlurin"
+          },
+          {
+            "code": "#UER",
+            "display": "Erststrahlurin"
+          },
+          {
+            "code": "#UMO",
+            "display": "Morgenurin"
+          },
+          {
+            "code": "#UMO1",
+            "display": "Morgenurin 1"
+          },
+          {
+            "code": "#UMO2",
+            "display": "Morgenurin 2"
+          },
+          {
+            "code": "#UMO3",
+            "display": "Morgenurin 3"
+          },
+          {
+            "code": "#UREPPCE",
+            "display": "Ureaplasma urealyticum / parvum"
+          },
+          {
+            "code": "#UREPPDP",
+            "display": "Ureaplasma urealyticum / parvum"
+          },
+          {
+            "code": "#UREPPEJ",
+            "display": "Ureaplasma urealyticum / parvum"
+          },
+          {
+            "code": "#UREPPEU",
+            "display": "Ureaplasma urealyticum / parvum"
+          },
+          {
+            "code": "#UREPPGE",
+            "display": "Ureaplasma urealyticum / parvum"
+          },
+          {
+            "code": "#UREPPMU",
+            "display": "Ureaplasma urealyticum / parvum"
+          },
+          {
+            "code": "#UREPPRE",
+            "display": "Ureaplasma urealyticum / parvum (PCR)"
+          },
+          {
+            "code": "#UREPPUR",
+            "display": "Ureaplasma urealyticum / parvum"
+          },
+          {
+            "code": "#UREPWA",
+            "display": "Ureaplasma urealyticum / parvum"
+          },
+          {
+            "code": "#UVDK",
+            "display": "Dauerkatheterurin"
+          },
+          {
+            "code": "#UVEK",
+            "display": "Einmalkatheterurin"
+          },
+          {
+            "code": "#UVMI",
+            "display": "Mittelstrahlurin"
+          },
+          {
+            "code": "#VREACH",
+            "display": "Screening VRE"
+          },
+          {
+            "code": "#VREDKU",
+            "display": "Screening VRE"
+          },
+          {
+            "code": "#VRELEI",
+            "display": "Screening VRE"
+          },
+          {
+            "code": "#VRERA",
+            "display": "Screening VRE"
+          },
+          {
+            "code": "#VRETRA",
+            "display": "Screening VRE"
+          },
+          {
+            "code": "#VREWUN",
+            "display": "Screening VRE"
+          },
+          {
+            "code": "#VZVP",
+            "display": "VZV, Varizella Zoster (PCR)"
+          },
+          {
+            "code": "#VZVPAU",
+            "display": "VZV Varizella-Zoster Virus"
+          },
+          {
+            "code": "#VZVPBI",
+            "display": "VZV, Varizella Zoster V- (PCR)"
+          },
+          {
+            "code": "#VZVPBL",
+            "display": "VZV Varizella-Zoster Virus"
+          },
+          {
+            "code": "#VZVPLI",
+            "display": "VZV, Varizella Zoster V- (PCR)"
+          },
+          {
+            "code": "#VZVWA",
+            "display": "VZV Varizella-Zoster Virus"
+          },
+          {
+            "code": "#WE",
+            "display": "Helminthen / Würmer"
+          },
+          {
+            "code": "#WEA",
+            "display": "Wurm Identifizierung"
+          },
+          {
+            "code": "#ZIKAPED",
+            "display": "Zika Virus RNA (PCR)"
+          },
+          {
+            "code": "#ZIKAPEU",
+            "display": "Zika Virus RNA (PCR)"
+          },
+          {
+            "code": "#ZIKAPMU",
+            "display": "Zika Virus RNA (PCR)"
+          },
+          {
+            "code": "#ZIKAWA",
+            "display": "Zika Virus RNA (PCR)"
+          },
+          {
+            "code": "1ABZ",
+            "display": "Abszess intraoperativ"
+          },
+          {
+            "code": "1AUC",
+            "display": "Auge"
+          },
+          {
+            "code": "1BAB",
+            "display": "Blutkultur aerob beb."
+          },
+          {
+            "code": "1BAL",
+            "display": "BAL"
+          },
+          {
+            "code": "1BIO",
+            "display": "Biopsie"
+          },
+          {
+            "code": "1BK1",
+            "display": "Blutkulturset"
+          },
+          {
+            "code": "1BNB",
+            "display": "Blutkultur anaerob beb."
+          },
+          {
+            "code": "1BS",
+            "display": "Bronchialsekret"
+          },
+          {
+            "code": "1BUP",
+            "display": "Bursa"
+          },
+          {
+            "code": "1CER",
+            "display": "Cervix"
+          },
+          {
+            "code": "1CVA",
+            "display": "Cervix, Vaginalabstrich"
+          },
+          {
+            "code": "1DRS",
+            "display": "Drain"
+          },
+          {
+            "code": "1DU",
+            "display": "Dauerkatheterurin"
+          },
+          {
+            "code": "1EJA",
+            "display": "Ejakulat"
+          },
+          {
+            "code": "1ENK",
+            "display": "Endovask. Katheter"
+          },
+          {
+            "code": "1EU",
+            "display": "Erststrahlurin"
+          },
+          {
+            "code": "1EWS",
+            "display": "Eiter"
+          },
+          {
+            "code": "1GEL",
+            "display": "Gelenk"
+          },
+          {
+            "code": "1HAA",
+            "display": "Haare"
+          },
+          {
+            "code": "1HAS",
+            "display": "Schuppen"
+          },
+          {
+            "code": "1HAU",
+            "display": "Haut"
+          },
+          {
+            "code": "1IMP",
+            "display": "Implantate"
+          },
+          {
+            "code": "1KU",
+            "display": "Einmalkatheterurin"
+          },
+          {
+            "code": "1LIQ",
+            "display": "Liquor"
+          },
+          {
+            "code": "1MO",
+            "display": "Morgenurin"
+          },
+          {
+            "code": "1MO1",
+            "display": "Morgenurin 1"
+          },
+          {
+            "code": "1MO2",
+            "display": "Morgenurin 2"
+          },
+          {
+            "code": "1MO3",
+            "display": "Morgenurin 3"
+          },
+          {
+            "code": "1MU",
+            "display": "Urin"
+          },
+          {
+            "code": "1MUS",
+            "display": "Mund"
+          },
+          {
+            "code": "1NAG",
+            "display": "Nagel"
+          },
+          {
+            "code": "1NAS",
+            "display": "Nase"
+          },
+          {
+            "code": "1NPA",
+            "display": "Nasopharyngeal"
+          },
+          {
+            "code": "1NPS",
+            "display": "NPS"
+          },
+          {
+            "code": "1NRA",
+            "display": "Nase-/Rachen"
+          },
+          {
+            "code": "1OHR",
+            "display": "Ohr"
+          },
+          {
+            "code": "1OW",
+            "display": "Wunde oberflächlich"
+          },
+          {
+            "code": "1PEN",
+            "display": "Glans penis"
+          },
+          {
+            "code": "1PEX",
+            "display": "Prostataexprimat"
+          },
+          {
+            "code": "1PLE",
+            "display": "Pleura"
+          },
+          {
+            "code": "1PRO",
+            "display": "Wurmteile"
+          },
+          {
+            "code": "1PUN",
+            "display": "Punktat divers"
+          },
+          {
+            "code": "1RA",
+            "display": "Rachen"
+          },
+          {
+            "code": "1REC",
+            "display": "Rektalabstrich"
+          },
+          {
+            "code": "1RVA",
+            "display": "Rektovaginal"
+          },
+          {
+            "code": "1SCT",
+            "display": "Klebestreifen"
+          },
+          {
+            "code": "1SIN",
+            "display": "Sinus"
+          },
+          {
+            "code": "1SP",
+            "display": "Sputum"
+          },
+          {
+            "code": "1SP1",
+            "display": "Sputum 1"
+          },
+          {
+            "code": "1SP2",
+            "display": "Sputum 2"
+          },
+          {
+            "code": "1SP3",
+            "display": "Sputum 3"
+          },
+          {
+            "code": "1ST",
+            "display": "Stuhl"
+          },
+          {
+            "code": "1ST1",
+            "display": "Stuhl 1"
+          },
+          {
+            "code": "1ST2",
+            "display": "Stuhl 2"
+          },
+          {
+            "code": "1ST3",
+            "display": "Stuhl 3"
+          },
+          {
+            "code": "1TON",
+            "display": "Tonsillen"
+          },
+          {
+            "code": "1TRA",
+            "display": "Trachealsekret"
+          },
+          {
+            "code": "1TW",
+            "display": "Wunde tief"
+          },
+          {
+            "code": "1UDB",
+            "display": "Uricult bebrütet Dauerkatheterurin"
+          },
+          {
+            "code": "1UDU",
+            "display": "Uricult unbebrütet Dauerkatheterurin"
+          },
+          {
+            "code": "1UKB",
+            "display": "Uricult Katherterurin bebrütet"
+          },
+          {
+            "code": "1UKU",
+            "display": "Uricult Katheterurin unbebrütet"
+          },
+          {
+            "code": "1UMB",
+            "display": "Uricult bebrütet"
+          },
+          {
+            "code": "1UMU",
+            "display": "Uricult unbebrütet"
+          },
+          {
+            "code": "1URE",
+            "display": "Urethralabstrich"
+          },
+          {
+            "code": "1VAG",
+            "display": "Vagina"
+          },
+          {
+            "code": "1VUL",
+            "display": "Vulva"
+          },
+          {
+            "code": "ADVRSP",
+            "display": "'Adenovirus"
+          },
+          {
+            "code": "AREC",
+            "display": "Rektovaginal"
+          },
+          {
+            "code": "BKAE",
+            "display": "'Blutkultur aerob"
+          },
+          {
+            "code": "BKAECOM",
+            "display": "- Kommentar"
+          },
+          {
+            "code": "BKAEPOSR",
+            "display": "- weitere Massnahmen"
+          },
+          {
+            "code": "BKAEPZT",
+            "display": "- positiv nach (Tag:Std:Min)"
+          },
+          {
+            "code": "BKAET1",
+            "display": "Blutkultur aerob Startzeit"
+          },
+          {
+            "code": "BKAN",
+            "display": "'Blutkultur anaerob"
+          },
+          {
+            "code": "BKANCOM",
+            "display": "- Kommentar"
+          },
+          {
+            "code": "BKANPOSR",
+            "display": "- weitere Massnahmen"
+          },
+          {
+            "code": "BKANPZT",
+            "display": "- positiv nach (Tag:Std:Min)"
+          },
+          {
+            "code": "BKANT1",
+            "display": "Blutkultur anaerob Startzeit"
+          },
+          {
+            "code": "BKBEDATE",
+            "display": "Blutentnahmedatum"
+          },
+          {
+            "code": "BKBETIME",
+            "display": "Blutentnahmezeit"
+          },
+          {
+            "code": "BKDAUER",
+            "display": "vorgegebene Bebrütungsdauer (Tage)"
+          },
+          {
+            "code": "BKHER",
+            "display": "Blutkultur Herkunft"
+          },
+          {
+            "code": "BKKLANG",
+            "display": "Klinische Angaben"
+          },
+          {
+            "code": "BKKULT",
+            "display": "'Blutkultur aerob + anaerob"
+          },
+          {
+            "code": "BKNEGVER",
+            "display": "Blutkultur Verrechnung"
+          },
+          {
+            "code": "BKPED",
+            "display": "'Blutkultur Pediatric"
+          },
+          {
+            "code": "BKPEDCOM",
+            "display": "- Kommentar"
+          },
+          {
+            "code": "BKPEDF",
+            "display": "'Blutkultur Pediatric"
+          },
+          {
+            "code": "BKPEDPOS",
+            "display": "- weitere Massnahmen"
+          },
+          {
+            "code": "BKPEDPZT",
+            "display": "- positiv nach (Tag:Std:Min)"
+          },
+          {
+            "code": "BKPEDT1",
+            "display": "Blutkultur Pediatric Startzeit"
+          },
+          {
+            "code": "BKPIL",
+            "display": "'Blutkultur Pilze"
+          },
+          {
+            "code": "BKPILCOM",
+            "display": "- Kommentar"
+          },
+          {
+            "code": "BKPILPZT",
+            "display": "- positiv nach (Tage:Std:Min)"
+          },
+          {
+            "code": "BKPILT1",
+            "display": "Blutkultur Pilze Startzeit"
+          },
+          {
+            "code": "BKTHERAP",
+            "display": "Therapie/Medikamente"
+          },
+          {
+            "code": "BOCARSP",
+            "display": "'Bocavirus"
+          },
+          {
+            "code": "BOPERSP",
+            "display": "'Bordetella pertussis"
+          },
+          {
+            "code": "CGAPLI",
+            "display": "'Cryptococcus gatii/neoformans"
+          },
+          {
+            "code": "CHLT",
+            "display": "'Chlamydia trachomatis (PCR)"
+          },
+          {
+            "code": "CHLTCT",
+            "display": "'Chlamydia trachomatis CT"
+          },
+          {
+            "code": "CHPNRSP",
+            "display": "'Chlamydophila pneumoniae"
+          },
+          {
+            "code": "CMVPLI",
+            "display": "'Cytomegalievirus"
+          },
+          {
+            "code": "CO229RSP",
+            "display": "'Coronavirus 229E"
+          },
+          {
+            "code": "COHKRSP",
+            "display": "'Coronavirus HKU1"
+          },
+          {
+            "code": "CONLRSP",
+            "display": "'Coronavirus NL63"
+          },
+          {
+            "code": "COOCRSP",
+            "display": "'Coronavirus OC43"
+          },
+          {
+            "code": "COV1N",
+            "display": "COV1N"
+          },
+          {
+            "code": "COV1NCT",
+            "display": "COV1N Ct-Wert"
+          },
+          {
+            "code": "COV1NSP2",
+            "display": "COV1NSP2"
+          },
+          {
+            "code": "COV1NSPC",
+            "display": "COV2NSP2 Ct-Wert"
+          },
+          {
+            "code": "COV1RDCT",
+            "display": "COV1Rd CT-Wert"
+          },
+          {
+            "code": "COV1RDRP",
+            "display": "COV1RdRP"
+          },
+          {
+            "code": "COV2PCR",
+            "display": "'SARS-CoV-2 (2019-nCoV) RT-PCR"
+          },
+          {
+            "code": "COV2PCRB",
+            "display": "'SARS-CoV-2 PCR Bestätigungstest"
+          },
+          {
+            "code": "COV2PCRC",
+            "display": "'Ct-Wert"
+          },
+          {
+            "code": "COV2RSP",
+            "display": "'SARS-CoV-2"
+          },
+          {
+            "code": "COVPCR",
+            "display": "'SARS-CoV-2 PCR"
+          },
+          {
+            "code": "ECOPLI",
+            "display": "'Escherichia coli K1"
+          },
+          {
+            "code": "ENDBEM",
+            "display": "Endbefund Mikrobiologie"
+          },
+          {
+            "code": "ENTPLI",
+            "display": "'Enterovirus"
+          },
+          {
+            "code": "ENTRYM",
+            "display": "Probeneingang Labor Risch Mikrobiologie"
+          },
+          {
+            "code": "GBSPCR",
+            "display": "'Streptokokken Gr.B (PCR)"
+          },
+          {
+            "code": "H1N1RSP",
+            "display": "'Influenza A, Subtyp H1N1"
+          },
+          {
+            "code": "HERMI",
+            "display": "Herkunft Material Mikrobiologie"
+          },
+          {
+            "code": "HHE6PLI",
+            "display": "'Human herpes virus 6"
+          },
+          {
+            "code": "HINPLI",
+            "display": "'Haemophilus influenzae"
+          },
+          {
+            "code": "HPAG#",
+            "display": "Helicobacter pylori (Ag)"
+          },
+          {
+            "code": "HPAPLI",
+            "display": "'Human parechovirus"
+          },
+          {
+            "code": "HSI1PLI",
+            "display": "'Herpes simplex virus 1"
+          },
+          {
+            "code": "HSI2PLI",
+            "display": "'Herpes simplex virus 2"
+          },
+          {
+            "code": "HUMERSP",
+            "display": "'Humanes Metapneumonievirus A/B"
+          },
+          {
+            "code": "INAH1RSP",
+            "display": "'Influenza A, Subtyp H1"
+          },
+          {
+            "code": "INAH3RSP",
+            "display": "'Influenza A, Subtyp H3"
+          },
+          {
+            "code": "INFABPCR",
+            "display": "'Influenza Viren A,B RNA"
+          },
+          {
+            "code": "INFAPCR",
+            "display": "'Influenza Viren A (RNA)"
+          },
+          {
+            "code": "INFARSP",
+            "display": "'Influenza A"
+          },
+          {
+            "code": "INFBPCR",
+            "display": "'Influenza Viren B (RNA)"
+          },
+          {
+            "code": "INFBRSP",
+            "display": "'Influenza B"
+          },
+          {
+            "code": "LEPNRSP",
+            "display": "'Legionella pneumophila"
+          },
+          {
+            "code": "LMOPLI",
+            "display": "'Listeria monocytogenes"
+          },
+          {
+            "code": "MEENPLI",
+            "display": "*Meningitis Panel (PCR)"
+          },
+          {
+            "code": "MITOG",
+            "display": "Mitogen (positiv Kontrolle)"
+          },
+          {
+            "code": "MPNPLI",
+            "display": "'Mycoplasma pneumoniae"
+          },
+          {
+            "code": "MTBAG",
+            "display": "Mtbc-spezifische Antigene"
+          },
+          {
+            "code": "MYPNRSP",
+            "display": "'Mycoplasma pneumoniae"
+          },
+          {
+            "code": "NARCHMIK",
+            "display": "Nicht archivieren Verrechnung MIK"
+          },
+          {
+            "code": "NBMIK",
+            "display": "Nachbestellung aus MI_"
+          },
+          {
+            "code": "NCOVI#",
+            "display": "SARS-CoV-2 Screening(RT-PCR)"
+          },
+          {
+            "code": "NEIGO",
+            "display": "'Gonokokken (PCR)"
+          },
+          {
+            "code": "NEIGOCT",
+            "display": "'Gonokokken CT"
+          },
+          {
+            "code": "NMEPLI",
+            "display": "'Neisseria meningitidis"
+          },
+          {
+            "code": "PAIN1RSP",
+            "display": "'Parainfluenza 1"
+          },
+          {
+            "code": "PAIN2RSP",
+            "display": "'Parainfluenza 2"
+          },
+          {
+            "code": "PAIN3RSP",
+            "display": "'Parainfluenza 3"
+          },
+          {
+            "code": "PAIN4RSP",
+            "display": "'Parainfluenza 4"
+          },
+          {
+            "code": "RESPIKL",
+            "display": "'Respiratorisches Panel (Covid/Influenza/RSV)"
+          },
+          {
+            "code": "RHENRSP",
+            "display": "'Rhinovirus/Enterovirus"
+          },
+          {
+            "code": "RSPPCR",
+            "display": "'Respiratorisches Panel"
+          },
+          {
+            "code": "RSVPCR",
+            "display": "'RSV Respiratory Syncytial Virus (RNA)"
+          },
+          {
+            "code": "RSVRSP",
+            "display": "'Respiratorisches Synzytial-Virus A/B"
+          },
+          {
+            "code": "SAGPLI",
+            "display": "'Streptococcus agalactiae"
+          },
+          {
+            "code": "SEQNRAE",
+            "display": "Sequenznummer aerob"
+          },
+          {
+            "code": "SEQNRAN",
+            "display": "Sequenznummer anaerob"
+          },
+          {
+            "code": "SPNPLI",
+            "display": "'Streptococcus pneumoniae"
+          },
+          {
+            "code": "SPYPLI",
+            "display": "'Streptococcus pyogenes"
+          },
+          {
+            "code": "TESTGR1",
+            "display": "Testgrund"
+          },
+          {
+            "code": "TESTGR2",
+            "display": "Testgrund"
+          },
+          {
+            "code": "TESTGR3",
+            "display": "Testgrund"
+          },
+          {
+            "code": "TESTGR4",
+            "display": "Testgrund"
+          },
+          {
+            "code": "TESTGR5",
+            "display": "Testgrund"
+          },
+          {
+            "code": "URICRIS",
+            "display": "Uricult"
+          },
+          {
+            "code": "VZOPLI",
+            "display": "'Varicella-Zoster Virus"
+          }
+        ]
+      }
+    ]
+  }
+}

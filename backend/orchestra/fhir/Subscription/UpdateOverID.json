@@ -1,0 +1,11 @@
+{
+  "resourceType": "Subscription",
+  "id": "1018",
+  "status": "active",
+  "criteria": "ServiceRequest?status=active",
+  "channel": {
+    "type": "rest-hook",
+    "endpoint": "http://orchestra:8019/middleware/api/v1/notification/fhir",
+    "payload": "application/fhir+json"
+  }
+}

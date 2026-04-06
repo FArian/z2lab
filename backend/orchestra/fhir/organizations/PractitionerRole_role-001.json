@@ -1,0 +1,48 @@
+{
+  "resourceType": "PractitionerRole",
+  "id": "role-001",
+  "meta": {
+    "profile": ["http://hl7.org/fhir/StructureDefinition/PractitionerRole"]
+  },
+  "active": true,
+  "period": {
+    "start": "2024-01-01"
+  },
+  "practitioner": {
+    "reference": "Practitioner/prac-001",
+    "display": "Dr. med. Hans Müller"
+  },
+  "organization": {
+    "reference": "Organization/klinik-hirslanden",
+    "display": "Klinik Hirslanden"
+  },
+  "code": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "59058001",
+          "display": "General physician"
+        }
+      ],
+      "text": "Facharzt Innere Medizin"
+    }
+  ],
+  "specialty": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "419192003",
+          "display": "Internal medicine"
+        }
+      ]
+    }
+  ],
+  "location": [
+    {
+      "reference": "Location/klinik-hirslanden",
+      "display": "Klinik Hirslanden"
+    }
+  ]
+}

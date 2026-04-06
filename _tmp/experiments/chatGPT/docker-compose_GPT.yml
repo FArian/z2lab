@@ -1,0 +1,227 @@
+version: "3.9"
+
+volumes:
+  pgdata:
+  portainer-data:
+  orc-database:
+  traefik-letsencrypt:
+
+networks:
+  orderentry-orc-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.128.0/24
+
+services:
+
+  # =========================
+  # TRAEFIK (ENTRYPOINT)
+  # =========================
+  traefik:
+    image: traefik:v3.0
+    container_name: traefik
+    restart: unless-stopped
+
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+
+      # LETS ENCRYPT
+      - "--certificatesresolvers.le.acme.email=${ACME_EMAIL}"
+      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.le.acme.httpchallenge=true"
+      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
+
+      # LOGGING
+      - "--log.level=INFO"
+
+    ports:
+      - "80:80"
+      - "443:443"
+
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik-letsencrypt:/letsencrypt
+
+    networks:
+      - orderentry-orc-net
+
+    labels:
+      - "traefik.enable=true"
+
+      # Dashboard
+      - "traefik.http.routers.traefik.rule=Host(`${TRAEFIK_DOMAIN}`)"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.tls.certresolver=le"
+      - "traefik.http.routers.traefik.service=api@internal"
+
+      # Auth
+      - "traefik.http.middlewares.auth.basicauth.users=${TRAEFIK_AUTH}"
+      - "traefik.http.routers.traefik.middlewares=auth"
+
+      # Security headers
+      - "traefik.http.middlewares.secure.headers.stsSeconds=31536000"
+      - "traefik.http.middlewares.secure.headers.stsIncludeSubdomains=true"
+      - "traefik.http.middlewares.secure.headers.stsPreload=true"
+
+  # =========================
+  # WATCHTOWER
+  # =========================
+  watchtower:
+    image: containrrr/watchtower
+    restart: unless-stopped
+    command: --cleanup --schedule "0 0 3 * * *"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  # =========================
+  # PORTAINER
+  # =========================
+  portainer:
+    image: portainer/portainer-ce
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-data:/data
+    networks:
+      - orderentry-orc-net
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portainer.rule=Host(`${PORTAINER_DOMAIN}`)"
+      - "traefik.http.routers.portainer.entrypoints=websecure"
+      - "traefik.http.routers.portainer.tls.certresolver=le"
+      - "traefik.http.routers.portainer.middlewares=secure"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
+
+  # =========================
+  # POSTGRES
+  # =========================
+  postgres:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - orderentry-orc-net
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      retries: 5
+
+  # =========================
+  # HAPI FHIR
+  # =========================
+  hapi:
+    image: hapiproject/hapi
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    environment:
+      SPRING_CONFIG_ADDITIONAL_LOCATION: file:/data/
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    volumes:
+      - ./data/hapi/config:/data
+
+    networks:
+      - orderentry-orc-net
+
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/fhir/metadata"]
+      interval: 20s
+      retries: 5
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hapi.rule=Host(`${HAPI_DOMAIN}`)"
+      - "traefik.http.routers.hapi.entrypoints=websecure"
+      - "traefik.http.routers.hapi.tls.certresolver=le"
+      - "traefik.http.routers.hapi.middlewares=secure"
+      - "traefik.http.services.hapi.loadbalancer.server.port=8080"
+
+  # =========================
+  # ORCHESTRA (FIXED IP)
+  # =========================
+  orchestra:
+    image: farian/oie-juno:4.10.1.1
+    platform: linux/amd64
+    restart: unless-stopped
+
+    networks:
+      orderentry-orc-net:
+        ipv4_address: 172.20.128.10
+
+    environment:
+      ORCHESTRA_CONTAINER_MODE_ACTIVE: 'true'
+      orchestra_settings_database_runtime_db_typ: Derby
+      orchestra_settings_database_runtime_url: jdbc:derby:/home/juno/database
+
+    volumes:
+      - orc-database:/home/juno/database
+
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8019/Orchestra/default/RuntimeHealthMetrics/"]
+      interval: 30s
+      retries: 10
+
+    labels:
+      - "traefik.enable=true"
+
+      # UI
+      - "traefik.http.routers.orchestra.rule=Host(`${ORCHESTRA_DOMAIN}`)"
+      - "traefik.http.routers.orchestra.entrypoints=websecure"
+      - "traefik.http.routers.orchestra.tls.certresolver=le"
+      - "traefik.http.routers.orchestra.middlewares=secure"
+      - "traefik.http.services.orchestra.loadbalancer.server.port=8090"
+
+      # API
+      - "traefik.http.routers.orchestra-api.rule=Host(`${ORCHESTRA_API_DOMAIN}`)"
+      - "traefik.http.routers.orchestra-api.entrypoints=websecure"
+      - "traefik.http.routers.orchestra-api.tls.certresolver=le"
+      - "traefik.http.routers.orchestra-api.middlewares=secure"
+      - "traefik.http.services.orchestra-api.loadbalancer.server.port=8019"
+
+  # =========================
+  # ORDERENTRY
+  # =========================
+  orderentry:
+    image: farian/orderentry:latest
+    restart: unless-stopped
+    platform: linux/amd64
+
+    environment:
+      AUTH_SECRET: ${AUTH_SECRET}
+      FHIR_BASE_URL: ${FHIR_BASE_URL}
+      LOG_LEVEL: ${LOG_LEVEL}
+      LOG_FILE: ${LOG_FILE}
+
+    networks:
+      - orderentry-orc-net
+
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000"]
+      interval: 20s
+      retries: 5
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.orderentry.rule=Host(`${ORDERENTRY_DOMAIN}`)"
+      - "traefik.http.routers.orderentry.entrypoints=websecure"
+      - "traefik.http.routers.orderentry.tls.certresolver=le"
+      - "traefik.http.routers.orderentry.middlewares=secure"
+      - "traefik.http.services.orderentry.loadbalancer.server.port=3000"

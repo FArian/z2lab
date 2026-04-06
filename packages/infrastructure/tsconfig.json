@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2020", "dom"],
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    "typeRoots": ["../../frontend/orderentry/node_modules/@types"],
+
+    "paths": {
+      "@/domain/*":          ["../domain/src/*"],
+      "@/application/*":     ["../application/src/*"],
+
+      "@prisma/client":      ["../../frontend/orderentry/node_modules/@prisma/client"],
+      "nodemailer":          ["../../frontend/orderentry/node_modules/@types/nodemailer"],
+      "prom-client":         ["../../frontend/orderentry/node_modules/prom-client"],
+      "fast-xml-parser":     ["../../frontend/orderentry/node_modules/fast-xml-parser"],
+      "better-sqlite3":      ["../../frontend/orderentry/node_modules/@types/better-sqlite3"]
+    }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}

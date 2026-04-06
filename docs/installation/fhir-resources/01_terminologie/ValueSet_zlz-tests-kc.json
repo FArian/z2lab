@@ -1,0 +1,3674 @@
+{
+  "resourceType": "ValueSet",
+  "id": "zlz-tests-kc",
+  "url": "https://www.zetlab.ch/fhir/ValueSet/zlz-tests-kc",
+  "name": "zlzTestsKc",
+  "title": "ZLZ — Klinische Chemie",
+  "status": "active",
+  "description": "Tests der Befundgruppe KC.",
+  "compose": {
+    "include": [
+      {
+        "system": "https://www.zetlab.ch/lis/codes",
+        "concept": [
+          {
+            "code": "A1MKUZ",
+            "display": "alpha-1-Mikroglobulin/Krea"
+          },
+          {
+            "code": "A1MUZ",
+            "display": "alpha-1-Mikroglobulin"
+          },
+          {
+            "code": "A2MKUZ",
+            "display": "alpha-2-Makroglobulin/Krea"
+          },
+          {
+            "code": "A2MUZ",
+            "display": "alpha-2-Makroglobulin"
+          },
+          {
+            "code": "A2PLAUSZ",
+            "display": "Alpha-2-Antiplasmin (fkt.)"
+          },
+          {
+            "code": "AACETUSZ",
+            "display": "Anti-Acethylcholin-Rezeptor"
+          },
+          {
+            "code": "ACCP",
+            "display": "Anti-CCP"
+          },
+          {
+            "code": "ACCPI",
+            "display": "Anti-CCP Interpretation"
+          },
+          {
+            "code": "ACEMEUSZ",
+            "display": "Acemetacin"
+          },
+          {
+            "code": "ACICLOUZ",
+            "display": "Aciclovir"
+          },
+          {
+            "code": "ADAPU",
+            "display": "Adenosin-Desaminase (ADA), Punktat"
+          },
+          {
+            "code": "ADENQLUZ",
+            "display": "Adenovirus DNA-Nachweis, ql (PCR)"
+          },
+          {
+            "code": "AFIBRUSZ",
+            "display": "Anti-Fibrillarin"
+          },
+          {
+            "code": "AFPFW",
+            "display": "Alpha-1 Fetoprotein im Fruchtwasser"
+          },
+          {
+            "code": "AFPFWMED",
+            "display": "AFP Median (im Fruchtwasser)"
+          },
+          {
+            "code": "AFPFWMOM",
+            "display": "AFP MoM (im Fruchtwasser)"
+          },
+          {
+            "code": "AFPMEDIA",
+            "display": "AFP Median"
+          },
+          {
+            "code": "AFPMOM",
+            "display": "AFP Multiple of Median"
+          },
+          {
+            "code": "AFPSS",
+            "display": "alpha-Fetoprotein"
+          },
+          {
+            "code": "AFPTM",
+            "display": "AFP"
+          },
+          {
+            "code": "AKCHRUSZ",
+            "display": "Anti-Chromatin"
+          },
+          {
+            "code": "AKELAUSZ",
+            "display": "Anti-Elastase IgG"
+          },
+          {
+            "code": "AKGLOMZ",
+            "display": "Anti-Glom. Basalmembarn"
+          },
+          {
+            "code": "ALAT",
+            "display": "ALAT (GPT)"
+          },
+          {
+            "code": "ALB",
+            "display": "Albumin"
+          },
+          {
+            "code": "ALBENUSZ",
+            "display": "Albendazol"
+          },
+          {
+            "code": "ALBKREA",
+            "display": "Albumin/Kreatinin"
+          },
+          {
+            "code": "ALBKREAU",
+            "display": "Albumin/Kreatinin (Sammelurin)"
+          },
+          {
+            "code": "ALBKRG",
+            "display": "Albumin/Kreatinin"
+          },
+          {
+            "code": "ALBKUZ",
+            "display": "Albumin/Krea"
+          },
+          {
+            "code": "ALBPU",
+            "display": "Albumin Punktat"
+          },
+          {
+            "code": "ALBSA",
+            "display": "*Albumin im Sammelurin"
+          },
+          {
+            "code": "ALBSP",
+            "display": "*Albumin im Spontanurin"
+          },
+          {
+            "code": "ALBTAG",
+            "display": "Albumin/24h"
+          },
+          {
+            "code": "ALBU",
+            "display": "Albumin im Sammelurin"
+          },
+          {
+            "code": "ALBUGST",
+            "display": "Geschätzte Albuminurie/Tag"
+          },
+          {
+            "code": "ALBURKL",
+            "display": "Albuminurie Klassifizierung"
+          },
+          {
+            "code": "ALBUSPOT",
+            "display": "Albumin im Spontanurin"
+          },
+          {
+            "code": "ALBUZ",
+            "display": "Albumin"
+          },
+          {
+            "code": "AMIKUSZ",
+            "display": "Amikacin"
+          },
+          {
+            "code": "AMM",
+            "display": "Ammoniak"
+          },
+          {
+            "code": "AMPH",
+            "display": "Amphetamine qual."
+          },
+          {
+            "code": "AMPHD",
+            "display": "Amphetamine quant."
+          },
+          {
+            "code": "AMPHDIF",
+            "display": "Amphetamindiff. ql Urin"
+          },
+          {
+            "code": "AMY",
+            "display": "Amylase"
+          },
+          {
+            "code": "AMYPU",
+            "display": "Amylase Punktat"
+          },
+          {
+            "code": "ANDERE",
+            "display": "Andere"
+          },
+          {
+            "code": "AP",
+            "display": "Alkalische Phosphatase"
+          },
+          {
+            "code": "APCR",
+            "display": "APC-Resistenz"
+          },
+          {
+            "code": "APS",
+            "display": "*APS Screening"
+          },
+          {
+            "code": "ARA3USZ",
+            "display": "Anti-RNA Polymerase III"
+          },
+          {
+            "code": "ARGATUSZ",
+            "display": "Anti-Faktor IIa-Aktivität (Argatroban)"
+          },
+          {
+            "code": "ASAT",
+            "display": "ASAT (GOT)"
+          },
+          {
+            "code": "ASLO$",
+            "display": "Anti-Streptolysin O"
+          },
+          {
+            "code": "ASO",
+            "display": "Anti-Streptolysin"
+          },
+          {
+            "code": "AT3AGUSZ",
+            "display": "Antithrombin III, antigenetisch"
+          },
+          {
+            "code": "AU1USZ",
+            "display": "Anti-U1 snRNP"
+          },
+          {
+            "code": "AUSSTR",
+            "display": "Blutausstrich"
+          },
+          {
+            "code": "AUSSTR",
+            "display": "Blutausstrich"
+          },
+          {
+            "code": "AZATHIO",
+            "display": "*Azathioprin (Imurek®)"
+          },
+          {
+            "code": "AZATHIOG",
+            "display": "Thioguaninnukleotide"
+          },
+          {
+            "code": "AZATHIOM",
+            "display": "Methylmercaptopurinnukleotide"
+          },
+          {
+            "code": "AZATHIOP",
+            "display": "Mercaptopurinnukleotide"
+          },
+          {
+            "code": "B2G",
+            "display": "*b2 Glycoprotein 1"
+          },
+          {
+            "code": "B2GA",
+            "display": "b2-Glykoprotein-1 IgA"
+          },
+          {
+            "code": "B2GG",
+            "display": "b2-Glykoprotein 1 IgG"
+          },
+          {
+            "code": "B2GM",
+            "display": "b2-Glykoprotein-1 IgM"
+          },
+          {
+            "code": "B2TRF",
+            "display": "*b2 Transferrin (Liq + Serum)"
+          },
+          {
+            "code": "BARB",
+            "display": "Barbiturate qual."
+          },
+          {
+            "code": "BARBD",
+            "display": "Barbiturate quant."
+          },
+          {
+            "code": "BBLOCKU",
+            "display": "Betablocker im Urin"
+          },
+          {
+            "code": "BE",
+            "display": "Blutentnahme"
+          },
+          {
+            "code": "BEMERK",
+            "display": "Bemerkung"
+          },
+          {
+            "code": "BENZDIFF",
+            "display": "*Benzodiazepindifferenzierung"
+          },
+          {
+            "code": "BENZDIFU",
+            "display": "Benzodiazepindifferenz.qual. im Urin"
+          },
+          {
+            "code": "BENZO",
+            "display": "Benzodiazepine qual."
+          },
+          {
+            "code": "BENZOD",
+            "display": "Benzodiazepine quant."
+          },
+          {
+            "code": "BENZOUSZ",
+            "display": "Benzodiazepine qual. (Screening)"
+          },
+          {
+            "code": "BENZUQL",
+            "display": "Benzoylecgonin, ql (Cocain-M)"
+          },
+          {
+            "code": "BEURTUZ",
+            "display": "Beurteilung Proteinurie"
+          },
+          {
+            "code": "BHARZT",
+            "display": "Behandelnder Arzt"
+          },
+          {
+            "code": "BHBUSZ",
+            "display": "Beta-Hydroxybutyrat"
+          },
+          {
+            "code": "BICARUSZ",
+            "display": "Bicarbonat"
+          },
+          {
+            "code": "BNP",
+            "display": "BNP"
+          },
+          {
+            "code": "BNS_SORT",
+            "display": "BNProspec DMS Sort"
+          },
+          {
+            "code": "BOBUS",
+            "display": "*'Borrelia burgdorferi IgG und IgM"
+          },
+          {
+            "code": "BTPRATIO",
+            "display": "Sekret/Serum-Ratio (BTP)"
+          },
+          {
+            "code": "BTPSEK",
+            "display": "Beta-Trace Protein (BTP) - Sekret"
+          },
+          {
+            "code": "BTPSER",
+            "display": "Beta-Trace Protein (BTP) - Serum"
+          },
+          {
+            "code": "BTRACEUZ",
+            "display": "Beta-Trace Protein (Sekret/Liquor)"
+          },
+          {
+            "code": "C3C4",
+            "display": "*Komplement(C3/C4)"
+          },
+          {
+            "code": "C3K",
+            "display": "Komplement C3c"
+          },
+          {
+            "code": "C4K",
+            "display": "Komplement C4"
+          },
+          {
+            "code": "CA",
+            "display": "Calcium"
+          },
+          {
+            "code": "CA125",
+            "display": "CA 125"
+          },
+          {
+            "code": "CA153",
+            "display": "CA 15-3"
+          },
+          {
+            "code": "CA199",
+            "display": "CA 19-9"
+          },
+          {
+            "code": "CAKORR",
+            "display": "Albumin-korrigiertes Ca"
+          },
+          {
+            "code": "CAKREA",
+            "display": "Calcium/Kreatinin"
+          },
+          {
+            "code": "CAKREAU",
+            "display": "Calcium/Kreatinin (Sammelurin)"
+          },
+          {
+            "code": "CALPROST",
+            "display": "Calprotectin im Stuhl"
+          },
+          {
+            "code": "CALPUSZ",
+            "display": "Calprotectin im Serum"
+          },
+          {
+            "code": "CANN",
+            "display": "Cannabinoide qual."
+          },
+          {
+            "code": "CANND",
+            "display": "Cannabinoide quant."
+          },
+          {
+            "code": "CANNDIF",
+            "display": "*Cannabis-Bestätigung (LC-MS)"
+          },
+          {
+            "code": "CANNTHC",
+            "display": "Cannabisdiff. qual"
+          },
+          {
+            "code": "CARA",
+            "display": "Cardiolipin IgA"
+          },
+          {
+            "code": "CARD",
+            "display": "*Cardiolipin"
+          },
+          {
+            "code": "CARG",
+            "display": "Cardiolipin IgG"
+          },
+          {
+            "code": "CARM",
+            "display": "Cardiolipin IgM"
+          },
+          {
+            "code": "CASA",
+            "display": "Calcium im Sammelurin"
+          },
+          {
+            "code": "CASP",
+            "display": "Calcium im Spontanurin"
+          },
+          {
+            "code": "CATAG",
+            "display": "Calcium/24h"
+          },
+          {
+            "code": "CAU",
+            "display": "Calcium im Sammelurin"
+          },
+          {
+            "code": "CAUSPOT",
+            "display": "Calcium im Spontanurin"
+          },
+          {
+            "code": "CD19-2UZ",
+            "display": "B-Zellen (CD19+) in%"
+          },
+          {
+            "code": "CD19UZ",
+            "display": "B-Zellen (CD19+) abs."
+          },
+          {
+            "code": "CD4TAKUZ",
+            "display": "CD4+ akt.T-Zellen(CD25+) Absolut"
+          },
+          {
+            "code": "CD4TAPUZ",
+            "display": "CD4+ akt.T-Zellen (CD25+) %"
+          },
+          {
+            "code": "CD8TAKUZ",
+            "display": "CD8+ akt.T-Zellen(CD25+) Absolut"
+          },
+          {
+            "code": "CD8TAPUZ",
+            "display": "CD8+ akt.T-Zellen(CD25+) %"
+          },
+          {
+            "code": "CEA",
+            "display": "CEA"
+          },
+          {
+            "code": "CEFEPIM",
+            "display": "*Cefepim"
+          },
+          {
+            "code": "CEFEPIMF",
+            "display": "Cefepim Frei (berechnet)"
+          },
+          {
+            "code": "CEFEPIMT",
+            "display": "Cefepim Total"
+          },
+          {
+            "code": "CEFTFUSZ",
+            "display": "Ceftazidim, frei (ber.)"
+          },
+          {
+            "code": "CEFTUSZ",
+            "display": "Ceftazidim total"
+          },
+          {
+            "code": "CHE2",
+            "display": "Cholinesterase"
+          },
+          {
+            "code": "CHLORPRO",
+            "display": "Chlorpromazin"
+          },
+          {
+            "code": "CHOL",
+            "display": "Cholesterin"
+          },
+          {
+            "code": "CHOLPU",
+            "display": "Cholesterin Punktat"
+          },
+          {
+            "code": "CHYLOMIK",
+            "display": "Chylomikronen"
+          },
+          {
+            "code": "CICLOUSZ",
+            "display": "Ciclosporin A"
+          },
+          {
+            "code": "CIPRUSZ",
+            "display": "Ciprofloxacin"
+          },
+          {
+            "code": "CIT1:10",
+            "display": "Citrat-Vollblut 1:10"
+          },
+          {
+            "code": "CIT1:10",
+            "display": "Citrat-Vollblut 1:10"
+          },
+          {
+            "code": "CIT1:5",
+            "display": "Citrat-Vollblut 1:5"
+          },
+          {
+            "code": "CIT1:5",
+            "display": "Citrat-Vollblut 1:5"
+          },
+          {
+            "code": "CITPL",
+            "display": "Citrat-Plasma 1:10"
+          },
+          {
+            "code": "CITPL",
+            "display": "Citrat-Plasma 1:10"
+          },
+          {
+            "code": "CK",
+            "display": "CK (Creatin Kinase)"
+          },
+          {
+            "code": "CKDBIS1M",
+            "display": "eGFR (CKD-BIS1-Formel)"
+          },
+          {
+            "code": "CKDBIS1W",
+            "display": "eGFR (CKD-BIS1-Formel)"
+          },
+          {
+            "code": "CKDBIS2M",
+            "display": "eGFR (Cystatin C-BIS2- Formel)"
+          },
+          {
+            "code": "CKDBIS2W",
+            "display": "eGFR (Cystatin C-BIS2-Formel)"
+          },
+          {
+            "code": "CKDCYCM1",
+            "display": "eGFR (Cystatin C, Krea-CKD-EPI-Formel)"
+          },
+          {
+            "code": "CKDCYCM2",
+            "display": "eGFR (Cystatin C, Krea-CKD-EPI-Formel)"
+          },
+          {
+            "code": "CKDCYCM3",
+            "display": "eGFR (Cystatin C, Krea-CKD-EPI-Formel)"
+          },
+          {
+            "code": "CKDCYCM4",
+            "display": "eGFR (Cystatin C, Krea-CKD-EPI-Formel)"
+          },
+          {
+            "code": "CKDCYCM7",
+            "display": "eGFR( CystatinC, Krea Formel Kinder)"
+          },
+          {
+            "code": "CKDCYCW1",
+            "display": "eGFR (Cystatin C, Krea-CKD-EPI-Formel)"
+          },
+          {
+            "code": "CKDCYCW2",
+            "display": "eGFR (Cystatin C, Krea-CKD-EPI-Formel)"
+          },
+          {
+            "code": "CKDCYCW3",
+            "display": "eGFR (Cystatin C, Krea-CKD-EPI-Formel)"
+          },
+          {
+            "code": "CKDCYCW4",
+            "display": "eGFR (Cystatin C, Krea-CKD-EPI-Formel)"
+          },
+          {
+            "code": "CKDCYCW7",
+            "display": "eGFR( CystatinC, Krea Formel Kinder)"
+          },
+          {
+            "code": "CKDGFRM1",
+            "display": "eGFR (CKD-EPI-Formel)"
+          },
+          {
+            "code": "CKDGFRM2",
+            "display": "eGFR (CKD-EPI-Formel)"
+          },
+          {
+            "code": "CKDGFRM3",
+            "display": "eGFR (Krea-CKD Kinder)"
+          },
+          {
+            "code": "CKDGFRW1",
+            "display": "eGFR (CKD-EPI-Formel)"
+          },
+          {
+            "code": "CKDGFRW2",
+            "display": "eGFR (CKD-EPI-Formel)"
+          },
+          {
+            "code": "CKDGFRW3",
+            "display": "eGFR (Krea-CKD Kinder)"
+          },
+          {
+            "code": "CKMBA",
+            "display": "CK-MB Aktivität"
+          },
+          {
+            "code": "CKMBA%",
+            "display": "CK-MB Aktivität %"
+          },
+          {
+            "code": "CKMBM",
+            "display": "CK-MB Masse"
+          },
+          {
+            "code": "CL",
+            "display": "Chlorid"
+          },
+          {
+            "code": "CLINDA",
+            "display": "Clindamycin"
+          },
+          {
+            "code": "CLKREA",
+            "display": "Chlorid/Kreatinin"
+          },
+          {
+            "code": "CLOMETHU",
+            "display": "Clomethiazol im Urin ql"
+          },
+          {
+            "code": "CLOTIUSZ",
+            "display": "Clotiapin"
+          },
+          {
+            "code": "CLSA",
+            "display": "*Chlorid im Sammelurin"
+          },
+          {
+            "code": "CLSP",
+            "display": "*Chlorid im Spontanurin"
+          },
+          {
+            "code": "CLTAG",
+            "display": "Chlorid/24h"
+          },
+          {
+            "code": "CLU",
+            "display": "Chlorid im Sammelurin"
+          },
+          {
+            "code": "CLUKREA",
+            "display": "Chlorid/Kreatinin im Sammelurin"
+          },
+          {
+            "code": "CLUSPOT",
+            "display": "Chlorid im Spontanurin"
+          },
+          {
+            "code": "CMVQNUSZ",
+            "display": "CMV-DNA (Virämie) qn."
+          },
+          {
+            "code": "COCA",
+            "display": "Cocain qual."
+          },
+          {
+            "code": "COCAD",
+            "display": "Cocain quant."
+          },
+          {
+            "code": "COCADIFU",
+            "display": "*Cocain-Bestätigung"
+          },
+          {
+            "code": "COCAUQL",
+            "display": "Cocain, ql"
+          },
+          {
+            "code": "COLCH",
+            "display": "Colchicin"
+          },
+          {
+            "code": "COLIUSZ",
+            "display": "Colistin"
+          },
+          {
+            "code": "COPEPUSZ",
+            "display": "Copeptin"
+          },
+          {
+            "code": "COR16",
+            "display": "Cortisol 16h"
+          },
+          {
+            "code": "COR8",
+            "display": "Cortisol  basal 8h"
+          },
+          {
+            "code": "CORDEX",
+            "display": "Cortisol nach Dexamethason"
+          },
+          {
+            "code": "CORDEX",
+            "display": "Cortisol nach Dexamethason"
+          },
+          {
+            "code": "CORSTIM",
+            "display": "*Cortisol stimuliert (Synacthen)"
+          },
+          {
+            "code": "CORSYN30",
+            "display": "30 min. nach Synacthen"
+          },
+          {
+            "code": "CORSYN30",
+            "display": "30 min. nach Synacthen"
+          },
+          {
+            "code": "CORSYN60",
+            "display": "60 min. nach Synacthen"
+          },
+          {
+            "code": "CORSYN60",
+            "display": "60 min. nach Synacthen"
+          },
+          {
+            "code": "CPSA",
+            "display": "c-PSA (komplexiertes PSA)"
+          },
+          {
+            "code": "CRP",
+            "display": "CRP"
+          },
+          {
+            "code": "CRPPU",
+            "display": "CRP Punktat"
+          },
+          {
+            "code": "CRPS",
+            "display": "CRP sensitiv"
+          },
+          {
+            "code": "CTX",
+            "display": "CTX (beta-Crosslaps)"
+          },
+          {
+            "code": "CYSC",
+            "display": "Cystatin C (inkl. eGFR)"
+          },
+          {
+            "code": "DABIGAUZ",
+            "display": "Anti-Faktor IIa-Aktivität (Dabigatran)"
+          },
+          {
+            "code": "DAPTOUSZ",
+            "display": "Daptomycin (z.B. Cubicin)"
+          },
+          {
+            "code": "DBILI",
+            "display": "Bilirubin direkt"
+          },
+          {
+            "code": "DESALKYL",
+            "display": "Desalkyl-Flurazepam"
+          },
+          {
+            "code": "DHEAS",
+            "display": "Dehydroepiandrosteron-Sulfat (DHEA-S)"
+          },
+          {
+            "code": "DIA",
+            "display": "Diazepam"
+          },
+          {
+            "code": "DIAGNOSE",
+            "display": "Diagnose"
+          },
+          {
+            "code": "DIALYSAT",
+            "display": "*Dialysat"
+          },
+          {
+            "code": "DIGO",
+            "display": "Digoxin"
+          },
+          {
+            "code": "DISEC",
+            "display": "davon dismorphe Erythrozyten"
+          },
+          {
+            "code": "DNADS",
+            "display": "Anti-dsDNA"
+          },
+          {
+            "code": "DROGENGR",
+            "display": "*Drogenscreen im Urin"
+          },
+          {
+            "code": "DROGENKL",
+            "display": "*Drogenscreen im Urin"
+          },
+          {
+            "code": "EBN_SORT",
+            "display": "EPS + BNProspec DNS Sort"
+          },
+          {
+            "code": "EBNAIGG",
+            "display": "'EBV EBNA IgG"
+          },
+          {
+            "code": "EBNAIG-I",
+            "display": "'EBV EBNA IgG-Index"
+          },
+          {
+            "code": "EBVQNUSZ",
+            "display": "EBV-DNA (Virämie) qn."
+          },
+          {
+            "code": "EDDPUSZ",
+            "display": "EDDP (Methadon-Metabolit)"
+          },
+          {
+            "code": "EDTA",
+            "display": "EDTA-Vollblut"
+          },
+          {
+            "code": "EDTA",
+            "display": "EDTA-Vollblut"
+          },
+          {
+            "code": "EDTAPL",
+            "display": "EDTA-Plasma"
+          },
+          {
+            "code": "EDTAPL",
+            "display": "EDTA-Plasma"
+          },
+          {
+            "code": "EFAVUSZ",
+            "display": "Efavirenz"
+          },
+          {
+            "code": "EMTRIUSZ",
+            "display": "Emtricitabin"
+          },
+          {
+            "code": "EPA1",
+            "display": "alpha-1-Globulin"
+          },
+          {
+            "code": "EPA1ABS",
+            "display": "alpha-1-Globulin"
+          },
+          {
+            "code": "EPA2",
+            "display": "alpha-2-Globulin"
+          },
+          {
+            "code": "EPA2ABS",
+            "display": "alpha-2-Globulin"
+          },
+          {
+            "code": "EPALB",
+            "display": "Albumin"
+          },
+          {
+            "code": "EPALBABS",
+            "display": "Albumin"
+          },
+          {
+            "code": "EPBE1ABS",
+            "display": "beta-1-Globulin"
+          },
+          {
+            "code": "EPBE2ABS",
+            "display": "beta-2-Globulin"
+          },
+          {
+            "code": "EPBETA",
+            "display": "beta-Globulin"
+          },
+          {
+            "code": "EPBETA1",
+            "display": "beta-1-Globulin"
+          },
+          {
+            "code": "EPBETA2",
+            "display": "beta-2-Globulin"
+          },
+          {
+            "code": "EPBETABS",
+            "display": "beta-Globulin"
+          },
+          {
+            "code": "EPGAMABS",
+            "display": "gamma-Globulin"
+          },
+          {
+            "code": "EPGAMMA",
+            "display": "gamma-Globulin"
+          },
+          {
+            "code": "EPINTER",
+            "display": "Interpretation"
+          },
+          {
+            "code": "EPOUSZ",
+            "display": "Erythropoietin"
+          },
+          {
+            "code": "EPS",
+            "display": "*Proteinelektrophorese"
+          },
+          {
+            "code": "EPS_SORT",
+            "display": "EPS CentraLink Sort"
+          },
+          {
+            "code": "ETHANOL",
+            "display": "Ethanol"
+          },
+          {
+            "code": "ETHGLUSZ",
+            "display": "Ethylglucuronid"
+          },
+          {
+            "code": "ETHGYUSZ",
+            "display": "Ethylenglykol"
+          },
+          {
+            "code": "ETHo/oo",
+            "display": "Ethanol"
+          },
+          {
+            "code": "ETOH",
+            "display": "Ethanol"
+          },
+          {
+            "code": "EVEROUSZ",
+            "display": "Everolimus"
+          },
+          {
+            "code": "FAI",
+            "display": "Freier Androgenindex (FAI)"
+          },
+          {
+            "code": "FBEURUSZ",
+            "display": "Beurteilung"
+          },
+          {
+            "code": "FCD14USZ",
+            "display": "GPI-neg CD14-neg Monozyten"
+          },
+          {
+            "code": "FCD24USZ",
+            "display": "GPI-neg CD24-neg Granulozyten"
+          },
+          {
+            "code": "FCORU",
+            "display": "Freies Cortisol (Sammelurin)"
+          },
+          {
+            "code": "FE",
+            "display": "Eisen"
+          },
+          {
+            "code": "FEHSTSP",
+            "display": "Fraktionelle Harnstoffexkretion (Spontanurin)"
+          },
+          {
+            "code": "FEHSTU",
+            "display": "Fraktionelle Harnstoffexkretion (Urin)"
+          },
+          {
+            "code": "FENASP",
+            "display": "Fraktionelle Natriumexkretion (Spontanurin)"
+          },
+          {
+            "code": "FENAU",
+            "display": "Fraktionelle Natriumexkretion (Urin)"
+          },
+          {
+            "code": "FENTA",
+            "display": "Fentanyl"
+          },
+          {
+            "code": "FERR",
+            "display": "Ferritin"
+          },
+          {
+            "code": "FERRLI",
+            "display": "Ferritin im Liquor"
+          },
+          {
+            "code": "FGRANUSZ",
+            "display": "Granulozyten"
+          },
+          {
+            "code": "FIBIUSZ",
+            "display": "Fibrinogen (ag)"
+          },
+          {
+            "code": "FKLK",
+            "display": "Kappa freie Leichtketten (Freelite)"
+          },
+          {
+            "code": "FKLRATIO",
+            "display": "Kappa/Lambda-Ratio (Freelite)"
+          },
+          {
+            "code": "FLK",
+            "display": "*Freie Leichketten"
+          },
+          {
+            "code": "FLLK",
+            "display": "Lambda freie Leichtketten (Freelite)"
+          },
+          {
+            "code": "FLPL",
+            "display": "Fluorid-Plasma"
+          },
+          {
+            "code": "FLPL",
+            "display": "Fluorid-Plasma"
+          },
+          {
+            "code": "FLUCLOX",
+            "display": "Flucloxacillin (Floxapen)"
+          },
+          {
+            "code": "FLUCOUSZ",
+            "display": "Fluconazol (Diflucan)"
+          },
+          {
+            "code": "FLUNOR",
+            "display": "Fluoxetin+Norfluoxetin"
+          },
+          {
+            "code": "FLUOXMET",
+            "display": "*Fluoxetin und Metabolit"
+          },
+          {
+            "code": "FLUOXUSZ",
+            "display": "Fluoxetin"
+          },
+          {
+            "code": "FLURAMET",
+            "display": "*Flurazepam und Metabolit"
+          },
+          {
+            "code": "FLURAUSZ",
+            "display": "Flurazepam"
+          },
+          {
+            "code": "FMONOUSZ",
+            "display": "Monozyten"
+          },
+          {
+            "code": "FOL",
+            "display": "Folsäure Serum"
+          },
+          {
+            "code": "FOLEC",
+            "display": "Folsäure in Erythrozyten"
+          },
+          {
+            "code": "FPSA",
+            "display": "freies PSA"
+          },
+          {
+            "code": "FPSARATI",
+            "display": "Ratio fPSA/PSA"
+          },
+          {
+            "code": "FSH",
+            "display": "FSH, Follitropin"
+          },
+          {
+            "code": "FT3",
+            "display": "freies T3"
+          },
+          {
+            "code": "FT4",
+            "display": "freies T4"
+          },
+          {
+            "code": "GANCUSZ",
+            "display": "Ganciclovir"
+          },
+          {
+            "code": "GENTAUSZ",
+            "display": "Gentamicin"
+          },
+          {
+            "code": "GERBEURT",
+            "display": "Gesamtbeurteilung Hämostase"
+          },
+          {
+            "code": "GEWICHT",
+            "display": "Körpergewicht in kg"
+          },
+          {
+            "code": "GFRKL",
+            "display": "GFR Klassifizierung"
+          },
+          {
+            "code": "GGT",
+            "display": "GGT"
+          },
+          {
+            "code": "GHBSPUSZ",
+            "display": "Gammahydroxybuttersäure (GHB), qn. (Urin)"
+          },
+          {
+            "code": "GHBUSZ",
+            "display": "Gammahydroxybutyrat (GHB) qn. (Plasma)"
+          },
+          {
+            "code": "GLUCDIAL",
+            "display": "Glucose (Dialysat)"
+          },
+          {
+            "code": "GLUCF",
+            "display": "Glucose (Fluorid)"
+          },
+          {
+            "code": "GLUCKREA",
+            "display": "Glucose/Kreatinin"
+          },
+          {
+            "code": "GLUCLI",
+            "display": "Glucose Liquor"
+          },
+          {
+            "code": "GLUCLIF",
+            "display": "Glucose Liquor (Fluorid)"
+          },
+          {
+            "code": "GLUCPU",
+            "display": "Glucose Punktat"
+          },
+          {
+            "code": "GLUCPUF",
+            "display": "Glukose Punktat (Fluorid)"
+          },
+          {
+            "code": "GLUCQUO",
+            "display": "Glucosequotient"
+          },
+          {
+            "code": "GLUCQUOF",
+            "display": "Glucosequotient (Fluorid)"
+          },
+          {
+            "code": "GLUCS",
+            "display": "Glucose (Serum)"
+          },
+          {
+            "code": "GLUCSA",
+            "display": "Glucose im Sammelurin"
+          },
+          {
+            "code": "GLUCSP",
+            "display": "*Glucose im Spontanurin"
+          },
+          {
+            "code": "GLUCTAG",
+            "display": "Glucose/24h"
+          },
+          {
+            "code": "GLUCU",
+            "display": "Glucose im Sammelurin"
+          },
+          {
+            "code": "GLUUSPOT",
+            "display": "Glucose im Spontanurin"
+          },
+          {
+            "code": "GROESSE",
+            "display": "Körpergrösse in cm"
+          },
+          {
+            "code": "GTT120",
+            "display": "Glucose 120 min"
+          },
+          {
+            "code": "GTT120",
+            "display": "Glucose 120 min"
+          },
+          {
+            "code": "GTT180",
+            "display": "Glucose 180 min"
+          },
+          {
+            "code": "GTT180",
+            "display": "Glucose 180 min"
+          },
+          {
+            "code": "GTT60",
+            "display": "Glucose 60 min"
+          },
+          {
+            "code": "GTT60",
+            "display": "Glucose 60 min"
+          },
+          {
+            "code": "GTTAKRO",
+            "display": "*GTT Akromegalie"
+          },
+          {
+            "code": "GTTGEST",
+            "display": "*Glucose Toleranztest SS"
+          },
+          {
+            "code": "GTTN",
+            "display": "Glucose nüchtern"
+          },
+          {
+            "code": "GTTP120",
+            "display": "Glucose 120 min"
+          },
+          {
+            "code": "GTTPN",
+            "display": "Glucose nüchtern"
+          },
+          {
+            "code": "GTTPOST",
+            "display": "*Glucose Toleranztest postpartal"
+          },
+          {
+            "code": "GTTWHO",
+            "display": "Glucose Toleranztest WHO"
+          },
+          {
+            "code": "GZT120",
+            "display": "Glucose 120 min"
+          },
+          {
+            "code": "GZTN",
+            "display": "Glucose nüchtern"
+          },
+          {
+            "code": "GZYLIND",
+            "display": "Granulierte Zylinder"
+          },
+          {
+            "code": "HÄMO",
+            "display": "Hämolyse"
+          },
+          {
+            "code": "HAPTO",
+            "display": "Haptoglobin"
+          },
+          {
+            "code": "HAVRNAUZ",
+            "display": "Hepatitis A (HAV) Virämie ql."
+          },
+          {
+            "code": "HBA1C",
+            "display": "*HbA1c  HPLC-Methode"
+          },
+          {
+            "code": "HBSAGQN",
+            "display": "Hepatitis B HBs-Ag qn."
+          },
+          {
+            "code": "HBVQLUSZ",
+            "display": "Hepatitis B (HBV) ql."
+          },
+          {
+            "code": "HBVQNUSZ",
+            "display": "Hepatitis B (HBV) DNA qn."
+          },
+          {
+            "code": "HCGSS",
+            "display": "HCG Schwangerschaft"
+          },
+          {
+            "code": "HCGTM",
+            "display": "hCG total"
+          },
+          {
+            "code": "HCVQLUSZ",
+            "display": "Hepatitis C (HCV) ql."
+          },
+          {
+            "code": "HCVQNUSZ",
+            "display": "Hepatitis C (HCV) Virämie qn."
+          },
+          {
+            "code": "HDL",
+            "display": "HDL-Cholesterin"
+          },
+          {
+            "code": "HDLFRAK",
+            "display": "HDL-Fraktion (alpha-Lipo)"
+          },
+          {
+            "code": "HDLRATIO",
+            "display": "Cholesterin/HDL (berechnet)"
+          },
+          {
+            "code": "HEPPL",
+            "display": "Heparin-Plasma"
+          },
+          {
+            "code": "HEPPL",
+            "display": "Heparin-Plasma"
+          },
+          {
+            "code": "HEPVB",
+            "display": "Heparin-Vollblut"
+          },
+          {
+            "code": "HEPVB",
+            "display": "Heparin-Vollblut"
+          },
+          {
+            "code": "HERDIAL",
+            "display": "Herkunft Dialysat"
+          },
+          {
+            "code": "HERSEK",
+            "display": "Herkunft Sekret"
+          },
+          {
+            "code": "HERU1M",
+            "display": "1. Morgenurin"
+          },
+          {
+            "code": "HERU2M",
+            "display": "2. Morgenurin"
+          },
+          {
+            "code": "HERUBL",
+            "display": "Blasenpunktion"
+          },
+          {
+            "code": "HERUKA",
+            "display": "Katheterurin"
+          },
+          {
+            "code": "HERUMI",
+            "display": "Mittelstrahlurin"
+          },
+          {
+            "code": "HH6QNUSZ",
+            "display": "Human Herpes-Virus 6 (HHV-6) DNA ql."
+          },
+          {
+            "code": "HIRUUSZ",
+            "display": "Lepirudin-Konzentration (Hirudin)"
+          },
+          {
+            "code": "HISTUSZ",
+            "display": "Histon AK"
+          },
+          {
+            "code": "HIVQLUSZ",
+            "display": "HIV-1-RNA ql."
+          },
+          {
+            "code": "HIVQNUSZ",
+            "display": "HIV-1-RNA qn."
+          },
+          {
+            "code": "HLAB57US",
+            "display": "HLA-B*5701"
+          },
+          {
+            "code": "HOLO",
+            "display": "Holotranscobalamin"
+          },
+          {
+            "code": "HOMA",
+            "display": "HOMA- Index"
+          },
+          {
+            "code": "HOMO",
+            "display": "Homocystein"
+          },
+          {
+            "code": "HS",
+            "display": "Harnsäure"
+          },
+          {
+            "code": "HSKREA",
+            "display": "Harnsäure/Kreatinin"
+          },
+          {
+            "code": "HSPU",
+            "display": "Harnsäure Punktat"
+          },
+          {
+            "code": "HSSA",
+            "display": "*Harnsäure im Sammelurin"
+          },
+          {
+            "code": "HSSP",
+            "display": "*Harnsäure im Spontanurin"
+          },
+          {
+            "code": "HST",
+            "display": "Harnstoff"
+          },
+          {
+            "code": "HSTAG",
+            "display": "Harnsäure/24h"
+          },
+          {
+            "code": "HSTDIAL",
+            "display": "Harnstoff (Dialysat)"
+          },
+          {
+            "code": "HSTKREA",
+            "display": "Harnstoff/Kreatinin"
+          },
+          {
+            "code": "HSTKREAU",
+            "display": "Harnstoff/Kreatinin (Sammelurin)"
+          },
+          {
+            "code": "HSTOFFU",
+            "display": "Harnstoff im Sammelurin"
+          },
+          {
+            "code": "HSTPU",
+            "display": "Harnstoff Punktat"
+          },
+          {
+            "code": "HSTSA",
+            "display": "*Harnstoff im Sammelurin"
+          },
+          {
+            "code": "HSTSP",
+            "display": "*Harnstoff im Spontanurin"
+          },
+          {
+            "code": "HSTTAG",
+            "display": "Harnstoff/24h"
+          },
+          {
+            "code": "HSTUSPOT",
+            "display": "Harnstoff im Spontanurin"
+          },
+          {
+            "code": "HSU",
+            "display": "Harnsäure im Sammelurin"
+          },
+          {
+            "code": "HSUSPOT",
+            "display": "Harnsäure im Spontanurin"
+          },
+          {
+            "code": "HSV1DUSZ",
+            "display": "Herpes-Simplex-Virus 1 (HSV-1) DNA ql."
+          },
+          {
+            "code": "HSV1G-I",
+            "display": "'Herpes-simplex-Virus 1, IgG (Index)"
+          },
+          {
+            "code": "HSV1IGG",
+            "display": "'Herpes-simplex-Virus 1, IgG"
+          },
+          {
+            "code": "HSV2DUSZ",
+            "display": "Herpes-Simplex-Virus 2 (HSV-2) DNA ql."
+          },
+          {
+            "code": "HSV2G-I",
+            "display": "'Herpes-simplex-Virus 2, IgG (Index)"
+          },
+          {
+            "code": "HSV2IGG",
+            "display": "'Herpes-simplex-Virus 2, IgG"
+          },
+          {
+            "code": "HSVDNAUZ",
+            "display": "Herpes-Simplex-Virus (HSV) PCR"
+          },
+          {
+            "code": "HSVIGM",
+            "display": "'Herpes-simplex-Virus IgM"
+          },
+          {
+            "code": "HSVIGM-I",
+            "display": "'Herpes-simplex-Virus IgM (Index)"
+          },
+          {
+            "code": "HVSKREAT",
+            "display": "Homovanillinsäure/Kreatinin"
+          },
+          {
+            "code": "HVSTAG",
+            "display": "Homovanillinsäure/24h"
+          },
+          {
+            "code": "HYDROUSZ",
+            "display": "Hydroxyapatit-Kristalle Synovialfluid"
+          },
+          {
+            "code": "HZYLIND",
+            "display": "Hyaline Zylinder"
+          },
+          {
+            "code": "IBILI",
+            "display": "Bilirubin indirekt (berechnet)"
+          },
+          {
+            "code": "IGA",
+            "display": "IgA"
+          },
+          {
+            "code": "IGAUUSZ",
+            "display": "Immunglobulin-IgA, Urin"
+          },
+          {
+            "code": "IGG",
+            "display": "IgG"
+          },
+          {
+            "code": "IGGKUZ",
+            "display": "IgG/Krea"
+          },
+          {
+            "code": "IGGUUSZ",
+            "display": "Immunglobulin-IgG, Urin"
+          },
+          {
+            "code": "IGGUZ",
+            "display": "IgG"
+          },
+          {
+            "code": "IGLOUSZ",
+            "display": "anti-IgLON5 Serum"
+          },
+          {
+            "code": "IGM",
+            "display": "IgM"
+          },
+          {
+            "code": "IKT",
+            "display": "Ikterus"
+          },
+          {
+            "code": "IL5",
+            "display": "Interleukin 5"
+          },
+          {
+            "code": "IL6",
+            "display": "Interleukin 6"
+          },
+          {
+            "code": "IMMUNOT",
+            "display": "Immunotyping/Immunfixation"
+          },
+          {
+            "code": "IMT",
+            "display": "*Immunotyping/Immunfixation"
+          },
+          {
+            "code": "INDKREA",
+            "display": "5-Hydroxy-Indolessigsäure/Kreatinin"
+          },
+          {
+            "code": "INDOMUSZ",
+            "display": "Indometacin"
+          },
+          {
+            "code": "INFLIUSZ",
+            "display": "Infliximab"
+          },
+          {
+            "code": "INTOXBUS",
+            "display": "Intoxikationsanalyse im Blut ql"
+          },
+          {
+            "code": "INTOXQL",
+            "display": "Intoxikations-Analyse ql"
+          },
+          {
+            "code": "IPDLYP02",
+            "display": "Einsenderprofil 02 IPDLY"
+          },
+          {
+            "code": "ISONIUSZ",
+            "display": "Isoniazid im Blut"
+          },
+          {
+            "code": "ITRACO",
+            "display": "Itraconazol"
+          },
+          {
+            "code": "ITRACOME",
+            "display": "Itraconazol + OH-Itraconazol"
+          },
+          {
+            "code": "ITRACOOH",
+            "display": "Hydroxy-Itraconazol"
+          },
+          {
+            "code": "ITRAUSZ",
+            "display": "Itraconazol und Metabolit"
+          },
+          {
+            "code": "K",
+            "display": "Kalium"
+          },
+          {
+            "code": "KAUSSTR",
+            "display": "Blutausstrich"
+          },
+          {
+            "code": "KBAUSSTR",
+            "display": "Blutausstrich"
+          },
+          {
+            "code": "KBCIT1:5",
+            "display": "Blutsenkungsprobe"
+          },
+          {
+            "code": "KBCITPL",
+            "display": "Gerinnungsprobe"
+          },
+          {
+            "code": "KBEDTA",
+            "display": "EDTA-Probe"
+          },
+          {
+            "code": "KBEDTAPL",
+            "display": "EDTA-Plasmaprobe"
+          },
+          {
+            "code": "KBFLPL",
+            "display": "Fluoridprobe"
+          },
+          {
+            "code": "KBFW",
+            "display": "Fruchtwasserprobe"
+          },
+          {
+            "code": "KBHEPPL",
+            "display": "Heparinplasmaprobe"
+          },
+          {
+            "code": "KBHEPVB",
+            "display": "Heparinvollblutprobe"
+          },
+          {
+            "code": "KBLIEDTA",
+            "display": "Liquor-EDTA-Probe"
+          },
+          {
+            "code": "KBLIFL",
+            "display": "Liquor-Fluoridprobe"
+          },
+          {
+            "code": "KBLINA",
+            "display": "Liquor-Nativprobe"
+          },
+          {
+            "code": "KBNAVB",
+            "display": "Serum-Nativprobe"
+          },
+          {
+            "code": "KBPUEDTA",
+            "display": "Punktat-EDTA-Probe"
+          },
+          {
+            "code": "KBPUFL",
+            "display": "Punktat-Fluoridprobe"
+          },
+          {
+            "code": "KBPUHEP",
+            "display": "Punktat-Heparinprobe"
+          },
+          {
+            "code": "KBPUNA",
+            "display": "Punktat-Nativprobe"
+          },
+          {
+            "code": "KBSEGEL",
+            "display": "Serumprobe"
+          },
+          {
+            "code": "KBSL",
+            "display": "Serumprobe lichtgeschützt"
+          },
+          {
+            "code": "KBSPOTU",
+            "display": "Spontanurin"
+          },
+          {
+            "code": "KBSPUR",
+            "display": "Spurenenlementprobe"
+          },
+          {
+            "code": "KBSTUHL",
+            "display": "Stuhlprobe"
+          },
+          {
+            "code": "KBURIN",
+            "display": "Sammelurin"
+          },
+          {
+            "code": "KCIT1:5",
+            "display": "Blutsenkungsprobe"
+          },
+          {
+            "code": "KCITPL",
+            "display": "Gerinnungsprobe"
+          },
+          {
+            "code": "KCLEAR",
+            "display": "*Kreatinin-Clearance"
+          },
+          {
+            "code": "KEDTA",
+            "display": "EDTA-Probe"
+          },
+          {
+            "code": "KEDTAPL",
+            "display": "EDTA-Plasmaprobe"
+          },
+          {
+            "code": "KFLPL",
+            "display": "Fluoridprobe"
+          },
+          {
+            "code": "KFW",
+            "display": "Fruchtwasserprobe"
+          },
+          {
+            "code": "KHEPPL",
+            "display": "Heparinplasmaprobe"
+          },
+          {
+            "code": "KHEPVB",
+            "display": "Heparinvollblutprobe"
+          },
+          {
+            "code": "KKREA",
+            "display": "Kalium/Kreatinin"
+          },
+          {
+            "code": "KLFRAGE",
+            "display": "Klinische Fragestellungen"
+          },
+          {
+            "code": "KLIEDTA",
+            "display": "Liquor-EDTA-Probe"
+          },
+          {
+            "code": "KLIFL",
+            "display": "Liquor-Fluoridprobe"
+          },
+          {
+            "code": "KLINA",
+            "display": "Liquor-Nativprobe"
+          },
+          {
+            "code": "KLKKOUSZ",
+            "display": "Kappa/Lambda-Koeffizient, Urin"
+          },
+          {
+            "code": "KLKUUSZ",
+            "display": "Kappa freie Leichtketten, Urin"
+          },
+          {
+            "code": "KNAVB",
+            "display": "Serum-Nativprobe"
+          },
+          {
+            "code": "KOFE",
+            "display": "Körperoberfläche Erwachsene"
+          },
+          {
+            "code": "KOFK",
+            "display": "Körperoberfläche Kinder"
+          },
+          {
+            "code": "KOPIEBKP",
+            "display": "Kopie pos. Blutkultur"
+          },
+          {
+            "code": "KOPIEINF",
+            "display": "Kopie Influenza A/B"
+          },
+          {
+            "code": "KOPIEZOP",
+            "display": "Kopie an AGZOPER"
+          },
+          {
+            "code": "KPU",
+            "display": "Kalium (Punktat)"
+          },
+          {
+            "code": "KPUEDTA",
+            "display": "Punktat-EDTA-Probe"
+          },
+          {
+            "code": "KPUFL",
+            "display": "Punktat-Fluoridprobe"
+          },
+          {
+            "code": "KPUHEP",
+            "display": "Punktat-Heparinprobe"
+          },
+          {
+            "code": "KPUNA",
+            "display": "Punktat-Nativprobe"
+          },
+          {
+            "code": "KRCLKOF",
+            "display": "*Endogene Kreatinin Clearance"
+          },
+          {
+            "code": "KRCLKOFE",
+            "display": "Endogene Krea-Clearance"
+          },
+          {
+            "code": "KRCLKOFK",
+            "display": "Endogene Krea-Clearance"
+          },
+          {
+            "code": "KREA",
+            "display": "Kreatinin (inkl. eGFR)"
+          },
+          {
+            "code": "KREACL",
+            "display": "Kreatinin-Clearance"
+          },
+          {
+            "code": "KREADIAL",
+            "display": "Kreatinin (Dialysat)"
+          },
+          {
+            "code": "KREAPDUZ",
+            "display": "Kreatinin"
+          },
+          {
+            "code": "KREAPU",
+            "display": "Kreatinin Punktat"
+          },
+          {
+            "code": "KREASA",
+            "display": "Kreatinin im Sammelurin"
+          },
+          {
+            "code": "KREASPOT",
+            "display": "Kreatinin im Spontanurin"
+          },
+          {
+            "code": "KREATAG",
+            "display": "Kreatinin/24h"
+          },
+          {
+            "code": "KREATUSZ",
+            "display": "Kreatinin/24h"
+          },
+          {
+            "code": "KREAU",
+            "display": "Kreatinin im Urin"
+          },
+          {
+            "code": "KREAUSZ",
+            "display": "Kreatinin"
+          },
+          {
+            "code": "KREAUUSZ",
+            "display": "Kreatinin im Sammelurin"
+          },
+          {
+            "code": "KRYOMUSZ",
+            "display": "Kryoglobulinmenge"
+          },
+          {
+            "code": "KRYOTUSZ",
+            "display": "Kryoglobulin-Typ"
+          },
+          {
+            "code": "KRYOUSZ",
+            "display": "Kryoglobuline"
+          },
+          {
+            "code": "KSA",
+            "display": "*Kalium im Sammelurin"
+          },
+          {
+            "code": "KSEGEL",
+            "display": "Serumprobe"
+          },
+          {
+            "code": "KSL",
+            "display": "Serumprobe lichtgeschützt"
+          },
+          {
+            "code": "KSP",
+            "display": "*Kalium im Spontanurin"
+          },
+          {
+            "code": "KSPOTU",
+            "display": "Spontanurin"
+          },
+          {
+            "code": "KSPUR",
+            "display": "Spurenelementprobe"
+          },
+          {
+            "code": "KSTUHL",
+            "display": "Stuhlprobe"
+          },
+          {
+            "code": "KTAG",
+            "display": "Kalium/24h"
+          },
+          {
+            "code": "KU",
+            "display": "Kalium im Sammelurin"
+          },
+          {
+            "code": "KURIC",
+            "display": "Uricult"
+          },
+          {
+            "code": "KURIN",
+            "display": "Sammelurin"
+          },
+          {
+            "code": "KUSPOT",
+            "display": "Kalium im Spontanurin"
+          },
+          {
+            "code": "LA1USZ",
+            "display": "LA1 (DRVVT)"
+          },
+          {
+            "code": "LA1VUSZ",
+            "display": "LA1 1:2 verd."
+          },
+          {
+            "code": "LA2USZ",
+            "display": "LA2 (DRVVT+PL)"
+          },
+          {
+            "code": "LA2VUSZ",
+            "display": "LA2 1:2 verd."
+          },
+          {
+            "code": "LACT",
+            "display": "Lactat (Fluorid)"
+          },
+          {
+            "code": "LACTLI",
+            "display": "Lactat (Liquor)"
+          },
+          {
+            "code": "LACTLIF",
+            "display": "Lactat Liquor (Fluorid)"
+          },
+          {
+            "code": "LACTPU",
+            "display": "Lactat (Punktat)"
+          },
+          {
+            "code": "LAMOUSZ",
+            "display": "Lamotrigin"
+          },
+          {
+            "code": "LDH",
+            "display": "LDH"
+          },
+          {
+            "code": "LDHPU",
+            "display": "LDH (Punktat)"
+          },
+          {
+            "code": "LDL",
+            "display": "LDL-Cholesterin"
+          },
+          {
+            "code": "LDLFRAK",
+            "display": "LDL-Fraktion (beta-Lipo)"
+          },
+          {
+            "code": "LEVETUSZ",
+            "display": "Levetiracetam"
+          },
+          {
+            "code": "LEVOF#",
+            "display": "Levofloxacin im Serum"
+          },
+          {
+            "code": "LH",
+            "display": "Lutropin"
+          },
+          {
+            "code": "LI",
+            "display": "Lithium"
+          },
+          {
+            "code": "LIEDTA",
+            "display": "Liquor-EDTA"
+          },
+          {
+            "code": "LIEDTA",
+            "display": "Liquor-EDTA"
+          },
+          {
+            "code": "LIFL",
+            "display": "Liquor-Fluorid"
+          },
+          {
+            "code": "LIFL",
+            "display": "Liquor-Fluorid"
+          },
+          {
+            "code": "LINA",
+            "display": "Liquor-Nativ"
+          },
+          {
+            "code": "LINA",
+            "display": "Liquor-Nativ"
+          },
+          {
+            "code": "LIP",
+            "display": "Lipase"
+          },
+          {
+            "code": "LIPÄ",
+            "display": "Lipämie"
+          },
+          {
+            "code": "LIPOEPHO",
+            "display": "Lipoprotein-Elektrophorese"
+          },
+          {
+            "code": "LIPPU",
+            "display": "Lipase Punktat"
+          },
+          {
+            "code": "LIPST",
+            "display": "Lipidstatus"
+          },
+          {
+            "code": "LLKUUSZ",
+            "display": "Lambda freie Leichtketten, Urin"
+          },
+          {
+            "code": "LPA",
+            "display": "Lipoprotein (a)"
+          },
+          {
+            "code": "LSDUSZ",
+            "display": "Lysergsärurediethylamid(LSD)ql"
+          },
+          {
+            "code": "LUPAKUSZ",
+            "display": "Lupus Antikoagulans"
+          },
+          {
+            "code": "LUPUSZ",
+            "display": "Lupus Antikoagulans"
+          },
+          {
+            "code": "LYMPHUSZ",
+            "display": "Lymphozyten"
+          },
+          {
+            "code": "MASG",
+            "display": "'Masern IgG"
+          },
+          {
+            "code": "MASGM",
+            "display": "Masern (IgG/IgM)"
+          },
+          {
+            "code": "MASIGG",
+            "display": "'Masern IgG"
+          },
+          {
+            "code": "MASIGG-I",
+            "display": "'Masern IgG (Index)"
+          },
+          {
+            "code": "MASIGM",
+            "display": "'Masern IgM"
+          },
+          {
+            "code": "MASIGM-I",
+            "display": "'Masern IgM (Index)"
+          },
+          {
+            "code": "MEFENUSZ",
+            "display": "Mefenaminsäure"
+          },
+          {
+            "code": "MEROFUSZ",
+            "display": "Meropenem, frei (berechnet)"
+          },
+          {
+            "code": "MEROTUSZ",
+            "display": "Meropenem, total"
+          },
+          {
+            "code": "MEROUSZ",
+            "display": "*Meropenem"
+          },
+          {
+            "code": "METECGON",
+            "display": "Methylecgonin, ql"
+          },
+          {
+            "code": "METFOR",
+            "display": "Metformin"
+          },
+          {
+            "code": "METFUSZ",
+            "display": "Metanephrin frei (Plasma)"
+          },
+          {
+            "code": "METH",
+            "display": "Methadon qual. im Urin"
+          },
+          {
+            "code": "METHAUSZ",
+            "display": "Methadon"
+          },
+          {
+            "code": "METHD",
+            "display": "Methadon quant. im Urin"
+          },
+          {
+            "code": "METHDIU",
+            "display": "Methadon-Diff im Urin"
+          },
+          {
+            "code": "METHOUSZ",
+            "display": "3-Methoxytyramin (Plasma)"
+          },
+          {
+            "code": "METHTXUZ",
+            "display": "Methotrexat"
+          },
+          {
+            "code": "MG",
+            "display": "Magnesium"
+          },
+          {
+            "code": "MGKREA",
+            "display": "Magnesium/Kreatinin"
+          },
+          {
+            "code": "MGKREAU",
+            "display": "Magnesium/Kreatinin (Sammelurin)"
+          },
+          {
+            "code": "MGRAD1",
+            "display": "M-Gradient 1"
+          },
+          {
+            "code": "MGRAD2",
+            "display": "M-Gradient 2"
+          },
+          {
+            "code": "MGRAD3",
+            "display": "M-Gradient 3"
+          },
+          {
+            "code": "MGRAD4",
+            "display": "M-Gradient 4"
+          },
+          {
+            "code": "MGSA",
+            "display": "Magnesium im Sammelurin"
+          },
+          {
+            "code": "MGSP",
+            "display": "*Magnesium im Spontanurin"
+          },
+          {
+            "code": "MGTAG",
+            "display": "Magnesium/24h"
+          },
+          {
+            "code": "MGU",
+            "display": "Magnesium im Sammelurin"
+          },
+          {
+            "code": "MGUSPOT",
+            "display": "Magnesium im Spontanurin"
+          },
+          {
+            "code": "MITOTUSZ",
+            "display": "Mitotan"
+          },
+          {
+            "code": "MKOMP1",
+            "display": "Monoklonale Komponente 1"
+          },
+          {
+            "code": "MKOMP2",
+            "display": "Monoklonale Komponente 2"
+          },
+          {
+            "code": "MKOMP3",
+            "display": "Monoklonale Komponente 3"
+          },
+          {
+            "code": "MKOMP4",
+            "display": "Monoklonale Komponente 4"
+          },
+          {
+            "code": "MOR3USZ",
+            "display": "Morphin-3-glucuronid"
+          },
+          {
+            "code": "MOR6USZ",
+            "display": "Morphin-6-glucuronid"
+          },
+          {
+            "code": "MORMETUZ",
+            "display": "*Morphin und Metaboliten"
+          },
+          {
+            "code": "MORPUSZ",
+            "display": "Morphin und Metabolite"
+          },
+          {
+            "code": "MORUSZ",
+            "display": "Morphin"
+          },
+          {
+            "code": "MPA",
+            "display": "Mycophenolsäure"
+          },
+          {
+            "code": "MPO",
+            "display": "MPO (pANCA)"
+          },
+          {
+            "code": "MRPANPUZ",
+            "display": "MR-proANP"
+          },
+          {
+            "code": "MUMG",
+            "display": "'Mumps IgG"
+          },
+          {
+            "code": "MUMGM",
+            "display": "Mumps (IgG/IgM)"
+          },
+          {
+            "code": "MUMIGG",
+            "display": "'Mumps IgG"
+          },
+          {
+            "code": "MUMIGG-I",
+            "display": "'Mumps IgG (Index)"
+          },
+          {
+            "code": "MUMIGM",
+            "display": "'Mumps IgM"
+          },
+          {
+            "code": "MUMIGM-I",
+            "display": "'Mumps IgM (Index)"
+          },
+          {
+            "code": "MYO",
+            "display": "Myoglobin"
+          },
+          {
+            "code": "NA",
+            "display": "Natrium"
+          },
+          {
+            "code": "NADIAL",
+            "display": "Natrium (Dialysat)"
+          },
+          {
+            "code": "NAKREA",
+            "display": "Natrium/Kreatinin"
+          },
+          {
+            "code": "NAKREAU",
+            "display": "Natrium/Kreatinin (Sammelurin)"
+          },
+          {
+            "code": "NAPROUSZ",
+            "display": "Naproxen"
+          },
+          {
+            "code": "NAPU",
+            "display": "Natrium (Punktat)"
+          },
+          {
+            "code": "NASA",
+            "display": "Natrium im Sammelurin"
+          },
+          {
+            "code": "NASP",
+            "display": "*Natrium im Spontanurin"
+          },
+          {
+            "code": "NATAG",
+            "display": "Natrium/24h"
+          },
+          {
+            "code": "NAU",
+            "display": "Natrium im Sammelurin"
+          },
+          {
+            "code": "NAUSPOT",
+            "display": "Natrium im Spontanurin"
+          },
+          {
+            "code": "NAVB",
+            "display": "Nativ-Vollblut"
+          },
+          {
+            "code": "NAVB",
+            "display": "Nativ-Vollblut"
+          },
+          {
+            "code": "NBILI",
+            "display": "Neugeborenen Bilirubin"
+          },
+          {
+            "code": "NHDL",
+            "display": "Non-HDL Cholesterin (berechnet)"
+          },
+          {
+            "code": "NITRA",
+            "display": "Nitrazepam"
+          },
+          {
+            "code": "NMETFUSZ",
+            "display": "Normetanephrin frei (Plasma)"
+          },
+          {
+            "code": "NORCOCA",
+            "display": "Norcocain, ql"
+          },
+          {
+            "code": "NORDA",
+            "display": "Nordazepam"
+          },
+          {
+            "code": "NOROX",
+            "display": "Norfluoxetin"
+          },
+          {
+            "code": "NSB",
+            "display": "Nabelschnurblut"
+          },
+          {
+            "code": "NSB",
+            "display": "Nabelschnurblut"
+          },
+          {
+            "code": "OESTRL",
+            "display": "Oestradiol (E2)"
+          },
+          {
+            "code": "OPIA",
+            "display": "Opiate qual."
+          },
+          {
+            "code": "OPIA6MAM",
+            "display": "6-Monocetylmorphin (Heroin-M)"
+          },
+          {
+            "code": "OPIAAND",
+            "display": "verwandten Substanzen"
+          },
+          {
+            "code": "OPIACOD",
+            "display": "Codein"
+          },
+          {
+            "code": "OPIAD",
+            "display": "Opiate quant."
+          },
+          {
+            "code": "OPIADEXT",
+            "display": "Dextropropoxyphen"
+          },
+          {
+            "code": "OPIADIF",
+            "display": "*Opiat-Differenzierung"
+          },
+          {
+            "code": "OPIADIFU",
+            "display": "Opiatdifferenzierung ql. Urin"
+          },
+          {
+            "code": "OPIADIHY",
+            "display": "Dihydrocodein"
+          },
+          {
+            "code": "OPIAHYDR",
+            "display": "Hydrocodon"
+          },
+          {
+            "code": "OPIAMOR",
+            "display": "Morphin"
+          },
+          {
+            "code": "OPIANALB",
+            "display": "Nalbuphin"
+          },
+          {
+            "code": "OPIAOXYC",
+            "display": "Oxycodon"
+          },
+          {
+            "code": "OPIAPETH",
+            "display": "Pethidin"
+          },
+          {
+            "code": "OPIATRAM",
+            "display": "Tramadol"
+          },
+          {
+            "code": "OREXUSZ",
+            "display": "Orexin A(Hypocretin-I)"
+          },
+          {
+            "code": "OSMO",
+            "display": "Osmolalität"
+          },
+          {
+            "code": "OSMOU",
+            "display": "Osmolalität im Urin"
+          },
+          {
+            "code": "OXA",
+            "display": "Oxazepam"
+          },
+          {
+            "code": "OXAKREAT",
+            "display": "Oxalat/Kreatinin"
+          },
+          {
+            "code": "OXYCODON",
+            "display": "Oxycodon"
+          },
+          {
+            "code": "P1NP",
+            "display": "P1NP"
+          },
+          {
+            "code": "PAMY",
+            "display": "Pankreas-Amylase"
+          },
+          {
+            "code": "PAMYPU",
+            "display": "Pankreas-Amylase Punktat"
+          },
+          {
+            "code": "PAMYU",
+            "display": "Pankreas-Amylase im Urin"
+          },
+          {
+            "code": "PARACET",
+            "display": "Paracetamol"
+          },
+          {
+            "code": "PARVG",
+            "display": "Parvovirus B19 IgG"
+          },
+          {
+            "code": "PARVGM",
+            "display": "'Parvovirus B19 IgG/IgM"
+          },
+          {
+            "code": "PARVIGG",
+            "display": "'Parvovirus B19 IgG"
+          },
+          {
+            "code": "PARVIG-I",
+            "display": "'Parvovirus B19 IgG qn"
+          },
+          {
+            "code": "PARVIGM",
+            "display": "'Parvovirus B19 IgM"
+          },
+          {
+            "code": "PARVM-I",
+            "display": "'Parvovirus B19 IgM (Index)"
+          },
+          {
+            "code": "PATETIK",
+            "display": "Patientenetikette"
+          },
+          {
+            "code": "PCT",
+            "display": "Procalcitonin"
+          },
+          {
+            "code": "PENTOBAR",
+            "display": "Pentobarbital"
+          },
+          {
+            "code": "PERAMUSZ",
+            "display": "Perampanel"
+          },
+          {
+            "code": "PERIODE",
+            "display": "Sammelperiode"
+          },
+          {
+            "code": "PESCRE",
+            "display": "Präeklampsie Screening"
+          },
+          {
+            "code": "PHENPRUZ",
+            "display": "Phenprocoumon"
+          },
+          {
+            "code": "PHENYUSZ",
+            "display": "Phenytoin"
+          },
+          {
+            "code": "PHOKREA",
+            "display": "Phosphat/Kreatinin"
+          },
+          {
+            "code": "PHOKREAU",
+            "display": "Phosphat/Kreatinin (Sammelurin)"
+          },
+          {
+            "code": "PHOS",
+            "display": "Phosphat"
+          },
+          {
+            "code": "PHOSSP",
+            "display": "*Phosphat im Spontanurin"
+          },
+          {
+            "code": "PHOTAG",
+            "display": "Phosphat/24h"
+          },
+          {
+            "code": "PHOU",
+            "display": "Phosphat im Sammelurin"
+          },
+          {
+            "code": "PHOUSPOT",
+            "display": "Phosphat im Spontanurin"
+          },
+          {
+            "code": "PLGF",
+            "display": "PLGF"
+          },
+          {
+            "code": "PNH",
+            "display": "*Paroxysmale nächtliche Hämoglobinurie*"
+          },
+          {
+            "code": "PNHUSZ",
+            "display": "Paroxysmale nächtliche Hämoglobinurie"
+          },
+          {
+            "code": "POSAUSZ",
+            "display": "Posaconazol"
+          },
+          {
+            "code": "PR3",
+            "display": "PR3 (cANCA)"
+          },
+          {
+            "code": "PREALB",
+            "display": "Präalbumin"
+          },
+          {
+            "code": "PREGAUSZ",
+            "display": "Pregabalin"
+          },
+          {
+            "code": "PROBNP",
+            "display": "NT-proBNP"
+          },
+          {
+            "code": "PRODIFFZ",
+            "display": "*Proteinurie Differenzierung"
+          },
+          {
+            "code": "PROG",
+            "display": "Progesteron"
+          },
+          {
+            "code": "PROKREA",
+            "display": "Protein/Kreatinin"
+          },
+          {
+            "code": "PROKREAU",
+            "display": "Protein/Kreatinin (Sammelurin)"
+          },
+          {
+            "code": "PROL",
+            "display": "Prolaktin"
+          },
+          {
+            "code": "PROLMAKR",
+            "display": "Makroprolaktin (nach PEG)"
+          },
+          {
+            "code": "PROLUSZ",
+            "display": "Prolaktin (USZ)"
+          },
+          {
+            "code": "PROMAZSZ",
+            "display": "Promazin"
+          },
+          {
+            "code": "PROPAFUZ",
+            "display": "Propafenon"
+          },
+          {
+            "code": "PROT",
+            "display": "Protein"
+          },
+          {
+            "code": "PROTAG",
+            "display": "Protein/24h"
+          },
+          {
+            "code": "PROTDIAL",
+            "display": "Protein (Dialysat)"
+          },
+          {
+            "code": "PROTEPS",
+            "display": "Protein"
+          },
+          {
+            "code": "PROTKUZ",
+            "display": "Protein/Krea"
+          },
+          {
+            "code": "PROTLI",
+            "display": "Protein Liquor"
+          },
+          {
+            "code": "PROTPU",
+            "display": "Protein Punktat"
+          },
+          {
+            "code": "PROTSA",
+            "display": "*Protein im Sammelurin"
+          },
+          {
+            "code": "PROTSP",
+            "display": "*Protein im Spontanurin"
+          },
+          {
+            "code": "PROTUZ",
+            "display": "Protein im Urin"
+          },
+          {
+            "code": "PROU",
+            "display": "Protein im Sammelurin"
+          },
+          {
+            "code": "PROUGST",
+            "display": "Geschätzte Proteinurie/Tag"
+          },
+          {
+            "code": "PROUSPOT",
+            "display": "Protein im Spontanurin"
+          },
+          {
+            "code": "PSA",
+            "display": "PSA"
+          },
+          {
+            "code": "PSAR",
+            "display": "PSA Screening"
+          },
+          {
+            "code": "PTH",
+            "display": "Parathormon intakt"
+          },
+          {
+            "code": "PUEDTA",
+            "display": "Punktat-EDTA"
+          },
+          {
+            "code": "PUEDTA",
+            "display": "Punktat-EDTA"
+          },
+          {
+            "code": "PUFL",
+            "display": "Punktat-Fluorid"
+          },
+          {
+            "code": "PUFL",
+            "display": "Punktat-Fluorid"
+          },
+          {
+            "code": "PUHEP",
+            "display": "Punktat-Heparin"
+          },
+          {
+            "code": "PUHEP",
+            "display": "Punktat-Heparin"
+          },
+          {
+            "code": "PUNA",
+            "display": "Punktat-Nativ"
+          },
+          {
+            "code": "PUNA",
+            "display": "Punktat-Nativ"
+          },
+          {
+            "code": "PYRUSZ",
+            "display": "Pyruvat"
+          },
+          {
+            "code": "QNBAKT",
+            "display": "Bakterien"
+          },
+          {
+            "code": "QNEC",
+            "display": "Erythrozyten"
+          },
+          {
+            "code": "QNKRIST",
+            "display": "Kristalle"
+          },
+          {
+            "code": "QNLC",
+            "display": "Leukozyten"
+          },
+          {
+            "code": "QNPILZE",
+            "display": "Pilze"
+          },
+          {
+            "code": "QNPLAT",
+            "display": "Plattenepithelien"
+          },
+          {
+            "code": "QNRUND",
+            "display": "Rundepithelien"
+          },
+          {
+            "code": "QNSPERM",
+            "display": "Spermatozoiden"
+          },
+          {
+            "code": "REBOXUSZ",
+            "display": "Reboxetin (z.B. Edronax)"
+          },
+          {
+            "code": "RF",
+            "display": "Rheumafaktor"
+          },
+          {
+            "code": "RFPU",
+            "display": "Rheumafaktor Punktat"
+          },
+          {
+            "code": "RIFA",
+            "display": "Rifampicin"
+          },
+          {
+            "code": "ROPIUSZ",
+            "display": "Ropivacain"
+          },
+          {
+            "code": "RSVABUSZ",
+            "display": "RSV A/B ql (PCR)"
+          },
+          {
+            "code": "RSVUSZ",
+            "display": "Respiratory Syncytial Virus (RSV)"
+          },
+          {
+            "code": "RUBG",
+            "display": "'Rubella-Virus IgG"
+          },
+          {
+            "code": "RUBGM",
+            "display": "*'Rubella IgG+IgM"
+          },
+          {
+            "code": "RUBIGG",
+            "display": "'Rubella-Virus IgG"
+          },
+          {
+            "code": "RUBIGG-I",
+            "display": "'Rubella-Virus IgG qn"
+          },
+          {
+            "code": "RUBIGM",
+            "display": "'Rubella-Virus IgM"
+          },
+          {
+            "code": "RUBIGM-I",
+            "display": "'Rubella-Virus IgM Index"
+          },
+          {
+            "code": "RUBM",
+            "display": "'Rubella-Virus IgM"
+          },
+          {
+            "code": "SAAUSZ",
+            "display": "Serum Amyloid A"
+          },
+          {
+            "code": "SALIUSZ",
+            "display": "Salicylat"
+          },
+          {
+            "code": "SCHLEIM",
+            "display": "Schleim"
+          },
+          {
+            "code": "SEDIANDE",
+            "display": "Andere"
+          },
+          {
+            "code": "SEDIBAKT",
+            "display": "Bakterien"
+          },
+          {
+            "code": "SEDIDEC",
+            "display": "davon glomeruläre Erythrozyten"
+          },
+          {
+            "code": "SEDIEC",
+            "display": "Erythrozyten"
+          },
+          {
+            "code": "SEDIGZYL",
+            "display": "Granulierte Zylinder"
+          },
+          {
+            "code": "SEDIHZYL",
+            "display": "Hyaline Zylinder"
+          },
+          {
+            "code": "SEDIKRIS",
+            "display": "Kristalle"
+          },
+          {
+            "code": "SEDILC",
+            "display": "Leukozyten"
+          },
+          {
+            "code": "SEDIPILZ",
+            "display": "Pilze"
+          },
+          {
+            "code": "SEDIPLAT",
+            "display": "Plattenepithelien"
+          },
+          {
+            "code": "SEDIRUND",
+            "display": "Rundepithelien"
+          },
+          {
+            "code": "SEDISCHL",
+            "display": "Schleim"
+          },
+          {
+            "code": "SEDISPER",
+            "display": "Spermatozoiden"
+          },
+          {
+            "code": "SEDIWZYL",
+            "display": "Wachszylinder"
+          },
+          {
+            "code": "SEDIZYL",
+            "display": "Zylinder"
+          },
+          {
+            "code": "SEGEL",
+            "display": "Serum"
+          },
+          {
+            "code": "SEGEL",
+            "display": "Serum"
+          },
+          {
+            "code": "SERINDEX",
+            "display": "*Serumindex"
+          },
+          {
+            "code": "SERO3M",
+            "display": "Serothek 3 Monate"
+          },
+          {
+            "code": "SERO5J",
+            "display": "Serothek 5 Jahre"
+          },
+          {
+            "code": "SERO6M",
+            "display": "Serothek 6 Monate"
+          },
+          {
+            "code": "SFPLR",
+            "display": "Ratio (sFlt-1/PLGF)"
+          },
+          {
+            "code": "SHBG",
+            "display": "Sexualhormon bindendes Globulin"
+          },
+          {
+            "code": "SIG",
+            "display": "*Immunglobuline (IgG/IgA/IgM)"
+          },
+          {
+            "code": "SIRO",
+            "display": "Sirolimus"
+          },
+          {
+            "code": "SPOTURIN",
+            "display": "Spontanurin"
+          },
+          {
+            "code": "SPOTURIN",
+            "display": "Spontanurin"
+          },
+          {
+            "code": "SSA",
+            "display": "SSA1/SSA2"
+          },
+          {
+            "code": "SSA1",
+            "display": "Anti-SSA/Ro52"
+          },
+          {
+            "code": "SSA2",
+            "display": "Anti-SSA/Ro60"
+          },
+          {
+            "code": "SSAB",
+            "display": "SSA/SSB"
+          },
+          {
+            "code": "SSB",
+            "display": "Anti-SSB/La"
+          },
+          {
+            "code": "SSNEURAL",
+            "display": "*Risiko für Neuralrohrdefekte"
+          },
+          {
+            "code": "SST",
+            "display": "Interpretation hCG"
+          },
+          {
+            "code": "SSTAG",
+            "display": "Schwangerschaftstag"
+          },
+          {
+            "code": "SSTSER",
+            "display": "Schwangerschaftstest hCG (Serum)"
+          },
+          {
+            "code": "SSVER",
+            "display": "*hCG Schwangerschaftsverlauf"
+          },
+          {
+            "code": "SSW",
+            "display": "Schwangerschaftswoche"
+          },
+          {
+            "code": "STICH",
+            "display": "Stichverletzung"
+          },
+          {
+            "code": "STICHI",
+            "display": "Stichverletzung Indexpatient"
+          },
+          {
+            "code": "STICHIZO",
+            "display": "Stichverletzung Inderxpatient"
+          },
+          {
+            "code": "STICHP",
+            "display": "Stichverletzung Personal"
+          },
+          {
+            "code": "STICHPZO",
+            "display": "Stichverletzung Personal"
+          },
+          {
+            "code": "STROKE",
+            "display": "STROKE"
+          },
+          {
+            "code": "STUHL",
+            "display": "Stuhl"
+          },
+          {
+            "code": "STUHL",
+            "display": "Stuhl"
+          },
+          {
+            "code": "SULFAMET",
+            "display": "Sulfamethoxazol"
+          },
+          {
+            "code": "TACROUSZ",
+            "display": "Tacrolimus"
+          },
+          {
+            "code": "TAREA",
+            "display": "Total Area"
+          },
+          {
+            "code": "TBILI",
+            "display": "Bilirubin gesamt"
+          },
+          {
+            "code": "TBILIPU",
+            "display": "Bilirubin gesamt Punktat"
+          },
+          {
+            "code": "TEICOT",
+            "display": "Teicoplanin"
+          },
+          {
+            "code": "TENOUSZ",
+            "display": "Tenofovir"
+          },
+          {
+            "code": "TERIFUSZ",
+            "display": "Teriflunomid"
+          },
+          {
+            "code": "TEST",
+            "display": "test"
+          },
+          {
+            "code": "TEST1",
+            "display": "Test 1"
+          },
+          {
+            "code": "TESTO",
+            "display": "Testosteron"
+          },
+          {
+            "code": "TGUSUSZ",
+            "display": "Thyreoglobulin sensitiv (Brahms)"
+          },
+          {
+            "code": "TGUSWUSZ",
+            "display": "Thyreoglobulin sensitiv Wiederfindung"
+          },
+          {
+            "code": "THBA0",
+            "display": "HbA0"
+          },
+          {
+            "code": "THBA1C",
+            "display": "*HbA1c HPLC-Methode"
+          },
+          {
+            "code": "THBA1CI",
+            "display": "HbA1c nach IFCC"
+          },
+          {
+            "code": "THBA1CN",
+            "display": "HbA1c nach NGSP"
+          },
+          {
+            "code": "THBF",
+            "display": "Hb-F"
+          },
+          {
+            "code": "THCUQN",
+            "display": "THC quant. im Urin"
+          },
+          {
+            "code": "THEOPH",
+            "display": "Theophyllin"
+          },
+          {
+            "code": "THIOPENT",
+            "display": "Thiopental + Metabolit (Pentothal)"
+          },
+          {
+            "code": "THROMBER",
+            "display": "Thromber"
+          },
+          {
+            "code": "THROMBER",
+            "display": "Thromber"
+          },
+          {
+            "code": "TMAOHEPL",
+            "display": "Trimethylaminoxid TMAO"
+          },
+          {
+            "code": "TNIHS",
+            "display": "Troponin I HS (high sensitiv)"
+          },
+          {
+            "code": "TNTHSUSZ",
+            "display": "Troponin T hoch sensitiv"
+          },
+          {
+            "code": "TOBRAT",
+            "display": "Tobramycin"
+          },
+          {
+            "code": "TOXIGG",
+            "display": "'Toxoplasma gondii IgG"
+          },
+          {
+            "code": "TOXIGG-I",
+            "display": "'Toxoplasma gondii IgG (Titer)"
+          },
+          {
+            "code": "TOXIGM",
+            "display": "'Toxoplasma gondii IgM"
+          },
+          {
+            "code": "TOXIGM-I",
+            "display": "'Toxoplasma gondii IgM (Index)"
+          },
+          {
+            "code": "TOXOGM",
+            "display": "*'Toxoplasmose IgG+IgM"
+          },
+          {
+            "code": "TRAMETAB",
+            "display": "m-CCP"
+          },
+          {
+            "code": "TRAUSZ",
+            "display": "Trazodon"
+          },
+          {
+            "code": "TRAZOUSZ",
+            "display": "Trazodon + Metabolit (m-CPP)"
+          },
+          {
+            "code": "TRF",
+            "display": "Transferrin"
+          },
+          {
+            "code": "TRFKUZ",
+            "display": "Transferrin/Krea"
+          },
+          {
+            "code": "TRFS",
+            "display": "Transferrinsättigung"
+          },
+          {
+            "code": "TRFUZ",
+            "display": "Transferrin"
+          },
+          {
+            "code": "TRHTEST",
+            "display": "*TRH-Test (TSH stimuliert)"
+          },
+          {
+            "code": "TRIG",
+            "display": "Triglyceride"
+          },
+          {
+            "code": "TRIGPU",
+            "display": "Triglyceride Punktat"
+          },
+          {
+            "code": "TRIMUSZ",
+            "display": "Trimethoprim"
+          },
+          {
+            "code": "TROBPUSZ",
+            "display": "Thrombopoietin"
+          },
+          {
+            "code": "TSH",
+            "display": "TSH basal"
+          },
+          {
+            "code": "TSHR",
+            "display": "TSH reflex (screening)"
+          },
+          {
+            "code": "TSHST",
+            "display": "TSH stimuliert"
+          },
+          {
+            "code": "TTOTHBA1",
+            "display": "HbA1 Total"
+          },
+          {
+            "code": "TYPFRED",
+            "display": "Typisierung nach Fredrickson"
+          },
+          {
+            "code": "U1MHER",
+            "display": "1. Morgenurin"
+          },
+          {
+            "code": "U2MHER",
+            "display": "2. Morgenurin"
+          },
+          {
+            "code": "UBILI",
+            "display": "Bilirubin"
+          },
+          {
+            "code": "UBLHER",
+            "display": "Blasenpunktion"
+          },
+          {
+            "code": "UCBILI",
+            "display": "Bilirubin"
+          },
+          {
+            "code": "UCEC",
+            "display": "Erythrozyten"
+          },
+          {
+            "code": "UCGLUC",
+            "display": "Glucose"
+          },
+          {
+            "code": "UCHB",
+            "display": "Hämoglobin"
+          },
+          {
+            "code": "UCKET",
+            "display": "Keton"
+          },
+          {
+            "code": "UCLC",
+            "display": "Leukozyten"
+          },
+          {
+            "code": "UCNITRIT",
+            "display": "Nitrit"
+          },
+          {
+            "code": "UCPH",
+            "display": "PH"
+          },
+          {
+            "code": "UCPROT",
+            "display": "Protein"
+          },
+          {
+            "code": "UCSPEZ",
+            "display": "Spezifisches Gewicht"
+          },
+          {
+            "code": "UCTRÜB",
+            "display": "Trübung"
+          },
+          {
+            "code": "UCUBG",
+            "display": "Urobilinogen"
+          },
+          {
+            "code": "UEC",
+            "display": "Erythrozyten"
+          },
+          {
+            "code": "UFBACT",
+            "display": "Bakterien"
+          },
+          {
+            "code": "UFCAST",
+            "display": "Zylinder"
+          },
+          {
+            "code": "UFCOND",
+            "display": "Conduktivität"
+          },
+          {
+            "code": "UFEC",
+            "display": "Epithelzellen"
+          },
+          {
+            "code": "UFHCAST",
+            "display": "Hyaline Zylinder"
+          },
+          {
+            "code": "UFLYRBC",
+            "display": "Lysed Erythrozyten"
+          },
+          {
+            "code": "UFMUCUS",
+            "display": "Schleim"
+          },
+          {
+            "code": "UFPCAST",
+            "display": "Pathologische Zylinder"
+          },
+          {
+            "code": "UFRBC",
+            "display": "Erythrozyten"
+          },
+          {
+            "code": "UFSPERM",
+            "display": "Spermatozoiden"
+          },
+          {
+            "code": "UFSQUAEC",
+            "display": "Plattenepithelzellen"
+          },
+          {
+            "code": "UFSRC",
+            "display": "Rundepithelien"
+          },
+          {
+            "code": "UFTRANEC",
+            "display": "Übergangsepithelzellen"
+          },
+          {
+            "code": "UFWBC",
+            "display": "Leukozyten"
+          },
+          {
+            "code": "UFXTAL",
+            "display": "Kristalle"
+          },
+          {
+            "code": "UFYLC",
+            "display": "Pilze"
+          },
+          {
+            "code": "UGLUC",
+            "display": "Glucose"
+          },
+          {
+            "code": "UKAHER",
+            "display": "Katheterurin"
+          },
+          {
+            "code": "UKET",
+            "display": "Keton"
+          },
+          {
+            "code": "ULC",
+            "display": "Leukozyten"
+          },
+          {
+            "code": "UMIHER",
+            "display": "Mittelstrahlurin"
+          },
+          {
+            "code": "UNITRIT",
+            "display": "Nitrit"
+          },
+          {
+            "code": "UPH",
+            "display": "PH"
+          },
+          {
+            "code": "UPROT",
+            "display": "Protein"
+          },
+          {
+            "code": "URIN",
+            "display": "Sammelurin ohne Zusatz"
+          },
+          {
+            "code": "URIN",
+            "display": "Sammelurin ohne Zusatz"
+          },
+          {
+            "code": "URINHCL",
+            "display": "24h-Urin angesäuert"
+          },
+          {
+            "code": "URINHCL",
+            "display": "24h-Urin angesäuert"
+          },
+          {
+            "code": "US",
+            "display": "Urinstatus-Profil"
+          },
+          {
+            "code": "USEDI",
+            "display": "*Urinsediment Flowcytometry"
+          },
+          {
+            "code": "USEDIQL",
+            "display": "*Urinsediment mikr. qual."
+          },
+          {
+            "code": "USPEZ",
+            "display": "Spezifisches Gewicht"
+          },
+          {
+            "code": "USTATUS",
+            "display": "*Urinstatus"
+          },
+          {
+            "code": "UUBG",
+            "display": "Urobilinogen"
+          },
+          {
+            "code": "VALPFUSZ",
+            "display": "Valproat Frei (berechnet)"
+          },
+          {
+            "code": "VALPUSZ",
+            "display": "Valproat"
+          },
+          {
+            "code": "VANCO",
+            "display": "Vancomycin"
+          },
+          {
+            "code": "VANCOLI",
+            "display": "Vancomycin im Liquor"
+          },
+          {
+            "code": "VANCOTRI",
+            "display": "Vancomycin"
+          },
+          {
+            "code": "VB12",
+            "display": "Vitamin B12"
+          },
+          {
+            "code": "VB12R",
+            "display": "Vitamin B12 reflex (screening)"
+          },
+          {
+            "code": "VCAIGG",
+            "display": "'EBV VCA IgG"
+          },
+          {
+            "code": "VCAIGG-I",
+            "display": "'EBV VCA IgG-Index"
+          },
+          {
+            "code": "VCAIGM",
+            "display": "'EBV VCA IgM"
+          },
+          {
+            "code": "VCAIGM-I",
+            "display": "'EBV VCA IgM-Index"
+          },
+          {
+            "code": "VEGFUSZ",
+            "display": "Vascular Endothelial Growth Factor"
+          },
+          {
+            "code": "VITDDIA",
+            "display": "25-OH-Vitamin D (Diasorin)"
+          },
+          {
+            "code": "VLDLFRAK",
+            "display": "VLDL-Fraktion (prä-beta-Lipo)"
+          },
+          {
+            "code": "VOL",
+            "display": "Volumen"
+          },
+          {
+            "code": "VORICUSZ",
+            "display": "Voriconazol"
+          },
+          {
+            "code": "VZVG",
+            "display": "'Varizella-Zoster-Virus IgG"
+          },
+          {
+            "code": "VZVGM",
+            "display": "*'Varizella-Zoster-Virus IgG+IgM"
+          },
+          {
+            "code": "VZVIGG",
+            "display": "'Varizella-Zoster-Virus IgG"
+          },
+          {
+            "code": "VZVIGG-I",
+            "display": "'Varizella-Zoster-Virus IgG (Titer)"
+          },
+          {
+            "code": "VZVIGM",
+            "display": "'Varizella-Zoster-Virus IgM"
+          },
+          {
+            "code": "VZVIGM-I",
+            "display": "'Varizella-Zoster-Virus IgM (Index)"
+          },
+          {
+            "code": "WA",
+            "display": "Weitere Analysen"
+          },
+          {
+            "code": "WAALLER",
+            "display": "Weitere Analysen Allergiologie"
+          },
+          {
+            "code": "WAHÄMA",
+            "display": "Weitere Analysen Hämatologie"
+          },
+          {
+            "code": "WAHÄMO",
+            "display": "Weitere Analysen Hämostase"
+          },
+          {
+            "code": "WAIMMUNO",
+            "display": "Weitere Analysen Immunologie"
+          },
+          {
+            "code": "WAINFEKT",
+            "display": "Weitere Analysen Infektiologie"
+          },
+          {
+            "code": "WAKLCH",
+            "display": "Weitere Analysen Klinische Chemie"
+          },
+          {
+            "code": "WALIQUOR",
+            "display": "Weitere Analysen Liquor"
+          },
+          {
+            "code": "WAMEDI",
+            "display": "Weitere Analysen Medikamente"
+          },
+          {
+            "code": "WAMIK",
+            "display": "Weitere Analysen Risch Mikrobiologie"
+          },
+          {
+            "code": "WAPUNKT",
+            "display": "Weitere Analysen Punktat"
+          },
+          {
+            "code": "WAROLTI",
+            "display": "Waaler-Rose Titer"
+          },
+          {
+            "code": "WAROLTW",
+            "display": "Waaler-Rose Test"
+          },
+          {
+            "code": "WAURIN",
+            "display": "Weitere Analysen Urin"
+          },
+          {
+            "code": "WZYLIND",
+            "display": "Wachszylinder"
+          },
+          {
+            "code": "XTC",
+            "display": "Ecstasy"
+          },
+          {
+            "code": "XTCD",
+            "display": "Ecstasy quant."
+          },
+          {
+            "code": "ZPP01",
+            "display": "Allgemein Check-Up"
+          },
+          {
+            "code": "ZPP02",
+            "display": "Anämiestatus"
+          },
+          {
+            "code": "ZPP03",
+            "display": "Vitamine"
+          },
+          {
+            "code": "ZPP04",
+            "display": "Frauen Senior"
+          },
+          {
+            "code": "ZPP05",
+            "display": "Männer Senior"
+          },
+          {
+            "code": "ZPP06",
+            "display": "Frauen Hormone"
+          },
+          {
+            "code": "ZPP07",
+            "display": "Männer Hormone"
+          },
+          {
+            "code": "ZPP08",
+            "display": "Sportprofil"
+          },
+          {
+            "code": "ZPP09",
+            "display": "Ernährung"
+          },
+          {
+            "code": "ZPP10",
+            "display": "Blutgruppe ZPoint"
+          },
+          {
+            "code": "ZPP11",
+            "display": "Detecon"
+          },
+          {
+            "code": "ZPP12",
+            "display": "Schlaf und Erholung"
+          },
+          {
+            "code": "ZYLIND",
+            "display": "Zylinder"
+          }
+        ]
+      }
+    ]
+  }
+}

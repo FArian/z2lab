@@ -1,0 +1,234 @@
+{
+  "resourceType": "ValueSet",
+  "id": "zlz-tests-ger",
+  "url": "https://www.zetlab.ch/fhir/ValueSet/zlz-tests-ger",
+  "name": "zlzTestsGer",
+  "title": "ZLZ — Gerinnung",
+  "status": "active",
+  "description": "Tests der Befundgruppe GER.",
+  "compose": {
+    "include": [
+      {
+        "system": "https://www.zetlab.ch/lis/codes",
+        "concept": [
+          {
+            "code": "ADAMII",
+            "display": "ADAMTS13-Inhibitor Interpretation"
+          },
+          {
+            "code": "ADAMTS13",
+            "display": "ADAMTS-13 Aktivität"
+          },
+          {
+            "code": "ADAMTSIN",
+            "display": "ADAMTS-13 Inhibitor"
+          },
+          {
+            "code": "AFXAHM",
+            "display": "Anti-Faktor Xa-Aktivität HM"
+          },
+          {
+            "code": "AFXANM",
+            "display": "Anti-Faktor Xa-Aktivität NM"
+          },
+          {
+            "code": "ANTIKOAG",
+            "display": "Antikoaguliert mit"
+          },
+          {
+            "code": "APIXAUSZ",
+            "display": "Anti- Xa-Aktivität (Apixaban)"
+          },
+          {
+            "code": "APTT",
+            "display": "aPTT (aktivierte PTT)"
+          },
+          {
+            "code": "AT3",
+            "display": "Antithrombin III funktionell"
+          },
+          {
+            "code": "DANAPUSZ",
+            "display": "Danaparoid: Anti-Faktor-Xa akt."
+          },
+          {
+            "code": "DD",
+            "display": "D-Dimere"
+          },
+          {
+            "code": "EDOXAUSZ",
+            "display": "Edoxaban (Anti-FXa-Akt.)"
+          },
+          {
+            "code": "F10USZ",
+            "display": "Faktor X fkt."
+          },
+          {
+            "code": "F12USZ",
+            "display": "Faktor XII fkt."
+          },
+          {
+            "code": "F13USZ",
+            "display": "Faktor XIII, fkt."
+          },
+          {
+            "code": "F2MOL",
+            "display": "Prothrombin G20210A"
+          },
+          {
+            "code": "F2USZ",
+            "display": "Faktor II fkt."
+          },
+          {
+            "code": "F5LEIDEN",
+            "display": "Faktor V Leiden R506Q"
+          },
+          {
+            "code": "F5USZ",
+            "display": "Faktor V fkt."
+          },
+          {
+            "code": "F7USZ",
+            "display": "Faktor VII fkt."
+          },
+          {
+            "code": "F8IUSZ",
+            "display": "Faktor VIII Inhibitor"
+          },
+          {
+            "code": "F8USZ",
+            "display": "Faktor VIII fkt."
+          },
+          {
+            "code": "F9USZ",
+            "display": "Faktor IX fkt."
+          },
+          {
+            "code": "FA11USZ",
+            "display": "Faktor XI fkt."
+          },
+          {
+            "code": "FA13",
+            "display": "Faktor XIII fkt."
+          },
+          {
+            "code": "FA13AG",
+            "display": "Faktor XIII, antigenetisch"
+          },
+          {
+            "code": "FA5",
+            "display": "Faktor V fkt."
+          },
+          {
+            "code": "FA7",
+            "display": "Faktor VII fkt."
+          },
+          {
+            "code": "FIBI",
+            "display": "Fibrinogen"
+          },
+          {
+            "code": "FONDAUSZ",
+            "display": "Fondaparinux"
+          },
+          {
+            "code": "GERKL",
+            "display": "*Gerinnungsstatus klein"
+          },
+          {
+            "code": "HEPH",
+            "display": "*Heparinspiegel hochmolekular"
+          },
+          {
+            "code": "HEPN",
+            "display": "*Heparinspiegel niedermolekular"
+          },
+          {
+            "code": "HIPAIB",
+            "display": "HIPA (Heparin-induzierte Thrombozytenaktivierung"
+          },
+          {
+            "code": "HITAKUSZ",
+            "display": "HIT (Heparin induzierte Thrombopenie)"
+          },
+          {
+            "code": "HITIGGUZ",
+            "display": "HIT-AK: IgG"
+          },
+          {
+            "code": "INR",
+            "display": "INR"
+          },
+          {
+            "code": "KOMGER",
+            "display": "Kommentar Gerinnung"
+          },
+          {
+            "code": "PROTCUSZ",
+            "display": "Protein C (fkt.)"
+          },
+          {
+            "code": "PROTSFUZ",
+            "display": "Freies Protein S (ag.)"
+          },
+          {
+            "code": "PROTSTUZ",
+            "display": "Totales Protein S (ag.)"
+          },
+          {
+            "code": "PROTSUSZ",
+            "display": "Protein S (fkt.)"
+          },
+          {
+            "code": "PT",
+            "display": "Quick"
+          },
+          {
+            "code": "QUICK",
+            "display": "Quick"
+          },
+          {
+            "code": "RIVARO",
+            "display": "Anti-Xa-Aktivität (Rivaroxaban)"
+          },
+          {
+            "code": "RVWFUSZ",
+            "display": "Ratio vWF"
+          },
+          {
+            "code": "TQUICK",
+            "display": "Tiefer Spontanquick"
+          },
+          {
+            "code": "TZ",
+            "display": "Thrombinzeit"
+          },
+          {
+            "code": "VENTHROM",
+            "display": "*Venöse Thrombophilie"
+          },
+          {
+            "code": "VWF8BKUZ",
+            "display": "Faktor VIII-Bindungskapazität des VWF"
+          },
+          {
+            "code": "VWFAGUSZ",
+            "display": "Von Willebrand Faktor (ag.)"
+          },
+          {
+            "code": "VWFAKTOR",
+            "display": "*Von Willebrand Faktor"
+          },
+          {
+            "code": "VWFUSZ",
+            "display": "Von Willebrand Faktor (fkt.)"
+          },
+          {
+            "code": "VWMULTIB",
+            "display": "VW-Faktor-Multimeranalyse"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,129 @@
+version: "3.9"
+
+volumes:
+  portainer-data:
+  hapi-data:
+  traefik-letsencrypt:
+
+networks:
+  orderentry-net:
+    name: orderentry-net
+
+services:
+
+  # =========================
+  # Traefik (Reverse Proxy)
+  # =========================
+  traefik:
+    image: traefik:v3.0
+    container_name: traefik
+    restart: always
+
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+
+      # HTTP → HTTPS redirect
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+
+      # Let's Encrypt
+      - "--certificatesresolvers.le.acme.email=${ACME_EMAIL}"
+      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
+
+    ports:
+      - "80:80"
+      - "443:443"
+
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik-letsencrypt:/letsencrypt
+
+    networks:
+      - orderentry-net
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`${TRAEFIK_DOMAIN}`)"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.tls.certresolver=le"
+      - "traefik.http.routers.traefik.service=api@internal"
+
+
+  # =========================
+  # HAPI FHIR (H2 DB)
+  # =========================
+  hapi:
+    image: hapiproject/hapi:latest
+    container_name: hapi-fhir
+    restart: always
+
+    volumes:
+      - hapi-data:/data
+
+    environment:
+      SPRING_CONFIG_ADDITIONAL_LOCATION: file:/data/
+
+      # 🔥 Wichtig: H2 aktiv lassen (default)
+      HAPI_FHIR_DB_TYPE: h2
+
+      # Optional Performance Settings
+      HAPI_FHIR_ALLOW_EXTERNAL_REFERENCES: "true"
+      HAPI_FHIR_AUTO_CREATE_PLACEHOLDER_REFERENCE_TARGETS: "true"
+
+    networks:
+      - orderentry-net
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hapi.rule=Host(`${HAPI_DOMAIN}`)"
+      - "traefik.http.routers.hapi.entrypoints=websecure"
+      - "traefik.http.routers.hapi.tls.certresolver=le"
+      - "traefik.http.services.hapi.loadbalancer.server.port=8080"
+
+
+  # =========================
+  # Portainer
+  # =========================
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: always
+
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-data:/data
+
+    networks:
+      - orderentry-net
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portainer.rule=Host(`${PORTAINER_DOMAIN}`)"
+      - "traefik.http.routers.portainer.entrypoints=websecure"
+      - "traefik.http.routers.portainer.tls.certresolver=le"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
+
+
+  # =========================
+  # Watchtower (Auto Update)
+  # =========================
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    restart: always
+
+    environment:
+      WATCHTOWER_CLEANUP: "true"
+      WATCHTOWER_SCHEDULE: "0 0 3 * * *"
+
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    networks:
+      - orderentry-net

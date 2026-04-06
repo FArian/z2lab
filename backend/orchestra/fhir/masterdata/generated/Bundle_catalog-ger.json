@@ -1,0 +1,5945 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-ADAMII",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 230,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/ADAMII",
+        "subtitle": "ADAMTS13-Inhibitor Interpretation",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "ADAMII",
+              "display": "ADAMTS13-Inhibitor Interpretation"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-ADAMII"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-ADAMII",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "ADAMII",
+              "display": "ADAMTS13-Inhibitor Interpretation"
+            }
+          ],
+          "text": "ADAMTS13-Inhibitor Interpretation"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "ADAMII"
+          }
+        ],
+        "preferredReportName": "Interpretation of ADAMTS13 inhibitors"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-ADAMII"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-ADAMTS13",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 230,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/ADAMTS13",
+        "subtitle": "ADAMTS-13 Aktivität",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "ADAMTS13",
+              "display": "ADAMTS-13 Aktivität"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-ADAMTS13"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-ADAMTS13",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "ADAMTS13",
+              "display": "ADAMTS-13 Aktivität"
+            }
+          ],
+          "text": "ADAMTS-13 Aktivität"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "ADAMTS13"
+          }
+        ],
+        "preferredReportName": "*ADAMTS 13*"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-ADAMTS13"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-ADAMTSIN",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 230,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/ADAMTSIN",
+        "subtitle": "ADAMTS-13 Inhibitor",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "ADAMTSIN",
+              "display": "ADAMTS-13 Inhibitor"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-ADAMTSIN"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-ADAMTSIN",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "ADAMTSIN",
+              "display": "ADAMTS-13 Inhibitor"
+            }
+          ],
+          "text": "ADAMTS-13 Inhibitor"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "ADAMTSIN"
+          }
+        ],
+        "preferredReportName": "ADAMTS-13 inhibitor"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-ADAMTSIN"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-AFXAHM",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 700,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "04"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/AFXAHM",
+        "subtitle": "Anti-Faktor Xa-Aktivität HM",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "AFXAHM",
+              "display": "Anti-Faktor Xa-Aktivität HM"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-AFXAHM"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-AFXAHM",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "AFXAHM",
+              "display": "Anti-Faktor Xa-Aktivität HM"
+            }
+          ],
+          "text": "Anti-Faktor Xa-Aktivität HM"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "AFXAHM"
+          }
+        ],
+        "preferredReportName": "anti-factor Xa activity HMW"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-AFXAHM"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-AFXANM",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 700,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "04"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/AFXANM",
+        "subtitle": "Anti-Faktor Xa-Aktivität NM",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "AFXANM",
+              "display": "Anti-Faktor Xa-Aktivität NM"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-AFXANM"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-AFXANM",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "AFXANM",
+              "display": "Anti-Faktor Xa-Aktivität NM"
+            }
+          ],
+          "text": "Anti-Faktor Xa-Aktivität NM"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "AFXANM"
+          }
+        ],
+        "preferredReportName": "anti-factor Xa activity LMW"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-AFXANM"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-ANTIKOAG",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 230,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "04"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/ANTIKOAG",
+        "subtitle": "Antikoaguliert mit",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "ANTIKOAG",
+              "display": "Antikoaguliert mit"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-ANTIKOAG"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-ANTIKOAG",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "ANTIKOAG",
+              "display": "Antikoaguliert mit"
+            }
+          ],
+          "text": "Antikoaguliert mit"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "ANTIKOAG"
+          }
+        ],
+        "preferredReportName": "Anticoagulated with"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-ANTIKOAG"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-APIXAUSZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 500,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/APIXAUSZ",
+        "subtitle": "Anti- Xa-Aktivität (Apixaban)",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "APIXAUSZ",
+              "display": "Anti- Xa-Aktivität (Apixaban)"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-APIXAUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-APIXAUSZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "APIXAUSZ",
+              "display": "Anti- Xa-Aktivität (Apixaban)"
+            }
+          ],
+          "text": "Anti- Xa-Aktivität (Apixaban)"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "APIXAUSZ"
+          }
+        ],
+        "preferredReportName": "Apixaban"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-APIXAUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-APTT",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 700,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "04"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/APTT",
+        "subtitle": "aPTT (aktivierte PTT)",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "APTT",
+              "display": "aPTT (aktivierte PTT)"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-APTT"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-APTT",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "APTT",
+              "display": "aPTT (aktivierte PTT)"
+            }
+          ],
+          "text": "aPTT (aktivierte PTT)"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "APTT"
+          }
+        ],
+        "preferredReportName": "aPTT (activated PTT)"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-APTT"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-AT3",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 700,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "04"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/AT3",
+        "subtitle": "Antithrombin III funktionell",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "AT3",
+              "display": "Antithrombin III funktionell"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-AT3"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-AT3",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "AT3",
+              "display": "Antithrombin III funktionell"
+            }
+          ],
+          "text": "Antithrombin III funktionell"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "AT3"
+          }
+        ],
+        "preferredReportName": "Antithrombin III, functional"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-AT3"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-DANAPUSZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 230,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/DANAPUSZ",
+        "subtitle": "Danaparoid: Anti-Faktor-Xa akt.",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "DANAPUSZ",
+              "display": "Danaparoid: Anti-Faktor-Xa akt."
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-DANAPUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-DANAPUSZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "DANAPUSZ",
+              "display": "Danaparoid: Anti-Faktor-Xa akt."
+            }
+          ],
+          "text": "Danaparoid: Anti-Faktor-Xa akt."
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "DANAPUSZ"
+          }
+        ],
+        "preferredReportName": "Danaparoid: anti-factor-Xa act."
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-DANAPUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-DD",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 700,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "04"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/DD",
+        "subtitle": "D-Dimere",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "DD",
+              "display": "D-Dimere"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-DD"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-DD",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "DD",
+              "display": "D-Dimere"
+            }
+          ],
+          "text": "D-Dimere"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "DD"
+          }
+        ],
+        "preferredReportName": "D-dimers"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-DD"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-EDOXAUSZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 500,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/EDOXAUSZ",
+        "subtitle": "Edoxaban (Anti-FXa-Akt.)",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "EDOXAUSZ",
+              "display": "Edoxaban (Anti-FXa-Akt.)"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-EDOXAUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-EDOXAUSZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "EDOXAUSZ",
+              "display": "Edoxaban (Anti-FXa-Akt.)"
+            }
+          ],
+          "text": "Edoxaban (Anti-FXa-Akt.)"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "EDOXAUSZ"
+          }
+        ],
+        "preferredReportName": "Edoxaban (Anti-FXa-act.)"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-EDOXAUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-F10USZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 500,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/F10USZ",
+        "subtitle": "Faktor X fkt.",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F10USZ",
+              "display": "Faktor X fkt."
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-F10USZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-F10USZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F10USZ",
+              "display": "Faktor X fkt."
+            }
+          ],
+          "text": "Faktor X fkt."
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "F10USZ"
+          }
+        ],
+        "preferredReportName": "Factor X fct."
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-F10USZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-F12USZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 500,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/F12USZ",
+        "subtitle": "Faktor XII fkt.",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F12USZ",
+              "display": "Faktor XII fkt."
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-F12USZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-F12USZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F12USZ",
+              "display": "Faktor XII fkt."
+            }
+          ],
+          "text": "Faktor XII fkt."
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "F12USZ"
+          }
+        ],
+        "preferredReportName": "Factor XII"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-F12USZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-F13USZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 500,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/F13USZ",
+        "subtitle": "Faktor XIII, fkt.",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F13USZ",
+              "display": "Faktor XIII, fkt."
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-F13USZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-F13USZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F13USZ",
+              "display": "Faktor XIII, fkt."
+            }
+          ],
+          "text": "Faktor XIII, fkt."
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "F13USZ"
+          }
+        ],
+        "preferredReportName": "Factor XIII, functional"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-F13USZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-F2MOL",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 230,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "03"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/F2MOL",
+        "subtitle": "Prothrombin G20210A",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F2MOL",
+              "display": "Prothrombin G20210A"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-F2MOL"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-F2MOL",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F2MOL",
+              "display": "Prothrombin G20210A"
+            }
+          ],
+          "text": "Prothrombin G20210A"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "F2MOL"
+          }
+        ],
+        "preferredReportName": "Prothrombin G20210A"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-F2MOL"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-F2USZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 500,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/F2USZ",
+        "subtitle": "Faktor II fkt.",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F2USZ",
+              "display": "Faktor II fkt."
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-F2USZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-F2USZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F2USZ",
+              "display": "Faktor II fkt."
+            }
+          ],
+          "text": "Faktor II fkt."
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "F2USZ"
+          }
+        ],
+        "preferredReportName": "Factor II fct."
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-F2USZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-F5LEIDEN",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 1000,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "03"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/F5LEIDEN",
+        "subtitle": "Faktor V Leiden R506Q",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F5LEIDEN",
+              "display": "Faktor V Leiden R506Q"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-F5LEIDEN"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-F5LEIDEN",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F5LEIDEN",
+              "display": "Faktor V Leiden R506Q"
+            }
+          ],
+          "text": "Faktor V Leiden R506Q"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "F5LEIDEN"
+          }
+        ],
+        "preferredReportName": "Factor V Leiden R506Q"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-F5LEIDEN"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-F5USZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 500,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/F5USZ",
+        "subtitle": "Faktor V fkt.",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F5USZ",
+              "display": "Faktor V fkt."
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-F5USZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-F5USZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F5USZ",
+              "display": "Faktor V fkt."
+            }
+          ],
+          "text": "Faktor V fkt."
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "F5USZ"
+          }
+        ],
+        "preferredReportName": "Factor V functional"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-F5USZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-F7USZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 500,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/F7USZ",
+        "subtitle": "Faktor VII fkt.",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F7USZ",
+              "display": "Faktor VII fkt."
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-F7USZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-F7USZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F7USZ",
+              "display": "Faktor VII fkt."
+            }
+          ],
+          "text": "Faktor VII fkt."
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "F7USZ"
+          }
+        ],
+        "preferredReportName": "Factor VII fct."
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-F7USZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-F8IUSZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 500,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/F8IUSZ",
+        "subtitle": "Faktor VIII Inhibitor",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F8IUSZ",
+              "display": "Faktor VIII Inhibitor"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-F8IUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-F8IUSZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F8IUSZ",
+              "display": "Faktor VIII Inhibitor"
+            }
+          ],
+          "text": "Faktor VIII Inhibitor"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "F8IUSZ"
+          }
+        ],
+        "preferredReportName": "Factor 8 inhibitor"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-F8IUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-F8USZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 500,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/F8USZ",
+        "subtitle": "Faktor VIII fkt.",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F8USZ",
+              "display": "Faktor VIII fkt."
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-F8USZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-F8USZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F8USZ",
+              "display": "Faktor VIII fkt."
+            }
+          ],
+          "text": "Faktor VIII fkt."
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "F8USZ"
+          }
+        ],
+        "preferredReportName": "Factor VIII functional"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-F8USZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-F9USZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 500,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/F9USZ",
+        "subtitle": "Faktor IX fkt.",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F9USZ",
+              "display": "Faktor IX fkt."
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-F9USZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-F9USZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "F9USZ",
+              "display": "Faktor IX fkt."
+            }
+          ],
+          "text": "Faktor IX fkt."
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "F9USZ"
+          }
+        ],
+        "preferredReportName": "Factor IX fct."
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-F9USZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-FA11USZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 500,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/FA11USZ",
+        "subtitle": "Faktor XI fkt.",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "FA11USZ",
+              "display": "Faktor XI fkt."
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-FA11USZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-FA11USZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "FA11USZ",
+              "display": "Faktor XI fkt."
+            }
+          ],
+          "text": "Faktor XI fkt."
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "FA11USZ"
+          }
+        ],
+        "preferredReportName": "Factor XI"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-FA11USZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-FA13",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 700,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "04"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/FA13",
+        "subtitle": "Faktor XIII fkt.",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "FA13",
+              "display": "Faktor XIII fkt."
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-FA13"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-FA13",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "FA13",
+              "display": "Faktor XIII fkt."
+            }
+          ],
+          "text": "Faktor XIII fkt."
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "FA13"
+          }
+        ],
+        "preferredReportName": "Factor XIII, functional"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-FA13"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-FA13AG",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 500,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/FA13AG",
+        "subtitle": "Faktor XIII, antigenetisch",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "FA13AG",
+              "display": "Faktor XIII, antigenetisch"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-FA13AG"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-FA13AG",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "FA13AG",
+              "display": "Faktor XIII, antigenetisch"
+            }
+          ],
+          "text": "Faktor XIII, antigenetisch"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "FA13AG"
+          }
+        ],
+        "preferredReportName": "Factor XIII, antigenic"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-FA13AG"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-FA5",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 700,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "04"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/FA5",
+        "subtitle": "Faktor V fkt.",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "FA5",
+              "display": "Faktor V fkt."
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-FA5"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-FA5",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "FA5",
+              "display": "Faktor V fkt."
+            }
+          ],
+          "text": "Faktor V fkt."
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "FA5"
+          }
+        ],
+        "preferredReportName": "Factor V, functional"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-FA5"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-FA7",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 700,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "04"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/FA7",
+        "subtitle": "Faktor VII fkt.",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "FA7",
+              "display": "Faktor VII fkt."
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-FA7"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-FA7",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "FA7",
+              "display": "Faktor VII fkt."
+            }
+          ],
+          "text": "Faktor VII fkt."
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "FA7"
+          }
+        ],
+        "preferredReportName": "Factor VII"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-FA7"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-FIBI",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 700,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "04"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/FIBI",
+        "subtitle": "Fibrinogen",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "FIBI",
+              "display": "Fibrinogen"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-FIBI"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-FIBI",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "FIBI",
+              "display": "Fibrinogen"
+            }
+          ],
+          "text": "Fibrinogen"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "FIBI"
+          }
+        ],
+        "preferredReportName": "Fibrinogen"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-FIBI"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-FONDAUSZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 500,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/FONDAUSZ",
+        "subtitle": "Fondaparinux",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "FONDAUSZ",
+              "display": "Fondaparinux"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-FONDAUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-FONDAUSZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "FONDAUSZ",
+              "display": "Fondaparinux"
+            }
+          ],
+          "text": "Fondaparinux"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "FONDAUSZ"
+          }
+        ],
+        "preferredReportName": "Arixtra"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-FONDAUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-GERKL",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 700,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "04"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/GERKL",
+        "subtitle": "*Gerinnungsstatus klein",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "GERKL",
+              "display": "*Gerinnungsstatus klein"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-GERKL"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-GERKL",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "GERKL",
+              "display": "*Gerinnungsstatus klein"
+            }
+          ],
+          "text": "*Gerinnungsstatus klein"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "GERKL"
+          }
+        ],
+        "preferredReportName": "*Coagulation status reduced*"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-GERKL"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-HEPH",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 230,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "04"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/HEPH",
+        "subtitle": "*Heparinspiegel hochmolekular",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "HEPH",
+              "display": "*Heparinspiegel hochmolekular"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-HEPH"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-HEPH",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "HEPH",
+              "display": "*Heparinspiegel hochmolekular"
+            }
+          ],
+          "text": "*Heparinspiegel hochmolekular"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "HEPH"
+          }
+        ],
+        "preferredReportName": "*Heparin levels, high molecular weight*"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-HEPH"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-HEPN",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 230,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "04"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/HEPN",
+        "subtitle": "*Heparinspiegel niedermolekular",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "HEPN",
+              "display": "*Heparinspiegel niedermolekular"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-HEPN"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-HEPN",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "HEPN",
+              "display": "*Heparinspiegel niedermolekular"
+            }
+          ],
+          "text": "*Heparinspiegel niedermolekular"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "HEPN"
+          }
+        ],
+        "preferredReportName": "*Heparin levels, low molecular weight*"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-HEPN"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-HIPAIB",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 10000,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/HIPAIB",
+        "subtitle": "HIPA (Heparin-induzierte Thrombozytenaktivierung",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "HIPAIB",
+              "display": "HIPA (Heparin-induzierte Thrombozytenaktivierung"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-HIPAIB"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-HIPAIB",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "HIPAIB",
+              "display": "HIPA (Heparin-induzierte Thrombozytenaktivierung"
+            }
+          ],
+          "text": "HIPA (Heparin-induzierte Thrombozytenaktivierung"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "HIPAIB"
+          }
+        ],
+        "preferredReportName": "Heparin-induced platelet activation"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-HIPAIB"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-HITAKUSZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 1000,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "01"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/HITAKUSZ",
+        "subtitle": "HIT (Heparin induzierte Thrombopenie)",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "HITAKUSZ",
+              "display": "HIT (Heparin induzierte Thrombopenie)"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-HITAKUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-HITAKUSZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "HITAKUSZ",
+              "display": "HIT (Heparin induzierte Thrombopenie)"
+            }
+          ],
+          "text": "HIT (Heparin induzierte Thrombopenie)"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "HITAKUSZ"
+          }
+        ],
+        "preferredReportName": "HIT-AB ELISA: IgG, IgM, IgA"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-HITAKUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-HITIGGUZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 230,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "01"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/HITIGGUZ",
+        "subtitle": "HIT-AK: IgG",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "HITIGGUZ",
+              "display": "HIT-AK: IgG"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-HITIGGUZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-HITIGGUZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "HITIGGUZ",
+              "display": "HIT-AK: IgG"
+            }
+          ],
+          "text": "HIT-AK: IgG"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "HITIGGUZ"
+          }
+        ],
+        "preferredReportName": "HIT-AB ELISA: IgG"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-HITIGGUZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-INR",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 230,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "04"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/INR",
+        "subtitle": "INR",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "INR",
+              "display": "INR"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-INR"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-INR",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "INR",
+              "display": "INR"
+            }
+          ],
+          "text": "INR"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "INR"
+          }
+        ],
+        "preferredReportName": "INR"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-INR"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-KOMGER",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 230,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "04"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/KOMGER",
+        "subtitle": "Kommentar Gerinnung",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "KOMGER",
+              "display": "Kommentar Gerinnung"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-KOMGER"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-KOMGER",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "KOMGER",
+              "display": "Kommentar Gerinnung"
+            }
+          ],
+          "text": "Kommentar Gerinnung"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "KOMGER"
+          }
+        ],
+        "preferredReportName": "Comment Coagulation"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-KOMGER"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-PROTCUSZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 700,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/PROTCUSZ",
+        "subtitle": "Protein C (fkt.)",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "PROTCUSZ",
+              "display": "Protein C (fkt.)"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-PROTCUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-PROTCUSZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "PROTCUSZ",
+              "display": "Protein C (fkt.)"
+            }
+          ],
+          "text": "Protein C (fkt.)"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "PROTCUSZ"
+          }
+        ],
+        "preferredReportName": "Protein C (functional)"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-PROTCUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-PROTSFUZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 500,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/PROTSFUZ",
+        "subtitle": "Freies Protein S (ag.)",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "PROTSFUZ",
+              "display": "Freies Protein S (ag.)"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-PROTSFUZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-PROTSFUZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "PROTSFUZ",
+              "display": "Freies Protein S (ag.)"
+            }
+          ],
+          "text": "Freies Protein S (ag.)"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "PROTSFUZ"
+          }
+        ],
+        "preferredReportName": "Free protein S (antigenic)"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-PROTSFUZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-PROTSTUZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 230,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/PROTSTUZ",
+        "subtitle": "Totales Protein S (ag.)",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "PROTSTUZ",
+              "display": "Totales Protein S (ag.)"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-PROTSTUZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-PROTSTUZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "PROTSTUZ",
+              "display": "Totales Protein S (ag.)"
+            }
+          ],
+          "text": "Totales Protein S (ag.)"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "PROTSTUZ"
+          }
+        ],
+        "preferredReportName": "Total protein S (antigenic)"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-PROTSTUZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-PROTSUSZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 500,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/PROTSUSZ",
+        "subtitle": "Protein S (fkt.)",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "PROTSUSZ",
+              "display": "Protein S (fkt.)"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-PROTSUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-PROTSUSZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "PROTSUSZ",
+              "display": "Protein S (fkt.)"
+            }
+          ],
+          "text": "Protein S (fkt.)"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "PROTSUSZ"
+          }
+        ],
+        "preferredReportName": "Protein S (functional)"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-PROTSUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-PT",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 230,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "04"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/PT",
+        "subtitle": "Quick",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "PT",
+              "display": "Quick"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-PT"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-PT",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "PT",
+              "display": "Quick"
+            }
+          ],
+          "text": "Quick"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "PT"
+          }
+        ],
+        "preferredReportName": "Prothrombin time"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-PT"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-QUICK",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 500,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "04"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/QUICK",
+        "subtitle": "Quick",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "QUICK",
+              "display": "Quick"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-QUICK"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-QUICK",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "QUICK",
+              "display": "Quick"
+            }
+          ],
+          "text": "Quick"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "QUICK"
+          }
+        ],
+        "preferredReportName": "PT profile"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-QUICK"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-RIVARO",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 500,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "04"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/RIVARO",
+        "subtitle": "Anti-Xa-Aktivität (Rivaroxaban)",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "RIVARO",
+              "display": "Anti-Xa-Aktivität (Rivaroxaban)"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-RIVARO"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-RIVARO",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "RIVARO",
+              "display": "Anti-Xa-Aktivität (Rivaroxaban)"
+            }
+          ],
+          "text": "Anti-Xa-Aktivität (Rivaroxaban)"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "RIVARO"
+          }
+        ],
+        "preferredReportName": "Anti-FXa activity of rivaroxaban"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-RIVARO"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-RVWFUSZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 230,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/RVWFUSZ",
+        "subtitle": "Ratio vWF",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "RVWFUSZ",
+              "display": "Ratio vWF"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-RVWFUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-RVWFUSZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "RVWFUSZ",
+              "display": "Ratio vWF"
+            }
+          ],
+          "text": "Ratio vWF"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "RVWFUSZ"
+          }
+        ],
+        "preferredReportName": "Ratio vWF"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-RVWFUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-TQUICK",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 230,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/TQUICK",
+        "subtitle": "Tiefer Spontanquick",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "TQUICK",
+              "display": "Tiefer Spontanquick"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-TQUICK"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-TQUICK",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "TQUICK",
+              "display": "Tiefer Spontanquick"
+            }
+          ],
+          "text": "Tiefer Spontanquick"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "TQUICK"
+          }
+        ],
+        "preferredReportName": "deep spontaneous quick"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-TQUICK"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-TZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 700,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "04"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/TZ",
+        "subtitle": "Thrombinzeit",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "TZ",
+              "display": "Thrombinzeit"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-TZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-TZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "TZ",
+              "display": "Thrombinzeit"
+            }
+          ],
+          "text": "Thrombinzeit"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "TZ"
+          }
+        ],
+        "preferredReportName": "Thrombin time"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-TZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-VENTHROM",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 230,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/VENTHROM",
+        "subtitle": "*Venöse Thrombophilie",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "VENTHROM",
+              "display": "*Venöse Thrombophilie"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-VENTHROM"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-VENTHROM",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "VENTHROM",
+              "display": "*Venöse Thrombophilie"
+            }
+          ],
+          "text": "*Venöse Thrombophilie"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "VENTHROM"
+          }
+        ],
+        "preferredReportName": "venous thrombophilia"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-VENTHROM"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-VWF8BKUZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 500,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/VWF8BKUZ",
+        "subtitle": "Faktor VIII-Bindungskapazität des VWF",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "VWF8BKUZ",
+              "display": "Faktor VIII-Bindungskapazität des VWF"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-VWF8BKUZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-VWF8BKUZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "VWF8BKUZ",
+              "display": "Faktor VIII-Bindungskapazität des VWF"
+            }
+          ],
+          "text": "Faktor VIII-Bindungskapazität des VWF"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "VWF8BKUZ"
+          }
+        ],
+        "preferredReportName": "Factor VIII binding capacity of VWF"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-VWF8BKUZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-VWFAGUSZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 230,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/VWFAGUSZ",
+        "subtitle": "Von Willebrand Faktor (ag.)",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "VWFAGUSZ",
+              "display": "Von Willebrand Faktor (ag.)"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-VWFAGUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-VWFAGUSZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "VWFAGUSZ",
+              "display": "Von Willebrand Faktor (ag.)"
+            }
+          ],
+          "text": "Von Willebrand Faktor (ag.)"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "VWFAGUSZ"
+          }
+        ],
+        "preferredReportName": "Von Willebrand factor (antigen)"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-VWFAGUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-VWFAKTOR",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 230,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/VWFAKTOR",
+        "subtitle": "*Von Willebrand Faktor",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "VWFAKTOR",
+              "display": "*Von Willebrand Faktor"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-VWFAKTOR"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-VWFAKTOR",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "VWFAKTOR",
+              "display": "*Von Willebrand Faktor"
+            }
+          ],
+          "text": "*Von Willebrand Faktor"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "VWFAKTOR"
+          }
+        ],
+        "preferredReportName": "*Von Willebrand Factor*"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-VWFAKTOR"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-VWFUSZ",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 500,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/VWFUSZ",
+        "subtitle": "Von Willebrand Faktor (fkt.)",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "VWFUSZ",
+              "display": "Von Willebrand Faktor (fkt.)"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-VWFUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-VWFUSZ",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "VWFUSZ",
+              "display": "Von Willebrand Faktor (fkt.)"
+            }
+          ],
+          "text": "Von Willebrand Faktor (fkt.)"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "VWFUSZ"
+          }
+        ],
+        "preferredReportName": "von Willebrand factor (Fct.)"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-VWFUSZ"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ActivityDefinition",
+        "id": "actdef-VWMULTIB",
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/minimal-volume-microliter",
+            "valueQuantity": {
+              "value": 230,
+              "unit": "µl",
+              "system": "http://unitsofmeasure.org",
+              "code": "uL"
+            }
+          },
+          {
+            "url": "https://www.zetlab.ch/StructureDefinition/specimen-definition",
+            "valueReference": {
+              "identifier": {
+                "system": "https://www.zetlab.ch/fhir/specimen",
+                "value": "43"
+              }
+            }
+          }
+        ],
+        "url": "https://www.zetlab.ch/fhir/activity/VWMULTIB",
+        "subtitle": "VW-Faktor-Multimeranalyse",
+        "status": "active",
+        "description": "Gerinnung",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "facility"
+            },
+            "valueReference": {
+              "reference": "Organization/zlz"
+            }
+          }
+        ],
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "https://www.zetlab.ch/fhir/category",
+                "code": "Routine",
+                "display": "Routine"
+              }
+            ]
+          }
+        ],
+        "kind": "ServiceRequest",
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "VWMULTIB",
+              "display": "VW-Faktor-Multimeranalyse"
+            }
+          ]
+        },
+        "location": {
+          "identifier": {
+            "system": "https://www.zetlab.ch/fhir/groups-observation",
+            "value": "GER"
+          }
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ActivityDefinition/actdef-VWMULTIB"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ObservationDefinition",
+        "id": "obsdef-VWMULTIB",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.zetlab.ch/lis/codes",
+              "code": "VWMULTIB",
+              "display": "VW-Faktor-Multimeranalyse"
+            }
+          ],
+          "text": "VW-Faktor-Multimeranalyse"
+        },
+        "identifier": [
+          {
+            "system": "https://www.zetlab.ch/lis/codes",
+            "value": "VWMULTIB"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ObservationDefinition/obsdef-VWMULTIB"
+      }
+    }
+  ]
+}

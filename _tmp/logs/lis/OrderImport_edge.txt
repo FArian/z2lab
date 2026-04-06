@@ -1,0 +1,249 @@
+#=== ASCII ====================================================================
+# ASCII>MCS|Vewaltung|
+#ASCII>223|225|		# ß   (maass 27.10.2017)
+ASCII>252|129|		# ü
+ASCII>246|148|		# ö
+ASCII>228|132|		# ä
+ASCII>220|154|		# Ü
+ASCII>214|153|		# Ö
+ASCII>196|142|		# A
+#=== ASCII ====================================================================
+
+
+#STRING>|'|				#nh/23.8.24 IHD-12190
+
+#=== Makros ===================================================================
+# $CON|ZIELFELD|[TABELLE]|SUCHFELD|
+$CO1|ARZT|ARZT|MATCH|	# Arzt finden
+
+$IF1|.EQ.|0|167|					#Notfall Nacht/Woe ScheinUG 167 NHR 19.08.2021
+#$IF2|.EQ.|ZPPRIV|$ME3|				### TCH2200479 22.11.2022 ### TCH2300438 <GRR 21.09.2023>
+$IF2|.NE.|ZPPRIV|$ME5|				### TCH2300438 <GRR 21.09.2023>
+$IF3|.NE.|AGAMB|$ME7|				### TCH2300438 <GRR 21.09.2023>
+
+
+
+$DA1|TT.MM.JJJJ|JJJJMMTTXXXXXX
+$DA2|HH:NN:SS|XXXXXXXXHHNNSS
+$DA3|TT.MM.JJJJ HH:NN:SS|JJJJMMTTHHNNSS
+$DA4|TTMMJJJJ|JJJJMMTT
+
+$IN1|0|
+$IN2|ZLZ|
+$IN3|107|			#Default Schein UG 107 NHR 19.08.2021
+$IN4||				### 
+
+#Eiligflag
+$EIL|1|U
+$EIL|0|R
+
+#Geschlecht 		eingefügt NHR 24.03.2022
+$SEX|W|W
+$SEX|W|F
+$SEX|M|M
+
+#wurde nur für Openmedical umgesetzt, seit 1.1.26 PRO-0033 obsolet nho#
+$SUG|107|LAB0|					# ACH230014
+$SUG|167|LAB1|					# ACH230014
+$SUG|117|BAK0|					# ACH230014
+$SUG|177|BAK1|					# ACH230014
+
+
+$PO1|1|5|
+$PO2|1|32|
+$PO3|1|96|
+$PO4|1|6|			### 
+$PO5|7|11|			###
+$PO6|6|11|			### TCH2300438 <GRR 21.09.2023>
+
+
+
+$AP1|-|
+
+
+$ME1
+$ME2
+$MA1
+$MA2
+$ME3		###
+$ME4		###
+$MA3		###
+$MA4		###
+$ME5		### TCH2300438 <GRR 21.09.2023>
+$MA5		### TCH2300438 <GRR 21.09.2023>
+$ME6		### TCH2300438 <GRR 21.09.2023>
+$MA6		### TCH2300438 <GRR 21.09.2023>
+$ME7		### TCH2300438 <GRR 21.09.2023>
+$MA7		### TCH2300438 <GRR 21.09.2023>
+
+
+#=== Makros ===================================================================
+
+
+#=== Segmente =================================================================
+# Satzkennung|Feld|Comp|SUBcomp|max. Feldl„nge|Text/Variable/syslex|Makro|
+#
+# Makro:	$TS - Time Stamp
+#
+# Variable:	$MSH[1] - Sending application
+#			$MSH[2] - Receiving application
+#			$MSH[3] - Receiving facility
+#			$MSH[4] - Message Type
+#			$MSH[5] - message Control Id
+#			$MSH[6] - Processing Id
+#			$MSH[7] - Version Id
+
+
+C>MSH|MSA|
+
+
+#=== [MSH send] ===============================================================
+C>MSH|1||||FS||				# Field separator
+C>MSH|2||||SFS||			# Encoding characters
+C>MSH|3||||ZLZ||			# Sending application  // Test
+C>MSH|4||||ACK||			# Sending facility     // Test
+C>MSH|5||||LABZLZ||			# Receiving application
+C>MSH|6||||LAB||			# Receiving facility
+C>MSH|7||||$TS||			# Data/Time of Message
+C>MSH|8||||||				# Securety
+C>MSH|9|1|||ACK||			# Message Type
+C>MSH|9|2|||$MSH[9;2]||
+C>MSH|10||||$MSH[10]||		# Message control Id
+C>MSH|11||||$MSH[11]||		# Processing Id
+C>MSH|12||||$MSH[12]||		# Version Id
+C>MSH|13||||||
+C>MSH|14||||||
+C>MSH|15||||$MSH[15]||
+C>MSH|16||||$MSH[16]||
+#=== [MSH send] ===============================================================
+
+
+#=== [MSA send] ===============================================================
+#C>MSA|1||||AA||			# Acknowledge Code
+#C>MSA|2||||$MSH[10]||		# Message Control Id
+#C>MSA|3||||||				# Text Message
+#=== [MSA send] ===============================================================
+
+
+#=== [Initialisierungen] ======================================================
+#P>MSH|0|0|||FAL.HAUS|$IN1||||		# Haus initialisieren
+P>MSH|0|0|||HAUS|$IN1||||		# Haus initialisieren
+A>MSH|0|0|||AUF.ABTEILUNG|$IN2||||
+#P>PID|0|0|||PAT.LAND|||||		# Land initialisieren
+#P>PV1|19|1|||FALL||||			# Fall initialisieren
+#=== [Initialisierungen] ======================================================
+
+
+#=== [MSH receive] ============================================================
+A>MSH|3|1|||ABTEILUNG||
+#=== [MSH receive] ============================================================
+
+
+#=== [PID receive] ============================================================
+#P>PID|3|1|||PAT.LEBENSNR|$ME3,$PO5,$ME4,$IN4|					### Lebensnummer TCH2200479 22.11.2022 ### TCH2300438 <GRR 21.09.2023>
+#P>PID|3|1|||PAT.LEBENSNR|$PO4,$IF2,$IN4,$MA4|					### Lebensnummer TCH2200479 22.11.2022    ### TCH2300438 <GRR 21.09.2023>
+P>PID|3|1|||PAT.LEBENSNR|$ME3,$IN4|								### TCH2300438 <GRR 21.09.2023> Lebensnummer vollständig merken
+P>PID|3|1|||PAT.LEBENSNR|$PO4,$ME4,$IN4|						### TCH2300438 <GRR 21.09.2023> Lebensnummerpräfix ZPPRIV ermitteln
+P>PID|3|1|||PAT.LEBENSNR|$PO5,$ME5,$IN4|						### TCH2300438 <GRR 21.09.2023> Lebensnummer bei Präfix ZPPRIV ermitteln
+P>PID|3|1|||PAT.LEBENSNR|$PO1,$ME6,$IN4|						### TCH2300438 <GRR 21.09.2023> Lebensnummerpräfix AGAMB ermitteln
+P>PID|3|1|||PAT.LEBENSNR|$PO6,$ME7,$IN4|						### TCH2300438 <GRR 21.09.2023> Lebensnummer bei Präfix AGAMB ermitteln
+P>PID|3|2|||PAT.LEBENSNR|$MA4,$IF2,$IN4,$MA6,$IF3,$IN4,$MA3|	### TCH2300438 <GRR 21.09.2023> Lebensnummer abhängig vom Präfix ermitteln und setzen im leeren Behlefsfeld PID3^2
+
+
+
+P>PID|5|1|||PAT.NAME||			# Name
+P>PID|5|2|||PAT.VORNAME||		# Vorname
+#P>PID|5|3|||PAT.NAMENSZUSATZ||	# Name
+#P>PID|5|4|||PAT.TITEL||		# Vorname
+P>PID|7||||PAT.GEB|$DA1|		# Geburtsdatum
+P>PID|8||||PAT.SEX|$SEX|			# Geschlecht   
+P>PID|11|1|||PAT.STRASSE||		# Straße
+P>PID|11|2|||PAT.HAUSNR|$PO2|	# Hausnummer               #PET/03.01.2023
+P>PID|11|3|||PAT.ORT||			# Ort
+P>PID|11|5|||PAT.PLZ||			# Postleitzahl
+P>PID|11|6|||PAT.LAND||			# Land
+P>PID|13|1|||PAT.TELEFON|$PO2|	# Telefonnummer
+P>PID|13|4|||PAT.EMAIL|$PO3|		# E-Mail						#SMA/17.08.2022
+#=== [PID receive] ============================================================
+
+#=== [Scheindaten] ============================================================
+##P>IN2|2||||SCH.IK||					# Kassennummer
+#P>IN1|4||||SCH.IK|$PO4|				# Kassenname
+##P>IN2|2||||SCH.VNR||					# Versicherungsnummer
+#P>IN2|2||||SCH.VNR||					# AHV
+
+### Anpassung-Ergänzung ACH220036 - 25.08.2023 GRR ###
+#          AHV-Nr (7561234569) im PID-19 und IN2-2
+#          Versicherung (VersicherungName) im IN1-2 (= BAG Nr?)
+#          Versicherungs-Vertrags-Nr (VersischerungNr) im IN1-36    #FARHAD / 30.04.24 change IN1-49 to IN1-36
+#          VeKa-Nr (VersicherteKarte-Nr) im IN2-6
+P>IN1|2|1|||PAT.IK||
+P>IN1|36|1|||PAT.VNR||												#FARHAD / 30.04.24 change IN1-49 to IN1-36
+A>IN1|12|1|||SCH.VK_GUELTIG_AB|$DA4|
+A>IN1|13|1|||SCH.VK_GUELTIG_BIS|$DA4|
+A>IN1|2|1|||SCH.IK||
+A>IN1|36|1|||SCH.VNR||												#FARHAD / 30.04.24 change IN1-49 to IN1-36
+P>IN2|2|1|||PAT.@AHV||
+A>IN2|6|1|||SCH.@VKN||
+#=== [Scheindaten] ============================================================
+
+#=== [PV1 receive] ============================================================
+P>PV1|2|1|||FAL.BEHANDLUNGSART||			# Behandlungsart
+P>PV1|3|1|||ARZT|$CO1|						# Einsender
+A>PV1|10|1|||SCH.SCHEIN_UG|$ME2,$IN4|		# ACH230014
+P>PV1|19|1|||FALL||							# Fallnummer
+#A>PV1|28|1|||AUF.GROESSE||					# Groesse
+#A>PV1|29|1|||AUF.GEWICHT||					# Gewicht
+A>PV1|11|1|||AUF.SSW||						# Schwagerschaftswoche
+A>PV1|12|1|||AUF.SSW_TAG||					# Schwangerschaftswochen-Tag
+P>PV1|44|1|||FAL.DATUM_AUFNAHME|$DA3|		# Aufnahmedatum
+P>PV1|45|1|||FAL.DATUM_ENTLASSUNG|$DA3|		# Entlassungsdatum
+#=== [PV1 receive] ============================================================
+
+
+# -----------
+# - Auftrag -
+# -----------
+
+
+#=== [ORC receive] ============================================================
+A>ORC|2|1|||AUF.EXTERN||
+A>ORC|2|1|||AUF.BARCODE||
+A>ORC|5|1|||AUF.ANFSTATUS||
+A>ORC|7|6|||AUF.EILT|$EIL,$ME1|
+A>ORC|7|6|||SCH.SCHEIN_UG|$EIL,$MA2,$SUG|					# ACH230014
+#=== [ORC receive] ============================================================
+
+
+#=== [NTE receive] (klinische Angaben) ========================================	
+A>NTE|3|1|||AUF.TEXT||		# klinische Angaben
+A>NTE|3|2|||PAT.INFO||		# Bemerkung
+
+#=== [NTE receive] (klinische Angaben) ========================================
+
+
+#=== [OBR receive] ============================================================
+#A>OBR|1|1|||SCH.SCHEIN_UG|$MA1,$IF1,$IN3|	# ACH230014 auskommentiert GRR # Default Schein_UG 107, Bei Notfall Nacht/WoE 167 NHR 19.08.2021
+
+									 
+										 
+
+#A>OBR|2|1|||AUF.EXTERN||			# Externe Auftragsnummer
+#A>OBR|2|1|||AUF.BARCODE||			# Barcode
+A>OBR|4|1|||TEST||||				# Testkürzel Extern
+A>OBR|7|1|||AUF.ABNAHMEDATUM|$DA1|	# Für DATUM_PROBE
+A>OBR|7|1|||AUF.ABNAHMEZEIT|$DA2|	# Für DATUM_PROBE
+#A>OBR|15|1|||MATERIAL||				# Proben Material		23.05.2024 nhr IHD-11280 Materialerfassung wieder rückgängig gemacht
+#=== [OBR receive] ============================================================
+
+
+#=== [OBX receive] ============================================================
+A>OBX|3|1|||TEST||||			# nur für Befunde
+A>OBX|5|1|||WERT||||			# nur für Befunde
+#=== [OBX receive] ============================================================
+
+
+A>NTE|3|1|||BEFUND||
+#=== Segmente =================================================================
+
+

@@ -1,0 +1,1315 @@
+{
+  "resourceType": "ConceptMap",
+  "id": "zlz-snomed-zu-material",
+  "url": "https://zlz-zentrallabor.ch/fhir/ConceptMap/zlz-snomed-zu-material",
+  "version": "1.0.0",
+  "name": "ZlzSnomedZuMaterial",
+  "title": "ZLZ Material-Code zu SNOMED CT Specimen",
+  "status": "active",
+  "experimental": false,
+  "date": "2026-04-03",
+  "publisher": "ZLZ Zentrallabor AG",
+  "contact": [
+    {
+      "name": "ZLZ Zentrallabor AG",
+      "telecom": [
+        {
+          "system": "url",
+          "value": "https://www.zlz.ch"
+        }
+      ]
+    }
+  ],
+  "description": "Übersetzt ZLZ-interne Material-Codes (specimen_additionalinfo aus dem LIS) auf SNOMED CT Specimen-Konzepte.\n\nWICHTIG — Barcode-Format im Labor:\n  Auftrags-Barcode = Auftragsnummer + Leerzeichen + Material-Code\n  Beispiel: Auftragsnummer 7004003000 + Material-Code 16 → Barcode '7004003000 16'\n  Das LIS-System erkennt das Material anhand dieser kombinierten Barcode-Struktur.\n\nÄquivalenz 'subsumes': Der SNOMED-Code ist Oberbegriff des ZLZ-Materials; ZLZ-Codes können laborspezifische Details enthalten (Antikoagulans, Temperatur, Zeitpunkt).",
+  "purpose": "Wird von Orchestra/OIE Juno verwendet, um FHIR Specimen.type (SNOMED CT) auf den LIS-internen Material-Code (specimen_additionalinfo) zu übersetzen und umgekehrt.",
+  "copyright": "ZLZ Zentrallabor AG, Forchstrasse 454, 8702 Zollikon",
+  "sourceUri": "https://zlz-zentrallabor.ch/fhir/CodeSystem/zlz-material-codes",
+  "targetUri": "http://snomed.info/sct",
+  "group": [
+    {
+      "source": "https://zlz-zentrallabor.ch/fhir/CodeSystem/zlz-material-codes",
+      "sourceVersion": "1.0.0",
+      "target": "http://snomed.info/sct",
+      "targetVersion": "http://snomed.info/sct/900000000000207008",
+      "element": [
+        {
+          "code": "10",
+          "display": "Liquor Nativ",
+          "target": [
+            {
+              "code": "258450006",
+              "display": "Cerebrospinal fluid specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "11",
+          "display": "Liquor Fluorid",
+          "target": [
+            {
+              "code": "258450006",
+              "display": "Cerebrospinal fluid specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "12",
+          "display": "Punktat Fluorid",
+          "target": [
+            {
+              "code": "258455001",
+              "display": "Fluid specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "13",
+          "display": "Punktat Heparin",
+          "target": [
+            {
+              "code": "258455001",
+              "display": "Fluid specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "14",
+          "display": "Fluorid-Plasma",
+          "target": [
+            {
+              "code": "119361005",
+              "display": "Plasma specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "15",
+          "display": "Citrat-Vollblut 1:10",
+          "target": [
+            {
+              "code": "420135007",
+              "display": "Whole blood (substance)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "16",
+          "display": "Stuhl (nativ)",
+          "target": [
+            {
+              "code": "119339001",
+              "display": "Stool specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "17",
+          "display": "Heparin-Vollblut",
+          "target": [
+            {
+              "code": "420135007",
+              "display": "Whole blood (substance)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "18",
+          "display": "Nativ-Vollblut",
+          "target": [
+            {
+              "code": "420135007",
+              "display": "Whole blood (substance)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "20",
+          "display": "Erythrozyten Segment",
+          "target": [
+            {
+              "code": "119362003",
+              "display": "Erythrocyte specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "22",
+          "display": "Hämolysat Folsäure im Ec",
+          "target": [
+            {
+              "code": "119362003",
+              "display": "Erythrocyte specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "24",
+          "display": "Liquor EDTA",
+          "target": [
+            {
+              "code": "258450006",
+              "display": "Cerebrospinal fluid specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "25",
+          "display": "Blutausstrich",
+          "target": [
+            {
+              "code": "418566009",
+              "display": "Blood smear (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "26",
+          "display": "Cortisol stimuliert 30 min",
+          "target": [
+            {
+              "code": "119364003",
+              "display": "Serum specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "27",
+          "display": "Cortisol stimuliert 60 min",
+          "target": [
+            {
+              "code": "119364003",
+              "display": "Serum specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "29",
+          "display": "Glucose-Toleranztest nach 60min",
+          "target": [
+            {
+              "code": "119364003",
+              "display": "Serum specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "30",
+          "display": "Glucose-Toleranztest nach 120min",
+          "target": [
+            {
+              "code": "119364003",
+              "display": "Serum specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "31",
+          "display": "Glucose-Toleranztest nach 180min",
+          "target": [
+            {
+              "code": "119364003",
+              "display": "Serum specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "32",
+          "display": "TSH stimuliert",
+          "target": [
+            {
+              "code": "119364003",
+              "display": "Serum specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "33",
+          "display": "Nabelschnurblut",
+          "target": [
+            {
+              "code": "122554006",
+              "display": "Cord blood specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "35",
+          "display": "Serum lichtgeschützt",
+          "target": [
+            {
+              "code": "119364003",
+              "display": "Serum specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "36",
+          "display": "Fruchtwasser",
+          "target": [
+            {
+              "code": "119346000",
+              "display": "Amniotic fluid specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "37",
+          "display": "EDTA Spurenelemente",
+          "target": [
+            {
+              "code": "445295009",
+              "display": "Blood specimen with EDTA (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "43",
+          "display": "Citrat Pl. 1:10 gefroren  -20°C",
+          "target": [
+            {
+              "code": "119361005",
+              "display": "Plasma specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "44",
+          "display": "EDTA Plasma gefroren -20°C",
+          "target": [
+            {
+              "code": "445295009",
+              "display": "Blood specimen with EDTA (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "45",
+          "display": "EDTA-Blut lichtgeschützt",
+          "target": [
+            {
+              "code": "445295009",
+              "display": "Blood specimen with EDTA (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "46",
+          "display": "Aprotinin Plasma gefroren",
+          "target": [
+            {
+              "code": "119361005",
+              "display": "Plasma specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "47",
+          "display": "Serum gekühlt",
+          "target": [
+            {
+              "code": "119364003",
+              "display": "Serum specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "48",
+          "display": "Serum gefroren -20° C",
+          "target": [
+            {
+              "code": "119364003",
+              "display": "Serum specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "49",
+          "display": "Heparin Plasma gefroren -20°C",
+          "target": [
+            {
+              "code": "119361005",
+              "display": "Plasma specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "50",
+          "display": "EDTA-Plasma gekühlt",
+          "target": [
+            {
+              "code": "445295009",
+              "display": "Blood specimen with EDTA (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "51",
+          "display": "EDTA gefroren -20°C",
+          "target": [
+            {
+              "code": "445295009",
+              "display": "Blood specimen with EDTA (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "52",
+          "display": "Nativ Vollblut gekühlt",
+          "target": [
+            {
+              "code": "420135007",
+              "display": "Whole blood (substance)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "54",
+          "display": "Spontanurin gefroren",
+          "target": [
+            {
+              "code": "122575003",
+              "display": "Urine specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "55",
+          "display": "ThromboExact Röhrchen",
+          "target": [
+            {
+              "code": "420135007",
+              "display": "Whole blood (substance)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "56",
+          "display": "Blutkultur Peds Plus",
+          "target": [
+            {
+              "code": "447154002",
+              "display": "Blood culture specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "57",
+          "display": "Heparin-Plasma gekühlt",
+          "target": [
+            {
+              "code": "119361005",
+              "display": "Plasma specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "58",
+          "display": "Nativ Vollblut gefroren -20°C",
+          "target": [
+            {
+              "code": "420135007",
+              "display": "Whole blood (substance)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "59",
+          "display": "Fluorid Vollblut",
+          "target": [
+            {
+              "code": "420135007",
+              "display": "Whole blood (substance)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "60",
+          "display": "Abstrich/Sekret",
+          "target": [
+            {
+              "code": "257861003",
+              "display": "Swab specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "62",
+          "display": "Dialysat",
+          "target": [
+            {
+              "code": "258455001",
+              "display": "Fluid specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "63",
+          "display": "Biopsie",
+          "target": [
+            {
+              "code": "258452001",
+              "display": "Biopsy specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "64",
+          "display": "Konkrement",
+          "target": [
+            {
+              "code": "257630004",
+              "display": "Calculus specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "65",
+          "display": "Speichel",
+          "target": [
+            {
+              "code": "119342007",
+              "display": "Saliva specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "66",
+          "display": "Dialysat (Protein)",
+          "target": [
+            {
+              "code": "258455001",
+              "display": "Fluid specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "75",
+          "display": "Spontanurin lichtgeschützt",
+          "target": [
+            {
+              "code": "122575003",
+              "display": "Urine specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "76",
+          "display": "24h-Urin nativ lichtgeschützt",
+          "target": [
+            {
+              "code": "276833005",
+              "display": "24-hour urine specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "77",
+          "display": "24h-Sammelurin",
+          "target": [
+            {
+              "code": "276833005",
+              "display": "24-hour urine specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "78",
+          "display": "24h-Urin angesäuert",
+          "target": [
+            {
+              "code": "276833005",
+              "display": "24-hour urine specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "80",
+          "display": "Spontanurin Borsäure",
+          "target": [
+            {
+              "code": "122575003",
+              "display": "Urine specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "83",
+          "display": "Nativ Vollblut bei 37°C",
+          "target": [
+            {
+              "code": "420135007",
+              "display": "Whole blood (substance)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "84",
+          "display": "Erythrozytenarmes Natrium-Citrat",
+          "target": [
+            {
+              "code": "421399002",
+              "display": "Erythrocyte-poor plasma specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "86",
+          "display": "Blutkultur I",
+          "target": [
+            {
+              "code": "447154002",
+              "display": "Blood culture specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "91",
+          "display": "Nasopharyngialabstrich",
+          "target": [
+            {
+              "code": "258500001",
+              "display": "Nasopharyngeal swab (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "95",
+          "display": "24h-Urin gefroren",
+          "target": [
+            {
+              "code": "276833005",
+              "display": "24-hour urine specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "96",
+          "display": "DTT-Heparin",
+          "target": [
+            {
+              "code": "119361005",
+              "display": "Plasma specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "97",
+          "display": "Quantiferon",
+          "target": [
+            {
+              "code": "420135007",
+              "display": "Whole blood (substance)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "98",
+          "display": "Mikrobiologie Material",
+          "target": [
+            {
+              "code": "257861003",
+              "display": "Swab specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "01",
+          "display": "Serum",
+          "target": [
+            {
+              "code": "119364003",
+              "display": "Serum specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "02",
+          "display": "Heparin-Plasma",
+          "target": [
+            {
+              "code": "119361005",
+              "display": "Plasma specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "03",
+          "display": "EDTA-Vollblut",
+          "target": [
+            {
+              "code": "445295009",
+              "display": "Blood specimen with EDTA (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "04",
+          "display": "Citrat-Plasma",
+          "target": [
+            {
+              "code": "119361005",
+              "display": "Plasma specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "05",
+          "display": "EDTA-Plasma",
+          "target": [
+            {
+              "code": "445295009",
+              "display": "Blood specimen with EDTA (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "06",
+          "display": "Citrat-Vollblut 1:5",
+          "target": [
+            {
+              "code": "420135007",
+              "display": "Whole blood (substance)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "07",
+          "display": "Spontanurin",
+          "target": [
+            {
+              "code": "122575003",
+              "display": "Urine specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "08",
+          "display": "Punktat Nativ",
+          "target": [
+            {
+              "code": "258455001",
+              "display": "Fluid specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "09",
+          "display": "Punktat EDTA",
+          "target": [
+            {
+              "code": "258455001",
+              "display": "Fluid specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "A1",
+          "display": "Atemtest-1",
+          "target": [
+            {
+              "code": "258543008",
+              "display": "Exhaled air specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "AA",
+          "display": "Abstrich Auge/Nase/Mund/Ohr",
+          "target": [
+            {
+              "code": "257863000",
+              "display": "Swab specimen from eye (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "AB",
+          "display": "Abstrich Bläschen",
+          "target": [
+            {
+              "code": "258462009",
+              "display": "Vesicle swab (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "AC",
+          "display": "Abstrich Cervix/Vagina/Penis",
+          "target": [
+            {
+              "code": "430229002",
+              "display": "Swab from vaginal fornix (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "AE",
+          "display": "Abstrich Eiter/ Wunde",
+          "target": [
+            {
+              "code": "258468009",
+              "display": "Swab from wound (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "AH",
+          "display": "Abstrich Haut",
+          "target": [
+            {
+              "code": "258435002",
+              "display": "Skin scraping specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "AR",
+          "display": "Abstrich Rektal",
+          "target": [
+            {
+              "code": "430229002",
+              "display": "Rectal swab (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "AT",
+          "display": "Abstrich Bronch./Trachealsekret",
+          "target": [
+            {
+              "code": "119398005",
+              "display": "Specimen from trachea (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "AU",
+          "display": "Abstrich Urethra",
+          "target": [
+            {
+              "code": "258499004",
+              "display": "Urethral swab (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "AV",
+          "display": "Abstrich Rektovaginal",
+          "target": [
+            {
+              "code": "430229002",
+              "display": "Recto-vaginal swab (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "AW",
+          "display": "Abstrich Wunde",
+          "target": [
+            {
+              "code": "258468009",
+              "display": "Swab from wound (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "BA",
+          "display": "Bronchoalveoläre Lavage",
+          "target": [
+            {
+              "code": "258607008",
+              "display": "Bronchoalveolar lavage fluid specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "DP",
+          "display": "Douglaspunktat",
+          "target": [
+            {
+              "code": "258455001",
+              "display": "Fluid specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "FM",
+          "display": "Endov. Katheter/Implantat/Drain",
+          "target": [
+            {
+              "code": "258528007",
+              "display": "Implant specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "GP",
+          "display": "Gelenkspunktat",
+          "target": [
+            {
+              "code": "441695006",
+              "display": "Synovial fluid specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "HA",
+          "display": "Abstrich Haar/Nagel/Schuppen",
+          "target": [
+            {
+              "code": "257910001",
+              "display": "Hair specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "KS",
+          "display": "Klebestreifen",
+          "target": [
+            {
+              "code": "258435002",
+              "display": "Skin scraping specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "L1",
+          "display": "Liquor nativ gekühl",
+          "target": [
+            {
+              "code": "258450006",
+              "display": "Cerebrospinal fluid specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "LP",
+          "display": "Lymphknoten Punktat",
+          "target": [
+            {
+              "code": "258580003",
+              "display": "Lymph node biopsy specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "NA",
+          "display": "Nagel",
+          "target": [
+            {
+              "code": "258448003",
+              "display": "Nail specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "P1",
+          "display": "Punktat Nativ gekühlt",
+          "target": [
+            {
+              "code": "258455001",
+              "display": "Fluid specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "PE",
+          "display": "Penis",
+          "target": [
+            {
+              "code": "258499004",
+              "display": "Urethral swab (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "PP",
+          "display": "Pleurapunktat",
+          "target": [
+            {
+              "code": "418564007",
+              "display": "Pleural fluid specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "PR",
+          "display": "Prostataexprimat",
+          "target": [
+            {
+              "code": "446252009",
+              "display": "Prostate fluid specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "PW",
+          "display": "Parasiten/Würmer",
+          "target": [
+            {
+              "code": "119339001",
+              "display": "Stool specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "Q1",
+          "display": "Quantiferon NIL",
+          "target": [
+            {
+              "code": "420135007",
+              "display": "Whole blood (substance)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "Q2",
+          "display": "Quantiferon TB1",
+          "target": [
+            {
+              "code": "420135007",
+              "display": "Whole blood (substance)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "Q3",
+          "display": "Quantiferon TB2",
+          "target": [
+            {
+              "code": "420135007",
+              "display": "Whole blood (substance)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "Q4",
+          "display": "Quantiferon Mitogen",
+          "target": [
+            {
+              "code": "420135007",
+              "display": "Whole blood (substance)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "RN",
+          "display": "Abstrich Rachen/Nasoph.",
+          "target": [
+            {
+              "code": "258500001",
+              "display": "Nasopharyngeal swab (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "RT",
+          "display": "Abstrich Rachen/Tonsillen",
+          "target": [
+            {
+              "code": "258530009",
+              "display": "Throat swab (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "SE",
+          "display": "Sperma/Ejakulat",
+          "target": [
+            {
+              "code": "258508009",
+              "display": "Seminal fluid specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "SH",
+          "display": "Schuppen",
+          "target": [
+            {
+              "code": "258435002",
+              "display": "Skin scraping specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "SP",
+          "display": "Sputum",
+          "target": [
+            {
+              "code": "119334006",
+              "display": "Sputum specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "U1",
+          "display": "Erststrahlurin",
+          "target": [
+            {
+              "code": "122575003",
+              "display": "Urine specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "U2",
+          "display": "Mittelstrahlurin",
+          "target": [
+            {
+              "code": "122575003",
+              "display": "Urine specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "U3",
+          "display": "Morgenurin (M-Strahl)",
+          "target": [
+            {
+              "code": "122575003",
+              "display": "Urine specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "U4",
+          "display": "Einmalkatheterurin",
+          "target": [
+            {
+              "code": "122579009",
+              "display": "Catheterized urine specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        },
+        {
+          "code": "U5",
+          "display": "Dauerkatheterurin",
+          "target": [
+            {
+              "code": "122579009",
+              "display": "Catheterized urine specimen (specimen)",
+              "equivalence": "subsumes",
+              "comment": "Annäherung: SNOMED-Code ist das übergeordnete Konzept. ZLZ-Material kann laborspezifische Zusatzinformationen enthalten (z.B. Temperatur, Antikoagulans)."
+            }
+          ]
+        }
+      ],
+      "unmapped": {
+        "mode": "fixed",
+        "code": "OTH",
+        "display": "Sonstiges Material — kein SNOMED CT Äquivalent definiert"
+      }
+    }
+  ]
+}

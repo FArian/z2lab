@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrderEntry – Laboraufträge</title>
+    <style>
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2980b9;
+            --accent: #27ae60;
+            --danger: #c0392b;
+            --warning: #f39c12;
+            --bg: #f4f6f8;
+            --card: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --border: #dce1e6;
+            --shadow: 0 2px 8px rgba(0,0,0,0.08);
+            --radius: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+        }
+        .header h1 { font-size: 20px; font-weight: 600; }
+        .header-right { display: flex; align-items: center; gap: 16px; }
+
+        /* FHIR Config */
+        .fhir-config {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            padding: 6px 12px;
+            border-radius: var(--radius);
+        }
+        .fhir-config label { font-size: 12px; opacity: 0.9; }
+        .fhir-config input {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            width: 260px;
+        }
+        .fhir-config input::placeholder { color: rgba(255,255,255,0.6); }
+        .fhir-status {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: #e74c3c;
+            transition: background 0.3s;
+        }
+        .fhir-status.connected { background: #2ecc71; }
+
+        /* Layout */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto auto;
+            gap: 16px;
+            padding: 16px 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+        .card-header {
+            background: var(--primary);
+            color: white;
+            padding: 10px 16px;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card-header .icon { font-size: 16px; }
+        .card-body { padding: 16px; }
+
+        /* Patientendaten */
+        .patient-card { grid-column: 1 / -1; }
+        .section-subtitle {
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--primary-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .patient-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        /* Form Elements */
+        .form-group { display: flex; flex-direction: column; gap: 4px; }
+        .form-group label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .form-group input, .form-group select {
+            padding: 8px 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 13px;
+            color: var(--text);
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 2px rgba(41,128,185,0.15);
+        }
+        .form-group input[readonly] {
+            background: #f0f3f5;
+            color: var(--text-light);
+        }
+
+        /* Billing */
+        .billing-card { grid-column: 1; }
+        .billing-mode {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .billing-mode-btn {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            background: white;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .billing-mode-btn.active {
+            border-color: var(--primary);
+            background: rgba(26,82,118,0.05);
+            color: var(--primary);
+        }
+        .billing-mode-btn:hover { border-color: var(--primary-light); }
+        .billing-info {
+            background: #eaf2f8;
+            border-left: 3px solid var(--primary-light);
+            padding: 10px 12px;
+            border-radius: 0 4px 4px 0;
+            font-size: 12px;
+            margin-top: 12px;
+        }
+        .billing-info.warning {
+            background: #fef9e7;
+            border-left-color: var(--warning);
+        }
+        .billing-info.error {
+            background: #fdedec;
+            border-left-color: var(--danger);
+        }
+
+        /* Insurance */
+        .insurance-card { grid-column: 2; }
+        .insurance-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .insurance-section-title {
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--primary);
+            margin: 12px 0 8px 0;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--border);
+        }
+        .insurance-section-title:first-child { margin-top: 0; }
+        .mandatory-marker { color: var(--danger); font-weight: 700; }
+
+        /* Analysen */
+        .analyses-card { grid-column: 1 / -1; }
+        .analyses-tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0;
+        }
+        .analyses-tab {
+            padding: 8px 16px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-weight: 600;
+            color: var(--text-light);
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+        }
+        .analyses-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        .analyses-tab:hover { color: var(--primary-light); }
+        .analyses-tab .badge {
+            background: var(--primary);
+            color: white;
+            font-size: 10px;
+            padding: 1px 6px;
+            border-radius: 10px;
+            margin-left: 6px;
+        }
+
+        .analyses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 8px;
+        }
+        .analysis-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .analysis-item:hover { background: #f0f3f5; }
+        .analysis-item.selected {
+            background: rgba(39,174,96,0.08);
+            border-color: var(--accent);
+        }
+        .analysis-item input[type="checkbox"] {
+            accent-color: var(--accent);
+            width: 16px;
+            height: 16px;
+        }
+        .analysis-name { font-weight: 500; font-size: 13px; }
+        .analysis-code { font-size: 11px; color: var(--text-light); }
+        .analysis-mibi {
+            font-size: 10px;
+            background: #f39c12;
+            color: white;
+            padding: 1px 6px;
+            border-radius: 3px;
+            margin-left: auto;
+        }
+
+        /* Ausgewählte Analysen */
+        .selected-analyses {
+            margin-top: 16px;
+            border-top: 1px solid var(--border);
+            padding-top: 12px;
+        }
+        .selected-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+        .selected-tag {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--primary);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 16px;
+            font-size: 12px;
+        }
+        .selected-tag .remove {
+            cursor: pointer;
+            opacity: 0.7;
+            margin-left: 4px;
+            font-size: 14px;
+        }
+        .selected-tag .remove:hover { opacity: 1; }
+
+        /* Actions */
+        .actions-bar {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            padding: 8px 0;
+        }
+        .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+        .btn-primary:hover { background: #219a52; }
+        .btn-primary:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+        .btn-secondary {
+            background: white;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover { background: #f0f3f5; }
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+        .btn-danger:hover { background: #a93226; }
+
+        /* Toast */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .toast {
+            padding: 12px 20px;
+            border-radius: var(--radius);
+            color: white;
+            font-size: 13px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease;
+            max-width: 400px;
+        }
+        .toast.success { background: var(--accent); }
+        .toast.error { background: var(--danger); }
+        .toast.info { background: var(--primary-light); }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 16px; height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 500;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            max-width: 860px;
+            width: 95%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .modal-header {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .modal-header h3 { font-size: 16px; }
+        .modal-header-actions { display: flex; align-items: center; gap: 10px; }
+        .modal-close {
+            cursor: pointer;
+            font-size: 20px;
+            color: var(--text-light);
+            background: none;
+            border: none;
+            line-height: 1;
+        }
+        .btn-copy {
+            padding: 4px 12px;
+            font-size: 12px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            color: var(--text);
+            transition: all 0.2s;
+        }
+        .btn-copy:hover { background: var(--primary); color: white; border-color: var(--primary); }
+        .btn-copy.copied { background: var(--accent); color: white; border-color: var(--accent); }
+        .modal-body {
+            padding: 16px 20px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .modal-body pre {
+            background: #1e2a35;
+            color: #e8edf2;
+            padding: 16px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 12px;
+            line-height: 1.65;
+            white-space: pre-wrap;
+            word-break: break-all;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <h1><a href="/" style="color:white;text-decoration:none;" title="ZetLab OrderEntry">&#x1F9EA; OrderEntry – Laboraufträge</a></h1>
+    <div class="header-right">
+        <div class="fhir-config">
+            <label>FHIR Server:</label>
+            <input type="text" id="fhirUrl" placeholder="https://hapi-fhir.example.com/fhir" value="http://localhost:8080/fhir">
+            <button class="btn btn-secondary" style="padding:4px 10px;font-size:12px;" onclick="testFhirConnection()">Verbinden</button>
+            <div class="fhir-status" id="fhirStatus" title="Nicht verbunden"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- Main Layout -->
+<div class="main-layout">
+
+    <!-- Patientendaten -->
+    <div class="card patient-card">
+        <div class="card-header">
+            <span class="icon">&#x1F464;</span> Patientendaten
+            <span style="margin-left:auto;font-weight:400;font-size:12px;">
+                Patient-ID: <input type="text" id="patientSearchId" placeholder="FHIR Patient ID eingeben..." style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);color:white;padding:2px 8px;border-radius:4px;font-size:12px;width:200px;">
+                <button class="btn btn-secondary" style="padding:2px 10px;font-size:11px;color:white;border-color:rgba(255,255,255,0.4);" onclick="loadPatient()">Laden</button>
+            </span>
+        </div>
+        <div class="card-body">
+            <!-- PID Felder -->
+            <div class="section-subtitle">Stammdaten (PID)</div>
+            <div class="patient-grid">
+                <div class="form-group">
+                    <label>Patient-ID / PID-3</label>
+                    <input type="text" id="patId" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Externe Patient-ID / PID-2</label>
+                    <input type="text" id="patExternalId" placeholder="Ext. ID (KIS)">
+                </div>
+                <div class="form-group">
+                    <label>Patienten-Konto-Nr. / PID-18</label>
+                    <input type="text" id="patAccountNumber" placeholder="Konto-Nr.">
+                </div>
+                <div class="form-group">
+                    <label>AHV / SSN / PID-19</label>
+                    <input type="text" id="patSsn" readonly placeholder="aus IN2.2">
+                </div>
+            </div>
+            <div class="patient-grid" style="margin-top:10px;">
+                <div class="form-group">
+                    <label>Nachname / PID-5.1</label>
+                    <input type="text" id="patLastName" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Vorname / PID-5.2</label>
+                    <input type="text" id="patFirstName" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Zweiter Vorname / PID-5.3</label>
+                    <input type="text" id="patMiddleName" placeholder="Zweiter Vorname">
+                </div>
+                <div class="form-group">
+                    <label>Titel / PID-5.5</label>
+                    <input type="text" id="patPrefix" placeholder="z.B. Dr., Prof.">
+                </div>
+            </div>
+            <div class="patient-grid" style="margin-top:10px;">
+                <div class="form-group">
+                    <label>Geburtsdatum / PID-7</label>
+                    <input type="text" id="patBirthDate" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Geschlecht / PID-8</label>
+                    <select id="patGender">
+                        <option value="">--</option>
+                        <option value="M">M – Männlich</option>
+                        <option value="F">F – Weiblich</option>
+                        <option value="O">O – Andere</option>
+                        <option value="U">U – Unbekannt</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Sprache / PID-15</label>
+                    <select id="patLanguage">
+                        <option value="de">Deutsch</option>
+                        <option value="fr">Französisch</option>
+                        <option value="it">Italienisch</option>
+                        <option value="en">Englisch</option>
+                        <option value="">Unbekannt</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Zivilstand / PID-16</label>
+                    <select id="patMaritalStatus">
+                        <option value="">--</option>
+                        <option value="S">Ledig</option>
+                        <option value="M">Verheiratet</option>
+                        <option value="D">Geschieden</option>
+                        <option value="W">Verwitwet</option>
+                        <option value="T">Eingetragene Partnerschaft</option>
+                    </select>
+                </div>
+            </div>
+            <div class="patient-grid" style="margin-top:10px;">
+                <div class="form-group">
+                    <label>Strasse / PID-11.1</label>
+                    <input type="text" id="patStreet" placeholder="Musterstrasse 1">
+                </div>
+                <div class="form-group">
+                    <label>Adresszusatz / PID-11.2</label>
+                    <input type="text" id="patStreet2" placeholder="c/o, Postfach...">
+                </div>
+                <div class="form-group">
+                    <label>PLZ / PID-11.5</label>
+                    <input type="text" id="patZip" placeholder="8000">
+                </div>
+                <div class="form-group">
+                    <label>Ort / PID-11.3</label>
+                    <input type="text" id="patCity" placeholder="Zürich">
+                </div>
+            </div>
+            <div class="patient-grid" style="margin-top:10px;">
+                <div class="form-group">
+                    <label>Kanton / PID-11.4</label>
+                    <input type="text" id="patState" placeholder="ZH">
+                </div>
+                <div class="form-group">
+                    <label>Land / PID-11.6</label>
+                    <input type="text" id="patCountry" value="CH">
+                </div>
+                <div class="form-group">
+                    <label>Telefon Privat / PID-13</label>
+                    <input type="text" id="patPhoneHome" placeholder="+41 44 123 45 67">
+                </div>
+                <div class="form-group">
+                    <label>Telefon Geschäft / PID-14</label>
+                    <input type="text" id="patPhoneBusiness" placeholder="+41 44 987 65 43">
+                </div>
+            </div>
+
+            <!-- PV1 Felder -->
+            <div class="section-subtitle" style="margin-top:16px;">Fallangaben (PV1)</div>
+            <div class="patient-grid">
+                <div class="form-group">
+                    <label>Patientenklasse / PV1-2</label>
+                    <select id="patClass" onchange="updateBillingLogic()">
+                        <option value="">-- wählen --</option>
+                        <option value="O">O – Ambulant</option>
+                        <option value="I">I – Stationär</option>
+                        <option value="E">E – Notfall</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Fall-Nr. / PV1-19</label>
+                    <input type="text" id="encounterId" placeholder="Encounter / Visit Number">
+                </div>
+                <div class="form-group">
+                    <label>Aufnahmeart / PV1-4</label>
+                    <select id="admissionType">
+                        <option value="">--</option>
+                        <option value="E">Notfall</option>
+                        <option value="R">Routine</option>
+                        <option value="L">Elektiv</option>
+                        <option value="U">Dringend</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Aufnahmedatum / PV1-44</label>
+                    <input type="datetime-local" id="admitDate">
+                </div>
+            </div>
+            <div class="patient-grid" style="margin-top:10px;">
+                <div class="form-group">
+                    <label>Station / PV1-3.1</label>
+                    <input type="text" id="pvStation" placeholder="z.B. MED-3A">
+                </div>
+                <div class="form-group">
+                    <label>Zimmer / PV1-3.2</label>
+                    <input type="text" id="pvRoom" placeholder="z.B. 312">
+                </div>
+                <div class="form-group">
+                    <label>Bett / PV1-3.3</label>
+                    <input type="text" id="pvBed" placeholder="z.B. A">
+                </div>
+                <div class="form-group">
+                    <label>Einrichtung / PV1-3.4</label>
+                    <input type="text" id="pvFacility" value="ZLZ" placeholder="z.B. ZLZ">
+                </div>
+            </div>
+            <div class="patient-grid" style="margin-top:10px;">
+                <div class="form-group">
+                    <label>Klinik/Abteilung / PV1-10</label>
+                    <input type="text" id="pvHospitalService" placeholder="z.B. MED, CHIR">
+                </div>
+                <div class="form-group">
+                    <label>Behandelnder Arzt / PV1-7</label>
+                    <input type="text" id="pvAttendingDoctor" placeholder="ID^Nachname^Vorname">
+                </div>
+                <div class="form-group">
+                    <label>Zuweisender Arzt / PV1-8</label>
+                    <input type="text" id="pvReferringDoctor" placeholder="ID^Nachname^Vorname">
+                </div>
+                <div class="form-group">
+                    <label>Einweisender Arzt / PV1-17</label>
+                    <input type="text" id="pvAdmittingDoctor" placeholder="ID^Nachname^Vorname">
+                </div>
+            </div>
+            <div class="patient-grid" style="margin-top:10px;">
+                <div class="form-group">
+                    <label>Auftraggeber (ORC)</label>
+                    <input type="text" id="requester" placeholder="Dr. Muster">
+                </div>
+                <div class="form-group">
+                    <label>Finanzklasse / PV1-20</label>
+                    <select id="pvFinancialClass">
+                        <option value="">--</option>
+                        <option value="KVG">KVG (Grundversicherung)</option>
+                        <option value="VVG">VVG (Zusatzversicherung)</option>
+                        <option value="UVG">UVG (Unfallversicherung)</option>
+                        <option value="IVG">IVG (Invalidenversicherung)</option>
+                        <option value="MVG">MVG (Militärversicherung)</option>
+                        <option value="SELBST">Selbstzahler</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Entlassdatum / PV1-45</label>
+                    <input type="datetime-local" id="dischargeDate">
+                </div>
+                <div class="form-group">
+                    <label>VIP / PV1-16</label>
+                    <select id="pvVip">
+                        <option value="">Nein</option>
+                        <option value="Y">Ja</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Billing / TARDOC -->
+    <div class="card billing-card">
+        <div class="card-header">
+            <span class="icon">&#x1F4B3;</span> TARDOC / Abrechnung
+        </div>
+        <div class="card-body">
+            <div class="form-group" style="margin-bottom:12px;">
+                <label>Abrechnungsmodus (PV2.32)</label>
+                <div class="billing-mode">
+                    <button class="billing-mode-btn" data-value="0" onclick="setBillingMode(0)">
+                        0 – Patient / Versicherung
+                    </button>
+                    <button class="billing-mode-btn" data-value="1" onclick="setBillingMode(1)">
+                        1 – Klinik
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom:12px;">
+                <label>Verrechenbar (PV2.27)</label>
+                <select id="billable">
+                    <option value="true">Ja</option>
+                    <option value="false">Nein</option>
+                </select>
+            </div>
+
+            <div id="billingInfo"></div>
+        </div>
+    </div>
+
+    <!-- Versicherungsdaten -->
+    <div class="card insurance-card">
+        <div class="card-header">
+            <span class="icon">&#x1F3E5;</span> Versicherungsdaten (IN1 / IN2)
+        </div>
+        <div class="card-body">
+            <div class="insurance-section-title">IN1 – Versicherung</div>
+            <div class="insurance-grid">
+                <div class="form-group">
+                    <label>Versicherungsname <span class="mandatory-marker" id="in1Mandatory" style="display:none;">*</span></label>
+                    <input type="text" id="in1Name" placeholder="z.B. CSS, Swica...">
+                </div>
+                <div class="form-group">
+                    <label>Versicherungsnummer <span class="mandatory-marker" id="in1NumMandatory" style="display:none;">*</span></label>
+                    <input type="text" id="in1Number" placeholder="Policen-Nr.">
+                </div>
+            </div>
+
+            <div class="insurance-section-title">IN2 – Zusatzdaten</div>
+            <div class="insurance-grid">
+                <div class="form-group">
+                    <label>AHV-Nummer (IN2.2) <span class="mandatory-marker" id="ahvMandatory" style="display:none;">*</span></label>
+                    <input type="text" id="in2Ahv" placeholder="756.XXXX.XXXX.XX">
+                </div>
+                <div class="form-group">
+                    <label>Versichertenkarten-Nr. (IN2.6)</label>
+                    <input type="text" id="in2CardNumber" placeholder="Karten-Nr.">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Analysen-Auswahl -->
+    <div class="card analyses-card">
+        <div class="card-header">
+            <span class="icon">&#x1F52C;</span> Analysen-Auswahl
+        </div>
+        <div class="card-body">
+            <div class="analyses-tabs">
+                <button class="analyses-tab active" data-group="all" onclick="filterAnalyses('all')">
+                    Alle
+                </button>
+                <button class="analyses-tab" data-group="routine" onclick="filterAnalyses('routine')">
+                    Routine
+                </button>
+                <button class="analyses-tab" data-group="mibi" onclick="filterAnalyses('mibi')">
+                    Mikrobiologie (MIBI)
+                </button>
+                <button class="analyses-tab" data-group="selected" onclick="filterAnalyses('selected')">
+                    Ausgewählt <span class="badge" id="selectedCount">0</span>
+                </button>
+            </div>
+
+            <div class="analyses-grid" id="analysesGrid"></div>
+
+            <div class="selected-analyses">
+                <strong>Ausgewählte Analysen:</strong>
+                <div class="selected-list" id="selectedList">
+                    <span style="color:var(--text-light);font-size:12px;">Keine Analysen ausgewählt</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Aktionen -->
+    <div class="actions-bar">
+        <button class="btn btn-secondary" onclick="resetForm()">Zurücksetzen</button>
+        <button class="btn btn-secondary" onclick="previewFhir()">FHIR Preview</button>
+        <button class="btn btn-secondary" onclick="previewHl7()">HL7 Preview</button>
+        <button class="btn btn-primary" id="submitBtn" onclick="submitOrder()" disabled>
+            Auftrag senden
+        </button>
+    </div>
+</div>
+
+<!-- FHIR Preview Modal -->
+<div class="modal-overlay" id="fhirModal" onclick="if(event.target===this)closeModal('fhirModal')">
+    <div class="modal">
+        <div class="modal-header">
+            <h3>&#x1F4CB; FHIR Bundle (Transaction)</h3>
+            <div class="modal-header-actions">
+                <button class="btn-copy" id="fhirCopyBtn" onclick="copyPreview('fhirPreviewContent','fhirCopyBtn')">Kopieren</button>
+                <button class="modal-close" onclick="closeModal('fhirModal')">&times;</button>
+            </div>
+        </div>
+        <div class="modal-body">
+            <pre id="fhirPreviewContent"></pre>
+        </div>
+    </div>
+</div>
+
+<!-- HL7 Preview Modal -->
+<div class="modal-overlay" id="hl7Modal" onclick="if(event.target===this)closeModal('hl7Modal')">
+    <div class="modal">
+        <div class="modal-header">
+            <h3>&#x1F4E8; HL7 ORM^O01 Nachricht</h3>
+            <div class="modal-header-actions">
+                <button class="btn-copy" id="hl7CopyBtn" onclick="copyPreview('hl7PreviewContent','hl7CopyBtn')">Kopieren</button>
+                <button class="modal-close" onclick="closeModal('hl7Modal')">&times;</button>
+            </div>
+        </div>
+        <div class="modal-body">
+            <pre id="hl7PreviewContent"></pre>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ============================================================
+    // Analysen-Katalog
+    // ============================================================
+    const ANALYSES_CATALOG = [
+        // Routine
+        { code: 'CBC', name: 'Blutbild komplett', group: 'routine' },
+        { code: 'DIFF', name: 'Differentialblutbild', group: 'routine' },
+        { code: 'CRP', name: 'C-reaktives Protein', group: 'routine' },
+        { code: 'BSG', name: 'Blutsenkung', group: 'routine' },
+        { code: 'GLU', name: 'Glukose', group: 'routine' },
+        { code: 'HBA1C', name: 'HbA1c', group: 'routine' },
+        { code: 'CREA', name: 'Kreatinin', group: 'routine' },
+        { code: 'UREA', name: 'Harnstoff', group: 'routine' },
+        { code: 'NA', name: 'Natrium', group: 'routine' },
+        { code: 'K', name: 'Kalium', group: 'routine' },
+        { code: 'CA', name: 'Calcium', group: 'routine' },
+        { code: 'ALAT', name: 'ALAT (GPT)', group: 'routine' },
+        { code: 'ASAT', name: 'ASAT (GOT)', group: 'routine' },
+        { code: 'GGT', name: 'Gamma-GT', group: 'routine' },
+        { code: 'BILI', name: 'Bilirubin total', group: 'routine' },
+        { code: 'TP', name: 'Totalprotein', group: 'routine' },
+        { code: 'ALB', name: 'Albumin', group: 'routine' },
+        { code: 'TSH', name: 'TSH', group: 'routine' },
+        { code: 'FT4', name: 'Freies T4', group: 'routine' },
+        { code: 'FT3', name: 'Freies T3', group: 'routine' },
+        { code: 'CHOL', name: 'Cholesterin total', group: 'routine' },
+        { code: 'HDL', name: 'HDL-Cholesterin', group: 'routine' },
+        { code: 'LDL', name: 'LDL-Cholesterin', group: 'routine' },
+        { code: 'TG', name: 'Triglyceride', group: 'routine' },
+        { code: 'FE', name: 'Eisen', group: 'routine' },
+        { code: 'FERR', name: 'Ferritin', group: 'routine' },
+        { code: 'VB12', name: 'Vitamin B12', group: 'routine' },
+        { code: 'FOL', name: 'Folsäure', group: 'routine' },
+        { code: 'INR', name: 'INR / Quick', group: 'routine' },
+        { code: 'APTT', name: 'aPTT', group: 'routine' },
+        // Mikrobiologie
+        { code: 'BKAE', name: 'Blutkultur aerob', group: 'mibi', mode: 'MIBI' },
+        { code: 'BKAN', name: 'Blutkultur anaerob', group: 'mibi', mode: 'MIBI' },
+        { code: 'URIK', name: 'Urinkultur', group: 'mibi', mode: 'MIBI' },
+        { code: 'STUK', name: 'Stuhlkultur', group: 'mibi', mode: 'MIBI' },
+        { code: 'WUAB', name: 'Wundabstrich', group: 'mibi', mode: 'MIBI' },
+        { code: 'RAAB', name: 'Rachenabstrich', group: 'mibi', mode: 'MIBI' },
+        { code: 'NAAB', name: 'Nasenabstrich', group: 'mibi', mode: 'MIBI' },
+        { code: 'SPUT', name: 'Sputum-Kultur', group: 'mibi', mode: 'MIBI' },
+        { code: 'MRSA', name: 'MRSA-Screening', group: 'mibi', mode: 'MIBI' },
+        { code: 'CDIF', name: 'C. difficile Toxin', group: 'mibi', mode: 'MIBI' },
+        { code: 'ABRG', name: 'Antibiogramm', group: 'mibi', mode: 'MIBI' },
+        { code: 'GRAM', name: 'Gramfärbung', group: 'mibi', mode: 'MIBI' },
+    ];
+
+    let selectedAnalyses = new Set();
+    let billingMode = null;
+    let fhirConnected = false;
+
+    // ============================================================
+    // Initialisierung
+    // ============================================================
+    function init() {
+        renderAnalyses('all');
+        updateSubmitButton();
+    }
+
+    // ============================================================
+    // FHIR Verbindung
+    // ============================================================
+    async function testFhirConnection() {
+        const url = document.getElementById('fhirUrl').value.replace(/\/$/, '');
+        const status = document.getElementById('fhirStatus');
+
+        try {
+            const response = await fetch(`${url}/metadata`, {
+                headers: { 'Accept': 'application/fhir+json' }
+            });
+            if (response.ok) {
+                fhirConnected = true;
+                status.classList.add('connected');
+                status.title = 'Verbunden';
+                showToast('FHIR Server verbunden', 'success');
+            } else {
+                throw new Error(`HTTP ${response.status}`);
+            }
+        } catch (e) {
+            fhirConnected = false;
+            status.classList.remove('connected');
+            status.title = 'Nicht verbunden';
+            showToast(`Verbindung fehlgeschlagen: ${e.message}`, 'error');
+        }
+    }
+
+    // ============================================================
+    // Patient laden (FHIR)
+    // ============================================================
+    async function loadPatient() {
+        const patientId = document.getElementById('patientSearchId').value.trim();
+        if (!patientId) {
+            showToast('Bitte Patient-ID eingeben', 'error');
+            return;
+        }
+
+        const url = document.getElementById('fhirUrl').value.replace(/\/$/, '');
+
+        try {
+            const response = await fetch(`${url}/Patient/${patientId}`, {
+                headers: { 'Accept': 'application/fhir+json' }
+            });
+
+            if (!response.ok) throw new Error(`Patient nicht gefunden (HTTP ${response.status})`);
+
+            const patient = await response.json();
+
+            // Stammdaten ausfüllen
+            const name = patient.name?.[0] || {};
+            document.getElementById('patLastName').value = name.family || '';
+            document.getElementById('patFirstName').value = (name.given || [])[0] || '';
+            document.getElementById('patMiddleName').value = (name.given || [])[1] || '';
+            document.getElementById('patPrefix').value = (name.prefix || [])[0] || '';
+            document.getElementById('patBirthDate').value = patient.birthDate || '';
+            document.getElementById('patId').value = patient.id || patientId;
+
+            // Geschlecht mappen
+            const genderMap = { male: 'M', female: 'F', other: 'O', unknown: 'U' };
+            document.getElementById('patGender').value = genderMap[patient.gender] || '';
+
+            // Sprache
+            const comm = (patient.communication || [])[0];
+            if (comm?.language?.coding?.[0]?.code) {
+                document.getElementById('patLanguage').value = comm.language.coding[0].code.slice(0, 2);
+            }
+
+            // Zivilstand
+            const maritalCode = patient.maritalStatus?.coding?.[0]?.code;
+            if (maritalCode) {
+                document.getElementById('patMaritalStatus').value = maritalCode;
+            }
+
+            // Adresse
+            const addr = (patient.address || [])[0];
+            if (addr) {
+                document.getElementById('patStreet').value = (addr.line || [])[0] || '';
+                document.getElementById('patStreet2').value = (addr.line || [])[1] || '';
+                document.getElementById('patCity').value = addr.city || '';
+                document.getElementById('patState').value = addr.state || '';
+                document.getElementById('patZip').value = addr.postalCode || '';
+                document.getElementById('patCountry').value = addr.country || 'CH';
+            }
+
+            // Telefonnummern
+            const phoneHome = (patient.telecom || []).find(t => t.system === 'phone' && t.use === 'home');
+            const phoneBiz = (patient.telecom || []).find(t => t.system === 'phone' && t.use === 'work');
+            if (phoneHome) document.getElementById('patPhoneHome').value = phoneHome.value || '';
+            if (phoneBiz) document.getElementById('patPhoneBusiness').value = phoneBiz.value || '';
+
+            // Identifier durchsuchen
+            (patient.identifier || []).forEach(id => {
+                const typeCode = id.type?.coding?.[0]?.code;
+                // AHV-Nummer
+                if (id.system === 'urn:oid:2.16.756.5.32' || typeCode === 'SS') {
+                    document.getElementById('in2Ahv').value = id.value || '';
+                    document.getElementById('patSsn').value = id.value || '';
+                }
+                // Versichertenkarte
+                if (typeCode === 'VN') {
+                    document.getElementById('in2CardNumber').value = id.value || '';
+                }
+                // Externe ID (KIS/MR)
+                if (typeCode === 'MR') {
+                    document.getElementById('patExternalId').value = id.value || '';
+                }
+                // Account Number
+                if (typeCode === 'AN') {
+                    document.getElementById('patAccountNumber').value = id.value || '';
+                }
+            });
+
+            fhirConnected = true;
+            document.getElementById('fhirStatus').classList.add('connected');
+            showToast(`Patient ${name.family || patientId} geladen`, 'success');
+            updateSubmitButton();
+        } catch (e) {
+            showToast(`Fehler: ${e.message}`, 'error');
+        }
+    }
+
+    // ============================================================
+    // Billing-Logik (TARDOC)
+    // ============================================================
+    function setBillingMode(mode) {
+        billingMode = mode;
+        document.querySelectorAll('.billing-mode-btn').forEach(btn => {
+            btn.classList.toggle('active', parseInt(btn.dataset.value) === mode);
+        });
+        updateBillingLogic();
+        updateSubmitButton();
+    }
+
+    function updateBillingLogic() {
+        const patClass = document.getElementById('patClass').value;
+        const infoDiv = document.getElementById('billingInfo');
+        const in1Mandatory = document.getElementById('in1Mandatory');
+        const in1NumMandatory = document.getElementById('in1NumMandatory');
+        const ahvMandatory = document.getElementById('ahvMandatory');
+
+        // Alle Marker zurücksetzen
+        in1Mandatory.style.display = 'none';
+        in1NumMandatory.style.display = 'none';
+        ahvMandatory.style.display = 'none';
+
+        if (!patClass || billingMode === null) {
+            infoDiv.innerHTML = '<div class="billing-info">Bitte Patientenklasse und Abrechnungsmodus wählen.</div>';
+            return;
+        }
+
+        let html = '';
+
+        if (patClass === 'O') {
+            // Ambulant
+            if (billingMode === 0) {
+                html = `
+                    <div class="billing-info warning">
+                        <strong>Ambulant / Patient-Versicherung:</strong><br>
+                        IN1 (Versicherung) + IN2 (Zusatzdaten) sind <strong>Pflicht</strong>.<br>
+                        Abrechnung erfolgt an Patient bzw. Versicherung.
+                    </div>`;
+                in1Mandatory.style.display = 'inline';
+                in1NumMandatory.style.display = 'inline';
+                ahvMandatory.style.display = 'inline';
+            } else {
+                html = `
+                    <div class="billing-info">
+                        <strong>Ambulant / Klinik:</strong><br>
+                        AHV-Nummer (IN2.2) ist <strong>Pflicht</strong>, sofern verfügbar.<br>
+                        Abrechnung erfolgt an die Klinik.
+                    </div>`;
+                ahvMandatory.style.display = 'inline';
+            }
+        } else if (patClass === 'I') {
+            // Stationär
+            html = `
+                <div class="billing-info">
+                    <strong>Stationär (PV2.32 = 0):</strong><br>
+                    AHV-Nummer (IN2.2) ist <strong>Pflicht</strong>, sofern verfügbar.<br>
+                    Zusätzliche Versicherungsdaten empfohlen.
+                </div>`;
+            ahvMandatory.style.display = 'inline';
+        }
+
+        infoDiv.innerHTML = html;
+        updateSubmitButton();
+    }
+
+    // ============================================================
+    // Analysen-Verwaltung
+    // ============================================================
+    function renderAnalyses(filter) {
+        const grid = document.getElementById('analysesGrid');
+        let items = ANALYSES_CATALOG;
+
+        if (filter === 'routine') items = items.filter(a => a.group === 'routine');
+        else if (filter === 'mibi') items = items.filter(a => a.group === 'mibi');
+        else if (filter === 'selected') items = items.filter(a => selectedAnalyses.has(a.code));
+
+        grid.innerHTML = items.map(a => `
+            <div class="analysis-item ${selectedAnalyses.has(a.code) ? 'selected' : ''}"
+                 onclick="toggleAnalysis('${a.code}')">
+                <input type="checkbox" ${selectedAnalyses.has(a.code) ? 'checked' : ''} tabindex="-1">
+                <div>
+                    <div class="analysis-name">${a.name}</div>
+                    <div class="analysis-code">${a.code}</div>
+                </div>
+                ${a.mode === 'MIBI' ? '<span class="analysis-mibi">MIBI</span>' : ''}
+            </div>
+        `).join('');
+
+        // Tabs aktualisieren
+        document.querySelectorAll('.analyses-tab').forEach(tab => {
+            tab.classList.toggle('active', tab.dataset.group === filter);
+        });
+    }
+
+    function toggleAnalysis(code) {
+        if (selectedAnalyses.has(code)) {
+            selectedAnalyses.delete(code);
+        } else {
+            selectedAnalyses.add(code);
+        }
+        updateSelectedList();
+        const activeTab = document.querySelector('.analyses-tab.active');
+        renderAnalyses(activeTab?.dataset.group || 'all');
+        updateSubmitButton();
+    }
+
+    function removeAnalysis(code) {
+        selectedAnalyses.delete(code);
+        updateSelectedList();
+        const activeTab = document.querySelector('.analyses-tab.active');
+        renderAnalyses(activeTab?.dataset.group || 'all');
+        updateSubmitButton();
+    }
+
+    function updateSelectedList() {
+        const list = document.getElementById('selectedList');
+        const count = document.getElementById('selectedCount');
+        count.textContent = selectedAnalyses.size;
+
+        if (selectedAnalyses.size === 0) {
+            list.innerHTML = '<span style="color:var(--text-light);font-size:12px;">Keine Analysen ausgewählt</span>';
+            return;
+        }
+
+        list.innerHTML = Array.from(selectedAnalyses).map(code => {
+            const a = ANALYSES_CATALOG.find(x => x.code === code);
+            return `
+                <span class="selected-tag">
+                    ${a.name} (${a.code})
+                    <span class="remove" onclick="event.stopPropagation();removeAnalysis('${code}')">&times;</span>
+                </span>`;
+        }).join('');
+    }
+
+    function filterAnalyses(group) {
+        renderAnalyses(group);
+    }
+
+    // ============================================================
+    // Validierung
+    // ============================================================
+    function validateOrder() {
+        const errors = [];
+        const patClass = document.getElementById('patClass').value;
+
+        if (!document.getElementById('patLastName').value) errors.push('Patient nicht geladen');
+        if (!patClass) errors.push('Patientenklasse fehlt');
+        if (billingMode === null) errors.push('Abrechnungsmodus fehlt');
+        if (selectedAnalyses.size === 0) errors.push('Keine Analysen ausgewählt');
+
+        // TARDOC Pflichtfelder
+        if (patClass === 'O' && billingMode === 0) {
+            if (!document.getElementById('in1Name').value) errors.push('IN1: Versicherungsname fehlt (Pflicht bei ambulant/Patient)');
+            if (!document.getElementById('in1Number').value) errors.push('IN1: Versicherungsnummer fehlt (Pflicht bei ambulant/Patient)');
+            if (!document.getElementById('in2Ahv').value) errors.push('IN2.2: AHV-Nummer fehlt (Pflicht bei ambulant/Patient)');
+        }
+        if ((patClass === 'O' && billingMode === 1) || patClass === 'I') {
+            // AHV "wenn verfügbar" — Warnung statt Fehler
+        }
+
+        return errors;
+    }
+
+    function updateSubmitButton() {
+        const btn = document.getElementById('submitBtn');
+        const errors = validateOrder();
+        btn.disabled = errors.length > 0;
+    }
+
+    // ============================================================
+    // FHIR Bundle erstellen
+    // ============================================================
+    function buildFhirBundle() {
+        const patId = document.getElementById('patId').value || 'unknown';
+        const encId = document.getElementById('encounterId').value || `enc-${crypto.randomUUID().slice(0,8)}`;
+        const patClass = document.getElementById('patClass').value;
+        const msgId = crypto.randomUUID();
+
+        const entries = [];
+
+        // Patient
+        entries.push({
+            fullUrl: `Patient/${patId}`,
+            resource: {
+                resourceType: 'Patient',
+                id: patId,
+                name: [{
+                    family: document.getElementById('patLastName').value,
+                    given: [document.getElementById('patFirstName').value]
+                }],
+                birthDate: document.getElementById('patBirthDate').value,
+                gender: document.getElementById('patGender').value === 'Männlich' ? 'male' :
+                        document.getElementById('patGender').value === 'Weiblich' ? 'female' : 'unknown',
+                identifier: [
+                    ...(document.getElementById('in2Ahv').value ? [{
+                        system: 'urn:oid:2.16.756.5.32',
+                        value: document.getElementById('in2Ahv').value
+                    }] : [])
+                ]
+            },
+            request: { method: 'PUT', url: `Patient/${patId}` }
+        });
+
+        // Encounter
+        entries.push({
+            fullUrl: `Encounter/${encId}`,
+            resource: {
+                resourceType: 'Encounter',
+                id: encId,
+                status: 'in-progress',
+                class: {
+                    system: 'http://terminology.hl7.org/CodeSystem/v3-ActCode',
+                    code: patClass === 'I' ? 'IMP' : 'AMB',
+                    display: patClass === 'I' ? 'inpatient encounter' : 'ambulatory'
+                },
+                subject: { reference: `Patient/${patId}` }
+            },
+            request: { method: 'PUT', url: `Encounter/${encId}` }
+        });
+
+        // Coverage (Versicherung)
+        if (document.getElementById('in1Name').value) {
+            const covId = `cov-${crypto.randomUUID().slice(0,8)}`;
+            entries.push({
+                fullUrl: `Coverage/${covId}`,
+                resource: {
+                    resourceType: 'Coverage',
+                    id: covId,
+                    status: 'active',
+                    beneficiary: { reference: `Patient/${patId}` },
+                    payor: [{ display: document.getElementById('in1Name').value }],
+                    identifier: document.getElementById('in1Number').value ? [{
+                        value: document.getElementById('in1Number').value
+                    }] : []
+                },
+                request: { method: 'PUT', url: `Coverage/${covId}` }
+            });
+        }
+
+        // ServiceRequests (Analysen)
+        selectedAnalyses.forEach(code => {
+            const analysis = ANALYSES_CATALOG.find(a => a.code === code);
+            const srId = `sr-${crypto.randomUUID().slice(0,8)}`;
+            entries.push({
+                fullUrl: `ServiceRequest/${srId}`,
+                resource: {
+                    resourceType: 'ServiceRequest',
+                    id: srId,
+                    status: 'active',
+                    intent: 'order',
+                    code: {
+                        coding: [{
+                            system: 'http://zlz.ch/fhir/CodeSystem/lab-analyses',
+                            code: analysis.code,
+                            display: analysis.name
+                        }]
+                    },
+                    subject: { reference: `Patient/${patId}` },
+                    encounter: { reference: `Encounter/${encId}` },
+                    requester: document.getElementById('requester').value ?
+                        { display: document.getElementById('requester').value } : undefined,
+                    ...(analysis.mode === 'MIBI' ? {
+                        category: [{
+                            coding: [{
+                                system: 'http://zlz.ch/fhir/CodeSystem/order-category',
+                                code: 'MIBI',
+                                display: 'Mikrobiologie'
+                            }]
+                        }]
+                    } : {})
+                },
+                request: { method: 'PUT', url: `ServiceRequest/${srId}` }
+            });
+        });
+
+        return {
+            resourceType: 'Bundle',
+            id: msgId,
+            type: 'transaction',
+            entry: entries
+        };
+    }
+
+    // ============================================================
+    // HL7 ORM^O01 erstellen
+    // ============================================================
+    // Hilfsfunktion: Wert aus Feld holen
+    function fv(id) {
+        const el = document.getElementById(id);
+        return el ? (el.value || '') : '';
+    }
+
+    // Hilfsfunktion: Datum → HL7-Format (YYYYMMDD oder YYYYMMDDHHmmss)
+    function toHl7Date(val) {
+        if (!val) return '';
+        // datetime-local: "2026-03-25T14:30"
+        if (val.includes('T')) return val.replace(/[-T:]/g, '').slice(0, 14);
+        // date: "2026-03-25"
+        return val.replace(/-/g, '').slice(0, 8);
+    }
+
+    // Hilfsfunktion: Arzt-String parsen ("ID^Nachname^Vorname" oder "Nachname")
+    function parseDoctor(val) {
+        if (!val) return '';
+        const parts = val.split('^');
+        if (parts.length >= 3) return `${parts[0]}^${parts[1]}^${parts[2]}`;
+        if (parts.length === 2) return `^${parts[0]}^${parts[1]}`;
+        return `^${val}^`;
+    }
+
+    function buildHl7Message() {
+        const now = new Date();
+        const ts = now.toISOString().replace(/[-T:.Z]/g, '').slice(0, 14);
+        const msgId = crypto.randomUUID().replace(/-/g, '').slice(0, 20);
+
+        // Patientendaten
+        const patId = fv('patId') || 'UNKNOWN';
+        const extId = fv('patExternalId');
+        const lastName = fv('patLastName');
+        const firstName = fv('patFirstName');
+        const middleName = fv('patMiddleName');
+        const prefix = fv('patPrefix');
+        const birthDate = toHl7Date(fv('patBirthDate'));
+        const gender = fv('patGender') || 'U';
+        const street = fv('patStreet');
+        const street2 = fv('patStreet2');
+        const city = fv('patCity');
+        const state = fv('patState');
+        const zip = fv('patZip');
+        const country = fv('patCountry');
+        const phoneHome = fv('patPhoneHome');
+        const phoneBiz = fv('patPhoneBusiness');
+        const language = fv('patLanguage');
+        const marital = fv('patMaritalStatus');
+        const accountNr = fv('patAccountNumber');
+        const ahv = fv('in2Ahv');
+
+        // PV1-Daten
+        const patClass = fv('patClass');
+        const encId = fv('encounterId');
+        const admType = fv('admissionType');
+        const station = fv('pvStation');
+        const room = fv('pvRoom');
+        const bed = fv('pvBed');
+        const facility = fv('pvFacility');
+        const hospService = fv('pvHospitalService');
+        const attending = parseDoctor(fv('pvAttendingDoctor'));
+        const referring = parseDoctor(fv('pvReferringDoctor'));
+        const admitting = parseDoctor(fv('pvAdmittingDoctor'));
+        const financialClass = fv('pvFinancialClass');
+        const vip = fv('pvVip');
+        const admitDt = toHl7Date(fv('admitDate'));
+        const dischargeDt = toHl7Date(fv('dischargeDate'));
+
+        const lines = [];
+
+        // ================================================================
+        // MSH – Message Header
+        // MSH|^~\&|SendingApp|SendingFac|ReceivingApp|ReceivingFac|DateTime||MsgType|MsgControlId|ProcId|Version
+        // ================================================================
+        lines.push(`MSH|^~\\&|ORDERENTRY|ZLZ|VIANOVA|LIS|${ts}||ORM^O01|${msgId}|P|2.4|||AL|NE||8859/1`);
+
+        // ================================================================
+        // PID – Patient Identification (v2.4, Felder 1-19+)
+        // PID-1:  Set ID
+        // PID-2:  External Patient ID
+        // PID-3:  Patient Identifier List (ID^^^Authority^Type)
+        // PID-4:  Alternate Patient ID (leer)
+        // PID-5:  Patient Name (Family^Given^Middle^Suffix^Prefix^Degree)
+        // PID-6:  Mother's Maiden Name (leer)
+        // PID-7:  Date/Time of Birth
+        // PID-8:  Administrative Sex
+        // PID-9:  Patient Alias (leer)
+        // PID-10: Race (leer, nicht verwendet in CH)
+        // PID-11: Patient Address (Street^Other^City^State^Zip^Country^Type)
+        // PID-12: County Code (leer)
+        // PID-13: Phone Number – Home
+        // PID-14: Phone Number – Business
+        // PID-15: Primary Language
+        // PID-16: Marital Status
+        // PID-17: Religion (leer)
+        // PID-18: Patient Account Number
+        // PID-19: SSN / AHV
+        // ================================================================
+        const pid3 = `${patId}^^^ZLZ^PI` + (extId ? `~${extId}^^^KIS^MR` : '') + (ahv ? `~${ahv}^^^AHV^SS` : '');
+        const pid5 = `${lastName}^${firstName}^${middleName}^^${prefix}`;
+        const pid11 = `${street}^${street2}^${city}^${state}^${zip}^${country}^H`;
+        lines.push(`PID|1|${extId}|${pid3}||${pid5}||${birthDate}|${gender}|||${pid11}||${phoneHome}|${phoneBiz}|${language}|${marital}||${accountNr}|${ahv}`);
+
+        // ================================================================
+        // PV1 – Patient Visit (v2.4, Felder 1-45+)
+        // PV1-1:  Set ID
+        // PV1-2:  Patient Class (I/O/E)
+        // PV1-3:  Assigned Patient Location (PointOfCare^Room^Bed^Facility)
+        // PV1-4:  Admission Type
+        // PV1-5:  Preadmit Number (leer)
+        // PV1-6:  Prior Patient Location (leer)
+        // PV1-7:  Attending Doctor (ID^Family^Given)
+        // PV1-8:  Referring Doctor (ID^Family^Given)
+        // PV1-9:  Consulting Doctor (leer)
+        // PV1-10: Hospital Service
+        // PV1-11: Temporary Location (leer)
+        // PV1-12: Preadmit Test Indicator (leer)
+        // PV1-13: Re-admission Indicator (leer)
+        // PV1-14: Admit Source (leer)
+        // PV1-15: Ambulatory Status (leer)
+        // PV1-16: VIP Indicator
+        // PV1-17: Admitting Doctor (ID^Family^Given)
+        // PV1-18: Patient Type (leer)
+        // PV1-19: Visit Number (Encounter/Fall-Nr.)
+        // PV1-20: Financial Class
+        // PV1-21 bis PV1-43: (leer)
+        // PV1-44: Admit Date/Time
+        // PV1-45: Discharge Date/Time
+        // ================================================================
+        const pv1_3 = `${station}^${room}^${bed}^${facility}`;
+        const pv1_19 = encId ? `${encId}^^^ZLZ^VN` : '';
+        // Felder 21-43 sind leer → 23 Pipes
+        const emptyFields21to43 = '|'.repeat(23);
+        lines.push(`PV1|1|${patClass}|${pv1_3}|${admType}|||${attending}|${referring}||${hospService}|||||${vip}|${admitting}||${pv1_19}|${financialClass}${emptyFields21to43}${admitDt}|${dischargeDt}`);
+
+        // ================================================================
+        // PV2 – Patient Visit Additional Info
+        // PV2-27: Billable flag
+        // PV2-32: Billing mode
+        // ================================================================
+        const billable = fv('billable') === 'true' ? 'Y' : 'N';
+        // PV2: Felder 1-26 leer, dann 27, dann 28-31 leer, dann 32
+        const emptyPv2_1to26 = '|'.repeat(26);
+        const emptyPv2_28to31 = '|'.repeat(4);
+        lines.push(`PV2${emptyPv2_1to26}${billable}${emptyPv2_28to31}${billingMode !== null ? billingMode : ''}`);
+
+        // ================================================================
+        // IN1 – Insurance (vollständig)
+        // IN1-1:  Set ID
+        // IN1-2:  Insurance Plan ID
+        // IN1-3:  Insurance Company ID
+        // IN1-4:  Insurance Company Name
+        // ================================================================
+        if (fv('in1Name')) {
+            lines.push(`IN1|1||${fv('in1Number')}|${fv('in1Name')}`);
+        }
+
+        // ================================================================
+        // IN2 – Insurance Additional Info
+        // IN2-1:  Set ID
+        // IN2-2:  AHV / Social Security Number
+        // IN2-3 bis IN2-5: (leer)
+        // IN2-6:  Insurance Card Number
+        // ================================================================
+        if (fv('in2Ahv') || fv('in2CardNumber')) {
+            lines.push(`IN2|1|${fv('in2Ahv')}||||${fv('in2CardNumber')}`);
+        }
+
+        // ================================================================
+        // ORC + OBR – Order + Observation Request (pro Analyse)
+        // ================================================================
+        let seq = 1;
+        selectedAnalyses.forEach(code => {
+            const analysis = ANALYSES_CATALOG.find(a => a.code === code);
+            const orderId = `ORD-${msgId.slice(0,8)}-${seq}`;
+            lines.push(`ORC|NW|${orderId}|||CM||||${ts}|||${fv('requester') || ''}^^^ZLZ`);
+            lines.push(`OBR|${seq}|${orderId}||${analysis.code}^${analysis.name}^ZLZ|||${ts}||||||||${fv('requester') || ''}^^^ZLZ`);
+            seq++;
+        });
+
+        return lines.join('\r\n');
+    }
+
+    // ============================================================
+    // Previews
+    // ============================================================
+    function previewFhir() {
+        const bundle = buildFhirBundle();
+        document.getElementById('fhirPreviewContent').textContent = JSON.stringify(bundle, null, 2);
+        document.getElementById('fhirModal').classList.add('active');
+    }
+
+    function previewHl7() {
+        const msg = buildHl7Message();
+        document.getElementById('hl7PreviewContent').textContent = msg;
+        document.getElementById('hl7Modal').classList.add('active');
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).classList.remove('active');
+    }
+
+    function copyPreview(preId, btnId) {
+        const text = document.getElementById(preId).textContent;
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = document.getElementById(btnId);
+            btn.textContent = '✓ Kopiert';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = 'Kopieren'; btn.classList.remove('copied'); }, 2000);
+        }).catch(() => {
+            showToast('Kopieren nicht möglich', 'error');
+        });
+    }
+
+    // ============================================================
+    // Auftrag senden
+    // ============================================================
+    async function submitOrder() {
+        const errors = validateOrder();
+        if (errors.length > 0) {
+            showToast('Validierungsfehler: ' + errors.join(', '), 'error');
+            return;
+        }
+
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner"></span> Sende...';
+
+        const url = document.getElementById('fhirUrl').value.replace(/\/$/, '');
+        const bundle = buildFhirBundle();
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/fhir+json',
+                    'Accept': 'application/fhir+json'
+                },
+                body: JSON.stringify(bundle)
+            });
+
+            if (!response.ok) {
+                const error = await response.text();
+                throw new Error(`HTTP ${response.status}: ${error.slice(0, 200)}`);
+            }
+
+            const result = await response.json();
+            showToast(`Auftrag erfolgreich gesendet! (${selectedAnalyses.size} Analysen)`, 'success');
+            console.log('FHIR Response:', result);
+        } catch (e) {
+            showToast(`Fehler beim Senden: ${e.message}`, 'error');
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = 'Auftrag senden';
+            updateSubmitButton();
+        }
+    }
+
+    // ============================================================
+    // Formular zurücksetzen
+    // ============================================================
+    function resetForm() {
+        document.querySelectorAll('input:not([type="checkbox"])').forEach(input => {
+            if (!input.id.startsWith('fhir')) input.value = '';
+        });
+        document.getElementById('patClass').value = '';
+        document.getElementById('billable').value = 'true';
+        billingMode = null;
+        selectedAnalyses.clear();
+        document.querySelectorAll('.billing-mode-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.mandatory-marker').forEach(m => m.style.display = 'none');
+        document.getElementById('billingInfo').innerHTML = '';
+        updateSelectedList();
+        renderAnalyses('all');
+        updateSubmitButton();
+        showToast('Formular zurückgesetzt', 'info');
+    }
+
+    // ============================================================
+    // Toast-Benachrichtigungen
+    // ============================================================
+    function showToast(message, type = 'info') {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.textContent = message;
+        container.appendChild(toast);
+        setTimeout(() => toast.remove(), 4000);
+    }
+
+    // ============================================================
+    // Event-Listener für Eingaben
+    // ============================================================
+    document.querySelectorAll('input, select').forEach(el => {
+        el.addEventListener('input', updateSubmitButton);
+        el.addEventListener('change', updateSubmitButton);
+    });
+
+    // Modal schliessen mit Escape
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
+        }
+    });
+
+    // Init
+    init();
+</script>
+</body>
+</html>

@@ -1,0 +1,548 @@
+{
+  "resourceType": "CodeSystem",
+  "id": "zlz-material-codes",
+  "url": "https://www.zetlab.ch/fhir/specimen-types",
+  "name": "ZLZMaterialCodes",
+  "title": "ZLZ Material-Codes (Probentypen)",
+  "status": "active",
+  "content": "complete",
+  "description": "Interne Material-Codes des ZLZ Zentrallabor AG aus Labsoft LIS. Entspricht BARCODE_ZUSATZ.",
+  "count": 107,
+  "concept": [
+    {
+      "code": "01",
+      "display": "Serum",
+      "definition": "Wird von 1746 Test(s) verwendet."
+    },
+    {
+      "code": "02",
+      "display": "Heparin-Plasma",
+      "definition": "Wird von 18 Test(s) verwendet."
+    },
+    {
+      "code": "03",
+      "display": "EDTA-Vollblut",
+      "definition": "Wird von 343 Test(s) verwendet."
+    },
+    {
+      "code": "04",
+      "display": "Citrat-Plasma",
+      "definition": "Wird von 24 Test(s) verwendet."
+    },
+    {
+      "code": "05",
+      "display": "EDTA-Plasma",
+      "definition": "Wird von 8 Test(s) verwendet."
+    },
+    {
+      "code": "06",
+      "display": "Citrat-Vollblut 1:5",
+      "definition": "Wird von 4 Test(s) verwendet."
+    },
+    {
+      "code": "07",
+      "display": "Spontanurin",
+      "definition": "Wird von 249 Test(s) verwendet."
+    },
+    {
+      "code": "08",
+      "display": "Punktat Nativ",
+      "definition": "Wird von 24 Test(s) verwendet."
+    },
+    {
+      "code": "09",
+      "display": "Punktat EDTA",
+      "definition": "Wird von 18 Test(s) verwendet."
+    },
+    {
+      "code": "10",
+      "display": "Liquor Nativ",
+      "definition": "Wird von 163 Test(s) verwendet."
+    },
+    {
+      "code": "11",
+      "display": "Liquor Fluorid",
+      "definition": "Wird von 7 Test(s) verwendet."
+    },
+    {
+      "code": "12",
+      "display": "Punktat Fluorid",
+      "definition": "Wird von 6 Test(s) verwendet."
+    },
+    {
+      "code": "13",
+      "display": "Punktat Heparin",
+      "definition": "Wird von 6 Test(s) verwendet."
+    },
+    {
+      "code": "14",
+      "display": "Fluorid-Plasma",
+      "definition": "Wird von 14 Test(s) verwendet."
+    },
+    {
+      "code": "15",
+      "display": "Citrat-Vollblut 1:10",
+      "definition": "Wird von 4 Test(s) verwendet."
+    },
+    {
+      "code": "16",
+      "display": "Stuhl (nativ)",
+      "definition": "Wird von 54 Test(s) verwendet."
+    },
+    {
+      "code": "17",
+      "display": "Heparin-Vollblut",
+      "definition": "Wird von 18 Test(s) verwendet."
+    },
+    {
+      "code": "18",
+      "display": "Nativ-Vollblut",
+      "definition": "Wird von 236 Test(s) verwendet."
+    },
+    {
+      "code": "20",
+      "display": "Erythrozyten Segment",
+      "definition": "Wird von 4 Test(s) verwendet."
+    },
+    {
+      "code": "22",
+      "display": "Hämolysat Folsäure im Ec",
+      "definition": "Wird von 1 Test(s) verwendet."
+    },
+    {
+      "code": "24",
+      "display": "Liquor EDTA",
+      "definition": "Wird von 8 Test(s) verwendet."
+    },
+    {
+      "code": "25",
+      "display": "Blutausstrich",
+      "definition": "Wird von 4 Test(s) verwendet."
+    },
+    {
+      "code": "26",
+      "display": "Cortisol stimuliert 30 min",
+      "definition": "Wird von 2 Test(s) verwendet."
+    },
+    {
+      "code": "27",
+      "display": "Cortisol stimuliert 60 min",
+      "definition": "Wird von 2 Test(s) verwendet."
+    },
+    {
+      "code": "29",
+      "display": "Glucose-Toleranztest nach 60min",
+      "definition": "Wird von 2 Test(s) verwendet."
+    },
+    {
+      "code": "30",
+      "display": "Glucose-Toleranztest nach 120min",
+      "definition": "Wird von 4 Test(s) verwendet."
+    },
+    {
+      "code": "31",
+      "display": "Glucose-Toleranztest nach 180min",
+      "definition": "Wird von 2 Test(s) verwendet."
+    },
+    {
+      "code": "32",
+      "display": "TSH stimuliert",
+      "definition": "Wird von 1 Test(s) verwendet."
+    },
+    {
+      "code": "33",
+      "display": "Nabelschnurblut",
+      "definition": "Wird von 5 Test(s) verwendet."
+    },
+    {
+      "code": "35",
+      "display": "Serum lichtgeschützt",
+      "definition": "Wird von 6 Test(s) verwendet."
+    },
+    {
+      "code": "36",
+      "display": "Fruchtwasser",
+      "definition": "Wird von 5 Test(s) verwendet."
+    },
+    {
+      "code": "37",
+      "display": "EDTA Spurenelemente",
+      "definition": "Wird von 18 Test(s) verwendet."
+    },
+    {
+      "code": "43",
+      "display": "Citrat Pl. 1:10 gefroren  -20°C",
+      "definition": "Wird von 49 Test(s) verwendet."
+    },
+    {
+      "code": "44",
+      "display": "EDTA Plasma gefroren -20°C",
+      "definition": "Wird von 26 Test(s) verwendet."
+    },
+    {
+      "code": "45",
+      "display": "EDTA-Blut lichtgeschützt",
+      "definition": "Wird von 5 Test(s) verwendet."
+    },
+    {
+      "code": "46",
+      "display": "Aprotinin Plasma gefroren",
+      "definition": "Wird von 1 Test(s) verwendet."
+    },
+    {
+      "code": "47",
+      "display": "Serum gekühlt",
+      "definition": "Wird von 116 Test(s) verwendet."
+    },
+    {
+      "code": "48",
+      "display": "Serum gefroren -20° C",
+      "definition": "Wird von 55 Test(s) verwendet."
+    },
+    {
+      "code": "49",
+      "display": "Heparin Plasma gefroren -20°C",
+      "definition": "Wird von 48 Test(s) verwendet."
+    },
+    {
+      "code": "50",
+      "display": "EDTA-Plasma gekühlt",
+      "definition": "Wird von 14 Test(s) verwendet."
+    },
+    {
+      "code": "51",
+      "display": "EDTA gefroren -20°C",
+      "definition": "Wird von 7 Test(s) verwendet."
+    },
+    {
+      "code": "52",
+      "display": "Nativ Vollblut gekühlt",
+      "definition": "Wird von 6 Test(s) verwendet."
+    },
+    {
+      "code": "54",
+      "display": "Spontanurin gefroren",
+      "definition": "Wird von 1 Test(s) verwendet."
+    },
+    {
+      "code": "55",
+      "display": "ThromboExact Röhrchen",
+      "definition": "Wird von 3 Test(s) verwendet."
+    },
+    {
+      "code": "56",
+      "display": "Blutkultur Peds Plus",
+      "definition": "Wird von 6 Test(s) verwendet."
+    },
+    {
+      "code": "57",
+      "display": "Heparin-Plasma gekühlt",
+      "definition": "Wird von 4 Test(s) verwendet."
+    },
+    {
+      "code": "58",
+      "display": "Nativ Vollblut gefroren -20°C",
+      "definition": "Wird von 9 Test(s) verwendet."
+    },
+    {
+      "code": "59",
+      "display": "Fluorid Vollblut",
+      "definition": "Wird von 1 Test(s) verwendet."
+    },
+    {
+      "code": "60",
+      "display": "Abstrich/Sekret",
+      "definition": "Wird von 49 Test(s) verwendet."
+    },
+    {
+      "code": "62",
+      "display": "Dialysat",
+      "definition": "Wird von 6 Test(s) verwendet."
+    },
+    {
+      "code": "63",
+      "display": "Biopsie",
+      "definition": "Wird von 34 Test(s) verwendet."
+    },
+    {
+      "code": "64",
+      "display": "Konkrement",
+      "definition": "Wird von 11 Test(s) verwendet."
+    },
+    {
+      "code": "65",
+      "display": "Speichel",
+      "definition": "Wird von 1 Test(s) verwendet."
+    },
+    {
+      "code": "66",
+      "display": "Dialysat (Protein)",
+      "definition": "Wird von 1 Test(s) verwendet."
+    },
+    {
+      "code": "75",
+      "display": "Spontanurin lichtgeschützt",
+      "definition": "Wird von 2 Test(s) verwendet."
+    },
+    {
+      "code": "76",
+      "display": "24h-Urin nativ lichtgeschützt",
+      "definition": "Wird von 5 Test(s) verwendet."
+    },
+    {
+      "code": "77",
+      "display": "24h-Sammelurin",
+      "definition": "Wird von 114 Test(s) verwendet."
+    },
+    {
+      "code": "78",
+      "display": "24h-Urin angesäuert",
+      "definition": "Wird von 58 Test(s) verwendet."
+    },
+    {
+      "code": "80",
+      "display": "Spontanurin Borsäure",
+      "definition": "Wird von 11 Test(s) verwendet."
+    },
+    {
+      "code": "83",
+      "display": "Nativ Vollblut bei 37°C",
+      "definition": "Wird von 8 Test(s) verwendet."
+    },
+    {
+      "code": "84",
+      "display": "Erythrozytenarmes Natrium-Citrat",
+      "definition": "Wird von 6 Test(s) verwendet."
+    },
+    {
+      "code": "86",
+      "display": "Blutkultur I",
+      "definition": "Wird von 32 Test(s) verwendet."
+    },
+    {
+      "code": "91",
+      "display": "Nasopharyngialabstrich",
+      "definition": "Wird von 32 Test(s) verwendet."
+    },
+    {
+      "code": "95",
+      "display": "24h-Urin gefroren",
+      "definition": "Wird von 2 Test(s) verwendet."
+    },
+    {
+      "code": "96",
+      "display": "DTT-Heparin",
+      "definition": "Wird von 4 Test(s) verwendet."
+    },
+    {
+      "code": "97",
+      "display": "Quantiferon",
+      "definition": "Wird von 9 Test(s) verwendet."
+    },
+    {
+      "code": "98",
+      "display": "Mikrobiologie Material",
+      "definition": "Wird von 132 Test(s) verwendet."
+    },
+    {
+      "code": "A1",
+      "display": "Atemtest-1",
+      "definition": "Wird von 3 Test(s) verwendet."
+    },
+    {
+      "code": "AA",
+      "display": "Abstrich Auge/Nase/Mund/Ohr",
+      "definition": "Wird von 18 Test(s) verwendet."
+    },
+    {
+      "code": "AB",
+      "display": "Abstrich Bläschen",
+      "definition": "Wird von 3 Test(s) verwendet."
+    },
+    {
+      "code": "AC",
+      "display": "Abstrich Cervix/Vagina/Penis",
+      "definition": "Wird von 19 Test(s) verwendet."
+    },
+    {
+      "code": "AE",
+      "display": "Abstrich Eiter/ Wunde",
+      "definition": "Wird von 12 Test(s) verwendet."
+    },
+    {
+      "code": "AH",
+      "display": "Abstrich Haut",
+      "definition": "Wird von 10 Test(s) verwendet."
+    },
+    {
+      "code": "AR",
+      "display": "Abstrich Rektal",
+      "definition": "Wird von 12 Test(s) verwendet."
+    },
+    {
+      "code": "AT",
+      "display": "Abstrich Bronch./Trachealsekret",
+      "definition": "Wird von 20 Test(s) verwendet."
+    },
+    {
+      "code": "AU",
+      "display": "Abstrich Urethra",
+      "definition": "Wird von 13 Test(s) verwendet."
+    },
+    {
+      "code": "AV",
+      "display": "Abstrich Rektovaginal",
+      "definition": "Wird von 3 Test(s) verwendet."
+    },
+    {
+      "code": "AW",
+      "display": "Abstrich Wunde",
+      "definition": "Wird von 8 Test(s) verwendet."
+    },
+    {
+      "code": "BA",
+      "display": "Bronchoalveoläre Lavage",
+      "definition": "Wird von 1 Test(s) verwendet."
+    },
+    {
+      "code": "DP",
+      "display": "Douglaspunktat",
+      "definition": "Wird von 7 Test(s) verwendet."
+    },
+    {
+      "code": "FM",
+      "display": "Endov. Katheter/Implantat/Drain",
+      "definition": "Wird von 4 Test(s) verwendet."
+    },
+    {
+      "code": "GP",
+      "display": "Gelenkspunktat",
+      "definition": "Wird von 17 Test(s) verwendet."
+    },
+    {
+      "code": "HA",
+      "display": "Abstrich Haar/Nagel/Schuppen",
+      "definition": "Wird von 3 Test(s) verwendet."
+    },
+    {
+      "code": "KS",
+      "display": "Klebestreifen",
+      "definition": "Wird von 2 Test(s) verwendet."
+    },
+    {
+      "code": "L1",
+      "display": "Liquor nativ gekühl",
+      "definition": "Wird von 11 Test(s) verwendet."
+    },
+    {
+      "code": "LP",
+      "display": "Lymphknoten Punktat",
+      "definition": "Wird von 7 Test(s) verwendet."
+    },
+    {
+      "code": "NA",
+      "display": "Nagel",
+      "definition": "Wird von 1 Test(s) verwendet."
+    },
+    {
+      "code": "P1",
+      "display": "Punktat Nativ gekühlt",
+      "definition": "Wird von 2 Test(s) verwendet."
+    },
+    {
+      "code": "PE",
+      "display": "Penis",
+      "definition": "Wird von 1 Test(s) verwendet."
+    },
+    {
+      "code": "PP",
+      "display": "Pleurapunktat",
+      "definition": "Wird von 9 Test(s) verwendet."
+    },
+    {
+      "code": "PR",
+      "display": "Prostataexprimat",
+      "definition": "Wird von 1 Test(s) verwendet."
+    },
+    {
+      "code": "PW",
+      "display": "Parasiten/Würmer",
+      "definition": "Wird von 2 Test(s) verwendet."
+    },
+    {
+      "code": "Q1",
+      "display": "Quantiferon NIL",
+      "definition": "Wird von 1 Test(s) verwendet."
+    },
+    {
+      "code": "Q2",
+      "display": "Quantiferon TB1",
+      "definition": "Wird von 1 Test(s) verwendet."
+    },
+    {
+      "code": "Q3",
+      "display": "Quantiferon TB2",
+      "definition": "Wird von 1 Test(s) verwendet."
+    },
+    {
+      "code": "Q4",
+      "display": "Quantiferon Mitogen",
+      "definition": "Wird von 1 Test(s) verwendet."
+    },
+    {
+      "code": "RN",
+      "display": "Abstrich Rachen/Nasoph.",
+      "definition": "Wird von 14 Test(s) verwendet."
+    },
+    {
+      "code": "RT",
+      "display": "Abstrich Rachen/Tonsillen",
+      "definition": "Wird von 8 Test(s) verwendet."
+    },
+    {
+      "code": "SE",
+      "display": "Sperma/Ejakulat",
+      "definition": "Wird von 14 Test(s) verwendet."
+    },
+    {
+      "code": "SH",
+      "display": "Schuppen",
+      "definition": "Wird von 1 Test(s) verwendet."
+    },
+    {
+      "code": "SP",
+      "display": "Sputum",
+      "definition": "Wird von 17 Test(s) verwendet."
+    },
+    {
+      "code": "U1",
+      "display": "Erststrahlurin",
+      "definition": "Wird von 14 Test(s) verwendet."
+    },
+    {
+      "code": "U2",
+      "display": "Mittelstrahlurin",
+      "definition": "Wird von 5 Test(s) verwendet."
+    },
+    {
+      "code": "U3",
+      "display": "Morgenurin (M-Strahl)",
+      "definition": "Wird von 18 Test(s) verwendet."
+    },
+    {
+      "code": "U4",
+      "display": "Einmalkatheterurin",
+      "definition": "Wird von 1 Test(s) verwendet."
+    },
+    {
+      "code": "U5",
+      "display": "Dauerkatheterurin",
+      "definition": "Wird von 4 Test(s) verwendet."
+    },
+    {
+      "code": "VI",
+      "display": "Virtuelles Material",
+      "definition": "Wird von 55 Test(s) verwendet."
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "resourceType": "Patient",
+  "id": "test-001",
+  "meta": {
+    "profile": ["http://hl7.org/fhir/StructureDefinition/Patient"]
+  },
+  "identifier": [
+    {
+      "use": "usual",
+      "system": "https://www.hirslanden.ch/pid",
+      "value": "PID-TEST-001"
+    }
+  ],
+  "active": true,
+  "name": [
+    {
+      "use": "official",
+      "family": "Testperson",
+      "given": ["Anna"]
+    }
+  ],
+  "telecom": [
+    {
+      "system": "phone",
+      "value": "+41 79 000 00 00",
+      "use": "mobile"
+    }
+  ],
+  "gender": "female",
+  "birthDate": "1980-03-15",
+  "address": [
+    {
+      "use": "home",
+      "line": ["Teststrasse 1"],
+      "city": "Zürich",
+      "postalCode": "8001",
+      "country": "CH"
+    }
+  ],
+  "managingOrganization": {
+    "reference": "Organization/klinik-hirslanden",
+    "display": "Klinik Hirslanden"
+  }
+}

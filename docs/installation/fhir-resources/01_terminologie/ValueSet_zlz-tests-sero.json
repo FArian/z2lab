@@ -1,0 +1,514 @@
+{
+  "resourceType": "ValueSet",
+  "id": "zlz-tests-sero",
+  "url": "https://www.zetlab.ch/fhir/ValueSet/zlz-tests-sero",
+  "name": "zlzTestsSero",
+  "title": "ZLZ — Serologie / Immunologie",
+  "status": "active",
+  "description": "Tests der Befundgruppe SERO.",
+  "compose": {
+    "include": [
+      {
+        "system": "https://www.zetlab.ch/lis/codes",
+        "concept": [
+          {
+            "code": "AHAVMM1",
+            "display": "anti-HAV IgM 1. Messung"
+          },
+          {
+            "code": "AHAVMM2",
+            "display": "anti-HAV IgM 2. Messung"
+          },
+          {
+            "code": "AHAVMM3",
+            "display": "anti-HAV IgM 3. Messung"
+          },
+          {
+            "code": "AHAVTM1",
+            "display": "anti-HAV IgG/IgM 1. Messung"
+          },
+          {
+            "code": "AHAVTM2",
+            "display": "anti-HAV IgG/IgM 2. Messung"
+          },
+          {
+            "code": "AHAVTM3",
+            "display": "anti-HAV IgG/IgM 3. Messung"
+          },
+          {
+            "code": "AHBCMM1",
+            "display": "anti-HBc IgM 1. Messung"
+          },
+          {
+            "code": "AHBCMM2",
+            "display": "anti-HBc IgM 2. Messung"
+          },
+          {
+            "code": "AHBCMM3",
+            "display": "anti-HBc IgM 3. Messung"
+          },
+          {
+            "code": "AHBEM1",
+            "display": "anti-HBe 1. Messung"
+          },
+          {
+            "code": "AHBEM2",
+            "display": "anti-HBe 2. Messung"
+          },
+          {
+            "code": "AHBEM3",
+            "display": "anti-HBe 3. Messung"
+          },
+          {
+            "code": "AHBSM1",
+            "display": "Titer 1. Messung"
+          },
+          {
+            "code": "AHBSM2",
+            "display": "Titer 2. Messung"
+          },
+          {
+            "code": "AHBSM3",
+            "display": "Titer 3. Messung"
+          },
+          {
+            "code": "AHCVM1",
+            "display": "anti-HCV 1. Messung"
+          },
+          {
+            "code": "AHCVM2",
+            "display": "anti-HCV 2. Messung"
+          },
+          {
+            "code": "AHCVM3",
+            "display": "anti-HCV 3. Messung"
+          },
+          {
+            "code": "AKC1QUSZ",
+            "display": "Anti-C1q IgG"
+          },
+          {
+            "code": "ANTIHBE",
+            "display": "'Hepatitis B anti-HBe"
+          },
+          {
+            "code": "ANTIHBEI",
+            "display": "'Index"
+          },
+          {
+            "code": "ANTIHBS",
+            "display": "'Hepatitis B anti-HBs"
+          },
+          {
+            "code": "ANTIHBST",
+            "display": "'Titer"
+          },
+          {
+            "code": "B2M",
+            "display": "b2-Mikroglobulin"
+          },
+          {
+            "code": "BKPDNAUZ",
+            "display": "BK Polyomavirus DNA"
+          },
+          {
+            "code": "BORBEURT",
+            "display": "'Borrelien Beurteilung"
+          },
+          {
+            "code": "BORGM",
+            "display": "*'Borrelia burgdorferi IgG und IgM"
+          },
+          {
+            "code": "BORIGG",
+            "display": "'Borrelia burgdorferi IgG"
+          },
+          {
+            "code": "BORIGG-I",
+            "display": "'Borrelia burgdorferi IgG"
+          },
+          {
+            "code": "BORIGM",
+            "display": "'Borrelia burgdorferi IgM"
+          },
+          {
+            "code": "BORIGM-I",
+            "display": "'Borrelia burgdorferi IgM-Index"
+          },
+          {
+            "code": "CHAGAS",
+            "display": "Trypanosoma cruzi AK (Chagas)"
+          },
+          {
+            "code": "CHAGASTI",
+            "display": "Trypanosoma cruzi AK (Chagas)"
+          },
+          {
+            "code": "CMV",
+            "display": "'Cytomegalie-Virus (CMV)"
+          },
+          {
+            "code": "CMVG",
+            "display": "'CMV IgG"
+          },
+          {
+            "code": "CMVIGG",
+            "display": "'CMV IgG"
+          },
+          {
+            "code": "CMVIGG-I",
+            "display": "'CMV IgG Index"
+          },
+          {
+            "code": "CMVIGM",
+            "display": "'CMV IgM"
+          },
+          {
+            "code": "CMVIGM-I",
+            "display": "'CMV IgM Index"
+          },
+          {
+            "code": "CMVINTER",
+            "display": "'CMV Interpretation"
+          },
+          {
+            "code": "COV2G",
+            "display": "'SARS-Cov-2 IgG"
+          },
+          {
+            "code": "COV2G$",
+            "display": "SARS-CoV-2 Spike IgG"
+          },
+          {
+            "code": "COV2IGG",
+            "display": "'SARS-CoV-2-IgG"
+          },
+          {
+            "code": "COV2IGGT",
+            "display": "'SARS-CoV-2-Spike IgG (Trimer)"
+          },
+          {
+            "code": "COV2R",
+            "display": "'SARS-CoV-2 Ag-Schnelltest"
+          },
+          {
+            "code": "COV2RLOT",
+            "display": "SARS-CoV 2 Schnelltest Lotnummer"
+          },
+          {
+            "code": "COV2STM",
+            "display": "SARS-CoV-2 St. Gallen"
+          },
+          {
+            "code": "DPPXSUSZ",
+            "display": "Anti-DPPX-AK (Serum)"
+          },
+          {
+            "code": "EBV",
+            "display": "'Epstein-Barr Virus (EBV)"
+          },
+          {
+            "code": "EBVINTER",
+            "display": "'EBV Interpretation"
+          },
+          {
+            "code": "HAVIGGQL",
+            "display": "Anti-HAV IgG ql"
+          },
+          {
+            "code": "HAVIGGQN",
+            "display": "Anti-HAV IgG quant."
+          },
+          {
+            "code": "HAVIGM",
+            "display": "'Hepatitis A anti-HAV IgM"
+          },
+          {
+            "code": "HAVIGM-I",
+            "display": "'Index"
+          },
+          {
+            "code": "HAVIGT",
+            "display": "'Hepatitis A anti-HAV IgG+IgM"
+          },
+          {
+            "code": "HAVIGT-T",
+            "display": "'Titer"
+          },
+          {
+            "code": "HBCIGM",
+            "display": "'Hepatitis B anti-HBc IgM"
+          },
+          {
+            "code": "HBCIGM-I",
+            "display": "'Index"
+          },
+          {
+            "code": "HBCIGT",
+            "display": "'Hepatitis B anti-HBc IgG+IgM"
+          },
+          {
+            "code": "HBCIGT-I",
+            "display": "'Index"
+          },
+          {
+            "code": "HBCTM1",
+            "display": "anti-HBc IgG/IgM 1. Messung"
+          },
+          {
+            "code": "HBCTM2",
+            "display": "anti-HBc IgG/IgM 2. Messung"
+          },
+          {
+            "code": "HBCTM3",
+            "display": "anti-HBc IgG/IgM 3. Messung"
+          },
+          {
+            "code": "HBEAG",
+            "display": "'Hepatitis B HBe-Ag"
+          },
+          {
+            "code": "HBEAG-I",
+            "display": "'Index"
+          },
+          {
+            "code": "HBEM1",
+            "display": "HBe-Ag 1. Messung"
+          },
+          {
+            "code": "HBEM2",
+            "display": "HBe-Ag 2. Messung"
+          },
+          {
+            "code": "HBEM3",
+            "display": "HBe-Ag 3. Messung"
+          },
+          {
+            "code": "HBSAG",
+            "display": "'Hepatitis B HBs-Ag"
+          },
+          {
+            "code": "HBSAGBES",
+            "display": "HBs-Ag Bestätigung"
+          },
+          {
+            "code": "HBSAG-I",
+            "display": "'Index"
+          },
+          {
+            "code": "HBSAGM1",
+            "display": "HBsAg 1. Messung"
+          },
+          {
+            "code": "HBSAGM2",
+            "display": "HBsAg 2. Messung"
+          },
+          {
+            "code": "HBSAGM3",
+            "display": "HBsAg 3. Messung"
+          },
+          {
+            "code": "HBVSCR",
+            "display": "*Hepatitis B screening"
+          },
+          {
+            "code": "HCV",
+            "display": "'Hepatitis C anti-HCV (Screening)"
+          },
+          {
+            "code": "HCVGEUSZ",
+            "display": "Hepatitis C (HCV),Genotypisierung"
+          },
+          {
+            "code": "HCV-I",
+            "display": "'Index"
+          },
+          {
+            "code": "HDVRNAUZ",
+            "display": "Hepatitis D-Virus RNA"
+          },
+          {
+            "code": "HEVQNUSZ",
+            "display": "HEV-RNA qn."
+          },
+          {
+            "code": "HEVRNAUZ",
+            "display": "Hepatitis E-Virus RNA ql."
+          },
+          {
+            "code": "HIV",
+            "display": "HIV 1+2 Ag- + Ak-Screen"
+          },
+          {
+            "code": "HIV1",
+            "display": "HIV-1 Antikörper, LIA ql"
+          },
+          {
+            "code": "HIV105",
+            "display": "anti-SGP105"
+          },
+          {
+            "code": "HIV120",
+            "display": "anti-SGP120"
+          },
+          {
+            "code": "HIV17",
+            "display": "anti-P17"
+          },
+          {
+            "code": "HIV2",
+            "display": "HIV-2 Antikörper, LIA ql"
+          },
+          {
+            "code": "HIV24",
+            "display": "anti-P24"
+          },
+          {
+            "code": "HIV31",
+            "display": "anti-P31"
+          },
+          {
+            "code": "HIV36",
+            "display": "anti-GP36"
+          },
+          {
+            "code": "HIV41",
+            "display": "anti-GP41"
+          },
+          {
+            "code": "HIVBEUR",
+            "display": "Beurteilung HIV-WB"
+          },
+          {
+            "code": "HIV-I",
+            "display": "Index"
+          },
+          {
+            "code": "HIVWB",
+            "display": "HIV-1/2 Antikörper, LIA"
+          },
+          {
+            "code": "HSV",
+            "display": "'*HSV 1+2"
+          },
+          {
+            "code": "JCPVIUSZ",
+            "display": "JC Polyoma-Virus, DNA"
+          },
+          {
+            "code": "LUES",
+            "display": "'Lues Screening"
+          },
+          {
+            "code": "LUES-I",
+            "display": "'Lues Screening Index"
+          },
+          {
+            "code": "LUESVER",
+            "display": "Lues Thearpiekontrolle (nur VDRL+TPHA)"
+          },
+          {
+            "code": "MITNIL",
+            "display": "'Mitogen (Positivkontrolle)"
+          },
+          {
+            "code": "MITOG#",
+            "display": "Mitogen (positiv Kontrolle)"
+          },
+          {
+            "code": "MITOGEN",
+            "display": "'Mitogen"
+          },
+          {
+            "code": "MOGLUSZ",
+            "display": "Anti-MOG Liquor"
+          },
+          {
+            "code": "MOGUSZ",
+            "display": "Anti-MOG"
+          },
+          {
+            "code": "NIL",
+            "display": "'Nil (Negativkontrolle)"
+          },
+          {
+            "code": "OSTASE",
+            "display": "Knochenspezifische AP (Ostase)"
+          },
+          {
+            "code": "PARVQNUZ",
+            "display": "Parvovirus B19 DNA"
+          },
+          {
+            "code": "QFTL",
+            "display": "QFTL (IQK)"
+          },
+          {
+            "code": "QUANTI",
+            "display": "Quantiferon"
+          },
+          {
+            "code": "QUANTI",
+            "display": "Quantiferon"
+          },
+          {
+            "code": "QUANTRIS",
+            "display": "Quantiferon"
+          },
+          {
+            "code": "RACKSERO",
+            "display": "Rack Serologie"
+          },
+          {
+            "code": "TB1NIL",
+            "display": "'Mtbc spez. CD4 Antwort"
+          },
+          {
+            "code": "TB2NIL",
+            "display": "'Mtbc spez. CD4/CD8 Antwort"
+          },
+          {
+            "code": "TBCB",
+            "display": "'TBC-Bluttest"
+          },
+          {
+            "code": "TBCB1",
+            "display": "'TB1"
+          },
+          {
+            "code": "TBCB1#",
+            "display": "Mtbc spez. CD4 Antwort"
+          },
+          {
+            "code": "TBCB2",
+            "display": "'TB2"
+          },
+          {
+            "code": "TBCB2#",
+            "display": "Mtbc spez. CD4/CD8 Antwort"
+          },
+          {
+            "code": "TBCBT#",
+            "display": "TBC-Bluttest:"
+          },
+          {
+            "code": "TOXOG",
+            "display": "'Toxoplasma gondii IgG"
+          },
+          {
+            "code": "TOXOM",
+            "display": "'Toxoplasma gondii IgM"
+          },
+          {
+            "code": "TRWHUSZ",
+            "display": "Tropheryma whipplei, DNA"
+          },
+          {
+            "code": "VZVDNAUZ",
+            "display": "Varizella Zoster Virus (VZV) DNA ql."
+          }
+        ]
+      }
+    ]
+  }
+}

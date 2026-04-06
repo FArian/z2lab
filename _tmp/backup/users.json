@@ -1,0 +1,89 @@
+{
+  "users": [
+    {
+      "id": "c1a769e1-954b-4b58-b3ab-906a17837ede",
+      "username": "farian",
+      "salt": "678e5d0ffec7a13f192c7e7f7ede8862",
+      "passwordHash": "f3abe10b72069052c13306448dfa7ef3af610e8fa4cec7ade88e125fec81827bd02cc29b5e1067a35ca0a64afe49576193c96345708f75e4957e8efd6759b524",
+      "createdAt": "2026-03-30T19:58:18.322Z",
+      "profile": {
+        "gln": "7601001375413",
+        "firstName": "Farhad",
+        "lastName": "Arian",
+        "organization": "Commission Cantonale des Services Sanitaires",
+        "street": "route des Acacias",
+        "streetNo": "9",
+        "zip": "1227",
+        "city": "Les Acacias",
+        "canton": "GE",
+        "country": "CH",
+        "email": "",
+        "phone": "",
+        "ptype": "JUR",
+        "roleType": "PubHea",
+        "orgGln": "7601002145985",
+        "orgName": "TEST-ORG",
+        "orgFhirId": "org-17ad81c1-d7c7-4e78-b899-cf861a35b1ac"
+      },
+      "fhirSyncStatus": "synced",
+      "fhirSyncedAt": "2026-04-03T17:18:42.069Z",
+      "role": "admin",
+      "status": "active"
+    },
+    {
+      "id": "9d9935c7-51f7-475d-9468-2f6f537854b2",
+      "username": "Admin",
+      "salt": "5af46ddc58eb3b01a8e46c43ee702401",
+      "passwordHash": "ddce2fbcf2c4bee564898e7743aa0508e056c6d5be711afcb99c893e163e467bfe2b98b4068f699c10a4ad64d2ce56106d69b33dfb61ef969fcfdb874b2ef6da",
+      "createdAt": "2026-04-02T21:20:21.911Z",
+      "role": "admin",
+      "status": "active",
+      "profile": {
+        "firstName": "Farhad",
+        "lastName": "Arian",
+        "email": "farhad.arian@zlz.ch",
+        "gln": "7601001619241",
+        "ptype": "NAT",
+        "street": "",
+        "streetNo": "",
+        "zip": "",
+        "city": "",
+        "canton": "",
+        "country": "",
+        "phone": "Admin",
+        "orgFhirId": "hirslanden",
+        "orgGln": "7601002074810",
+        "orgName": "Hirslanden AG"
+      },
+      "fhirSyncStatus": "synced",
+      "fhirSyncError": "FHIR 400: {\n  \"resourceType\": \"OperationOutcome\",\n  \"issue\": [ {\n    \"severity\": \"error\",\n    \"code\": \"processing\",\n    \"diagnostics\": \"HAPI-1094: Resource Organization/org-9d9935c7-51f7-475d-9468-2f6f537854b2 ",
+      "fhirSyncedAt": "2026-04-03T17:18:39.974Z",
+      "fhirPractitionerId": "practitioner-9d9935c7-51f7-475d-9468-2f6f537854b2",
+      "fhirPractitionerRoleId": "practitioner-role-9d9935c7-51f7-475d-9468-2f6f537854b2"
+    },
+    {
+      "id": "e73344f1-b09d-473e-8c77-39f5f5b63191",
+      "username": "test",
+      "salt": "9661a6ef29afa3e5eff793bfb6f8cac8",
+      "passwordHash": "3cb5307ea584665b5d86cb26a4fe81391c7781296ff0da1254103e62d6512d44ab74351f48187b9b340b621990e0f0173159204bdbbf8fbabd07291ba4ed3a6d",
+      "createdAt": "2026-04-02T21:57:42.779Z",
+      "role": "user",
+      "status": "active",
+      "profile": {
+        "firstName": "test",
+        "lastName": "testNachname",
+        "email": "test@test.ch",
+        "gln": "7601001375413",
+        "ptype": "NAT",
+        "orgFhirId": "zlz",
+        "orgGln": "7601009336904",
+        "orgName": "ZLZ AG"
+      },
+      "fhirSyncStatus": "synced",
+      "fhirSyncError": "FHIR 400: {\n  \"resourceType\": \"OperationOutcome\",\n  \"issue\": [ {\n    \"severity\": \"error\",\n    \"code\": \"processing\",\n    \"diagnostics\": \"HAPI-1094: Resource Organization/org-e73344f1-b09d-473e-8c77-39f5f5b63191 ",
+      "fhirSyncedAt": "2026-04-03T17:18:38.010Z",
+      "fhirPractitionerId": "practitioner-e73344f1-b09d-473e-8c77-39f5f5b63191",
+      "fhirPractitionerRoleId": "practitioner-role-e73344f1-b09d-473e-8c77-39f5f5b63191"
+    }
+  ]
+}

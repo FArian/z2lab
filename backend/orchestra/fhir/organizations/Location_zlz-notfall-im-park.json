@@ -1,0 +1,47 @@
+{
+  "resourceType": "Location",
+  "id": "zlz-notfall-im-park",
+  "meta": {
+    "profile": ["http://hl7.org/fhir/StructureDefinition/Location"]
+  },
+  "status": "active",
+  "name": "ZLZ Notfalllabor Klinik Im Park",
+  "description": "ZLZ Notfalllabor im Standort Klinik Im Park, Zürich",
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
+          "code": "LAB",
+          "display": "Laboratory"
+        }
+      ]
+    }
+  ],
+  "address": {
+    "use": "work",
+    "type": "physical",
+    "line": ["Bellariastrasse 38"],
+    "city": "Zürich",
+    "state": "Zürich",
+    "postalCode": "8038",
+    "country": "CH"
+  },
+  "physicalType": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/location-physical-type",
+        "code": "bu",
+        "display": "Building"
+      }
+    ]
+  },
+  "managingOrganization": {
+    "reference": "Organization/zlz",
+    "display": "ZLZ Zentrallabor AG"
+  },
+  "partOf": {
+    "reference": "Location/zlz-zollikon",
+    "display": "ZLZ Zentrallabor AG — Zollikon"
+  }
+}

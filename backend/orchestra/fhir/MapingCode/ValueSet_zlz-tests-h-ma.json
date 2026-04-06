@@ -1,0 +1,878 @@
+{
+  "resourceType": "ValueSet",
+  "id": "zlz-tests-h-ma",
+  "url": "https://www.zetlab.ch/fhir/ValueSet/zlz-tests-h-ma",
+  "name": "zlzTestsHMa",
+  "title": "ZLZ — Hämatologie",
+  "status": "active",
+  "description": "Tests der Befundgruppe HÄMA.",
+  "compose": {
+    "include": [
+      {
+        "system": "https://www.zetlab.ch/lis/codes",
+        "concept": [
+          {
+            "code": "ANDERABS",
+            "display": "Andere"
+          },
+          {
+            "code": "ANDERE%",
+            "display": "Andere"
+          },
+          {
+            "code": "ANDEREBP",
+            "display": "Andere Blutparasiten"
+          },
+          {
+            "code": "AUSSLI",
+            "display": "Aussehen"
+          },
+          {
+            "code": "AUSSPU",
+            "display": "Aussehen"
+          },
+          {
+            "code": "BASO%",
+            "display": "Basophile"
+          },
+          {
+            "code": "BASOABS",
+            "display": "Basophile"
+          },
+          {
+            "code": "BASOM%",
+            "display": "Basophile"
+          },
+          {
+            "code": "BASOMABS",
+            "display": "Basophile"
+          },
+          {
+            "code": "BCR190IS",
+            "display": "BCR-ABL1 p190 IS%"
+          },
+          {
+            "code": "BCR210IS",
+            "display": "BCR-ABL1 p210 IS%"
+          },
+          {
+            "code": "BCRABLUZ",
+            "display": "*BCR-ABL1 [t(9:22)] ql."
+          },
+          {
+            "code": "BCRQLUSZ",
+            "display": "BCR-ABL1 [t(9:22)] ql"
+          },
+          {
+            "code": "BCRQN190",
+            "display": "BCR-ABL1 p190 t(9,22) qn"
+          },
+          {
+            "code": "BCRQN210",
+            "display": "BCR-ABL1 p210 t(9,22) qn"
+          },
+          {
+            "code": "BCRQNUSZ",
+            "display": "*BCR-ABL1 [t(9:22)] qn"
+          },
+          {
+            "code": "BEKDIAG",
+            "display": "Bekannte Diagnose"
+          },
+          {
+            "code": "BEURT",
+            "display": "Beurteilung"
+          },
+          {
+            "code": "BEURTBB",
+            "display": "Beurteilung"
+          },
+          {
+            "code": "BEURTLI",
+            "display": "Zellbeurteilung Liquor"
+          },
+          {
+            "code": "BLAST%",
+            "display": "Blasten"
+          },
+          {
+            "code": "BLASTABS",
+            "display": "Blasten"
+          },
+          {
+            "code": "BSG",
+            "display": "Blutsenkung"
+          },
+          {
+            "code": "CALRUSZ",
+            "display": "CALR Genotypisierung (Exon 9)"
+          },
+          {
+            "code": "CD19",
+            "display": "*CD19"
+          },
+          {
+            "code": "CD20",
+            "display": "*CD20"
+          },
+          {
+            "code": "CD20%",
+            "display": "CD20 Lymphozyten %"
+          },
+          {
+            "code": "CD20ABS",
+            "display": "CD20 Lymphozyten absolut"
+          },
+          {
+            "code": "CD3ABS",
+            "display": "T-Lymphozyten CD3 Absolut"
+          },
+          {
+            "code": "CD3PANT",
+            "display": "T-Lymphozyten CD3 PAN-T"
+          },
+          {
+            "code": "CD4ABS",
+            "display": "T-Lymphozyten CD4 Absolut"
+          },
+          {
+            "code": "CD4CD8R",
+            "display": "T-Lymphozyten-Typisierung(CD3/4/8)"
+          },
+          {
+            "code": "CD4HELF",
+            "display": "T-Lymphozyten CD4 Helfer"
+          },
+          {
+            "code": "CD4RATIO",
+            "display": "CD4/CD8 Ratio"
+          },
+          {
+            "code": "CD8ABS",
+            "display": "T-Lymphozyten CD8 Absolut"
+          },
+          {
+            "code": "CD8SUP",
+            "display": "T-Lymphozyten CD8 Suppressor"
+          },
+          {
+            "code": "CHEMO",
+            "display": "Chemotherapie"
+          },
+          {
+            "code": "DIFF",
+            "display": "*Differentialblutbild"
+          },
+          {
+            "code": "DIFFA",
+            "display": "Differentialblutbild automatisch"
+          },
+          {
+            "code": "DIFFANDE",
+            "display": "Andere"
+          },
+          {
+            "code": "DIFFBASO",
+            "display": "Basophile"
+          },
+          {
+            "code": "DIFFBF",
+            "display": "Zelldifferenzierung"
+          },
+          {
+            "code": "DIFFEO",
+            "display": "Eosinophile"
+          },
+          {
+            "code": "DIFFLI",
+            "display": "*Differenzierung"
+          },
+          {
+            "code": "DIFFLYMP",
+            "display": "Lymphozyten"
+          },
+          {
+            "code": "DIFFM",
+            "display": "Differentialblutbild mikroskopisch"
+          },
+          {
+            "code": "DIFFMIK",
+            "display": "Differenzialblutbild mikroskopisch"
+          },
+          {
+            "code": "DIFFMONO",
+            "display": "Monozyten"
+          },
+          {
+            "code": "DIFFNEUT",
+            "display": "Neutrophile Granulozyten"
+          },
+          {
+            "code": "EBL",
+            "display": "Erythroblasten"
+          },
+          {
+            "code": "EC",
+            "display": "Erythrozyten"
+          },
+          {
+            "code": "ECLIBF",
+            "display": "Erythrozyten"
+          },
+          {
+            "code": "ECLIQ",
+            "display": "Erythrozyten"
+          },
+          {
+            "code": "ECLIQQN",
+            "display": "Erythrozyten"
+          },
+          {
+            "code": "ECPHAG",
+            "display": "Erythrophagen (bD)"
+          },
+          {
+            "code": "ECPRP",
+            "display": "Erythrozyten PRP"
+          },
+          {
+            "code": "ECPU",
+            "display": "Erythrozyten"
+          },
+          {
+            "code": "ECPUBF",
+            "display": "Erythrozyten"
+          },
+          {
+            "code": "ECPUQN",
+            "display": "Erythrozyten"
+          },
+          {
+            "code": "EO%",
+            "display": "Eosinophile"
+          },
+          {
+            "code": "EOABS",
+            "display": "Eosinophile"
+          },
+          {
+            "code": "EOM%",
+            "display": "Eosinophile"
+          },
+          {
+            "code": "EOMABS",
+            "display": "Eosinophile"
+          },
+          {
+            "code": "FEFÄRBLI",
+            "display": "*Eisenfärbung im Liquor"
+          },
+          {
+            "code": "FELEBER",
+            "display": "Eisen im Lebergewebe (Biopsie)"
+          },
+          {
+            "code": "FEMMOL",
+            "display": "Eisen (mmol) /Trockengewicht"
+          },
+          {
+            "code": "FEUG",
+            "display": "Eisen (µg) / Trockengewicht"
+          },
+          {
+            "code": "FUSIONTR",
+            "display": "Fusionstranskript"
+          },
+          {
+            "code": "GRBB",
+            "display": "Hämatogramm gross"
+          },
+          {
+            "code": "GUMP%",
+            "display": "davon Gumprechtsche Kernschatten"
+          },
+          {
+            "code": "HÄMA",
+            "display": "*Hämatogramm"
+          },
+          {
+            "code": "HÄMOIDIN",
+            "display": "Hämatoidin (bD)"
+          },
+          {
+            "code": "HÄMPHAG",
+            "display": "Hämosiderophagen (bD)"
+          },
+          {
+            "code": "HB",
+            "display": "Hämoglobin"
+          },
+          {
+            "code": "HBFBEUSZ",
+            "display": "HbF Flowzytometrisch"
+          },
+          {
+            "code": "HBFFNK",
+            "display": "Foetale Erythrozyten in SS (HbF n. Kleinhauer)"
+          },
+          {
+            "code": "HERLI",
+            "display": "Herkunft Liquor"
+          },
+          {
+            "code": "HERLILU",
+            "display": "lumbal"
+          },
+          {
+            "code": "HERLISU",
+            "display": "suboccipital"
+          },
+          {
+            "code": "HERLIVE",
+            "display": "ventrikulär"
+          },
+          {
+            "code": "HERPRP",
+            "display": "Herkunft PRP"
+          },
+          {
+            "code": "HERPU",
+            "display": "Herkunft Punktat"
+          },
+          {
+            "code": "HIVCD",
+            "display": "CD3/CD4/CD8 Lymphozyten Subpopulationen"
+          },
+          {
+            "code": "HIVVER",
+            "display": "*HIV Verlauf"
+          },
+          {
+            "code": "HK",
+            "display": "Hämatokrit"
+          },
+          {
+            "code": "HYPEREC",
+            "display": "HYPER-EC"
+          },
+          {
+            "code": "HYPOEC",
+            "display": "HYPO-EC"
+          },
+          {
+            "code": "IG%",
+            "display": "Unreife Granulozyten"
+          },
+          {
+            "code": "IGABS",
+            "display": "Unreife Granulozyten"
+          },
+          {
+            "code": "IMMPHÄNO",
+            "display": "Immunphänotypisierung"
+          },
+          {
+            "code": "INFARTA",
+            "display": "Art und Gattung"
+          },
+          {
+            "code": "INTERAND",
+            "display": "Interpretation"
+          },
+          {
+            "code": "INTERAU",
+            "display": "Interpretation Ausstrich"
+          },
+          {
+            "code": "INTERDT",
+            "display": "Interpretation Dicker Tropfen"
+          },
+          {
+            "code": "INTERMAL",
+            "display": "Interpretation Schnelltest"
+          },
+          {
+            "code": "JAK2USZ",
+            "display": "JAK2 p.Val617Phe qn."
+          },
+          {
+            "code": "KALT",
+            "display": "*Kälteaglutinine"
+          },
+          {
+            "code": "KALTAMP",
+            "display": "Kälte Amplitude"
+          },
+          {
+            "code": "KALTID",
+            "display": "Kälteaglutinine Antikörperidentifizierung"
+          },
+          {
+            "code": "KALTSCR",
+            "display": "Kälteagglutinine Screen"
+          },
+          {
+            "code": "KALTTI",
+            "display": "Kälteaglutinine Titer"
+          },
+          {
+            "code": "KLBB",
+            "display": "Hämatogramm klein"
+          },
+          {
+            "code": "KRISTART",
+            "display": "Kristallart"
+          },
+          {
+            "code": "KRISTPU",
+            "display": "Kristalle Punktat"
+          },
+          {
+            "code": "LÄD%",
+            "display": "davon lädierte"
+          },
+          {
+            "code": "LC",
+            "display": "Leukozyten"
+          },
+          {
+            "code": "LCPRP",
+            "display": "Leukozyten PRP"
+          },
+          {
+            "code": "LCTOT%",
+            "display": "Leukozyten tot. % INT"
+          },
+          {
+            "code": "LCZTOT1",
+            "display": "zwischen total Leukozyten 1"
+          },
+          {
+            "code": "LCZTOT2",
+            "display": "zwischen total Leukozyten 2"
+          },
+          {
+            "code": "LCZTOT3",
+            "display": "zwischen total Leukozyten 3"
+          },
+          {
+            "code": "LIQSP415",
+            "display": "Messung bei 415 nm"
+          },
+          {
+            "code": "LIQSP476",
+            "display": "Messung bei 476 nm"
+          },
+          {
+            "code": "LIQSPBE",
+            "display": "Liquor Spektrogramm Beurteilung"
+          },
+          {
+            "code": "LIQSPE",
+            "display": "Liquor Spektrogramm"
+          },
+          {
+            "code": "LIQUOR",
+            "display": "Liquor"
+          },
+          {
+            "code": "LOTMALA",
+            "display": "Lotnummer"
+          },
+          {
+            "code": "LYMPABS",
+            "display": "Lymphozyten"
+          },
+          {
+            "code": "LYMPH%",
+            "display": "Lymphozyten"
+          },
+          {
+            "code": "LYMPHGES",
+            "display": "Lymphozyten gesamt"
+          },
+          {
+            "code": "LYMPHM%",
+            "display": "Lymphozyten"
+          },
+          {
+            "code": "LYMPMABS",
+            "display": "Lymphozyten"
+          },
+          {
+            "code": "MACROEC",
+            "display": "Macro-Ec"
+          },
+          {
+            "code": "MALA",
+            "display": "Malaria, Direktnachweis inkl. Schnelltest"
+          },
+          {
+            "code": "MALAAG",
+            "display": "Malaria-Ag-Schnelltest"
+          },
+          {
+            "code": "MALAAU",
+            "display": "Malaria Ausstrich"
+          },
+          {
+            "code": "MALADT",
+            "display": "Malaria Dicker Tropfen"
+          },
+          {
+            "code": "MCH",
+            "display": "MCH"
+          },
+          {
+            "code": "MCHC",
+            "display": "MCHC"
+          },
+          {
+            "code": "MCV",
+            "display": "MCV"
+          },
+          {
+            "code": "META%",
+            "display": "Metamyelozyten"
+          },
+          {
+            "code": "METAABS",
+            "display": "Metamyelozyten"
+          },
+          {
+            "code": "MICROEC",
+            "display": "Micro-Ec"
+          },
+          {
+            "code": "MN%",
+            "display": "Mononukleäre Zellen"
+          },
+          {
+            "code": "MONO%",
+            "display": "Monozyten"
+          },
+          {
+            "code": "MONOABS",
+            "display": "Monozyten"
+          },
+          {
+            "code": "MONOM%",
+            "display": "Monozyten"
+          },
+          {
+            "code": "MONOMABS",
+            "display": "Monozyten"
+          },
+          {
+            "code": "MORPH",
+            "display": "Morphologie"
+          },
+          {
+            "code": "MPLKUSZ",
+            "display": "MPLp.Trp515Lys(W515K)"
+          },
+          {
+            "code": "MPLLUSZ",
+            "display": "MPLp.Trp515Leu(W515L)"
+          },
+          {
+            "code": "MPLUSZ",
+            "display": "MPL"
+          },
+          {
+            "code": "MR",
+            "display": "Molekulare Remission"
+          },
+          {
+            "code": "MYELO%",
+            "display": "Myelozyten"
+          },
+          {
+            "code": "MYELOABS",
+            "display": "Myelozyten"
+          },
+          {
+            "code": "NEUT%",
+            "display": "Neutrophile Granulozyten"
+          },
+          {
+            "code": "NEUTABS",
+            "display": "Neutrophile Granulozyten"
+          },
+          {
+            "code": "NEUTPRP",
+            "display": "Neutrophile PRP"
+          },
+          {
+            "code": "NKBTUSZ",
+            "display": "T-, B-, NK-Zellen (Lymphozytentypisierung)"
+          },
+          {
+            "code": "NKUSZ",
+            "display": "NK-Zellen (CD3- CD56+) Abs."
+          },
+          {
+            "code": "NKUSZ%",
+            "display": "NK-Zellen (CD3- CD56+) %"
+          },
+          {
+            "code": "PARA",
+            "display": "Parasitämie"
+          },
+          {
+            "code": "PARAA",
+            "display": "Parasitämie"
+          },
+          {
+            "code": "PLAFAL",
+            "display": "Plasmodium falciparum"
+          },
+          {
+            "code": "PLAKNO",
+            "display": "Plasmodium knowlesi"
+          },
+          {
+            "code": "PLAMAL",
+            "display": "Plasmodium malariae"
+          },
+          {
+            "code": "PLAOV",
+            "display": "Plasmodium ovale"
+          },
+          {
+            "code": "PLAOVVI",
+            "display": "Plasmodium ovale/ vivax"
+          },
+          {
+            "code": "PLAS%",
+            "display": "Plasmazellen"
+          },
+          {
+            "code": "PLASABS",
+            "display": "Plasmazellen"
+          },
+          {
+            "code": "PLAVI",
+            "display": "Plasmodium vivax"
+          },
+          {
+            "code": "PMN%",
+            "display": "Polymorphkernige Zellen"
+          },
+          {
+            "code": "PROM%",
+            "display": "Promyelozyten"
+          },
+          {
+            "code": "PROMABS",
+            "display": "Promyelozyten"
+          },
+          {
+            "code": "PRPZZ",
+            "display": "PRP Zellzahl-Kontrolle"
+          },
+          {
+            "code": "PUNKTAT",
+            "display": "Punktat"
+          },
+          {
+            "code": "QCPOSMAL",
+            "display": "positive Kontrolle"
+          },
+          {
+            "code": "RDW",
+            "display": "RDW"
+          },
+          {
+            "code": "RDWCV",
+            "display": "RDW-CV"
+          },
+          {
+            "code": "RDW-CV",
+            "display": "RDW"
+          },
+          {
+            "code": "RETI",
+            "display": "Retikulozyten"
+          },
+          {
+            "code": "RETIA",
+            "display": "*Retikulozyten"
+          },
+          {
+            "code": "RETIABS",
+            "display": "Retikulozyten (absolut)"
+          },
+          {
+            "code": "RETIHB",
+            "display": "Hb-Gehalt"
+          },
+          {
+            "code": "RETIHFR",
+            "display": "HFR"
+          },
+          {
+            "code": "RETIINDE",
+            "display": "Produktionsindex"
+          },
+          {
+            "code": "RETILFR",
+            "display": "LFR"
+          },
+          {
+            "code": "RETIM",
+            "display": "*Retikulozyten mikroskopisch"
+          },
+          {
+            "code": "RETIMABS",
+            "display": "Retikulozyten mikroskopisch (absolut)"
+          },
+          {
+            "code": "RETIMFR",
+            "display": "MFR"
+          },
+          {
+            "code": "RETIo/oo",
+            "display": "Retikulozyten o/oo"
+          },
+          {
+            "code": "RETMo/oo",
+            "display": "Retikulozyten mikroskopisch o/oo"
+          },
+          {
+            "code": "SEG%",
+            "display": "Segmentkernige"
+          },
+          {
+            "code": "SEGABS",
+            "display": "Segmentkernige"
+          },
+          {
+            "code": "SP",
+            "display": "SMEAR (Hämatologie)"
+          },
+          {
+            "code": "STAB%",
+            "display": "Stabkernige"
+          },
+          {
+            "code": "STABABS",
+            "display": "Stabkernige"
+          },
+          {
+            "code": "STADIEN",
+            "display": "Beobachtete Stadien"
+          },
+          {
+            "code": "STADIENA",
+            "display": "Beobachtete Stadien"
+          },
+          {
+            "code": "T1F",
+            "display": "T1-Feld (P. falciparum)"
+          },
+          {
+            "code": "T2F",
+            "display": "T2-Feld (P. species)"
+          },
+          {
+            "code": "TC",
+            "display": "Thrombozyten"
+          },
+          {
+            "code": "TCCITBE",
+            "display": "Thrombozyten aus Citrat"
+          },
+          {
+            "code": "TCCITRAT",
+            "display": "Thrombozyten aus Citratblut"
+          },
+          {
+            "code": "TCFONIO",
+            "display": "Thrombozyten nach Fonio"
+          },
+          {
+            "code": "TCHEP",
+            "display": "Thrombozyten aus Heparinblut"
+          },
+          {
+            "code": "TCPRP",
+            "display": "Thrombozyten PRP"
+          },
+          {
+            "code": "TCTHROMB",
+            "display": "Thrombozyten aus ThromboExact Röhrchen"
+          },
+          {
+            "code": "TUMZELL",
+            "display": "Zytologie/Suche n. Tumorzellen"
+          },
+          {
+            "code": "VERDACHT",
+            "display": "Verdacht auf"
+          },
+          {
+            "code": "VISAU1",
+            "display": "Visum1"
+          },
+          {
+            "code": "VISAU2",
+            "display": "Visum2"
+          },
+          {
+            "code": "VISDT1",
+            "display": "Visum1"
+          },
+          {
+            "code": "VISDT2",
+            "display": "Visum2"
+          },
+          {
+            "code": "VISH1",
+            "display": "Visum1"
+          },
+          {
+            "code": "VISH2",
+            "display": "Visum2"
+          },
+          {
+            "code": "VISPARA1",
+            "display": "Visum1"
+          },
+          {
+            "code": "VISPARA2",
+            "display": "Visum2"
+          },
+          {
+            "code": "ZBPU",
+            "display": "Zellbeurteilung Punktat"
+          },
+          {
+            "code": "ZYTO",
+            "display": "Zytozentrifugation"
+          },
+          {
+            "code": "ZZLI",
+            "display": "Zellzahl im Liquor"
+          },
+          {
+            "code": "ZZLIQ",
+            "display": "Zellzahl (nukleäre Zellen)"
+          },
+          {
+            "code": "ZZP",
+            "display": "Zellzahl im Punktat"
+          },
+          {
+            "code": "ZZPU",
+            "display": "Zellzahl im Punktat"
+          },
+          {
+            "code": "ZZPUBF",
+            "display": "Zellzahl im Punktat"
+          }
+        ]
+      }
+    ]
+  }
+}

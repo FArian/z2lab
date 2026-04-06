@@ -1,0 +1,357 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+
+    {
+      "fullUrl": "urn:uuid:patient-001",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "test-patient-001",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Muster",
+            "given": ["Hans", "Peter"]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1975-04-12",
+        "address": [
+          {
+            "line": ["Bahnhofstrasse 14"],
+            "city": "Zürich",
+            "postalCode": "8001",
+            "country": "CH"
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:oid:2.16.756.5.32",
+            "value": "7561234567890"
+          },
+          {
+            "system": "urn:oid:2.16.756.5.30.1.123.100.1.1",
+            "value": "80756123456789012345"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/test-patient-001"
+      }
+    },
+
+    {
+      "fullUrl": "urn:uuid:practitioner-001",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "test-arzt-001",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Meier",
+            "given": ["Anna"],
+            "prefix": ["Dr. med."]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:oid:2.51.1.3",
+            "value": "7601000000000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Practitioner/test-arzt-001"
+      }
+    },
+
+    {
+      "fullUrl": "urn:uuid:sr-draft-001",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "test-sr-draft-001",
+        "status": "draft",
+        "intent": "order",
+        "priority": "routine",
+        "subject": { "reference": "Patient/test-patient-001" },
+        "requester": {
+          "reference": "Practitioner/test-arzt-001",
+          "display": "Dr. med. Anna Meier"
+        },
+        "occurrenceDateTime": "2026-03-31T08:30:00+01:00",
+        "note": [{ "text": "V.a. Eisenmangelanämie, Fatigue seit 4 Wochen" }],
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/encounter-class",
+            "valueCode": "AMB"
+          }
+        ],
+        "identifier": [
+          {
+            "system": "https://hapi.2a01-4f8-1c1a-5842--1.nip.io/fhir/order-numbers",
+            "value": "test-sr-draft-001"
+          }
+        ],
+        "code": { "text": "Kleines Blutbild, Eisen, Ferritin" },
+        "orderDetail": [
+          {
+            "coding": [{ "system": "http://loinc.org", "code": "58410-2", "display": "Kleines Blutbild" }],
+            "text": "Routine / Hämatologie"
+          },
+          {
+            "coding": [{ "system": "http://loinc.org", "code": "2498-4", "display": "Eisen" }],
+            "text": "Routine / Klinische Chemie"
+          },
+          {
+            "coding": [{ "system": "http://loinc.org", "code": "2276-4", "display": "Ferritin" }],
+            "text": "Routine / Klinische Chemie"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ServiceRequest/test-sr-draft-001"
+      }
+    },
+
+    {
+      "fullUrl": "urn:uuid:sr-active-001",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "test-sr-active-001",
+        "status": "active",
+        "intent": "order",
+        "priority": "urgent",
+        "subject": { "reference": "Patient/test-patient-001" },
+        "requester": {
+          "reference": "Practitioner/test-arzt-001",
+          "display": "Dr. med. Anna Meier"
+        },
+        "occurrenceDateTime": "2026-03-31T09:00:00+01:00",
+        "note": [{ "text": "Notfall – Verdacht Sepsis" }],
+        "extension": [
+          {
+            "url": "https://www.zetlab.ch/fhir/StructureDefinition/encounter-class",
+            "valueCode": "EMER"
+          }
+        ],
+        "identifier": [
+          {
+            "system": "https://hapi.2a01-4f8-1c1a-5842--1.nip.io/fhir/order-numbers",
+            "value": "test-sr-active-001"
+          }
+        ],
+        "code": { "text": "Blutkultur, CRP, PCT" },
+        "orderDetail": [
+          {
+            "coding": [{ "system": "http://loinc.org", "code": "600-7", "display": "Blutkultur" }],
+            "text": "Mikrobiologie"
+          },
+          {
+            "coding": [{ "system": "http://loinc.org", "code": "1988-5", "display": "CRP" }],
+            "text": "Routine / Klinische Chemie"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ServiceRequest/test-sr-active-001"
+      }
+    },
+
+    {
+      "fullUrl": "urn:uuid:obs-hb-001",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "test-obs-hb-001",
+        "status": "final",
+        "code": {
+          "coding": [{ "system": "http://loinc.org", "code": "718-7", "display": "Hämoglobin" }]
+        },
+        "subject": { "reference": "Patient/test-patient-001" },
+        "effectiveDateTime": "2026-03-31T10:15:00+01:00",
+        "valueQuantity": {
+          "value": 10.2,
+          "unit": "g/dl",
+          "system": "http://unitsofmeasure.org",
+          "code": "g/dL"
+        },
+        "referenceRange": [
+          { "low": { "value": 12.0, "unit": "g/dl" }, "high": { "value": 16.0, "unit": "g/dl" } }
+        ],
+        "interpretation": [
+          {
+            "coding": [{
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+              "code": "L",
+              "display": "Niedrig"
+            }]
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/test-obs-hb-001"
+      }
+    },
+
+    {
+      "fullUrl": "urn:uuid:obs-ferritin-001",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "test-obs-ferritin-001",
+        "status": "final",
+        "code": {
+          "coding": [{ "system": "http://loinc.org", "code": "2276-4", "display": "Ferritin" }]
+        },
+        "subject": { "reference": "Patient/test-patient-001" },
+        "effectiveDateTime": "2026-03-31T10:15:00+01:00",
+        "valueQuantity": {
+          "value": 4,
+          "unit": "µg/l",
+          "system": "http://unitsofmeasure.org",
+          "code": "ug/L"
+        },
+        "referenceRange": [
+          { "text": "13–150 µg/l", "low": { "value": 13 }, "high": { "value": 150 } }
+        ],
+        "interpretation": [
+          {
+            "coding": [{
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+              "code": "L",
+              "display": "Niedrig"
+            }]
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/test-obs-ferritin-001"
+      }
+    },
+
+    {
+      "fullUrl": "urn:uuid:dr-001",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "test-dr-001",
+        "status": "final",
+        "category": [
+          {
+            "coding": [{
+              "system": "http://terminology.hl7.org/CodeSystem/v2-0074",
+              "code": "LAB",
+              "display": "Laboratory"
+            }],
+            "text": "Laboratoriumsmedizin"
+          }
+        ],
+        "code": { "text": "Kleines Blutbild, Eisen, Ferritin" },
+        "subject": { "reference": "Patient/test-patient-001" },
+        "effectiveDateTime": "2026-03-31T10:15:00+01:00",
+        "issued": "2026-03-31T11:00:00+01:00",
+        "basedOn": [{ "reference": "ServiceRequest/test-sr-draft-001" }],
+        "result": [
+          { "reference": "Observation/test-obs-hb-001", "display": "Hämoglobin" },
+          { "reference": "Observation/test-obs-ferritin-001", "display": "Ferritin" }
+        ],
+        "conclusion": "Eisenmangelanämie bestätigt. Hb 10.2 g/dl, Ferritin 4 µg/l.",
+        "presentedForm": [
+          {
+            "contentType": "application/pdf",
+            "language": "de-CH",
+            "title": "Laborbefund 31.03.2026",
+            "creation": "2026-03-31T11:00:00+01:00",
+            "data": "JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBvYmoKPDwvTGVuZ3RoIDMgMCBSL0ZpbHRlci9GbGF0ZURlY29kZT4+CnN0cmVhbQp4nCtUMlQqS00tLgYABF4B8AplbmRzdHJlYW0KZW5kb2JqCjMgMCBvYmoKMjMKZW5kb2JqCjQgMCBvYmoKPDwvVHlwZS9QYWdlL01lZGlhQm94IFswIDAgNjEyIDc5Ml0vUmVzb3VyY2VzPDwvRm9udDw8L0YxIDUgMCBSPj4+Pi9Db250ZW50cyAyIDAgUi9QYXJlbnQgMSAwIFI+PgplbmRvYmoKNSAwIG9iago8PC9UeXBlL0ZvbnQvU3VidHlwZS9UeXBlMS9CYXNlRm9udC9IZWx2ZXRpY2E+PgplbmRvYmoKMSAwIG9iago8PC9UeXBlL1BhZ2VzL0tpZHMgWzQgMCBSXS9Db3VudCAxPj4KZW5kb2JqCjYgMCBvYmoKPDwvVHlwZS9DYXRhbG9nL1BhZ2VzIDEgMCBSPj4KZW5kb2JqCnhyZWYKMCA3CjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDI1OCAwMDAwMCBuIAowMDAwMDAwMDA5IDAwMDAwIG4gCjAwMDAwMDAwOTYgMDAwMDAgbiAKMDAwMDAwMDExNSAwMDAwMCBuIAowMDAwMDAwMjE1IDAwMDAwIG4gCjAwMDAwMDAzMDYgMDAwMDAgbiAKdHJhaWxlcgo8PC9TaXplIDcvUm9vdCA2IDAgUj4+CnN0YXJ0eHJlZgozNTUKJSVFT0YK"
+          },
+          {
+            "contentType": "text/hl7v2",
+            "language": "de-CH",
+            "title": "ORU^R01 HL7 v2.5 Nachricht",
+            "data": "TVNIfF5+XCZ8T1JERVJFTVRSWXZMWXNJU3xMQUJ8MjAyNjAzMzExMTAwMDB8fE9SVV5SMDFeT1JVXzIwMHxNU0ctMDAxfFB8Mi41DQpQSUR8MXx8dGVzdC1wYXRpZW50LTAwMV5eXlpMWl5QSXx8TXVzdGVyXkhhbnNeUGV0ZXJ8fDE5NzUwNDEyfE18fHxCYWhuaG9mc3RyYXNzZSAxNF5eWsO4cmljaCBeODAwMV5DSFR8fHx8fHx8fHw3NTYxMjM0NTY3ODkwDQpPUkN8UkV8dGVzdC1zci1kcmFmdC0wMDF8fHx8fHx8fHx8fERyLiBtZWQuIEFubmEgTWVpZXJeXl5eXk5QSQ0KT0JSfDF8fDU4NDEwLTJeS2xlaW5lcyBCbHV0Ymxkbl5MTnx8fHx8fHx8fHxGfHx8fHxIQU18fA0KT0JYfDF8RnwNNzE4LTdeSMOkbW9nbG9iaW5eTk18fDEwLjJ8Z19kbHx7MTIuMC0xNi4wfXx8THx8fHwyMDI2MDMzMTEwMTUwMHxGDQpPQlh8MnxGfDIyNzYtNF5GZXJyaXRpbl5MTnx8NHx1Z19MfHsxMy0xNTB9fHxMfHx8fDIwMjYwMzMxMTAxNTAwfEY="
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DiagnosticReport/test-dr-001"
+      }
+    },
+
+    {
+      "fullUrl": "urn:uuid:docref-001",
+      "resource": {
+        "resourceType": "DocumentReference",
+        "id": "test-docref-001",
+        "status": "current",
+        "docStatus": "final",
+        "type": {
+          "coding": [{
+            "system": "http://loinc.org",
+            "code": "11502-2",
+            "display": "Laboratory report"
+          }],
+          "text": "Laborbefund"
+        },
+        "category": [
+          {
+            "coding": [{
+              "system": "http://terminology.hl7.org/CodeSystem/v2-0074",
+              "code": "LAB",
+              "display": "Laboratory"
+            }]
+          }
+        ],
+        "subject": { "reference": "Patient/test-patient-001" },
+        "date": "2026-03-31T11:00:00+01:00",
+        "author": [{ "reference": "Practitioner/test-arzt-001", "display": "Dr. med. Anna Meier" }],
+        "description": "Laborbefund Hämatologie/Chemie 31.03.2026",
+        "context": {
+          "related": [
+            { "reference": "DiagnosticReport/test-dr-001" },
+            { "reference": "ServiceRequest/test-sr-draft-001" }
+          ]
+        },
+        "content": [
+          {
+            "attachment": {
+              "contentType": "application/pdf",
+              "language": "de-CH",
+              "title": "Laborbefund 31.03.2026",
+              "data": "JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBvYmoKPDwvTGVuZ3RoIDMgMCBSL0ZpbHRlci9GbGF0ZURlY29kZT4+CnN0cmVhbQp4nCtUMlQqS00tLgYABF4B8AplbmRzdHJlYW0KZW5kb2JqCjMgMCBvYmoKMjMKZW5kb2JqCjQgMCBvYmoKPDwvVHlwZS9QYWdlL01lZGlhQm94IFswIDAgNjEyIDc5Ml0vUmVzb3VyY2VzPDwvRm9udDw8L0YxIDUgMCBSPj4+Pi9Db250ZW50cyAyIDAgUi9QYXJlbnQgMSAwIFI+PgplbmRvYmoKNSAwIG9iago8PC9UeXBlL0ZvbnQvU3VidHlwZS9UeXBlMS9CYXNlRm9udC9IZWx2ZXRpY2E+PgplbmRvYmoKMSAwIG9iago8PC9UeXBlL1BhZ2VzL0tpZHMgWzQgMCBSXS9Db3VudCAxPj4KZW5kb2JqCjYgMCBvYmoKPDwvVHlwZS9DYXRhbG9nL1BhZ2VzIDEgMCBSPj4KZW5kb2JqCnhyZWYKMCA3CjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDI1OCAwMDAwMCBuIAowMDAwMDAwMDA5IDAwMDAwIG4gCjAwMDAwMDAwOTYgMDAwMDAgbiAKMDAwMDAwMDExNSAwMDAwMCBuIAowMDAwMDAwMjE1IDAwMDAwIG4gCjAwMDAwMDAzMDYgMDAwMDAgbiAKdHJhaWxlcgo8PC9TaXplIDcvUm9vdCA2IDAgUj4+CnN0YXJ0eHJlZgozNTUKJSVFT0YK"
+            },
+            "format": {
+              "system": "urn:oid:1.3.6.1.4.1.19376.1.2.3",
+              "code": "urn:ihe:lab:xd-lab:2008",
+              "display": "CDA Laboratory Report"
+            }
+          },
+          {
+            "attachment": {
+              "contentType": "text/hl7v2",
+              "language": "de-CH",
+              "title": "MDM^T02 HL7 v2.5 Nachricht",
+              "data": "TVNIfF5+XCZ8T1JERVJFTVRSWXZMWXNJU3xMQUJ8MjAyNjAzMzExMTAwMDB8fE1ETV5UMDJeTURNX1QwMnxNU0ctMDAyfFB8Mi41DQpFVlR8VDAyfDIwMjYwMzMxMTEwMDAwDQpQSUR8MXx8dGVzdC1wYXRpZW50LTAwMV5eXlpMWl5QSXx8TXVzdGVyXkhhbnNeUGV0ZXJ8fDE5NzUwNDEyfE18fHxCYWhuaG9mc3RyYXNzZSAxNF5eWsO4cmljaCBeODAwMV5DSFR8fHx8fHx8fHw3NTYxMjM0NTY3ODkwDQpUWEF8T1J8MjAyNjAzMzExMTAwMDB8fExhYm9yYmVmdW5kIEjDpG1hdG9sb2dpZS9DaGVtaWUgMzEuMDMuMjAyNnxBUHxEUnxGDQpPQlh8MXxGfDcxOC03XkjDpG1vZ2xvYmlufHwxMC4yfGdfZGx8e3RleHR9fHxMfHx8fDIwMjYwMzMxMTAxNTAwfEY="
+            },
+            "format": {
+              "system": "urn:oid:1.3.6.1.4.1.19376.1.2.3",
+              "code": "urn:hl7-org:sdwg:ccda-nonXMLBody:1.1",
+              "display": "HL7 v2 MDM Message"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DocumentReference/test-docref-001"
+      }
+    }
+
+  ]
+}

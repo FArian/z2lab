@@ -1,0 +1,598 @@
+{
+  "resourceType": "ValueSet",
+  "id": "zlz-tests-bb",
+  "url": "https://www.zetlab.ch/fhir/ValueSet/zlz-tests-bb",
+  "name": "zlzTestsBb",
+  "title": "ZLZ — Blutbild",
+  "status": "active",
+  "description": "Tests der Befundgruppe BB.",
+  "compose": {
+    "include": [
+      {
+        "system": "https://www.zetlab.ch/lis/codes",
+        "concept": [
+          {
+            "code": "*ABDPAT",
+            "display": "ABD-Kontrolle Patient"
+          },
+          {
+            "code": "*ABEK",
+            "display": "Verträglichkeitsprobe nach Type and Screen, ABO/"
+          },
+          {
+            "code": "*ABOAKNG",
+            "display": "AB0-Antikörper bei Neugeborenen"
+          },
+          {
+            "code": "*ABORH",
+            "display": "ABO/RhD-Bestimmung"
+          },
+          {
+            "code": "*ADSORP",
+            "display": "Antikörperadsorption pro Zelle"
+          },
+          {
+            "code": "*AGA1A2",
+            "display": "Erythrozyten-Antigenbestimmung A1/A2/A1B/A2B"
+          },
+          {
+            "code": "*AGPAT",
+            "display": "Antigenbestimmung an Patientenproben pro Antigen"
+          },
+          {
+            "code": "*AKELUSP",
+            "display": "Antikörperspezifizierung im Eluat"
+          },
+          {
+            "code": "*AKI",
+            "display": "Alloantikörperspezifizierung,  Test-Panel 8-11"
+          },
+          {
+            "code": "*AKI+",
+            "display": "Alloantikörperspez., pro zusätzliche Zelle"
+          },
+          {
+            "code": "*AKI+3",
+            "display": "Alloantikörperspezifizierung ab 3 Antikörper"
+          },
+          {
+            "code": "*AKS",
+            "display": "Antikörpersuchtest"
+          },
+          {
+            "code": "*ALAKT",
+            "display": "Alloantikörper Titerbestimmung"
+          },
+          {
+            "code": "*ANTIDT",
+            "display": "Alloantikörper, Anti-D (Titer) sq  in der SS WHO"
+          },
+          {
+            "code": "*AUAKT",
+            "display": "Autoantikörper, Titerbestimmung"
+          },
+          {
+            "code": "*AUTOAD",
+            "display": "Autoantikörper, Autoadsorption pro Zelle"
+          },
+          {
+            "code": "*BESTR",
+            "display": "Bestrahlen, pro Blutprodukt"
+          },
+          {
+            "code": "*DATMONO",
+            "display": "Dir. Coombstest, monospezifisch"
+          },
+          {
+            "code": "*DATPOLY",
+            "display": "Dir. Coombstest, polyspezifisch"
+          },
+          {
+            "code": "*DONATH",
+            "display": "Donath-Landsteiner Screening"
+          },
+          {
+            "code": "*EKESP",
+            "display": "Erythrozytenkonzentrat aus Eigenblutspend"
+          },
+          {
+            "code": "*EXDNA",
+            "display": "Extraktion genomische DNA"
+          },
+          {
+            "code": "*FAHRSRK",
+            "display": "Zuschlag Fahrspesenanteil a/o Labordienst"
+          },
+          {
+            "code": "*FGP",
+            "display": "FFP aus Vollblut oder Plasmapherese"
+          },
+          {
+            "code": "*GENABO",
+            "display": "Genotypisierung ABO"
+          },
+          {
+            "code": "*GENABOU",
+            "display": "Genotypisierung ABO (Untergruppe)"
+          },
+          {
+            "code": "*GENAG",
+            "display": "Sequenzierung erythrozytärer Antigene"
+          },
+          {
+            "code": "*GENCDE",
+            "display": "Genotypisierung CDE"
+          },
+          {
+            "code": "*GENDO",
+            "display": "Genotypisierung Do (a/b)"
+          },
+          {
+            "code": "*GENDP",
+            "display": "Genotypisierung Dpartial"
+          },
+          {
+            "code": "*GENDW",
+            "display": "Genotypisierung Rhesus Dweek"
+          },
+          {
+            "code": "*GENDZYG",
+            "display": "Genotypisierung D Zygotie"
+          },
+          {
+            "code": "*GENFYKJ",
+            "display": "Genotypisierung Fy / Kell / Kidd"
+          },
+          {
+            "code": "*GENHPA",
+            "display": "Genotypisierung HPA Antigene"
+          },
+          {
+            "code": "*GENJK",
+            "display": "Genotypisierung JK (Untergruppe)"
+          },
+          {
+            "code": "*GENKELL",
+            "display": "Genotypisierung Kell erweitert (Untergruppe)"
+          },
+          {
+            "code": "*GENLU",
+            "display": "Genotypisierung Lu (a/b)"
+          },
+          {
+            "code": "*GENMNS",
+            "display": "Genotypisierung MNS"
+          },
+          {
+            "code": "*GENPA",
+            "display": "Genotypisierung Public Antigene"
+          },
+          {
+            "code": "*IMAKABO",
+            "display": "Immunantikörper des ABO-Systems"
+          },
+          {
+            "code": "*ISOABSP",
+            "display": "Isoagglutinintiter, Anti-A, Anti-B, pro Spezif."
+          },
+          {
+            "code": "*KAGGL",
+            "display": "Kälteagglutinine Suchtest"
+          },
+          {
+            "code": "*KAGGLT",
+            "display": "Kälteagglutinine Titer pro Zelle"
+          },
+          {
+            "code": "*KÄLTAK",
+            "display": "Kälteantikörperabklärung-Bestimmung, erweitert"
+          },
+          {
+            "code": "*NFSRK",
+            "display": "Nacht-Sonntage-und Feiertage SRK"
+          },
+          {
+            "code": "*PRODHLA",
+            "display": "HLA typisiertes Thrombozytenkonzentrat"
+          },
+          {
+            "code": "*PRODHPA",
+            "display": "HPA typisiertes Thrombozytenkonzentrat"
+          },
+          {
+            "code": "*RHPHÄNO",
+            "display": "Rh-Phänotyp-Bestimmung pro Produkt"
+          },
+          {
+            "code": "*SPLIT",
+            "display": "Splitten, in 2- oder 4-Fach"
+          },
+          {
+            "code": "*TAXI1",
+            "display": "Bluttransport 7-19 Zimmermann"
+          },
+          {
+            "code": "*TAXI2",
+            "display": "Bluttransport Nachts/Woende"
+          },
+          {
+            "code": "*TAXI3",
+            "display": "Bluttransport 7-19 Citytrans"
+          },
+          {
+            "code": "*TKAPH",
+            "display": "Thrombozytenkonzentrat (Apherese oder BuffyCoat)"
+          },
+          {
+            "code": "*TKAPHS",
+            "display": "Thrombozytenkonzentrat,gesplittet in 2"
+          },
+          {
+            "code": "*TKPOOL",
+            "display": "Thrombozytenkonzentrat aus Buffy coat"
+          },
+          {
+            "code": "*VP",
+            "display": "Kreuzprobe nach Empfehlung BSD SRK"
+          },
+          {
+            "code": "*WASCH",
+            "display": "Waschen, pro Erythrozytenkonzentrat"
+          },
+          {
+            "code": "*ZAUFW",
+            "display": "Zusatz Beschaffung ausserordentlicher Aufwand"
+          },
+          {
+            "code": "*ZEKERW",
+            "display": "Genotypisierung erweitertes Blutgruppenprofil"
+          },
+          {
+            "code": "*ZLABSRK",
+            "display": "Zuschlag für a/o Labordienst"
+          },
+          {
+            "code": "ABD",
+            "display": "ABD-Kontrolle"
+          },
+          {
+            "code": "ABDEKTX",
+            "display": "ABD-Kontrolle (EK-TX)"
+          },
+          {
+            "code": "ABDRH",
+            "display": "Rhesusfaktor (ABD)"
+          },
+          {
+            "code": "ABEK",
+            "display": "AB-Kontrolle Erythrozytenkonzentrat"
+          },
+          {
+            "code": "ABO37",
+            "display": "Blutgruppenbestimmung bei 37°C"
+          },
+          {
+            "code": "AGP",
+            "display": "Antigen-Profil"
+          },
+          {
+            "code": "AKGUELT",
+            "display": "Gültigkeit Antikörpersuchtest"
+          },
+          {
+            "code": "AKI",
+            "display": "Antikörper Identifizierung"
+          },
+          {
+            "code": "AKS",
+            "display": "Antikörpersuchtest"
+          },
+          {
+            "code": "AKSNT",
+            "display": "Antikörpersuchtest nach Transfusion"
+          },
+          {
+            "code": "AKSVT",
+            "display": "Antikörpersuchtest vor Transfusion"
+          },
+          {
+            "code": "BBARCHIV",
+            "display": "Blutbank Archiv"
+          },
+          {
+            "code": "BBCART",
+            "display": "CAR-T Zellen"
+          },
+          {
+            "code": "BBGEBTER",
+            "display": "Geburtstermin"
+          },
+          {
+            "code": "BBIMT",
+            "display": "Antikörpertherapie"
+          },
+          {
+            "code": "BBKOMM",
+            "display": "Blutbank Kommentar"
+          },
+          {
+            "code": "BBMAMI",
+            "display": "Daten Mutter"
+          },
+          {
+            "code": "BBMED",
+            "display": "Medikamentengabe"
+          },
+          {
+            "code": "BBOPTER",
+            "display": "Operationstermin"
+          },
+          {
+            "code": "BBRHPRYL",
+            "display": "Rhesusprophylaxe erhalten"
+          },
+          {
+            "code": "BBSTZAL",
+            "display": "Stammzelltransplantation allogen"
+          },
+          {
+            "code": "BBSTZAU",
+            "display": "Stammzelltransplantation autolog"
+          },
+          {
+            "code": "BBTXTER",
+            "display": "Transfusionstermin"
+          },
+          {
+            "code": "BG",
+            "display": "Blutgruppe"
+          },
+          {
+            "code": "BGE",
+            "display": "Blutgruppe (elektronische Unterschrift)"
+          },
+          {
+            "code": "BGNEUGEB",
+            "display": "Blutgruppe Säugling"
+          },
+          {
+            "code": "BGNT",
+            "display": "Blutgruppe nach Transfusion"
+          },
+          {
+            "code": "BGVT",
+            "display": "Blutgruppe vor Transfusion"
+          },
+          {
+            "code": "BKTX",
+            "display": "Blutkultur TX"
+          },
+          {
+            "code": "BSDVER",
+            "display": "Versandt BSD"
+          },
+          {
+            "code": "CW",
+            "display": "Cw-Antigen"
+          },
+          {
+            "code": "CWNEUGEB",
+            "display": "Cw-Antigen Säugling"
+          },
+          {
+            "code": "DATC3C",
+            "display": "Anti-C3c"
+          },
+          {
+            "code": "DATC3D",
+            "display": "Anti-C3d"
+          },
+          {
+            "code": "DATC4",
+            "display": "Anti-C4"
+          },
+          {
+            "code": "DATIGA",
+            "display": "Anti-IgA"
+          },
+          {
+            "code": "DATIGG",
+            "display": "Anti-IgG"
+          },
+          {
+            "code": "DATIGM",
+            "display": "Anti-IgM"
+          },
+          {
+            "code": "DATMONO",
+            "display": "Direkter Coombs monospezifisch"
+          },
+          {
+            "code": "DATPEKTX",
+            "display": "DAT (EK-TX)"
+          },
+          {
+            "code": "DATPNT",
+            "display": "DAT nach Transfusion"
+          },
+          {
+            "code": "DATPOLY",
+            "display": "direkter Coombs polyspezifisch"
+          },
+          {
+            "code": "DATPOLYB",
+            "display": "direkter Coombs Bestätigungstest"
+          },
+          {
+            "code": "DATPOLYN",
+            "display": "DatPoly Säugling"
+          },
+          {
+            "code": "DATPVT",
+            "display": "DAT vor Transfusion"
+          },
+          {
+            "code": "DATSRK",
+            "display": "direkter Coombs"
+          },
+          {
+            "code": "DTITER",
+            "display": "Titer Anti-D"
+          },
+          {
+            "code": "EKNR",
+            "display": "EK-Nummer"
+          },
+          {
+            "code": "EKTX",
+            "display": "EK Transfusionsreaktion"
+          },
+          {
+            "code": "EXTBGK",
+            "display": "Externe Blutgruppenkarte"
+          },
+          {
+            "code": "FGPNR",
+            "display": "FGP-Nummer"
+          },
+          {
+            "code": "FGPTX",
+            "display": "FGP Transfusionsreaktion"
+          },
+          {
+            "code": "FRHD",
+            "display": "Foetales RHD aus mütterlichem Blut"
+          },
+          {
+            "code": "HAEMOTX",
+            "display": "Hämolyse TX"
+          },
+          {
+            "code": "IGGNEUGE",
+            "display": "IgG Säugling"
+          },
+          {
+            "code": "ISO37",
+            "display": "Serumgegenprobe bei 37°C"
+          },
+          {
+            "code": "ISO4",
+            "display": "Serumgegenprobe bei 4°C"
+          },
+          {
+            "code": "KELL",
+            "display": "Kell-Antigen"
+          },
+          {
+            "code": "KELLE",
+            "display": "Kell-Antigen EK"
+          },
+          {
+            "code": "KELLEKTX",
+            "display": "Kell-Antigen (EK-TX)"
+          },
+          {
+            "code": "KELLNEUG",
+            "display": "Kell-Antigen Säugling"
+          },
+          {
+            "code": "KELLNT",
+            "display": "Kell-Antigen nach Transfusion"
+          },
+          {
+            "code": "KELLVT",
+            "display": "Kell-Antigen vor Transfusion"
+          },
+          {
+            "code": "NARCHVER",
+            "display": "Nicht archivieren Verrechnung"
+          },
+          {
+            "code": "RH",
+            "display": "Rhesusfaktor"
+          },
+          {
+            "code": "RHEK",
+            "display": "Rhesus-Kontrolle Erythrozytenkonzentrat"
+          },
+          {
+            "code": "RHEKTX",
+            "display": "Rh-Kontr. EKTX"
+          },
+          {
+            "code": "RHFNEUG",
+            "display": "Phänotyp Säugling"
+          },
+          {
+            "code": "RHNEUGEB",
+            "display": "Rhesusfaktor Säugling"
+          },
+          {
+            "code": "RHNT",
+            "display": "Rhesusfaktor nach Transfusion"
+          },
+          {
+            "code": "RHPANEL",
+            "display": "Rhesus Prophylaxepanel"
+          },
+          {
+            "code": "RHPANELP",
+            "display": "Papain Panel"
+          },
+          {
+            "code": "RHPHÄNO",
+            "display": "Rhesus Phänotyp"
+          },
+          {
+            "code": "RHPHÄNOE",
+            "display": "Rhesus Phänotyp EK"
+          },
+          {
+            "code": "RHPHEKTX",
+            "display": "Rhesus Phänotyp (EK-TX)"
+          },
+          {
+            "code": "RHPHNT",
+            "display": "Rhesus Phänotyp nach Transfusion"
+          },
+          {
+            "code": "RHPHVT",
+            "display": "Rhesus Phänotyp vor Transfusion"
+          },
+          {
+            "code": "RHVT",
+            "display": "Rhesusfaktor vor Transfusion"
+          },
+          {
+            "code": "SEROBB",
+            "display": "Serothek Blutbank"
+          },
+          {
+            "code": "TKNR",
+            "display": "TK-Nummer"
+          },
+          {
+            "code": "TKTX",
+            "display": "TK Transfusionsreaktion"
+          },
+          {
+            "code": "VP",
+            "display": "Verträglichkeitstest"
+          },
+          {
+            "code": "VPNT",
+            "display": "VP nach Transfusion"
+          },
+          {
+            "code": "VPVT",
+            "display": "VP vor Transfusion"
+          },
+          {
+            "code": "XXXBB",
+            "display": "XXX Dummytest BB"
+          }
+        ]
+      }
+    ]
+  }
+}
