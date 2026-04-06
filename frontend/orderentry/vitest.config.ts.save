@@ -3,17 +3,20 @@ import path from "path";
 
 export default defineConfig({
   test: {
+    // Expose describe, it, expect, vi, beforeEach etc. globally — no imports needed in test files
     globals: true,
+
+    // Browser-like environment so DOM APIs are available in component tests
     environment: "jsdom",
+
+    // Runs before each test file — loads jest-dom matchers and the jest ↔ vi shim
     setupFiles: ["./vitest.setup.ts"],
 
+    // Mirror the same roots as jest.config.ts
     include: [
       "tests/**/*.{test,spec}.{ts,tsx}",
       "src/**/*.{test,spec}.{ts,tsx}",
     ],
-
-    pool: "threads",
-    fileParallelism: false,
 
     coverage: {
       provider: "v8",
@@ -34,6 +37,7 @@ export default defineConfig({
   },
 
   resolve: {
+    // Must mirror tsconfig.json paths so @/* imports resolve
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
