@@ -1,0 +1,40 @@
+# Git
+.git
+.gitignore
+
+# Node
+node_modules
+npm-debug.log
+
+# Env (SEHR WICHTIG)
+.env
+.env*
+!.env.example
+
+# Docker
+docker-compose*
+Dockerfile
+
+# Logs & Data
+logs
+data
+pdf-outbox
+hl7-outbox
+
+# Build
+.next
+dist
+build
+
+# Vercel (local dev artifacts — never needed in Docker image)
+.vercel
+
+# OS
+.DS_Store
+
+# Docs / AI / Tests (not needed in image)
+CLAUDE.md
+docs/
+tests/
+*.md
+coverage/

@@ -1,0 +1,207 @@
+// Prisma schema — z2Lab OrderEntry
+//
+// Default provider: sqlite (embedded, no extra service needed).
+//
+// To switch to PostgreSQL or MSSQL:
+//   1. Change `provider` below to "postgresql" or "sqlserver"
+//   2. Set DATABASE_URL to the new connection string
+//   3. Run: npx prisma migrate deploy
+//   4. Restart the container
+//
+// The script `scripts/db-setup.mjs` can auto-generate this file from DB_PROVIDER env.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ── User ─────────────────────────────────────────────────────────────────────
+
+model User {
+  id                     String    @id @default(uuid())
+  username               String    @unique
+  passwordHash           String
+  salt                   String
+  createdAt              DateTime  @default(now())
+  role                   String    @default("user")
+  status                 String    @default("active")
+  providerType           String    @default("local")
+  externalId             String?
+  fhirSyncStatus         String    @default("not_synced")
+  fhirSyncedAt           DateTime?
+  fhirSyncError          String?
+  fhirPractitionerId     String?
+  fhirPractitionerRoleId String?
+  apiTokenHash           String?
+  apiTokenCreatedAt      DateTime?
+
+  /// UserProfile serialized as JSON string (SQLite has no native JSON column type in Prisma 5).
+  /// PostgreSQL/MSSQL: change to `Json?` for native JSON support.
+  profile String?
+
+  /// Individual permissions granted beyond the user's base role.
+  /// Stored as JSON array string, e.g. '["patient:activate","order:edit"]'.
+  /// Resolved at auth time: effectivePermissions = rolePermissions ∪ extraPermissions.
+  extraPermissions String @default("[]")
+
+  resetTokens PasswordResetToken[]
+}
+
+// ── Password reset tokens ────────────────────────────────────────────────────
+
+model PasswordResetToken {
+  token     String   @id
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+// ── AgentJob ─────────────────────────────────────────────────────────────────
+
+/// Print- or ORU-job queued for a Local Agent to pick up via polling.
+///
+/// payload: JSON string containing:
+///   { documentReferenceId, serviceRequestId, patientId, orderNumber, zpl }
+///
+/// Routing:
+///   orgId      — FHIR Organization ID (mandatory — identifies the clinic)
+///   locationId — FHIR Location ID (optional — targets a specific department/printer)
+///               If null → Broadcast to all agents of the organization.
+model AgentJob {
+  id                  String    @id @default(uuid())
+  type                String    /// "print" | "oru"
+  status              String    @default("pending") /// "pending" | "done" | "failed"
+  orgId               String    /// FHIR Organization ID — routing key
+  locationId          String?   /// FHIR Location ID — targeted routing (nullable = broadcast)
+  payload             String    /// JSON: documentReferenceId, serviceRequestId, patientId, orderNumber, zpl
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  doneAt              DateTime?
+}
+
+// ── AgentRegistration ─────────────────────────────────────────────────────────
+
+/// A registered Local Agent for a clinic/practice.
+/// Each agent authenticates via a hashed API key (Bearer token).
+/// Routing: orgFhirId links the agent to a FHIR Organization.
+model AgentRegistration {
+  id            String    @id @default(uuid())
+  name          String                        /// Display name (e.g. "Klinik im Park")
+  orgFhirId     String                        /// FHIR Organization ID
+  orgGln        String?                       /// GS1 GLN (optional)
+  locationId    String?                       /// FHIR Location ID (optional — department routing)
+  apiKeyHash    String                        /// bcrypt hash of the API key
+  apiKeyPrefix  String                        /// First 8 chars for display (e.g. "zetlab_a")
+  status        String    @default("active")  /// "active" | "revoked"
+  lastSeenAt    DateTime?                     /// Last successful poll
+  agentVersion  String?                       /// Last reported agent version
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+// ── OrgRule ───────────────────────────────────────────────────────────────────
+
+/// Organisation-specific rules for order numbers, patient IDs, and HL7 mapping.
+/// One entry per external Auftraggeber-Organisation.
+model OrgRule {
+  id             String   @id @default(uuid())
+  orgFhirId      String   @unique
+  orgGln         String?                 /// nullable — GLN may not be available at creation time
+  orgName        String
+  patientPrefix  String   @default("")
+  casePrefix     String   @default("")
+  hl7Msh3        String   @default("")
+  hl7Msh4        String   @default("")
+  hl7Msh5        String   @default("ZLZ")
+  hl7Msh6        String   @default("LAB")
+
+  // Per-org order number overrides (empty/null = use global ENV defaults)
+  mibiPrefix         String   @default("")   /// MIBI prefix override (e.g. "MI")
+  mibiStart          String   @default("")   /// MIBI start digit after prefix (e.g. "4")
+  mibiLength         Int?                    /// MIBI total length including prefix (null = global)
+  pocPrefix          String   @default("")   /// POC prefix override (e.g. "PO")
+  pocLength          Int?                    /// POC total length including prefix (null = global)
+  routineLength      Int?                    /// Routine total digit count (null = global)
+
+  /// JSON mapping: external code/department → ServiceType ("MIBI"|"ROUTINE"|"POC")
+  /// Example: {"MIKRO":"MIBI","CARDIO":"ROUTINE","BGA":"POC"}
+  serviceTypeMapping String   @default("{}")
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+// ── ReservedOrderNumber ───────────────────────────────────────────────────────
+
+/// Pre-reserved order numbers used as fallback when Orchestra/LIS is unavailable.
+/// Unique constraint on `number` prevents duplicates at DB level.
+model ReservedOrderNumber {
+  id                      String    @id @default(uuid())
+  number                  String    @unique
+  serviceType             String    /// "MIBI" | "ROUTINE" | "POC"
+  status                  String    @default("available") /// "available" | "used"
+  /// null = shared pool (any org); set = org-specific pool (FHIR Organization.id)
+  orgFhirId               String?
+  usedAt                  DateTime?
+  usedForPatientId        String?
+  usedForServiceRequestId String?
+  createdAt               DateTime  @default(now())
+}
+
+// ── PoolNotificationLog ───────────────────────────────────────────────────────
+
+/// Anti-spam log for pool threshold email notifications.
+/// An email is only sent once per (serviceType + level) until the pool is refilled.
+model PoolNotificationLog {
+  id             String   @id @default(uuid())
+  level          String   /// "info" | "warn" | "error"
+  /// Service type this notification was sent for (MIBI, ROUTINE, POC, …). null = global.
+  serviceType    String?
+  sentAt         DateTime @default(now())
+  remainingCount Int
+  poolRefilled   Boolean  @default(false)
+  /// AdminTask that was created alongside this notification (nullable = no task created).
+  taskId         String?
+}
+
+// ── AdminTask ─────────────────────────────────────────────────────────────────
+
+/// Internal admin tasks created by the system for pool alerts and other events.
+/// Type "ORDER_NUMBER_POOL_ALERT" = pool threshold crossed.
+/// Status "OPEN" = needs attention; "RESOLVED" = admin confirmed fix.
+model AdminTask {
+  id          String    @id @default(uuid())
+  /// Task category — currently only "ORDER_NUMBER_POOL_ALERT"
+  type        String
+  /// Severity: "INFO" | "WARNING" | "CRITICAL"
+  severity    String
+  /// FHIR Organisation ID if the alert is org-specific. null = global pool.
+  orgId       String?
+  /// ServiceType (MIBI, ROUTINE, POC, …) this alert belongs to.
+  serviceType String?
+  /// Human-readable alert message (German).
+  message     String
+  /// JSON metadata: remainingCount, threshold level, pool stats.
+  metadata    String    @default("{}")
+  /// Task lifecycle: "OPEN" | "RESOLVED"
+  status      String    @default("OPEN")
+  resolvedAt  DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// ── PoolThresholdConfig ───────────────────────────────────────────────────────
+
+/// Singleton row (id = "default") storing pool alert thresholds and notification email.
+model PoolThresholdConfig {
+  id                 String @id @default("default")
+  infoAt             Int    @default(30)
+  warnAt             Int    @default(15)
+  errorAt            Int    @default(5)
+  notificationEmail  String @default("")
+}
