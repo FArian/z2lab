@@ -51,7 +51,9 @@ jobs:
         run: npm run lint --if-present
 
       - name: Test
-        run: npm test --if-present -- --runInBand
+        #run: npm test --if-present -- --runInBand
+        #run: npm test --if-present -- --coverage
+        run: npx vitest run --coverage
         env:
           CI: true
 
