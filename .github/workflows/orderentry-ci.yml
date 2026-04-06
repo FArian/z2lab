@@ -53,7 +53,9 @@ jobs:
       - name: Test
         #run: npm test --if-present -- --runInBand
         #run: npm test --if-present -- --coverage
-        run: npx vitest run --coverage
+        #run: npx vitest run --coverage
+        #run: npx vitest run --coverage --pool=threads
+        run: npx vitest run --coverage --pool=threads --no-file-parallelism
         env:
           CI: true
 
