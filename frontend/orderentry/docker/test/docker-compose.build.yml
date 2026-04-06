@@ -1,0 +1,12 @@
+services:
+  orderentry:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_LAB_ORG_ID: zlz
+        NEXT_PUBLIC_LAB_NAME: ZLZ Zentrallabor AG
+        NEXT_PUBLIC_ORDER_SERVICE_TYPES: MIBI,ROUTINE,POC
+        NEXT_PUBLIC_GLN_ENABLED: "false"
+        NEXT_PUBLIC_SASIS_ENABLED: "false"
+    image: farian/orderentry:local
