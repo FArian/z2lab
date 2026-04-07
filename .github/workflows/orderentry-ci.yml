@@ -3,21 +3,24 @@ name: OrderEntry CI/CD
 on:
   push:
     branches:
-      - master
       - dev
-      - test
     paths:
       - "frontend/orderentry/**"
       - ".github/workflows/orderentry-ci.yml"
+
   pull_request:
     branches:
-      - master
       - dev
-      - test
     paths:
       - "frontend/orderentry/**"
       - ".github/workflows/orderentry-ci.yml"
+
   workflow_dispatch:
+    inputs:
+      target_branch:
+        description: "Target branch (dev/test/master)"
+        required: true
+        default: "test"
 
 permissions:
   contents: read
@@ -28,6 +31,9 @@ env:
   DOCKERFILE: docker/Dockerfile
 
 jobs:
+  # =========================================================
+  # 🧪 QUALITY JOB
+  # =========================================================
   quality:
     name: Quality Check
     runs-on: ubuntu-latest
@@ -66,20 +72,42 @@ jobs:
           NEXT_PUBLIC_GLN_ENABLED: false
           NEXT_PUBLIC_SASIS_ENABLED: false
 
+  # =========================================================
+  # 🐳 DOCKER JOB
+  # =========================================================
   docker:
-    name: Build and Push Multi-Arch Docker Image
+    name: Build and Push Docker Image
     runs-on: ubuntu-latest
     needs: quality
-    if: github.event_name != 'pull_request'
+
+    # 👉 DEV automatisch + manuell (test/master)
+    if: >
+      github.event_name == 'push' && github.ref == 'refs/heads/dev' ||
+      github.event_name == 'workflow_dispatch'
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # =====================================================
+      # 🧠 Branch bestimmen
+      # =====================================================
+      - name: Determine branch
+        id: branch
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "branch=${{ github.event.inputs.target_branch }}" >> $GITHUB_OUTPUT
+          else
+            echo "branch=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+          fi
+
+      # =====================================================
+      # 🏷️ Tag bestimmen
+      # =====================================================
       - name: Set image tag
         id: vars
         run: |
-          BRANCH_NAME="${GITHUB_REF_NAME}"
+          BRANCH_NAME="${{ steps.branch.outputs.branch }}"
 
           if [ "$BRANCH_NAME" = "master" ]; then
             TAG="latest"
@@ -94,18 +122,27 @@ jobs:
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
           echo "sha_tag=sha-${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
 
+      # =====================================================
+      # ⚙️ Multi-Arch Setup
+      # =====================================================
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v3
 
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      # =====================================================
+      # 🔐 Docker Login
+      # =====================================================
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      # =====================================================
+      # 🏷️ Metadata
+      # =====================================================
       - name: Extract Docker metadata
         id: meta
         uses: docker/metadata-action@v5
@@ -115,6 +152,9 @@ jobs:
             type=raw,value=${{ steps.vars.outputs.tag }}
             type=raw,value=${{ steps.vars.outputs.sha_tag }}
 
+      # =====================================================
+      # 🚀 Build & Push
+      # =====================================================
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
@@ -124,14 +164,16 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
           build-args: |
             GIT_COMMIT=${{ github.sha }}
-            GIT_BRANCH=${{ github.ref_name }}
+            GIT_BRANCH=${{ steps.branch.outputs.branch }}
             GIT_COUNT=${{ github.run_number }}
             NEXT_PUBLIC_LAB_ORG_ID=zlz
             NEXT_PUBLIC_LAB_NAME=ZLZ Zentrallabor AG
             NEXT_PUBLIC_ORDER_SERVICE_TYPES=MIBI,ROUTINE,POC
             NEXT_PUBLIC_GLN_ENABLED=false
             NEXT_PUBLIC_SASIS_ENABLED=false
+
           cache-from: type=gha
           cache-to: type=gha,mode=max
