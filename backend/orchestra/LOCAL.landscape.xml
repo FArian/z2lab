@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<landscape>
+    <scenario id="d0292514-de0f-4eb1-a0c5-77f490af7b15" name="sc_OrderEntry_Middleware">
+        <entry reference="{d0292514-de0f-4eb1-a0c5-77f490af7b15:EnvironmentEntry}151" name="ee_OrderId_Logsfile" type="filepath">
+            <property name="Directory" description="Absolute directory path" type="0">/tmp/orchestra/localpath</property>
+            <property name="Protocoll" description="Protocol" type="2">LOCAL</property>
+            <property name="Test-Credential" description="Credential used for testing only" type="2">&lt;empty&gt;</property>
+        </entry>
+        <entry reference="{d0292514-de0f-4eb1-a0c5-77f490af7b15:EnvironmentEntry}78" name="ee_APV" type="Global variable">
+            <property name="VALUE" description="Current value of the global variable" type="0">default</property>
+            <property name="TYPE" description="Variable type" type="2">Text</property>
+        </entry>
+        <entry reference="{d0292514-de0f-4eb1-a0c5-77f490af7b15:EnvironmentEntry}111" name="ee_ENV" type="Global variable">
+            <property name="VALUE" description="Current value of the global variable" type="0">DEV</property>
+            <property name="TYPE" description="Variable type" type="2">Text</property>
+        </entry>
+        <entry reference="{d0292514-de0f-4eb1-a0c5-77f490af7b15:EnvironmentEntry}120" name="ee_URL_HAPI-FHIR-SERVER_OrderEntry" type="Uniform resource locator">
+            <property name="URL" description="Uniform resource locator" type="0">http://hapi:8080/fhir</property>
+            <property name="Proxy" description="Proxy server" type="2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"></property>
+        </entry>
+    </scenario>
+    <scenario id="9e2e3fea-b970-4652-b0e3-b2d80062dcb2" name="sc_Service_Middleware_GLN-API">
+        <entry reference="{9e2e3fea-b970-4652-b0e3-b2d80062dcb2:EnvironmentEntry}78" name="ee_APV" type="Global variable">
+            <property name="VALUE" description="Current value of the global variable" type="0">default</property>
+            <property name="TYPE" description="Variable type" type="2">Text</property>
+        </entry>
+        <entry reference="{9e2e3fea-b970-4652-b0e3-b2d80062dcb2:EnvironmentEntry}114" name="URL_PartnerSoap" type="Uniform resource locator">
+            <property name="URL" description="Uniform resource locator" type="0">https://refdatabase.refdata.ch/Service/Partner.asmx</property>
+            <property name="Proxy" description="Proxy server" type="2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"></property>
+        </entry>
+        <entry reference="{9e2e3fea-b970-4652-b0e3-b2d80062dcb2:EnvironmentEntry}116" name="URL_PartnerSoap12" type="Uniform resource locator">
+            <property name="URL" description="Uniform resource locator" type="0">https://refdatabase.refdata.ch/Service/Partner.asmx</property>
+            <property name="Proxy" description="Proxy server" type="2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"></property>
+        </entry>
+    </scenario>
+</landscape>
