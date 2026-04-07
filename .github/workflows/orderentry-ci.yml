@@ -153,13 +153,12 @@ jobs:
       # =====================================================
       - name: Extract Docker metadata
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v5 # v5 ist die neueste Version  
         with:
           images: ${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value=${{ steps.vars.outputs.tag }}
-            type=raw,value=${{ steps.vars.outputs.sha_tag }}
-
+            type=raw,value=${{ steps.vars.outputs.tag }} # dev Haupt-Tag basierend auf Branch
+            #type=raw,value=${{ steps.vars.outputs.sha_tag }} # Optional: zusätzlich ein Tag mit Commit-SHA
       # =====================================================
       # 🚀 Build & Push
       # =====================================================
