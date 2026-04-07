@@ -27,8 +27,6 @@ permissions:
 
 env:
   IMAGE_NAME: farian/orderentry
-  CONTEXT: ./frontend/orderentry
-  DOCKERFILE: docker/Dockerfile
 
 jobs:
   # =========================================================
@@ -88,6 +86,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      # 🔍 Debug (optional – kannst du später entfernen)
+      - name: Debug file structure
+        run: |
+          echo "Root:"
+          ls -la
+          echo "OrderEntry:"
+          ls -la frontend/orderentry
+          echo "Docker folder:"
+          ls -la frontend/orderentry/docker
 
       # =====================================================
       # 🧠 Branch bestimmen
@@ -158,8 +166,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: ${{ env.CONTEXT }}
-          file: ${{ env.DOCKERFILE }}
+          context: ./frontend/orderentry
+          file: ./frontend/orderentry/docker/Dockerfile   # ✅ FIXED PATH
           push: true
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
