@@ -1,8 +1,8 @@
 /**
- * GET  /api/v1/agent/jobs       — Agent polls for pending print/ORU jobs
- * POST /api/v1/agent/jobs/print — Create a print job after order submission
+ * GET  /api/v1/bridge/jobs       — Bridge polls for pending print/ORU jobs
+ * POST /api/v1/bridge/jobs/print — Create a print job after order submission
  *
- * Auth: Bearer JWT or PAT (same as /agent/status)
+ * Auth: Bearer JWT or PAT (same as /bridge/status)
  *
  * GET query params:
  *   orgId      (required) — FHIR Organization ID
@@ -10,10 +10,10 @@
  */
 
 import { NextResponse, type NextRequest } from "next/server";
-import { agentJobController } from "@/infrastructure/api/controllers/AgentJobController";
+import { bridgeJobController } from "@/infrastructure/api/controllers/BridgeJobController";
 import { bearerAuthGuard } from "@/infrastructure/auth/BearerAuthGuard";
 import { getSessionFromCookies } from "@/lib/auth";
-import type { CreatePrintJobRequestDto } from "@/infrastructure/api/dto/AgentJobDto";
+import type { CreatePrintJobRequestDto } from "@/infrastructure/api/dto/BridgeJobDto";
 
 export const dynamic = "force-dynamic";
 
@@ -34,7 +34,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   const locationId = searchParams.get("locationId") ?? undefined;
 
   try {
-    const result = await agentJobController.listJobs(orgId, locationId);
+    const result = await bridgeJobController.listJobs(orgId, locationId);
     return NextResponse.json(result);
   } catch (err) {
     const status = (err as { status?: number }).status ?? 500;
@@ -49,7 +49,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
   try {
     const body = await req.json() as CreatePrintJobRequestDto;
-    const result = await agentJobController.createPrintJob(body);
+    const result = await bridgeJobController.createPrintJob(body);
     return NextResponse.json(result, { status: 201 });
   } catch (err) {
     const status = (err as { status?: number }).status ?? 500;

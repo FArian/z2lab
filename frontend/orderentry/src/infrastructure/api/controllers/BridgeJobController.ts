@@ -1,32 +1,32 @@
 /**
- * AgentJobController — handles print job queue for Local Agent polling.
+ * BridgeJobController — handles print job queue for z2Lab Bridge polling.
  *
  * Responsibilities:
  *   - createPrintJob: create a pending job after order submission
- *   - listJobs:       return pending jobs for a given org/location (Agent polling)
- *   - markDone:       Agent confirms job completed
+ *   - listJobs:       return pending jobs for a given org/location (Bridge polling)
+ *   - markDone:       Bridge confirms job completed
  *
  * ZPL generation:
  *   One label per specimen, format: "{orderNumber} {materialCode}" as CODE128 barcode.
  *   Labels are concatenated into a single ZPL string stored in the job payload.
  *
  * Routing:
- *   orgId + locationId → targeted (agent of that department)
- *   orgId only         → broadcast (all agents of the organization)
+ *   orgId + locationId → targeted (bridge of that department)
+ *   orgId only         → broadcast (all bridges of the organization)
  */
 
-import type { IAgentJobRepository } from "@/application/interfaces/repositories/IAgentJobRepository";
-import { agentJobRepository } from "@/infrastructure/repositories/PrismaAgentJobRepository";
+import type { IBridgeJobRepository } from "@/application/interfaces/repositories/IBridgeJobRepository";
+import { bridgeJobRepository } from "@/infrastructure/repositories/PrismaBridgeJobRepository";
 import { createLogger } from "@/infrastructure/logging/Logger";
 import type {
   CreatePrintJobRequestDto,
   CreatePrintJobResponseDto,
-  ListAgentJobsResponseDto,
+  ListBridgeJobsResponseDto,
   JobDoneResponseDto,
-  AgentJobResponseDto,
-} from "../dto/AgentJobDto";
+  BridgeJobResponseDto,
+} from "../dto/BridgeJobDto";
 
-const log = createLogger("AgentJobController");
+const log = createLogger("BridgeJobController");
 
 function buildZpl(orderNumber: string, specimens: Array<{ materialCode: string; materialName: string }>): string {
   return specimens
@@ -44,10 +44,10 @@ function buildZpl(orderNumber: string, specimens: Array<{ materialCode: string; 
     .join("\n");
 }
 
-export class AgentJobController {
-  constructor(private readonly repo: IAgentJobRepository = agentJobRepository) {}
+export class BridgeJobController {
+  constructor(private readonly repo: IBridgeJobRepository = bridgeJobRepository) {}
 
-  // ── POST /api/v1/agent/jobs/print ──────────────────────────────────────────
+  // ── POST /api/v1/bridge/jobs/print ─────────────────────────────────────────
 
   async createPrintJob(body: CreatePrintJobRequestDto): Promise<CreatePrintJobResponseDto> {
     if (!body.orgId || !body.documentReferenceId || !body.orderNumber) {
@@ -72,16 +72,16 @@ export class AgentJobController {
     return { id: job.id, status: job.status, createdAt: job.createdAt };
   }
 
-  // ── GET /api/v1/agent/jobs ─────────────────────────────────────────────────
+  // ── GET /api/v1/bridge/jobs ────────────────────────────────────────────────
 
-  async listJobs(orgId: string, locationId?: string): Promise<ListAgentJobsResponseDto> {
+  async listJobs(orgId: string, locationId?: string): Promise<ListBridgeJobsResponseDto> {
     if (!orgId) {
       throw Object.assign(new Error("orgId query parameter is required"), { status: 400 });
     }
 
     const jobs = await this.repo.listPending(orgId, locationId);
 
-    const result: AgentJobResponseDto[] = jobs.map((j) => ({
+    const result: BridgeJobResponseDto[] = jobs.map((j) => ({
       id:                  j.id,
       type:                j.type,
       orgId:               j.orgId,
@@ -97,7 +97,7 @@ export class AgentJobController {
     return { jobs: result };
   }
 
-  // ── POST /api/v1/agent/jobs/[id]/done ──────────────────────────────────────
+  // ── POST /api/v1/bridge/jobs/[id]/done ─────────────────────────────────────
 
   async markDone(id: string): Promise<JobDoneResponseDto> {
     if (!id) {
@@ -111,4 +111,4 @@ export class AgentJobController {
   }
 }
 
-export const agentJobController = new AgentJobController();
+export const bridgeJobController = new BridgeJobController();

@@ -1,11 +1,11 @@
-export interface RegisterAgentRequestDto {
+export interface RegisterBridgeRequestDto {
   name: string;
   orgFhirId: string;
   orgGln?: string;
   locationId?: string;
 }
 
-export interface RegisterAgentResponseDto {
+export interface RegisterBridgeResponseDto {
   id: string;
   name: string;
   orgFhirId: string;
@@ -17,7 +17,7 @@ export interface RegisterAgentResponseDto {
   createdAt: string;
 }
 
-export interface AgentRegistrationResponseDto {
+export interface BridgeRegistrationResponseDto {
   id: string;
   name: string;
   orgFhirId: string;
@@ -26,12 +26,12 @@ export interface AgentRegistrationResponseDto {
   apiKeyPrefix: string;
   status: string;
   lastSeenAt: string | null;
-  agentVersion: string | null;
+  bridgeVersion: string | null;
   createdAt: string;
   updatedAt: string;
 }
 
-export interface ListAgentsResponseDto {
-  agents: AgentRegistrationResponseDto[];
+export interface ListBridgesResponseDto {
+  bridges: BridgeRegistrationResponseDto[];
   total: number;
 }

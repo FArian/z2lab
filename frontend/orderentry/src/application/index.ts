@@ -43,11 +43,11 @@ export type { IOrgRuleRepository }                        from "./interfaces/rep
 export type { IReservedNumberRepository,
               PoolStats }                                 from "./interfaces/repositories/IReservedNumberRepository";
 export type { IAdminTaskRepository }                      from "./interfaces/repositories/IAdminTaskRepository";
-export type { IAgentJobRepository,
-              CreateAgentJobInput }                       from "./interfaces/repositories/IAgentJobRepository";
-export type { IAgentRegistrationRepository,
-              AgentRegistrationData,
-              CreateAgentRegistrationInput }              from "./interfaces/repositories/IAgentRegistrationRepository";
+export type { IBridgeJobRepository,
+              CreateBridgeJobInput }                      from "./interfaces/repositories/IBridgeJobRepository";
+export type { IBridgeRegistrationRepository,
+              BridgeRegistrationData,
+              CreateBridgeRegistrationInput }             from "./interfaces/repositories/IBridgeRegistrationRepository";
 
 // ── Service Interfaces ────────────────────────────────────────────────────────
 

@@ -61,9 +61,9 @@ model PasswordResetToken {
   createdAt DateTime @default(now())
 }
 
-// ── AgentJob ─────────────────────────────────────────────────────────────────
+// ── BridgeJob ────────────────────────────────────────────────────────────────
 
-/// Print- or ORU-job queued for a Local Agent to pick up via polling.
+/// Print- or ORU-job queued for a z2Lab Bridge to pick up via polling.
 ///
 /// payload: JSON string containing:
 ///   { documentReferenceId, serviceRequestId, patientId, orderNumber, zpl }
@@ -71,8 +71,8 @@ model PasswordResetToken {
 /// Routing:
 ///   orgId      — FHIR Organization ID (mandatory — identifies the clinic)
 ///   locationId — FHIR Location ID (optional — targets a specific department/printer)
-///               If null → Broadcast to all agents of the organization.
-model AgentJob {
+///               If null → Broadcast to all bridges of the organization.
+model BridgeJob {
   id                  String    @id @default(uuid())
   type                String    /// "print" | "oru"
   status              String    @default("pending") /// "pending" | "done" | "failed"
@@ -84,12 +84,12 @@ model AgentJob {
   doneAt              DateTime?
 }
 
-// ── AgentRegistration ─────────────────────────────────────────────────────────
+// ── BridgeRegistration ────────────────────────────────────────────────────────
 
-/// A registered Local Agent for a clinic/practice.
-/// Each agent authenticates via a hashed API key (Bearer token).
-/// Routing: orgFhirId links the agent to a FHIR Organization.
-model AgentRegistration {
+/// A registered z2Lab Bridge for a clinic/practice.
+/// Each bridge authenticates via a hashed API key (Bearer token).
+/// Routing: orgFhirId links the bridge to a FHIR Organization.
+model BridgeRegistration {
   id            String    @id @default(uuid())
   name          String                        /// Display name (e.g. "Klinik im Park")
   orgFhirId     String                        /// FHIR Organization ID
@@ -99,7 +99,7 @@ model AgentRegistration {
   apiKeyPrefix  String                        /// First 8 chars for display (e.g. "zetlab_a")
   status        String    @default("active")  /// "active" | "revoked"
   lastSeenAt    DateTime?                     /// Last successful poll
-  agentVersion  String?                       /// Last reported agent version
+  bridgeVersion String?                       /// Last reported bridge version
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }

@@ -1,4 +1,4 @@
-/** POST /api/v1/agent/jobs/print — request body */
+/** POST /api/v1/bridge/jobs/print — request body */
 export interface CreatePrintJobRequestDto {
   /** FHIR Organization ID (e.g. "zlz") */
   orgId:               string;
@@ -16,8 +16,8 @@ export interface CreatePrintJobRequestDto {
   specimens:           Array<{ materialCode: string; materialName: string }>;
 }
 
-/** Single job returned in GET /api/v1/agent/jobs */
-export interface AgentJobResponseDto {
+/** Single job returned in GET /api/v1/bridge/jobs */
+export interface BridgeJobResponseDto {
   id:                  string;
   type:                "print" | "oru";
   orgId:               string;
@@ -30,19 +30,19 @@ export interface AgentJobResponseDto {
   createdAt:           string;
 }
 
-/** GET /api/v1/agent/jobs — response body */
-export interface ListAgentJobsResponseDto {
-  jobs: AgentJobResponseDto[];
+/** GET /api/v1/bridge/jobs — response body */
+export interface ListBridgeJobsResponseDto {
+  jobs: BridgeJobResponseDto[];
 }
 
-/** POST /api/v1/agent/jobs/print — response body */
+/** POST /api/v1/bridge/jobs/print — response body */
 export interface CreatePrintJobResponseDto {
   id:        string;
   status:    string;
   createdAt: string;
 }
 
-/** POST /api/v1/agent/jobs/[id]/done — response body */
+/** POST /api/v1/bridge/jobs/[id]/done — response body */
 export interface JobDoneResponseDto {
   id:     string;
   status: "done";

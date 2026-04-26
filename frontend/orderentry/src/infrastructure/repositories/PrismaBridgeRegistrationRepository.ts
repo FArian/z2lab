@@ -1,13 +1,13 @@
 import type {
-  IAgentRegistrationRepository,
-  AgentRegistrationData,
-  CreateAgentRegistrationInput,
-} from "@/application/interfaces/repositories/IAgentRegistrationRepository";
+  IBridgeRegistrationRepository,
+  BridgeRegistrationData,
+  CreateBridgeRegistrationInput,
+} from "@/application/interfaces/repositories/IBridgeRegistrationRepository";
 import { prisma } from "../db/prismaClient";
 
-export class PrismaAgentRegistrationRepository implements IAgentRegistrationRepository {
-  async create(input: CreateAgentRegistrationInput): Promise<AgentRegistrationData> {
-    return prisma.agentRegistration.create({
+export class PrismaBridgeRegistrationRepository implements IBridgeRegistrationRepository {
+  async create(input: CreateBridgeRegistrationInput): Promise<BridgeRegistrationData> {
+    return prisma.bridgeRegistration.create({
       data: {
         name:         input.name,
         orgFhirId:    input.orgFhirId,
@@ -19,42 +19,42 @@ export class PrismaAgentRegistrationRepository implements IAgentRegistrationRepo
     });
   }
 
-  async findAll(): Promise<AgentRegistrationData[]> {
-    return prisma.agentRegistration.findMany({
+  async findAll(): Promise<BridgeRegistrationData[]> {
+    return prisma.bridgeRegistration.findMany({
       orderBy: { createdAt: "desc" },
     });
   }
 
-  async findById(id: string): Promise<AgentRegistrationData | null> {
-    return prisma.agentRegistration.findUnique({ where: { id } });
+  async findById(id: string): Promise<BridgeRegistrationData | null> {
+    return prisma.bridgeRegistration.findUnique({ where: { id } });
   }
 
-  async findByApiKeyPrefix(prefix: string): Promise<AgentRegistrationData[]> {
-    return prisma.agentRegistration.findMany({
+  async findByApiKeyPrefix(prefix: string): Promise<BridgeRegistrationData[]> {
+    return prisma.bridgeRegistration.findMany({
       where: { apiKeyPrefix: prefix, status: "active" },
     });
   }
 
-  async updateLastSeen(id: string, agentVersion?: string): Promise<void> {
-    await prisma.agentRegistration.update({
+  async updateLastSeen(id: string, bridgeVersion?: string): Promise<void> {
+    await prisma.bridgeRegistration.update({
       where: { id },
       data: {
         lastSeenAt: new Date(),
-        ...(agentVersion !== undefined && { agentVersion }),
+        ...(bridgeVersion !== undefined && { bridgeVersion }),
       },
     });
   }
 
   async revoke(id: string): Promise<void> {
-    await prisma.agentRegistration.update({
+    await prisma.bridgeRegistration.update({
       where: { id },
       data: { status: "revoked" },
     });
   }
 
   async delete(id: string): Promise<void> {
-    await prisma.agentRegistration.delete({ where: { id } });
+    await prisma.bridgeRegistration.delete({ where: { id } });
   }
 }
 
-export const agentRegistrationRepository = new PrismaAgentRegistrationRepository();
+export const bridgeRegistrationRepository = new PrismaBridgeRegistrationRepository();

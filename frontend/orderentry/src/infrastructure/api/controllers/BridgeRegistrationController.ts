@@ -1,12 +1,12 @@
 import { randomBytes, createHash } from "crypto";
-import { agentRegistrationRepository } from "@/infrastructure/repositories/PrismaAgentRegistrationRepository";
+import { bridgeRegistrationRepository } from "@/infrastructure/repositories/PrismaBridgeRegistrationRepository";
 import type {
-  RegisterAgentRequestDto,
-  RegisterAgentResponseDto,
-  AgentRegistrationResponseDto,
-  ListAgentsResponseDto,
-} from "@/infrastructure/api/dto/AgentRegistrationDto";
-import type { AgentRegistrationData } from "@/application/interfaces/repositories/IAgentRegistrationRepository";
+  RegisterBridgeRequestDto,
+  RegisterBridgeResponseDto,
+  BridgeRegistrationResponseDto,
+  ListBridgesResponseDto,
+} from "@/infrastructure/api/dto/BridgeRegistrationDto";
+import type { BridgeRegistrationData } from "@/application/interfaces/repositories/IBridgeRegistrationRepository";
 
 function generateApiKey(): { plaintext: string; prefix: string; hash: string } {
   const raw = randomBytes(32).toString("hex");
@@ -16,30 +16,30 @@ function generateApiKey(): { plaintext: string; prefix: string; hash: string } {
   return { plaintext, prefix, hash };
 }
 
-function toResponseDto(r: AgentRegistrationData): AgentRegistrationResponseDto {
+function toResponseDto(r: BridgeRegistrationData): BridgeRegistrationResponseDto {
   return {
-    id:           r.id,
-    name:         r.name,
-    orgFhirId:    r.orgFhirId,
-    orgGln:       r.orgGln,
-    locationId:   r.locationId,
-    apiKeyPrefix: r.apiKeyPrefix,
-    status:       r.status,
-    lastSeenAt:   r.lastSeenAt?.toISOString() ?? null,
-    agentVersion: r.agentVersion,
-    createdAt:    r.createdAt.toISOString(),
-    updatedAt:    r.updatedAt.toISOString(),
+    id:            r.id,
+    name:          r.name,
+    orgFhirId:     r.orgFhirId,
+    orgGln:        r.orgGln,
+    locationId:    r.locationId,
+    apiKeyPrefix:  r.apiKeyPrefix,
+    status:        r.status,
+    lastSeenAt:    r.lastSeenAt?.toISOString() ?? null,
+    bridgeVersion: r.bridgeVersion,
+    createdAt:     r.createdAt.toISOString(),
+    updatedAt:     r.updatedAt.toISOString(),
   };
 }
 
-export class AgentRegistrationController {
-  async register(body: RegisterAgentRequestDto): Promise<RegisterAgentResponseDto> {
+export class BridgeRegistrationController {
+  async register(body: RegisterBridgeRequestDto): Promise<RegisterBridgeResponseDto> {
     if (!body.name?.trim())      throw Object.assign(new Error("name ist erforderlich."), { status: 400 });
     if (!body.orgFhirId?.trim()) throw Object.assign(new Error("orgFhirId ist erforderlich."), { status: 400 });
 
     const { plaintext, prefix, hash } = generateApiKey();
 
-    const created = await agentRegistrationRepository.create({
+    const created = await bridgeRegistrationRepository.create({
       name:      body.name.trim(),
       orgFhirId: body.orgFhirId.trim(),
       ...(body.orgGln     !== undefined && { orgGln:     body.orgGln }),
@@ -61,27 +61,27 @@ export class AgentRegistrationController {
     };
   }
 
-  async list(): Promise<ListAgentsResponseDto> {
-    const all = await agentRegistrationRepository.findAll();
+  async list(): Promise<ListBridgesResponseDto> {
+    const all = await bridgeRegistrationRepository.findAll();
     return {
-      agents: all.map(toResponseDto),
-      total:  all.length,
+      bridges: all.map(toResponseDto),
+      total:   all.length,
     };
   }
 
   async revoke(id: string): Promise<{ ok: boolean }> {
-    const agent = await agentRegistrationRepository.findById(id);
-    if (!agent) throw Object.assign(new Error("Agent nicht gefunden."), { status: 404 });
-    await agentRegistrationRepository.revoke(id);
+    const bridge = await bridgeRegistrationRepository.findById(id);
+    if (!bridge) throw Object.assign(new Error("Bridge nicht gefunden."), { status: 404 });
+    await bridgeRegistrationRepository.revoke(id);
     return { ok: true };
   }
 
   async remove(id: string): Promise<{ ok: boolean }> {
-    const agent = await agentRegistrationRepository.findById(id);
-    if (!agent) throw Object.assign(new Error("Agent nicht gefunden."), { status: 404 });
-    await agentRegistrationRepository.delete(id);
+    const bridge = await bridgeRegistrationRepository.findById(id);
+    if (!bridge) throw Object.assign(new Error("Bridge nicht gefunden."), { status: 404 });
+    await bridgeRegistrationRepository.delete(id);
     return { ok: true };
   }
 }
 
-export const agentRegistrationController = new AgentRegistrationController();
+export const bridgeRegistrationController = new BridgeRegistrationController();

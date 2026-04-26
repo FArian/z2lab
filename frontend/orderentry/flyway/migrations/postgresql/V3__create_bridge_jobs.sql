@@ -1,6 +1,6 @@
--- V3: AgentJob — print and ORU jobs queued for Local Agent polling
+-- V3: BridgeJob — print and ORU jobs queued for z2Lab Bridge polling
 
-CREATE TABLE IF NOT EXISTS "AgentJob" (
+CREATE TABLE IF NOT EXISTS "BridgeJob" (
   id           TEXT        NOT NULL PRIMARY KEY,
   type         TEXT        NOT NULL,
   status       TEXT        NOT NULL DEFAULT 'pending',
@@ -12,5 +12,5 @@ CREATE TABLE IF NOT EXISTS "AgentJob" (
   "doneAt"     TIMESTAMPTZ
 );
 
-CREATE INDEX IF NOT EXISTS idx_agent_job_status_org ON "AgentJob" (status, "orgId");
-CREATE INDEX IF NOT EXISTS idx_agent_job_status_loc ON "AgentJob" (status, "orgId", "locationId");
+CREATE INDEX IF NOT EXISTS idx_bridge_job_status_org ON "BridgeJob" (status, "orgId");
+CREATE INDEX IF NOT EXISTS idx_bridge_job_status_loc ON "BridgeJob" (status, "orgId", "locationId");

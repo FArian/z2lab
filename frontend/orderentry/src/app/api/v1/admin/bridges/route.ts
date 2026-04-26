@@ -1,20 +1,20 @@
 /**
- * GET /api/v1/admin/agents — List all registered agents
+ * GET /api/v1/admin/bridges — List all registered bridges
  * Auth: admin session required.
  */
 
 import { NextResponse, type NextRequest } from "next/server";
 import { apiGateway } from "@/infrastructure/api/gateway/ApiGateway";
-import { agentRegistrationController } from "@/infrastructure/api/controllers/AgentRegistrationController";
+import { bridgeRegistrationController } from "@/infrastructure/api/controllers/BridgeRegistrationController";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
   return apiGateway.handle(
     req,
-    { version: "v1", endpoint: "/admin/agents", auth: "admin" },
+    { version: "v1", endpoint: "/admin/bridges", auth: "admin" },
     async () => {
-      const result = await agentRegistrationController.list();
+      const result = await bridgeRegistrationController.list();
       return NextResponse.json(result);
     },
   );

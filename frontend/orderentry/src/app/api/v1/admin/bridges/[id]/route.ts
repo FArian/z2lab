@@ -1,12 +1,12 @@
 /**
- * DELETE /api/v1/admin/agents/[id] — Remove agent registration
- * PATCH  /api/v1/admin/agents/[id] — Revoke agent (status → revoked)
+ * DELETE /api/v1/admin/bridges/[id] — Remove bridge registration
+ * PATCH  /api/v1/admin/bridges/[id] — Revoke bridge (status → revoked)
  * Auth: admin session required.
  */
 
 import { NextResponse, type NextRequest } from "next/server";
 import { apiGateway } from "@/infrastructure/api/gateway/ApiGateway";
-import { agentRegistrationController } from "@/infrastructure/api/controllers/AgentRegistrationController";
+import { bridgeRegistrationController } from "@/infrastructure/api/controllers/BridgeRegistrationController";
 
 export const dynamic = "force-dynamic";
 
@@ -16,10 +16,10 @@ export async function PATCH(
 ): Promise<NextResponse> {
   return apiGateway.handle(
     req,
-    { version: "v1", endpoint: "/admin/agents/[id]", auth: "admin" },
+    { version: "v1", endpoint: "/admin/bridges/[id]", auth: "admin" },
     async () => {
       const { id } = await params;
-      const result = await agentRegistrationController.revoke(id);
+      const result = await bridgeRegistrationController.revoke(id);
       return NextResponse.json(result);
     },
   );
@@ -31,10 +31,10 @@ export async function DELETE(
 ): Promise<NextResponse> {
   return apiGateway.handle(
     req,
-    { version: "v1", endpoint: "/admin/agents/[id]", auth: "admin" },
+    { version: "v1", endpoint: "/admin/bridges/[id]", auth: "admin" },
     async () => {
       const { id } = await params;
-      const result = await agentRegistrationController.remove(id);
+      const result = await bridgeRegistrationController.remove(id);
       return NextResponse.json(result);
     },
   );

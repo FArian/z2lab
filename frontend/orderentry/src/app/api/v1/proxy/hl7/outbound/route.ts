@@ -2,7 +2,7 @@
  * GET /api/v1/proxy/hl7/outbound
  *
  * Retrieves outbound HL7 messages (e.g. ORU results) from Orchestra.
- * The Edge agent polls this endpoint and writes results to the local filesystem.
+ * The z2Lab Bridge polls this endpoint and writes results to the local filesystem.
  *
  * Orchestra converts FHIR DiagnosticReport → HL7 ORU before responding.
  * OrderEntry does NOT parse or interpret the HL7 content — pure proxy.

@@ -8,13 +8,13 @@ import { Button } from "@/presentation/ui/Button";
 import { Input } from "@/presentation/ui/Input";
 import { Card } from "@/presentation/ui/Card";
 import { formatDate } from "@/shared/utils/formatDate";
-import type { AgentRegistrationResponseDto, RegisterAgentRequestDto } from "@/infrastructure/api/dto/AgentRegistrationDto";
+import type { BridgeRegistrationResponseDto, RegisterBridgeRequestDto } from "@/infrastructure/api/dto/BridgeRegistrationDto";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 interface NewKeyInfo {
-  agentName: string;
-  apiKey: string;
+  bridgeName: string;
+  apiKey:     string;
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -33,64 +33,64 @@ function statusBadge(status: string, lastSeenAt: string | null) {
 
 // ── Main Component ────────────────────────────────────────────────────────────
 
-export function AgentsPage() {
-  const [agents, setAgents] = useState<AgentRegistrationResponseDto[]>([]);
+export function BridgesPage() {
+  const [bridges, setBridges] = useState<BridgeRegistrationResponseDto[]>([]);
   const [loading, setLoading] = useState(true);
   const [showRegister, setShowRegister] = useState(false);
   const [newKey, setNewKey] = useState<NewKeyInfo | null>(null);
-  const [form, setForm] = useState<RegisterAgentRequestDto>({ name: "", orgFhirId: "" });
+  const [form, setForm] = useState<RegisterBridgeRequestDto>({ name: "", orgFhirId: "" });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const loadAgents = useCallback(async () => {
+  const loadBridges = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/v1/admin/agents");
-      const data = await res.json() as { agents: AgentRegistrationResponseDto[] };
-      setAgents(data.agents ?? []);
+      const res = await fetch("/api/v1/admin/bridges");
+      const data = await res.json() as { bridges: BridgeRegistrationResponseDto[] };
+      setBridges(data.bridges ?? []);
     } catch {
-      setError("Agents konnten nicht geladen werden.");
+      setError("Bridges konnten nicht geladen werden.");
     } finally {
       setLoading(false);
     }
   }, []);
 
-  useEffect(() => { void loadAgents(); }, [loadAgents]);
+  useEffect(() => { void loadBridges(); }, [loadBridges]);
 
   const handleRegister = useCallback(async () => {
     if (!form.name.trim() || !form.orgFhirId.trim()) return;
     setSaving(true);
     setError(null);
     try {
-      const res = await fetch("/api/v1/agent/register", {
+      const res = await fetch("/api/v1/bridge/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
       if (!res.ok) throw new Error(await res.text());
       const data = await res.json() as { name: string; apiKey: string };
-      setNewKey({ agentName: data.name, apiKey: data.apiKey });
+      setNewKey({ bridgeName: data.name, apiKey: data.apiKey });
       setShowRegister(false);
       setForm({ name: "", orgFhirId: "" });
-      await loadAgents();
+      await loadBridges();
     } catch (err) {
       setError((err as Error).message);
     } finally {
       setSaving(false);
     }
-  }, [form, loadAgents]);
+  }, [form, loadBridges]);
 
   const handleRevoke = useCallback(async (id: string) => {
-    if (!confirm("Agent sperren?")) return;
-    await fetch(`/api/v1/admin/agents/${id}`, { method: "PATCH" });
-    await loadAgents();
-  }, [loadAgents]);
+    if (!confirm("Bridge sperren?")) return;
+    await fetch(`/api/v1/admin/bridges/${id}`, { method: "PATCH" });
+    await loadBridges();
+  }, [loadBridges]);
 
   const handleDelete = useCallback(async (id: string) => {
-    if (!confirm("Agent löschen?")) return;
-    await fetch(`/api/v1/admin/agents/${id}`, { method: "DELETE" });
-    await loadAgents();
-  }, [loadAgents]);
+    if (!confirm("Bridge löschen?")) return;
+    await fetch(`/api/v1/admin/bridges/${id}`, { method: "DELETE" });
+    await loadBridges();
+  }, [loadBridges]);
 
   // ── Render ──────────────────────────────────────────────────────────────────
 
@@ -102,12 +102,12 @@ export function AgentsPage() {
           <div className="flex items-center gap-3">
             <BackButton />
             <div>
-              <h1 className="text-xl font-semibold text-zt-text-primary">Local Agents</h1>
+              <h1 className="text-xl font-semibold text-zt-text-primary">Bridges</h1>
               <p className="text-sm text-zt-text-secondary">Registrierte Kliniken und Praxen</p>
             </div>
           </div>
           <Button variant="primary" onClick={() => setShowRegister(true)}>
-            + Agent registrieren
+            + Bridge registrieren
           </Button>
         </div>
 
@@ -119,7 +119,7 @@ export function AgentsPage() {
 
         {/* API Key — shown once after registration */}
         {newKey && (
-          <Card title={`✓ Agent registriert — ${newKey.agentName}`}>
+          <Card title={`✓ Bridge registriert — ${newKey.bridgeName}`}>
             <div className="space-y-3">
               <p className="text-sm text-zt-text-secondary">
                 Bitte den API-Key jetzt kopieren — er wird nur einmal angezeigt.
@@ -145,7 +145,7 @@ export function AgentsPage() {
 
         {/* Register Form */}
         {showRegister && (
-          <Card title="Neuen Agent registrieren">
+          <Card title="Neue Bridge registrieren">
             <div className="space-y-4">
               <Input
                 label="Name der Klinik / Praxis"
@@ -184,12 +184,12 @@ export function AgentsPage() {
           </Card>
         )}
 
-        {/* Agents Table */}
-        <Card title={`Agents (${agents.length})`}>
+        {/* Bridges Table */}
+        <Card title={`Bridges (${bridges.length})`}>
           {loading ? (
             <p className="text-sm text-zt-text-secondary py-4">Laden…</p>
-          ) : agents.length === 0 ? (
-            <p className="text-sm text-zt-text-secondary py-4">Noch keine Agents registriert.</p>
+          ) : bridges.length === 0 ? (
+            <p className="text-sm text-zt-text-secondary py-4">Noch keine Bridges registriert.</p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
@@ -205,23 +205,23 @@ export function AgentsPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {agents.map((a) => (
-                    <tr key={a.id} className="border-b border-zt-border last:border-0">
-                      <td className="py-3 pr-4 font-medium text-zt-text-primary">{a.name}</td>
-                      <td className="py-3 pr-4 text-zt-text-secondary font-mono text-xs">{a.orgFhirId}</td>
-                      <td className="py-3 pr-4 text-zt-text-secondary font-mono text-xs">{a.apiKeyPrefix}…</td>
-                      <td className="py-3 pr-4">{statusBadge(a.status, a.lastSeenAt)}</td>
-                      <td className="py-3 pr-4 text-zt-text-secondary">{a.agentVersion ?? "—"}</td>
+                  {bridges.map((b) => (
+                    <tr key={b.id} className="border-b border-zt-border last:border-0">
+                      <td className="py-3 pr-4 font-medium text-zt-text-primary">{b.name}</td>
+                      <td className="py-3 pr-4 text-zt-text-secondary font-mono text-xs">{b.orgFhirId}</td>
+                      <td className="py-3 pr-4 text-zt-text-secondary font-mono text-xs">{b.apiKeyPrefix}…</td>
+                      <td className="py-3 pr-4">{statusBadge(b.status, b.lastSeenAt)}</td>
+                      <td className="py-3 pr-4 text-zt-text-secondary">{b.bridgeVersion ?? "—"}</td>
                       <td className="py-3 pr-4 text-zt-text-secondary">
-                        {a.lastSeenAt ? formatDate(a.lastSeenAt) : "—"}
+                        {b.lastSeenAt ? formatDate(b.lastSeenAt) : "—"}
                       </td>
                       <td className="py-3">
                         <div className="flex gap-2">
-                          {a.status === "active" && (
+                          {b.status === "active" && (
                             <Button
                               variant="secondary"
                               size="sm"
-                              onClick={() => void handleRevoke(a.id)}
+                              onClick={() => void handleRevoke(b.id)}
                             >
                               Sperren
                             </Button>
@@ -229,7 +229,7 @@ export function AgentsPage() {
                           <Button
                             variant="danger"
                             size="sm"
-                            onClick={() => void handleDelete(a.id)}
+                            onClick={() => void handleDelete(b.id)}
                           >
                             Löschen
                           </Button>

@@ -1,8 +1,8 @@
--- V3: AgentJob — print and ORU jobs queued for Local Agent polling
+-- V3: BridgeJob — print and ORU jobs queued for z2Lab Bridge polling
 
-IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='AgentJob' AND xtype='U')
+IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='BridgeJob' AND xtype='U')
 BEGIN
-  CREATE TABLE AgentJob (
+  CREATE TABLE BridgeJob (
     id          NVARCHAR(36)  NOT NULL PRIMARY KEY,
     type        NVARCHAR(10)  NOT NULL,
     status      NVARCHAR(10)  NOT NULL DEFAULT 'pending',
@@ -14,6 +14,6 @@ BEGIN
     doneAt      DATETIME2     NULL
   );
 
-  CREATE INDEX idx_agent_job_status_org ON AgentJob (status, orgId);
-  CREATE INDEX idx_agent_job_status_loc ON AgentJob (status, orgId, locationId);
+  CREATE INDEX idx_bridge_job_status_org ON BridgeJob (status, orgId);
+  CREATE INDEX idx_bridge_job_status_loc ON BridgeJob (status, orgId, locationId);
 END

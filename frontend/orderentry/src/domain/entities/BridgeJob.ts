@@ -1,9 +1,9 @@
-export type AgentJobType   = "print" | "oru";
-export type AgentJobStatus = "pending" | "done" | "failed";
+export type BridgeJobType   = "print" | "oru";
+export type BridgeJobStatus = "pending" | "done" | "failed";
 
-/** Payload stored as JSON inside AgentJob.payload. */
-export interface AgentJobPayload {
-  /** FHIR DocumentReference ID — agent fetches PDF via /api/v1/proxy/fhir/document-references/{id} */
+/** Payload stored as JSON inside BridgeJob.payload. */
+export interface BridgeJobPayload {
+  /** FHIR DocumentReference ID — bridge fetches PDF via /api/v1/proxy/fhir/document-references/{id} */
   documentReferenceId: string;
   serviceRequestId:    string;
   patientId:           string;
@@ -12,15 +12,15 @@ export interface AgentJobPayload {
   zpl:                 string;
 }
 
-export interface AgentJob {
+export interface BridgeJob {
   id:         string;
-  type:       AgentJobType;
-  status:     AgentJobStatus;
+  type:       BridgeJobType;
+  status:     BridgeJobStatus;
   /** FHIR Organization ID — mandatory routing key. */
   orgId:      string;
-  /** FHIR Location ID — targeted routing. Null = broadcast to all agents of the org. */
+  /** FHIR Location ID — targeted routing. Null = broadcast to all bridges of the org. */
   locationId: string | null;
-  payload:    AgentJobPayload;
+  payload:    BridgeJobPayload;
   createdAt:  string;
   updatedAt:  string;
   doneAt:     string | null;

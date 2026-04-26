@@ -141,19 +141,19 @@ export const openApiSpec = {
         "Every request is audit-logged.",
     },
     {
-      name: "Agent",
+      name: "Bridge",
       description:
-        "Local Agent job queue — print jobs (ZPL barcode labels + Begleitschein PDF) and ORU dispatch. " +
-        "The Agent polls `GET /agent/jobs` every few seconds and marks completed jobs via `POST /agent/jobs/{id}/done`. " +
+        "z2Lab Bridge job queue — print jobs (ZPL barcode labels + Begleitschein PDF) and ORU dispatch. " +
+        "The Bridge polls `GET /bridge/jobs` every few seconds and marks completed jobs via `POST /bridge/jobs/{id}/done`. " +
         "Authentication: Bearer JWT or PAT (`ztk_...`). " +
-        "Routing: `orgId` (mandatory) selects the organisation; `locationId` (optional) targets a department agent — " +
-        "omitting it broadcasts the job to all agents of that organisation.",
+        "Routing: `orgId` (mandatory) selects the organisation; `locationId` (optional) targets a department bridge — " +
+        "omitting it broadcasts the job to all bridges of that organisation.",
     },
     {
       name: "FHIR Proxy",
       description:
         "Server-side proxies for FHIR resources on the HAPI FHIR R4 server. " +
-        "Used by the Local Agent (e.g. fetching DocumentReference PDFs) and by the UI. " +
+        "Used by the z2Lab Bridge (e.g. fetching DocumentReference PDFs) and by the UI. " +
         "Authentication: Bearer JWT, PAT, or session cookie.",
     },
     {
@@ -1927,19 +1927,19 @@ export const openApiSpec = {
       },
     },
 
-    // ── Agent job queue ───────────────────────────────────────────────────────
+    // ── Bridge job queue ──────────────────────────────────────────────────────
 
-    "/agent/jobs": {
+    "/bridge/jobs": {
       get: {
-        tags: ["Agent"],
-        summary: "Poll pending Agent jobs",
+        tags: ["Bridge"],
+        summary: "Poll pending Bridge jobs",
         description:
           "Returns all pending jobs (print and ORU) for the given organisation and optional location.\n\n" +
           "**Routing logic:**\n" +
           "- `locationId` provided → returns jobs targeted at that location **plus** broadcast jobs (`locationId = null`)\n" +
           "- `locationId` omitted → returns broadcast-only jobs\n\n" +
-          "The Agent polls this endpoint every few seconds and processes returned jobs sequentially.",
-        operationId: "listAgentJobs",
+          "The Bridge polls this endpoint every few seconds and processes returned jobs sequentially.",
+        operationId: "listBridgeJobs",
         security: [{ bearerAuth: [] }, { sessionCookie: [] }],
         parameters: [
           {
@@ -1953,7 +1953,7 @@ export const openApiSpec = {
             name: "locationId",
             in: "query",
             required: false,
-            description: "FHIR Location ID of the department/station running this Agent instance",
+            description: "FHIR Location ID of the department/station running this Bridge instance",
             schema: { type: "string", example: "loc-notaufnahme" },
           },
         ],
@@ -1962,7 +1962,7 @@ export const openApiSpec = {
             description: "List of pending jobs",
             content: {
               "application/json": {
-                schema: { $ref: "#/components/schemas/ListAgentJobsResponse" },
+                schema: { $ref: "#/components/schemas/ListBridgeJobsResponse" },
               },
             },
           },
@@ -1971,14 +1971,14 @@ export const openApiSpec = {
         },
       },
       post: {
-        tags: ["Agent"],
+        tags: ["Bridge"],
         summary: "Create a print job (after order submission)",
         description:
           "Creates a pending print job containing ZPL barcode labels (one per specimen) " +
           "and a reference to the Begleitschein PDF stored in HAPI FHIR as a DocumentReference.\n\n" +
           "Called automatically by OrderEntry after every successful order submission.\n\n" +
           `**ZPL format:** CODE128 barcode \`{orderNumber} {materialCode}\` — required by the ${EnvConfig.labName} LIS scanner.\n\n` +
-          "**PDF retrieval:** The Agent fetches the DocumentReference PDF via " +
+          "**PDF retrieval:** The Bridge fetches the DocumentReference PDF via " +
           "`GET /api/v1/proxy/fhir/document-references/{documentReferenceId}`.",
         operationId: "createPrintJob",
         security: [{ bearerAuth: [] }, { sessionCookie: [] }],
@@ -2005,22 +2005,22 @@ export const openApiSpec = {
       },
     },
 
-    "/agent/jobs/{id}/done": {
+    "/bridge/jobs/{id}/done": {
       post: {
-        tags: ["Agent"],
-        summary: "Mark Agent job as completed",
+        tags: ["Bridge"],
+        summary: "Mark Bridge job as completed",
         description:
-          "The Agent calls this endpoint after successfully completing a job " +
+          "The Bridge calls this endpoint after successfully completing a job " +
           "(print sent to printer, ORU delivered to LIS). " +
           "Sets `status → done` and records `doneAt` timestamp.",
-        operationId: "markAgentJobDone",
+        operationId: "markBridgeJobDone",
         security: [{ bearerAuth: [] }, { sessionCookie: [] }],
         parameters: [
           {
             name: "id",
             in: "path",
             required: true,
-            description: "AgentJob UUID",
+            description: "BridgeJob UUID",
             schema: { type: "string", format: "uuid" },
           },
         ],
@@ -2043,10 +2043,10 @@ export const openApiSpec = {
     "/proxy/fhir/document-references/{id}": {
       get: {
         tags: ["FHIR Proxy"],
-        summary: "Get FHIR DocumentReference (PDF for Agent printing)",
+        summary: "Get FHIR DocumentReference (PDF for Bridge printing)",
         description:
           "Proxies a single `DocumentReference` resource from HAPI FHIR. " +
-          "Used by the Local Agent to retrieve the Begleitschein PDF attachment before printing.\n\n" +
+          "Used by the z2Lab Bridge to retrieve the Begleitschein PDF attachment before printing.\n\n" +
           "The PDF is encoded in `content[].attachment.data` (Base64) with `contentType: application/pdf`.",
         operationId: "getFhirDocumentReference",
         security: [{ bearerAuth: [] }, { sessionCookie: [] }],
@@ -3723,9 +3723,9 @@ export const openApiSpec = {
         },
       },
 
-      // ── Agent job schemas ──────────────────────────────────────────────────
+      // ── Bridge job schemas ─────────────────────────────────────────────────
 
-      AgentJobResponse: {
+      BridgeJobResponse: {
         type: "object",
         required: ["id", "type", "orgId", "orderNumber", "zpl", "createdAt"],
         properties: {
@@ -3742,13 +3742,13 @@ export const openApiSpec = {
         },
       },
 
-      ListAgentJobsResponse: {
+      ListBridgeJobsResponse: {
         type: "object",
         required: ["jobs"],
         properties: {
           jobs: {
             type: "array",
-            items: { $ref: "#/components/schemas/AgentJobResponse" },
+            items: { $ref: "#/components/schemas/BridgeJobResponse" },
           },
         },
       },
@@ -3758,7 +3758,7 @@ export const openApiSpec = {
         required: ["orgId", "documentReferenceId", "orderNumber"],
         properties: {
           orgId:               { type: "string", description: "FHIR Organization ID (mandatory for routing)" },
-          locationId:          { type: "string", description: "FHIR Location ID — targets a specific department Agent (omit for broadcast)" },
+          locationId:          { type: "string", description: "FHIR Location ID — targets a specific department Bridge (omit for broadcast)" },
           documentReferenceId: { type: "string", description: "FHIR DocumentReference ID — Begleitschein PDF stored in HAPI FHIR" },
           serviceRequestId:    { type: "string", description: "FHIR ServiceRequest ID" },
           patientId:           { type: "string", description: "FHIR Patient ID" },

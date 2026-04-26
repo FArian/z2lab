@@ -73,15 +73,15 @@ export const V1_ROUTES: readonly RouteEntry[] = [
   { method: "GET",    path: "/v1/proxy/fhir/service-requests/:id",                  version: "v1", tag: "FHIR", auth: "public", summary: "Get service request" },
   { method: "GET",    path: "/v1/proxy/fhir/diagnostic-reports",                    version: "v1", tag: "FHIR", auth: "public", summary: "List diagnostic reports" },
 
-  // ── Agent ───────────────────────────────────────────────────────────────────
-  { method: "GET",    path: "/v1/agent/status",                              version: "v1", tag: "Agent", auth: "public", summary: "Agent connectivity check" },
-  { method: "POST",   path: "/v1/agent/token",                               version: "v1", tag: "Agent", auth: "public", summary: "Obtain agent access token" },
-  { method: "GET",    path: "/v1/agent/jobs",                                version: "v1", tag: "Agent", auth: "public", summary: "Poll pending jobs (print + ORU)" },
-  { method: "POST",   path: "/v1/agent/jobs",                                version: "v1", tag: "Agent", auth: "public", summary: "Create print job after order submission" },
-  { method: "POST",   path: "/v1/agent/jobs/:id/done",                       version: "v1", tag: "Agent", auth: "public", summary: "Mark job as completed" },
+  // ── Bridge ──────────────────────────────────────────────────────────────────
+  { method: "GET",    path: "/v1/bridge/status",                             version: "v1", tag: "Bridge", auth: "public", summary: "Bridge connectivity check" },
+  { method: "POST",   path: "/v1/bridge/token",                              version: "v1", tag: "Bridge", auth: "public", summary: "Obtain bridge access token" },
+  { method: "GET",    path: "/v1/bridge/jobs",                               version: "v1", tag: "Bridge", auth: "public", summary: "Poll pending jobs (print + ORU)" },
+  { method: "POST",   path: "/v1/bridge/jobs",                               version: "v1", tag: "Bridge", auth: "public", summary: "Create print job after order submission" },
+  { method: "POST",   path: "/v1/bridge/jobs/:id/done",                      version: "v1", tag: "Bridge", auth: "public", summary: "Mark job as completed" },
 
   // ── FHIR proxy ──────────────────────────────────────────────────────────────
-  { method: "GET",    path: "/v1/proxy/fhir/document-references/:id",        version: "v1", tag: "FHIR", auth: "public", summary: "Get DocumentReference (PDF for Agent)" },
+  { method: "GET",    path: "/v1/proxy/fhir/document-references/:id",        version: "v1", tag: "FHIR", auth: "public", summary: "Get DocumentReference (PDF for Bridge)" },
 
   // ── HL7 proxy ───────────────────────────────────────────────────────────────
   { method: "POST",   path: "/v1/proxy/hl7/inbound",             version: "v1", tag: "HL7",   auth: "public", summary: "HL7 inbound message" },

@@ -378,7 +378,7 @@ const ENV_SCHEMA: ReadonlyArray<{
   },
   {
     key:             envKey("ORCHESTRA__HL7_INBOUND_PATH"),
-    description:     "Orchestra path for receiving inbound HL7 messages from the Edge agent.",
+    description:     "Orchestra path for receiving inbound HL7 messages from the z2Lab Bridge.",
     default:         "/api/v1/in/hl7",
     required:        false,
     writable:        true,

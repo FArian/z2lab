@@ -1,7 +1,7 @@
 /**
  * POST /api/v1/proxy/hl7/inbound
  *
- * Receives a raw HL7v2 message from the Edge agent and forwards it to Orchestra.
+ * Receives a raw HL7v2 message from the z2Lab Bridge and forwards it to Orchestra.
  * Orchestra converts HL7 → FHIR and stores the result in HAPI FHIR.
  *
  * OrderEntry does NOT parse or interpret the HL7 content — pure proxy.

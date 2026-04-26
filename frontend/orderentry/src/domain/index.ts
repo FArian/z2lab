@@ -22,8 +22,8 @@ export { OrderStatus }                                     from "./entities/Orde
 export type { Order }                                      from "./entities/Order";
 export type { MailMessage }                                from "./entities/MailMessage";
 export type { DeepLinkContextType, DeepLinkContext }       from "./entities/DeepLinkContext";
-export type { AgentJobType, AgentJobStatus,
-              AgentJobPayload, AgentJob }                  from "./entities/AgentJob";
+export type { BridgeJobType, BridgeJobStatus,
+              BridgeJobPayload, BridgeJob }                from "./entities/BridgeJob";
 export type { UserRole, UserStatus, UserProviderType,
               UserFhirSyncStatus, ManagedUserProfile,
               ManagedUser }                                from "./entities/ManagedUser";

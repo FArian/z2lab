@@ -2,7 +2,7 @@
  * GET /api/v1/proxy/fhir/document-references/[id]
  *
  * FHIR proxy — fetches a single DocumentReference from HAPI FHIR.
- * Used by the Local Agent to retrieve the PDF attachment for printing.
+ * Used by the z2Lab Bridge to retrieve the PDF attachment for printing.
  *
  * Auth: Bearer JWT or PAT (same as other FHIR proxy routes)
  */

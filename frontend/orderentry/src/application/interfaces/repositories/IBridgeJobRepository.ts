@@ -1,7 +1,7 @@
-import type { AgentJob, AgentJobType } from "@/domain/entities/AgentJob";
+import type { BridgeJob, BridgeJobType } from "@/domain/entities/BridgeJob";
 
-export interface CreateAgentJobInput {
-  type:                AgentJobType;
+export interface CreateBridgeJobInput {
+  type:                BridgeJobType;
   orgId:               string;
   locationId?:         string;
   documentReferenceId: string;
@@ -11,16 +11,16 @@ export interface CreateAgentJobInput {
   zpl:                 string;
 }
 
-export interface IAgentJobRepository {
+export interface IBridgeJobRepository {
   /** Create a new pending job. */
-  create(input: CreateAgentJobInput): Promise<AgentJob>;
+  create(input: CreateBridgeJobInput): Promise<BridgeJob>;
 
   /**
    * Return all pending jobs for an organization.
    * If locationId is given, returns jobs for that location + broadcast jobs (locationId = null).
    * If locationId is omitted, returns only broadcast jobs.
    */
-  listPending(orgId: string, locationId?: string): Promise<AgentJob[]>;
+  listPending(orgId: string, locationId?: string): Promise<BridgeJob[]>;
 
   /** Mark a job as done. No-op if already done. */
   markDone(id: string): Promise<void>;

@@ -1,33 +1,33 @@
 /**
- * PrismaAgentJobRepository — IAgentJobRepository backed by Prisma.
+ * PrismaBridgeJobRepository — IBridgeJobRepository backed by Prisma.
  *
  * Works with SQLite (default), PostgreSQL, and MSSQL.
  * payload is stored as a JSON string (same approach as User.profile).
  */
 
-import type { IAgentJobRepository, CreateAgentJobInput } from "@/application/interfaces/repositories/IAgentJobRepository";
-import type { AgentJob, AgentJobPayload } from "@/domain/entities/AgentJob";
+import type { IBridgeJobRepository, CreateBridgeJobInput } from "@/application/interfaces/repositories/IBridgeJobRepository";
+import type { BridgeJob, BridgeJobPayload } from "@/domain/entities/BridgeJob";
 import { prisma } from "../db/prismaClient";
 import crypto from "node:crypto";
-import type { AgentJob as PrismaAgentJob } from "@prisma/client";
+import type { BridgeJob as PrismaBridgeJob } from "@prisma/client";
 
-function toAgentJob(row: PrismaAgentJob): AgentJob {
+function toBridgeJob(row: PrismaBridgeJob): BridgeJob {
   return {
     id:         row.id,
-    type:       row.type as AgentJob["type"],
-    status:     row.status as AgentJob["status"],
+    type:       row.type as BridgeJob["type"],
+    status:     row.status as BridgeJob["status"],
     orgId:      row.orgId,
     locationId: row.locationId ?? null,
-    payload:    JSON.parse(row.payload) as AgentJobPayload,
+    payload:    JSON.parse(row.payload) as BridgeJobPayload,
     createdAt:  row.createdAt.toISOString(),
     updatedAt:  row.updatedAt.toISOString(),
     doneAt:     row.doneAt ? row.doneAt.toISOString() : null,
   };
 }
 
-export class PrismaAgentJobRepository implements IAgentJobRepository {
-  async create(input: CreateAgentJobInput): Promise<AgentJob> {
-    const payload: AgentJobPayload = {
+export class PrismaBridgeJobRepository implements IBridgeJobRepository {
+  async create(input: CreateBridgeJobInput): Promise<BridgeJob> {
+    const payload: BridgeJobPayload = {
       documentReferenceId: input.documentReferenceId,
       serviceRequestId:    input.serviceRequestId,
       patientId:           input.patientId,
@@ -35,7 +35,7 @@ export class PrismaAgentJobRepository implements IAgentJobRepository {
       zpl:                 input.zpl,
     };
 
-    const row = await prisma.agentJob.create({
+    const row = await prisma.bridgeJob.create({
       data: {
         id:         crypto.randomUUID(),
         type:       input.type,
@@ -46,11 +46,11 @@ export class PrismaAgentJobRepository implements IAgentJobRepository {
       },
     });
 
-    return toAgentJob(row);
+    return toBridgeJob(row);
   }
 
-  async listPending(orgId: string, locationId?: string): Promise<AgentJob[]> {
-    const rows = await prisma.agentJob.findMany({
+  async listPending(orgId: string, locationId?: string): Promise<BridgeJob[]> {
+    const rows = await prisma.bridgeJob.findMany({
       where: {
         status: "pending",
         orgId,
@@ -62,22 +62,22 @@ export class PrismaAgentJobRepository implements IAgentJobRepository {
       orderBy: { createdAt: "asc" },
     });
 
-    return rows.map(toAgentJob);
+    return rows.map(toBridgeJob);
   }
 
   async markDone(id: string): Promise<void> {
-    await prisma.agentJob.update({
+    await prisma.bridgeJob.update({
       where: { id },
       data:  { status: "done", doneAt: new Date() },
     });
   }
 
   async markFailed(id: string): Promise<void> {
-    await prisma.agentJob.update({
+    await prisma.bridgeJob.update({
       where: { id },
       data:  { status: "failed" },
     });
   }
 }
 
-export const agentJobRepository = new PrismaAgentJobRepository();
+export const bridgeJobRepository = new PrismaBridgeJobRepository();

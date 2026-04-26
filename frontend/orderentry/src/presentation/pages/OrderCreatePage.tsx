@@ -224,8 +224,8 @@ export default function OrderCreatePage({ id, srId }: OrderCreatePageProps) {
       form.setSubmitMsg(`${tr("order.sent")}. IDs: ${ids.join(", ") || "ok"}`);
       form.setSubmitErr(null);
 
-      // Queue print job for Local Agent (fire-and-forget — does not block UI)
-      void fetch("/api/v1/agent/jobs", {
+      // Queue print job for z2Lab Bridge (fire-and-forget — does not block UI)
+      void fetch("/api/v1/bridge/jobs", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -240,7 +240,7 @@ export default function OrderCreatePage({ id, srId }: OrderCreatePageProps) {
           })),
         }),
       }).catch(() => {
-        // Agent not available — browser print is the fallback
+        // Bridge not available — browser print is the fallback
       });
 
       // Print Begleitschein before clearing state so patient/order data is still available

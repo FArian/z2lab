@@ -1,8 +1,8 @@
 /**
- * GET /api/v1/agent/status
+ * GET /api/v1/bridge/status
  *
- * Lightweight connectivity check for Edge Lite / Edge Full agents.
- * The agent calls this on startup and periodically to verify:
+ * Lightweight connectivity check for z2Lab Bridge instances.
+ * The bridge calls this on startup and periodically to verify:
  *   - Network connectivity to OrderEntry
  *   - Token validity
  *   - Whether HL7 proxy is configured

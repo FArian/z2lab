@@ -1,4 +1,4 @@
-export interface AgentRegistrationData {
+export interface BridgeRegistrationData {
   id: string;
   name: string;
   orgFhirId: string;
@@ -8,12 +8,12 @@ export interface AgentRegistrationData {
   apiKeyPrefix: string;
   status: string;
   lastSeenAt: Date | null;
-  agentVersion: string | null;
+  bridgeVersion: string | null;
   createdAt: Date;
   updatedAt: Date;
 }
 
-export interface CreateAgentRegistrationInput {
+export interface CreateBridgeRegistrationInput {
   name: string;
   orgFhirId: string;
   orgGln?: string;
@@ -22,12 +22,12 @@ export interface CreateAgentRegistrationInput {
   apiKeyPrefix: string;
 }
 
-export interface IAgentRegistrationRepository {
-  create(input: CreateAgentRegistrationInput): Promise<AgentRegistrationData>;
-  findAll(): Promise<AgentRegistrationData[]>;
-  findById(id: string): Promise<AgentRegistrationData | null>;
-  findByApiKeyPrefix(prefix: string): Promise<AgentRegistrationData[]>;
-  updateLastSeen(id: string, agentVersion?: string): Promise<void>;
+export interface IBridgeRegistrationRepository {
+  create(input: CreateBridgeRegistrationInput): Promise<BridgeRegistrationData>;
+  findAll(): Promise<BridgeRegistrationData[]>;
+  findById(id: string): Promise<BridgeRegistrationData | null>;
+  findByApiKeyPrefix(prefix: string): Promise<BridgeRegistrationData[]>;
+  updateLastSeen(id: string, bridgeVersion?: string): Promise<void>;
   revoke(id: string): Promise<void>;
   delete(id: string): Promise<void>;
 }

@@ -1,8 +1,8 @@
-import { AgentsPage } from "@/presentation/pages/AgentsPage";
+import { BridgesPage } from "@/presentation/pages/BridgesPage";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Local Agents — ZetLab" };
+export const metadata = { title: "Bridges — z2Lab" };
 
 export default function Page() {
-  return <AgentsPage />;
+  return <BridgesPage />;
 }

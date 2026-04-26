@@ -1,14 +1,14 @@
 /**
- * POST /api/v1/agent/jobs/[id]/done
+ * POST /api/v1/bridge/jobs/[id]/done
  *
- * Agent confirms that a job (print or ORU) has been completed.
+ * Bridge confirms that a job (print or ORU) has been completed.
  * Sets status → "done" and records doneAt timestamp.
  *
  * Auth: Bearer JWT or PAT
  */
 
 import { NextResponse, type NextRequest } from "next/server";
-import { agentJobController } from "@/infrastructure/api/controllers/AgentJobController";
+import { bridgeJobController } from "@/infrastructure/api/controllers/BridgeJobController";
 import { bearerAuthGuard } from "@/infrastructure/auth/BearerAuthGuard";
 import { getSessionFromCookies } from "@/lib/auth";
 
@@ -27,7 +27,7 @@ export async function POST(
 
   try {
     const { id } = await params;
-    const result = await agentJobController.markDone(id);
+    const result = await bridgeJobController.markDone(id);
     return NextResponse.json(result);
   } catch (err) {
     const status = (err as { status?: number }).status ?? 500;

@@ -1,5 +1,5 @@
 /**
- * Hl7ProxyController — pure HTTP proxy between the Edge agent and Orchestra.
+ * Hl7ProxyController — pure HTTP proxy between the z2Lab Bridge and Orchestra.
  *
  * Architecture rule (CRITICAL):
  *   OrderEntry does NOT parse HL7.
@@ -11,8 +11,8 @@
  *   2. Forwards the raw request body to Orchestra.
  *   3. Returns the Orchestra response (or a structured error).
  *
- * Inbound:  Agent → POST /api/v1/proxy/hl7/inbound → Orchestra (HL7 → FHIR)
- * Outbound: Agent → GET  /api/v1/proxy/hl7/outbound → Orchestra (FHIR → HL7)
+ * Inbound:  Bridge → POST /api/v1/proxy/hl7/inbound → Orchestra (HL7 → FHIR)
+ * Outbound: Bridge → GET  /api/v1/proxy/hl7/outbound → Orchestra (FHIR → HL7)
  */
 
 import { EnvConfig } from "@/infrastructure/config/EnvConfig";
@@ -78,7 +78,7 @@ export class Hl7ProxyController {
   /**
    * POST /api/v1/proxy/hl7/inbound
    *
-   * Accepts a raw HL7v2 message (or batch) from the Edge agent and forwards it
+   * Accepts a raw HL7v2 message (or batch) from the z2Lab Bridge and forwards it
    * to Orchestra. Orchestra converts HL7 → FHIR and stores the result.
    *
    * Content-Type of the body is passed through as-is to Orchestra.
