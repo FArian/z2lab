@@ -1013,6 +1013,39 @@ export const openApiSpec = {
           content: {
             "application/json": {
               schema: { $ref: "#/components/schemas/MailTestRequest" },
+              examples: {
+                verifyOnly: {
+                  summary: "SMTP verify only (no email sent)",
+                  value: {},
+                },
+                sendDefault: {
+                  summary: "Send default test email",
+                  value: { to: "admin@example.com" },
+                },
+                sendCustomSubject: {
+                  summary: "Custom subject (auto-prefixed with [TEST])",
+                  value: {
+                    to: "admin@example.com",
+                    subject: "Spam-Filter-Test mit Sonderzeichen ÄÖÜ",
+                  },
+                },
+                sendCustomText: {
+                  summary: "Custom plain-text body",
+                  value: {
+                    to: "admin@example.com",
+                    subject: "Routing-Test",
+                    text: "Bitte bestätigen, dass du diese Mail erhalten hast.",
+                  },
+                },
+                sendCustomHtml: {
+                  summary: "Custom HTML body",
+                  value: {
+                    to: "admin@example.com",
+                    subject: "Layout-Test",
+                    html: "<h1>Hallo</h1><p>Test mit eigenem HTML.</p>",
+                  },
+                },
+              },
             },
           },
         },
@@ -3570,8 +3603,16 @@ export const openApiSpec = {
 
       MailTestRequest: {
         type: "object",
+        description:
+          "Optional payload for `POST /admin/mail/test`. Without `to` the endpoint only " +
+          "performs an SMTP verify. With `to` a test email is sent; subject and body can " +
+          "be overridden, but the subject is always prefixed with `[TEST]` and a provider " +
+          "footer is always appended to the body for audit purposes.",
         properties: {
-          to: { type: "string", format: "email", description: "If provided, a test email is sent to this address after SMTP verify" },
+          to:      { type: "string", format: "email", description: "If provided, a test email is sent to this address after SMTP verify" },
+          subject: { type: "string", description: "Optional subject override. The `[TEST]` prefix is added automatically." },
+          text:    { type: "string", description: "Optional plain-text body override. A provider footer is always appended." },
+          html:    { type: "string", description: "Optional HTML body override. A provider footer is always appended." },
         },
       },
 

@@ -73,13 +73,23 @@ export class MailController {
     }
 
     if (body.to) {
+      // Subject: optional override + always-prefixed [TEST] marker
+      const baseSubject =
+        body.subject?.trim() || "z2Lab OrderEntry — Test-E-Mail";
+      const subject = baseSubject.startsWith("[TEST]")
+        ? baseSubject
+        : `[TEST] ${baseSubject}`;
+
+      // Body: optional override + always-appended provider footer
+      const text = body.text?.trim()
+        ? `${body.text}\n\n${footerText(provider)}`
+        : buildTestText(provider);
+      const html = body.html?.trim()
+        ? `${body.html}\n${footerHtml(provider)}`
+        : buildTestHtml(provider);
+
       try {
-        await this.service.send({
-          to:      body.to,
-          subject: "z2Lab OrderEntry — Test-E-Mail",
-          text:    buildTestText(provider),
-          html:    buildTestHtml(provider),
-        });
+        await this.service.send({ to: body.to, subject, text, html });
         log.info(`Mail test: test email sent to ${body.to} via ${provider}`);
         return {
           ok:         true,
@@ -131,6 +141,26 @@ function buildTestHtml(provider: string): string {
     `<tr><td style="padding:2px 12px 2px 0;color:#666">Auth</td><td><code>${EnvConfig.mailAuthType}</code></td></tr>` +
     "</table>" +
     "<p style=\"color:#28a745\">✓ Mail-Konfiguration ist korrekt.</p>"
+  );
+}
+
+/** Footer always appended when the caller supplies their own text body. */
+function footerText(provider: string): string {
+  return (
+    "---\n" +
+    "[TEST] z2Lab OrderEntry — Mail-Test-Endpoint\n" +
+    `Provider: ${provider} · Auth: ${EnvConfig.mailAuthType}`
+  );
+}
+
+/** Footer always appended when the caller supplies their own HTML body. */
+function footerHtml(provider: string): string {
+  return (
+    "<hr style=\"margin-top:16px;border:0;border-top:1px solid #ddd\">" +
+    "<p style=\"color:#888;font-size:11px;margin-top:8px\">" +
+    "[TEST] z2Lab OrderEntry — Mail-Test-Endpoint · " +
+    `Provider: <code>${provider}</code> · Auth: <code>${EnvConfig.mailAuthType}</code>` +
+    "</p>"
   );
 }
 

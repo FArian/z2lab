@@ -7,10 +7,25 @@
 
 // ── Request ───────────────────────────────────────────────────────────────────
 
-/** POST /api/admin/mail/test — optional recipient for send-through test. */
+/**
+ * POST /api/admin/mail/test — optional recipient for send-through test
+ * with optional content overrides.
+ *
+ * Without `to`: SMTP verify only, no email sent.
+ * With `to`:    after a successful verify, a test email is sent. The
+ *               subject is always prefixed with `[TEST]` so test emails
+ *               remain identifiable in logs and inboxes; provider/auth
+ *               metadata is always appended to the body.
+ */
 export interface MailTestRequestDto {
   /** If provided, a real test email is sent to this address after SMTP verify. */
   readonly to?: string;
+  /** Optional subject override (a `[TEST]` prefix is always added). */
+  readonly subject?: string;
+  /** Optional plain-text body override. */
+  readonly text?: string;
+  /** Optional HTML body override. */
+  readonly html?: string;
 }
 
 // ── Responses ─────────────────────────────────────────────────────────────────

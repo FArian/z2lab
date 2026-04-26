@@ -515,15 +515,44 @@ ORDERENTRY_MAIL__FROM=z2Lab OrderEntry <noreply@zlz.ch>
 | `GET`  | `/api/v1/admin/mail/status` | admin | Current configuration without secrets |
 | `POST` | `/api/v1/admin/mail/test`   | admin | Verify SMTP + optionally send test email |
 
-The `POST` body is optional:
+### `POST /api/v1/admin/mail/test` — body forms
 
-```json
-// SMTP verify only — no email sent
+The body is optional. Without it the endpoint only verifies SMTP. With `to`, a test email is sent. `subject`, `text`, and `html` are all optional content overrides.
+
+```jsonc
+// 1. SMTP verify only — no email sent
 {}
 
-// Verify + send a test email to <to>
+// 2. Default test email
 { "to": "admin@example.com" }
+
+// 3. Custom subject (auto-prefixed with [TEST])
+{ "to":      "admin@example.com",
+  "subject": "Spam-Filter-Test mit Sonderzeichen ÄÖÜ" }
+
+// 4. Custom plain-text body
+{ "to":      "admin@example.com",
+  "subject": "Routing-Test",
+  "text":    "Bitte bestätigen, dass du diese Mail erhalten hast." }
+
+// 5. Custom HTML body
+{ "to":      "admin@example.com",
+  "subject": "Layout-Test",
+  "html":    "<h1>Hallo</h1><p>Test mit eigenem HTML.</p>" }
 ```
+
+### Audit guarantees
+
+Even with custom `subject`, `text`, or `html`, the endpoint enforces two things so test emails remain identifiable:
+
+- **`[TEST]` subject prefix** — added automatically if not already present
+- **Provider footer** — `Provider: <provider> · Auth: <authType>` is appended to the body so auditors can trace which configuration produced the message
+
+Use cases:
+- Spam-filter testing with non-ASCII subjects
+- Verifying delivery to a specific mailbox / role address
+- Checking how the SMTP path renders custom HTML
+- Quick "did the new FROM-header land correctly?" smoke tests
 
 ---
 
