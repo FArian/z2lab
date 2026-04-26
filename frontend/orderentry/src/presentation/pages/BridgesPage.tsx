@@ -192,7 +192,7 @@ export function BridgesPage() {
             <p className="text-sm text-zt-text-secondary py-4">Noch keine Bridges registriert.</p>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full text-sm">
+              <table className="w-full min-w-[900px] text-sm">
                 <thead>
                   <tr className="border-b border-zt-border text-left text-zt-text-secondary">
                     <th className="pb-2 pr-4 font-medium">Name</th>

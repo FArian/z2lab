@@ -332,9 +332,10 @@ function OrganizationsPageInner() {
             </div>
           </div>
 
-          {/* Table */}
+          {/* Table — horizontal scroll on narrow viewports, min-width keeps columns readable */}
           <div className="bg-zt-bg-card border border-zt-border rounded-xl overflow-hidden">
-            <table className="w-full border-collapse">
+            <div className="overflow-x-auto">
+            <table className="w-full min-w-[900px] border-collapse">
               <thead>
                 <tr className="bg-zt-bg-page">
                   {[t("orgs.colName"), t("orgs.colGln"), t("orgs.colParent"), "FHIR ID", ""].map((h, i) => (
@@ -392,6 +393,7 @@ function OrganizationsPageInner() {
                 ))}
               </tbody>
             </table>
+            </div>
           </div>
 
           {/* Info banner */}

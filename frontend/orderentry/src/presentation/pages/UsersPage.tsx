@@ -762,9 +762,10 @@ export default function UsersPage() {
             </div>
           </div>
 
-          {/* Table */}
+          {/* Table — horizontal scroll on narrow viewports, min-width keeps columns readable */}
           <div className="bg-zt-bg-card border border-zt-border rounded-xl overflow-hidden">
-            <table className="w-full border-collapse">
+            <div className="overflow-x-auto">
+            <table className="w-full min-w-[1000px] border-collapse">
               <thead>
                 <tr className="bg-zt-bg-page">
                   {[
@@ -942,6 +943,7 @@ export default function UsersPage() {
                 })}
               </tbody>
             </table>
+            </div>
 
             {/* Footer */}
             {!loading && !error && total > 0 && (

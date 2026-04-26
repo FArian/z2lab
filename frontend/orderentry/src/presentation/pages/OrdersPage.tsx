@@ -366,21 +366,22 @@ export default function OrdersPage() {
             </div>
           </div>
 
-          {/* Table */}
+          {/* Table — horizontal scroll on narrow viewports, min-width keeps columns readable */}
           <div className="bg-zt-bg-card border border-zt-border rounded-xl overflow-hidden">
-            <table className="w-full border-collapse">
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[1180px] border-collapse">
               <thead>
                 <tr className="bg-zt-bg-page">
                   {[
                     { key: "id",             label: t("orders.id"),              cls: "w-40" },
-                    { key: "patient",        label: t("orders.patient"),          cls: "" },
-                    { key: "description",    label: t("orders.description"),      cls: "" },
-                    { key: "auftraggeber",   label: t("org.auftraggeber"),         cls: "w-36" },
-                    { key: "auftragnehmer",  label: t("org.auftragnehmer"),        cls: "w-36" },
-                    { key: "status",         label: t("orders.status"),           cls: "w-36" },
+                    { key: "patient",        label: t("orders.patient"),          cls: "min-w-[140px]" },
+                    { key: "description",    label: t("orders.description"),      cls: "min-w-[180px]" },
+                    { key: "auftraggeber",   label: t("org.auftraggeber"),         cls: "w-40" },
+                    { key: "auftragnehmer",  label: t("org.auftragnehmer"),        cls: "w-40" },
+                    { key: "status",         label: t("orders.status"),           cls: "w-32" },
                     { key: "date",           label: t("orders.date"),             cls: "w-28" },
                     { key: "specimens",      label: t("orders.specimens"),        cls: "w-20" },
-                    { key: "actions",        label: t("orders.actions"),          cls: "w-36" },
+                    { key: "actions",        label: t("orders.actions"),          cls: "w-44" },
                   ].map((col) => (
                     <th
                       key={col.key}
@@ -523,7 +524,8 @@ export default function OrdersPage() {
                   );
                 })}
               </tbody>
-            </table>
+              </table>
+            </div>
 
             {/* Table footer */}
             {!loading && !error && filteredOrders.length > 0 && (
