@@ -265,15 +265,6 @@ const IconMail = (
   </svg>
 );
 
-const IconOrgRules = (
-  <svg viewBox="0 0 16 16" fill="currentColor" className="w-full h-full">
-    <rect x="1" y="2" width="14" height="3" rx="1"/>
-    <rect x="1" y="7" width="9"  height="3" rx="1"/>
-    <rect x="1" y="12" width="6"  height="2" rx="1"/>
-    <path d="M12 8l2 2-2 2" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-  </svg>
-);
-
 const IconNumberPool = (
   <svg viewBox="0 0 16 16" fill="currentColor" className="w-full h-full">
     <rect x="1" y="1" width="6" height="6" rx="1"/>

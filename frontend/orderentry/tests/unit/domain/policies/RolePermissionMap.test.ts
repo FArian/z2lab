@@ -5,7 +5,6 @@ import { PERMISSIONS }          from "@/domain/valueObjects/Permission";
 describe("RolePermissionMap", () => {
 
   describe("admin role", () => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const grants = ROLE_PERMISSION_MAP["admin"]!;
 
     it("exists in the map", () => expect(grants).toBeDefined());
@@ -21,7 +20,6 @@ describe("RolePermissionMap", () => {
   });
 
   describe("user role", () => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const grants = ROLE_PERMISSION_MAP["user"]!;
 
     it("exists in the map", () => expect(grants).toBeDefined());

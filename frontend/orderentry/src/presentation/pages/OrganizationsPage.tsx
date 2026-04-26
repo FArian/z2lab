@@ -242,7 +242,7 @@ function OrganizationsPageInner() {
     } finally {
       setDeletingId(null);
     }
-  }, [deleteOrg, t]);
+  }, [deleteOrg, t, addTrace]);
 
   return (
     <div className="flex flex-1 min-h-0">

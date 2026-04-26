@@ -98,7 +98,7 @@ function EnvVarRow({ name, secret, example }: { name: string; secret: boolean; e
   );
 }
 
-function AuthTypeCard({ active, type, guide }: { active: boolean; type: AuthType; guide: typeof ENV_GUIDES[AuthType] }) {
+function AuthTypeCard({ active, type: _type, guide }: { active: boolean; type: AuthType; guide: typeof ENV_GUIDES[AuthType] }) {
   return (
     <div className={`rounded-lg border p-4 ${active ? "border-zt-primary bg-zt-primary-light" : "border-zt-border bg-zt-bg-card"}`}>
       <div className="flex items-center gap-2 mb-3">

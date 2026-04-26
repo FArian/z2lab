@@ -12,7 +12,7 @@
 import crypto from "crypto";
 import { userRepository } from "@/infrastructure/repositories/PrismaUserRepository";
 import { createLogger } from "@/infrastructure/logging/Logger";
-import type { User, UserProfile, UserRole, UserStatus, UserProviderType, UserFhirSyncStatus } from "@/domain/entities/User";
+import type { User, UserProfile, UserRole, UserStatus, UserFhirSyncStatus } from "@/domain/entities/User";
 
 // Re-exported so all existing callers of @/lib/userStore continue to work unchanged.
 export type { User, UserProfile, UserRole, UserStatus, UserProviderType, UserFhirSyncStatus } from "@/domain/entities/User";
