@@ -153,7 +153,7 @@ The UI language is **German** (Swiss context). All user-facing strings, labels, 
 ```
 OrderEntry/
 ├── frontend/
-│   └── zetlab/                   # Next.js 15.5 app — all frontend code lives here
+│   └── orderentry/               # Next.js 15.5 app — all frontend code lives here
 │       ├── Dockerfile
 │       ├── vitest.config.ts
 │       ├── vitest.setup.ts
@@ -214,7 +214,7 @@ OrderEntry/
 
 ## Commands
 
-All commands run from `frontend/zetlab/`:
+All commands run from `frontend/orderentry/`:
 
 ```bash
 npm run dev          # Start dev server (Turbopack)
@@ -234,7 +234,7 @@ npm run test:coverage # Coverage report (thresholds: branches 70%, functions/lin
 
 ## CI
 
-GitHub Actions (`frontend/zetlab/.github/workflows/ci.yml`) runs on every push and PR:
+GitHub Actions (`frontend/orderentry/.github/workflows/ci.yml`) runs on every push and PR:
 `npm ci` → `lint` → `tsc --noEmit` → `build`
 
 Tests are not yet added to CI — add `npm test` after the `build` step when ready.
@@ -243,7 +243,7 @@ Tests are not yet added to CI — add `npm test` after the `build` step when rea
 
 ## Docker Build
 
-Run from `frontend/zetlab/`:
+Run from `frontend/orderentry/`:
 
 ```bash
 docker buildx build \
@@ -961,7 +961,7 @@ Quick reference:
 
 ## Environment Variables
 
-### Frontend (`frontend/zetlab/`)
+### Frontend (`frontend/orderentry/`)
 
 **Naming convention:** `<APP_NAME>_<SERVICE>__<KEY>` (default prefix: `ORDERENTRY`).
 Set `APP_NAME=YOURAPP` once to rename every variable automatically.
@@ -1224,7 +1224,7 @@ Healthcare-grade security applied via Traefik middleware:
 
 ## Data Directory
 
-`frontend/zetlab/data/` — gitignored, never commit:
+`frontend/orderentry/data/` — gitignored, never commit:
 
 | File | Purpose |
 |---|---|
@@ -1254,7 +1254,7 @@ SQLite migrations run automatically at startup. PostgreSQL/MSSQL require Flyway 
 
 **Password reset:** `POST /api/auth/reset-password/request` → email with token → `POST /api/auth/reset-password/confirm`
 
-See [src/infrastructure/db/README.md](frontend/zetlab/src/infrastructure/db/README.md) for full documentation, SQL clients, and commands.
+See [src/infrastructure/db/README.md](frontend/orderentry/src/infrastructure/db/README.md) for full documentation, SQL clients, and commands.
 
 ---
 
@@ -1281,7 +1281,7 @@ The project maintains a hierarchical README tree — every significant folder ha
 
 ```
 OrderEntry/README.md                          ← root (project + architecture overview)
-frontend/zetlab/src/README.md                 ← CA layer map
+frontend/orderentry/src/README.md                 ← CA layer map
 ├── domain/README.md + subfolders
 ├── application/README.md + subfolders
 ├── infrastructure/README.md + subfolders
@@ -1289,7 +1289,7 @@ frontend/zetlab/src/README.md                 ← CA layer map
 ├── shared/README.md + subfolders
 ├── app/README.md
 └── messages/README.md
-frontend/zetlab/tests/README.md + subfolders
+frontend/orderentry/tests/README.md + subfolders
 ```
 
 ### Rules
@@ -1982,5 +1982,4 @@ Until then, `OrchestraOrderService` returns `null` and the pool fallback is alwa
 | GLN → FHIR Practitioner sync | ✅ Fertig — `profile.gln` → `Practitioner.identifier` mit System `https://www.gs1.org/gln` in `PractitionerMapper.buildIdentifiers()` |
 | `NEXT_PUBLIC_LAB_ORG_ID` als Docker `--build-arg` | ✅ Fertig — `ARG NEXT_PUBLIC_LAB_ORG_ID=zlz` in `docker/Dockerfile` Stage 2; wird in `.env.local` geschrieben vor `npm run build` |
 | Orchestra Order Number API | TODO — Orchestra muss `POST /api/orders/number` implementieren; `OrchestraOrderService` gibt aktuell `null` zurück → Pool-Fallback immer aktiv |
-| `prisma generate` nach Server-Neustart | Nach Neustart des Dev-Servers ausführen, damit neue Prisma-Modelle (OrgRule, ReservedOrderNumber, PoolNotificationLog, PoolThresholdConfig) aktiv sind |
 | RBAC Phase 2 — DB-backed permissions + Keycloak | Phase 1 fertig (statische role→permission Map). Phase 2: Tabelle `permissions`, Admin-UI `/admin/permissions`, optionaler Keycloak Role Mapper. Erst nach Go-Live angehen. |
