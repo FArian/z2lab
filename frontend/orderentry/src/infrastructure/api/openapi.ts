@@ -1572,6 +1572,85 @@ export const openApiSpec = {
       },
     },
 
+    // ── Admin — Bridge management ────────────────────────────────────────────
+
+    "/admin/bridges": {
+      get: {
+        tags: ["Bridge"],
+        summary: "List all registered Bridges (admin)",
+        description:
+          "Returns every Bridge registration with status, last-seen timestamp, " +
+          "reported version, and key prefix. The plaintext API key is never returned — " +
+          "only the prefix (e.g. `zetlab_a3f2b1c…`) for display purposes.",
+        operationId: "listBridges",
+        security: [{ sessionCookie: [] }, { bearerAuth: [] }],
+        responses: {
+          "200": {
+            description: "List of registered Bridges",
+            content: {
+              "application/json": {
+                schema: { $ref: "#/components/schemas/ListBridgesResponse" },
+              },
+            },
+          },
+          "401": { description: "Not authenticated" },
+          "403": { description: "Admin role required" },
+        },
+      },
+    },
+
+    "/admin/bridges/{id}": {
+      patch: {
+        tags: ["Bridge"],
+        summary: "Revoke a Bridge (admin)",
+        description:
+          "Sets the Bridge status to `revoked`. The Bridge can no longer authenticate " +
+          "with its current API key. Existing data is preserved — use `DELETE` for hard removal.",
+        operationId: "revokeBridge",
+        security: [{ sessionCookie: [] }, { bearerAuth: [] }],
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            required: true,
+            description: "BridgeRegistration UUID",
+            schema: { type: "string", format: "uuid" },
+          },
+        ],
+        responses: {
+          "200": { description: "Bridge revoked", content: { "application/json": { schema: { type: "object", properties: { ok: { type: "boolean" } } } } } },
+          "401": { description: "Not authenticated" },
+          "403": { description: "Admin role required" },
+          "404": { description: "Bridge not found" },
+        },
+      },
+      delete: {
+        tags: ["Bridge"],
+        summary: "Delete a Bridge registration (admin)",
+        description:
+          "Permanently deletes the BridgeRegistration row. Pending BridgeJobs are NOT " +
+          "deleted — they remain in the queue (orphaned). Use `PATCH` (revoke) for a " +
+          "softer alternative that keeps the audit trail.",
+        operationId: "deleteBridge",
+        security: [{ sessionCookie: [] }, { bearerAuth: [] }],
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            required: true,
+            description: "BridgeRegistration UUID",
+            schema: { type: "string", format: "uuid" },
+          },
+        ],
+        responses: {
+          "200": { description: "Bridge deleted", content: { "application/json": { schema: { type: "object", properties: { ok: { type: "boolean" } } } } } },
+          "401": { description: "Not authenticated" },
+          "403": { description: "Admin role required" },
+          "404": { description: "Bridge not found" },
+        },
+      },
+    },
+
     // ── Admin — Config ────────────────────────────────────────────────────────
     "/env/schema": {
       get: {
@@ -1921,6 +2000,83 @@ export const openApiSpec = {
               },
             },
           },
+          "401": { description: "Not authenticated" },
+          "403": { description: "Admin role required" },
+        },
+      },
+    },
+
+    // ── Bridge connectivity, auth, registration ──────────────────────────────
+
+    "/bridge/status": {
+      get: {
+        tags: ["Bridge"],
+        summary: "Bridge connectivity check",
+        description:
+          "Lightweight connectivity probe for the z2Lab Bridge. The Bridge calls this " +
+          "endpoint on startup and periodically to verify network connectivity, token " +
+          "validity, and whether the HL7 proxy is configured upstream.",
+        operationId: "getBridgeStatus",
+        security: [{ bearerAuth: [] }, { sessionCookie: [] }],
+        responses: {
+          "200": {
+            description: "Bridge is connected and authorised",
+            content: {
+              "application/json": {
+                schema: { $ref: "#/components/schemas/BridgeStatusResponse" },
+              },
+            },
+          },
+          "401": { description: "Not authenticated" },
+        },
+      },
+    },
+
+    "/bridge/token": {
+      post: {
+        tags: ["Bridge"],
+        summary: "Issue Bridge access token",
+        description:
+          "Issues a JWT or Personal Access Token for Bridge-side authentication. " +
+          "This route is an alias for `POST /api/v1/auth/token` and exists for " +
+          "discoverability in the Bridge documentation tag.",
+        operationId: "createBridgeToken",
+        security: [{ sessionCookie: [] }],
+        responses: {
+          "200": { description: "Token issued (response shape identical to /auth/token)" },
+          "401": { description: "Not authenticated" },
+        },
+      },
+    },
+
+    "/bridge/register": {
+      post: {
+        tags: ["Bridge"],
+        summary: "Register a new Bridge (admin)",
+        description:
+          "Registers a new z2Lab Bridge for a clinic or practice. Returns the " +
+          "plaintext API key — this is shown only ONCE and never persisted in clear text. " +
+          "Admins must copy it immediately. The hashed key is stored in `BridgeRegistration.apiKeyHash`.",
+        operationId: "registerBridge",
+        security: [{ sessionCookie: [] }, { bearerAuth: [] }],
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: { $ref: "#/components/schemas/RegisterBridgeRequest" },
+            },
+          },
+        },
+        responses: {
+          "201": {
+            description: "Bridge registered — API key returned ONCE",
+            content: {
+              "application/json": {
+                schema: { $ref: "#/components/schemas/RegisterBridgeResponse" },
+              },
+            },
+          },
+          "400": { description: "Missing required fields (name, orgFhirId)" },
           "401": { description: "Not authenticated" },
           "403": { description: "Admin role required" },
         },
@@ -3794,6 +3950,76 @@ export const openApiSpec = {
         properties: {
           id:     { type: "string", format: "uuid" },
           status: { type: "string", enum: ["done"] },
+        },
+      },
+
+      // ── Bridge connectivity / registration schemas ──────────────────────────
+
+      BridgeStatusResponse: {
+        type: "object",
+        required: ["ok", "version", "hl7ProxyEnabled", "time"],
+        properties: {
+          ok:              { type: "boolean", description: "Always true on 200" },
+          version:         { type: "string", description: "OrderEntry server version (`NEXT_PUBLIC_APP_VERSION`)" },
+          hl7ProxyEnabled: { type: "boolean", description: "True when `ORCHESTRA_HL7_BASE` is configured upstream" },
+          time:            { type: "string", format: "date-time", description: "ISO 8601 server time — useful for clock-skew detection" },
+        },
+      },
+
+      RegisterBridgeRequest: {
+        type: "object",
+        required: ["name", "orgFhirId"],
+        properties: {
+          name:       { type: "string", description: "Display name (e.g. \"Klinik im Park\")" },
+          orgFhirId:  { type: "string", description: "FHIR Organization ID" },
+          orgGln:     { type: "string", description: "GS1 GLN (optional)" },
+          locationId: { type: "string", description: "FHIR Location ID — for department-targeted routing (optional)" },
+        },
+      },
+
+      RegisterBridgeResponse: {
+        type: "object",
+        required: ["id", "name", "orgFhirId", "apiKey", "apiKeyPrefix", "status", "createdAt"],
+        properties: {
+          id:           { type: "string", format: "uuid" },
+          name:         { type: "string" },
+          orgFhirId:    { type: "string" },
+          orgGln:       { type: "string", nullable: true },
+          locationId:   { type: "string", nullable: true },
+          apiKey:       { type: "string", description: "Plaintext API key — shown ONCE, never returned again" },
+          apiKeyPrefix: { type: "string", description: "First 15 chars of the key for display (e.g. \"zetlab_a3f2b1c\")" },
+          status:       { type: "string", enum: ["active"] },
+          createdAt:    { type: "string", format: "date-time" },
+        },
+      },
+
+      BridgeRegistrationResponse: {
+        type: "object",
+        required: ["id", "name", "orgFhirId", "apiKeyPrefix", "status", "createdAt", "updatedAt"],
+        properties: {
+          id:            { type: "string", format: "uuid" },
+          name:          { type: "string" },
+          orgFhirId:     { type: "string" },
+          orgGln:        { type: "string", nullable: true },
+          locationId:    { type: "string", nullable: true },
+          apiKeyPrefix:  { type: "string", description: "Display prefix only — plaintext key never returned after registration" },
+          status:        { type: "string", enum: ["active", "revoked"] },
+          lastSeenAt:    { type: "string", format: "date-time", nullable: true, description: "Timestamp of the last successful Bridge poll" },
+          bridgeVersion: { type: "string", nullable: true, description: "Last reported Bridge binary version" },
+          createdAt:     { type: "string", format: "date-time" },
+          updatedAt:     { type: "string", format: "date-time" },
+        },
+      },
+
+      ListBridgesResponse: {
+        type: "object",
+        required: ["bridges", "total"],
+        properties: {
+          bridges: {
+            type:  "array",
+            items: { $ref: "#/components/schemas/BridgeRegistrationResponse" },
+          },
+          total: { type: "integer", description: "Total number of registered Bridges" },
         },
       },
     },
