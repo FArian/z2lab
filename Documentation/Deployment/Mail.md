@@ -131,6 +131,238 @@ The `MailServiceFactory` rejects invalid combinations and falls back to a `NullM
 
 ---
 
+## Variable-by-variable reference
+
+Detailed explanation of every Mail ENV variable: meaning, how to configure, concrete example.
+
+### 1. `ORDERENTRY_MAIL__PROVIDER`
+
+**Meaning:** Selects which mail provider implementation `MailServiceFactory` instantiates. Drives the entire mail pipeline.
+
+**Allowed values:** `smtp` · `gmail` · `smtp_oauth2` · `google_workspace_relay` · `hin` — empty or `none` disables mail entirely.
+
+**How to configure:** Pick by use case:
+- Hospital / on-prem mail server → `smtp`
+- Test mail from a personal Google account → `gmail`
+- Office 365 / Exchange Online → `smtp_oauth2`
+- Organisation with Google Workspace subscription → `google_workspace_relay`
+- Swiss patient data (nDSG) → `hin`
+
+**Example:**
+```bash
+ORDERENTRY_MAIL__PROVIDER=gmail
+```
+
+---
+
+### 2. `ORDERENTRY_MAIL__AUTH_TYPE`
+
+**Meaning:** Authentication mode the SMTP transport uses. **Mode selector — not a password.** Common pitfall: pasting the App Password here instead of into `MAIL__PASSWORD`.
+
+**Allowed values:** `APP_PASSWORD` · `OAUTH2` · `NONE`
+
+**How to configure:** Depends on the provider (see matrix above):
+| Provider | Valid AUTH_TYPE |
+|---|---|
+| `smtp` | `APP_PASSWORD`, `OAUTH2` |
+| `gmail` | `APP_PASSWORD`, `OAUTH2` |
+| `smtp_oauth2` | `OAUTH2` |
+| `google_workspace_relay` | `NONE`, `APP_PASSWORD` |
+| `hin` | `APP_PASSWORD` |
+
+**Example:**
+```bash
+ORDERENTRY_MAIL__AUTH_TYPE=APP_PASSWORD
+```
+
+---
+
+### 3. `ORDERENTRY_MAIL__HOST`
+
+**Meaning:** SMTP server hostname.
+
+**How to configure:** Provider-specific:
+| Provider | Hostname |
+|---|---|
+| Gmail | `smtp.gmail.com` |
+| Office 365 | `smtp.office365.com` |
+| HIN | `smtp.hin.ch` |
+| Google Workspace Relay | `smtp-relay.gmail.com` |
+| Generic SMTP | hostname of your server, e.g. `mail.klinik-im-park.ch` |
+
+**Example:**
+```bash
+ORDERENTRY_MAIL__HOST=smtp.gmail.com
+```
+
+---
+
+### 4. `ORDERENTRY_MAIL__PORT`
+
+**Meaning:** TCP port on the SMTP server. Default `587`.
+
+**How to configure:** Must match `MAIL__SECURE`:
+- `587` → STARTTLS (plaintext connect, then TLS upgrade — modern default)
+- `465` → direct TLS/SSL on connect (older but valid)
+- `25` → unencrypted (only inside closed networks; never over the internet)
+
+**Example:**
+```bash
+ORDERENTRY_MAIL__PORT=587
+```
+
+---
+
+### 5. `ORDERENTRY_MAIL__SECURE`
+
+**Meaning:** Selects the encryption model.
+
+**Allowed values:** `true` · `false`
+
+**How to configure:** Must agree with `MAIL__PORT`:
+| Port | SECURE | Behaviour |
+|---|---|---|
+| `587` | `false` | Plaintext connect → STARTTLS upgrade (Gmail/HIN/Office 365 standard) |
+| `465` | `true` | Immediate TLS, no plaintext phase |
+| `25` | `false` | Plaintext (no encryption) |
+
+**Example:**
+```bash
+ORDERENTRY_MAIL__SECURE=false
+```
+
+---
+
+### 6. `ORDERENTRY_MAIL__USER`
+
+**Meaning:** Username for SMTP authentication. For Gmail / Office 365 / HIN this is the email address itself.
+
+**How to configure:** Required when `AUTH_TYPE=APP_PASSWORD` or `OAUTH2`. Not used with `NONE`.
+
+**Example:**
+```bash
+ORDERENTRY_MAIL__USER=mcse.arian@gmail.com
+```
+
+---
+
+### 7. `ORDERENTRY_MAIL__PASSWORD`
+
+**Meaning:** SMTP password. For Gmail / Workspace this is the **App Password**, not the regular login password. **Secret — never log or commit.**
+
+**How to configure:**
+- **Gmail:** 16-character string from https://myaccount.google.com/apppasswords (spaces optional)
+- **Office 365 / Exchange:** SMTP-specific password of the service account
+- **HIN:** the HIN account password
+- **Generic SMTP:** the SMTP user's password
+
+Required when `AUTH_TYPE=APP_PASSWORD`. Do not set with `OAUTH2` or `NONE`.
+
+**Example:**
+```bash
+ORDERENTRY_MAIL__PASSWORD=nbkcyqtmieqqqsxx
+```
+
+> ⚠️ Never use your regular Gmail login password — Google has fully blocked that path since 2022. Only App Passwords work.
+
+---
+
+### 8. `ORDERENTRY_MAIL__FROM`
+
+**Meaning:** `From:` header of every outgoing mail. Recommended format: display name + address.
+
+**How to configure:** Use `Display Name <email@domain>`:
+
+**Example:**
+```bash
+ORDERENTRY_MAIL__FROM=z2Lab OrderEntry <mcse.arian@gmail.com>
+```
+
+> If empty, the code falls back to `OrderEntry <{MAIL__USER}>` — or `noreply@localhost` if `MAIL__USER` is also empty.
+
+---
+
+### 9. `ORDERENTRY_MAIL__ALIAS`
+
+**Meaning:** Reply-To header. When the recipient hits "Reply", the response goes to this address instead of `MAIL__FROM`.
+
+**How to configure:** Optional. Useful when the sender is `noreply@…` but replies should land in a service mailbox.
+
+**Example:**
+```bash
+ORDERENTRY_MAIL__ALIAS=auftrag@zlz.ch
+```
+
+---
+
+### 10. `ORDERENTRY_MAIL__OAUTH_CLIENT_ID`
+
+**Meaning:** Client ID of the OAuth2 application (Azure AD App Registration, Google Cloud Project). Only used when `AUTH_TYPE=OAUTH2`.
+
+**How to configure:**
+- **Office 365:** Azure Portal → App Registrations → new App → copy Application (client) ID
+- **Gmail OAuth2:** Google Cloud Console → APIs & Services → Credentials → OAuth 2.0 Client → copy Client ID
+
+**Example:**
+```bash
+ORDERENTRY_MAIL__OAUTH_CLIENT_ID=12345678-aaaa-bbbb-cccc-1234567890ab
+```
+
+---
+
+### 11. `ORDERENTRY_MAIL__OAUTH_CLIENT_SECRET`
+
+**Meaning:** Client secret of the OAuth2 app. **Secret — never log or commit.**
+
+**How to configure:** Generated when the app is created in Azure Portal / Google Cloud Console. Often has an expiry (max. 24 months in Azure).
+
+**Example:**
+```bash
+ORDERENTRY_MAIL__OAUTH_CLIENT_SECRET=Z3p8Q~AbCdEfGhIjKlMnOpQrStUv-XyZ1234567
+```
+
+---
+
+### 12. `ORDERENTRY_MAIL__OAUTH_REFRESH_TOKEN`
+
+**Meaning:** Long-lived refresh token granting `Mail.Send` scope. The server uses it to fetch short-lived access tokens automatically. **Secret.**
+
+**How to configure:** Obtained once via an OAuth2 flow (e.g. `oauth2-proxy` or the Google OAuth Playground). Does not expire as long as the app stays in active use.
+
+**Example:**
+```bash
+ORDERENTRY_MAIL__OAUTH_REFRESH_TOKEN=1//0gAbCdEfGhIjKlMnOpQrStUvWxYz1234567890
+```
+
+---
+
+### 13. `ORDERENTRY_MAIL__DOMAIN`
+
+**Meaning:** Google Workspace domain — only with `provider=google_workspace_relay`.
+
+**How to configure:** Your Workspace domain. Google uses it to validate the sender as belonging to this domain (and to apply IP-allow-list rules).
+
+**Example:**
+```bash
+ORDERENTRY_MAIL__DOMAIN=zlz.ch
+```
+
+---
+
+### Quick formula
+
+```
+PROVIDER  ─→ which implementation
+AUTH_TYPE ─→ which auth method (mode string — NEVER a password)
+HOST/PORT/SECURE ─→ connection
+USER/PASSWORD     ─→ classic auth (APP_PASSWORD)
+OAUTH_*           ─→ OAuth2 (three fields together)
+FROM/ALIAS        ─→ how recipients see the sender
+DOMAIN            ─→ Workspace Relay only
+```
+
+---
+
 ## Other providers — quick configurations
 
 ### Generic SMTP (hospital relay, Exchange on-prem)
