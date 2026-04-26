@@ -54,7 +54,3 @@ data/
 # =========================
 docker-compose.override.yml
 
-# =========================
-# AI / Docs (optional)
-# =========================
-CLAUDE.md
