@@ -1,4 +1,4 @@
-- [Agent-Terminologie (KRITISCH)](agent_terminology.md) — "Agent" = IMMER ZetLab Local Agent (Go-Produkt), NIE Claude Sub-Agents. Vor jeder Antwort beachten.
-- [ZetLab Local Agent](agent_project.md) — geplantes Go-Binary; Brücke Cloud ↔ Klinik (HL7, Druck, ORU). Spec liegt im Repo, Server-Routes teilweise da, Go-Agent noch nicht implementiert.
-- [Agent-Spec Referenz](agent_spec_reference.md) — vollständige Architektur-Spec im Repo unter frontend/orderentry/tmp/agent/README.md
-- [Frontend-Pfad-Diskrepanz](frontend_path_mismatch.md) — Code liegt unter frontend/orderentry/, CLAUDE.md beschreibt aber frontend/zetlab/
+- [Bridge-Naming (KRITISCH)](bridge_naming.md) — Produkt heißt "z2Lab Bridge" (vorher "Agent"). NIE mit Claude Sub-Agents verwechseln. Code/Spec noch agent — Renaming läuft.
+- [z2Lab Bridge — Projekt](bridge_project.md) — geplantes Go-Binary; Brücke Cloud ↔ Klinik (HL7, Druck, ORU). Spec im Repo, Server-Routes teilweise da, Go-Binary noch nicht implementiert.
+- [Bridge-Spec Referenz](bridge_spec_reference.md) — Pfade zur vollständigen Spec und zu allen Code-Stellen.
+- [Frontend-Pfad-Diskrepanz](frontend_path_mismatch.md) — Code liegt unter frontend/orderentry/, CLAUDE.md beschreibt aber frontend/zetlab/.

@@ -1,23 +1,28 @@
 ---
-name: Agent — Begriffsklärung (KRITISCH)
-description: Wenn der User "Agent" sagt, meint er IMMER den ZetLab Local Agent (sein Go-Produkt), NIE die Claude Code Sub-Agents unter .claude/agents/.
+name: Bridge — Namensregel und Übergangsphase (KRITISCH)
+description: Das Produkt heißt jetzt z2Lab Bridge (vorher "ZetLab Local Agent"). NIE mit Claude Sub-Agents verwechseln. Code/Spec heißen noch agent — Renaming läuft.
 type: feedback
 ---
 
-**Regel:** Im Sprachgebrauch dieses Projekts bedeutet **„Agent" = ZetLab Local Agent** — das geplante Go-Binary für HL7-Datenaustausch und Druck im lokalen Klinik-Netzwerk.
+**Regel — der Produktname ist jetzt z2Lab Bridge** (auch kurz „Bridge", „LabBridge").
+Vorheriger Name war „ZetLab Local Agent" — die Umbenennung wurde 2026-04-26 entschieden.
 
-**Why:** Es gibt zwei Dinge im Repo, die „Agent" heißen, aber nichts miteinander zu tun haben. Der User wurde verwirrt, als ich beide in derselben Memory-Datei erwähnt habe. Sein Produkt ist das Geschäft — Claude-Sub-Agents sind nur interne Tooling-Konfiguration.
+**Why:** „Agent" wurde mit Claude Code Sub-Agents (.claude/agents/*.md) verwechselt. „Bridge" ist eindeutig, kommt direkt aus der Architekturbeschreibung („Brücke zwischen Cloud und lokalen Systemen"), und kollidiert mit nichts im Repo (Gateway/Proxy sind bereits anderweitig vergeben).
 
 **How to apply:**
-- Bei jeder Erwähnung von „Agent" → ZetLab Local Agent (Go-Binary, Klinik, HL7, Druck, `tmp/agent/README.md` Spec, `frontend/orderentry/src/app/api/v1/agent/` Routes)
-- Wenn ich von Claude-Sub-Agents reden muss, IMMER explizit „Claude Sub-Agent" oder „`.claude/agents/`-Definition" sagen — nie nur „Agent"
-- In Memory-Files, Commits, Erklärungen die beiden NICHT in einem Atemzug mischen
+- In jeder neuen Antwort, Doku, Commit-Message, Variable, Identifier → **Bridge** verwenden
+- Wenn du Claude-Sub-Agents meinst, IMMER explizit „Claude Sub-Agent" oder „.claude/agents/-Definition" sagen
+- Beim Lesen von altem Code/Doku: `agent` = Bridge (mentale Übersetzung), bis Renaming abgeschlossen
 
-**Trennung im Repo:**
-| Sache | Pfad |
+**Übergangsphase — diese Stellen heißen NOCH agent (nicht reverten, sukzessiv umbenennen):**
+
+| Pfad | Status |
 |---|---|
-| ZetLab Local Agent — Spec | `frontend/orderentry/tmp/agent/README.md` |
-| ZetLab Local Agent — API-Routes | `frontend/orderentry/src/app/api/v1/agent/*` |
-| ZetLab Local Agent — Admin UI | `frontend/orderentry/src/app/admin/agents/` |
-| ZetLab Local Agent — späteres Go-Repo | `zetlab-agent/` (existiert noch nicht) |
-| Claude Sub-Agent Konfigurationen | `.claude/agents/*.md` |
+| `frontend/orderentry/src/app/api/v1/agent/*` | TODO → `/api/v1/bridge/*` |
+| `frontend/orderentry/src/app/api/v1/admin/agents/*` | TODO → `admin/bridges/*` |
+| `frontend/orderentry/src/app/admin/agents/page.tsx` | TODO → `admin/bridges/page.tsx` |
+| `frontend/orderentry/tmp/agent/README.md` | TODO → `tmp/bridge/README.md` + Inhalt umschreiben |
+| Geplantes Repo `zetlab-agent/` | wird → `z2lab-bridge/` |
+| ENV-Variablen `AGENT_*` | TODO → `BRIDGE_*` |
+
+**Bei jedem neuen Code:** sofort Bridge-Namen verwenden — keine neuen `agent`-Identifier mehr anlegen.
