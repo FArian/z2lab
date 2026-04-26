@@ -1,6 +1,8 @@
-# ZetLab Local Agent — Architektur & Entwicklungsstand
+# z2Lab Bridge — Architektur & Entwicklungsstand
 
-Der **ZetLab Local Agent** ist die Brücke zwischen der Cloud-Infrastruktur (OrderEntry, Orchestra, HAPI FHIR) und den lokalen Systemen in Klinik, Praxis und Labor. Er ermöglicht bidirektionalen HL7-Datenaustausch, lokalen Druck von Begleitscheinen und Barcode-Etiketten sowie die automatische Patientenübernahme aus bestehenden KIS/PIS-Systemen — ohne Firewall-Anpassungen oder Port-Forwarding.
+> **Hinweis (2026-04-26):** Das Produkt hieß früher „ZetLab Local Agent". Der Name wurde auf **z2Lab Bridge** geändert, um Verwechslungen mit Claude Code Sub-Agents (`.claude/agents/`) zu vermeiden. Diese Spec ist bereits auf den neuen Namen umgestellt — die zugehörigen Code-Pfade (`/api/v1/agent/*`, `admin/agents`, `AGENT_*` ENV) werden in einem Folge-Refactor ebenfalls umbenannt.
+
+Die **z2Lab Bridge** ist die Brücke zwischen der Cloud-Infrastruktur (OrderEntry, Orchestra, HAPI FHIR) und den lokalen Systemen in Klinik, Praxis und Labor. Sie ermöglicht bidirektionalen HL7-Datenaustausch, lokalen Druck von Begleitscheinen und Barcode-Etiketten sowie die automatische Patientenübernahme aus bestehenden KIS/PIS-Systemen — ohne Firewall-Anpassungen oder Port-Forwarding.
 
 ---
 
@@ -25,11 +27,11 @@ Der **ZetLab Local Agent** ist die Brücke zwischen der Cloud-Infrastruktur (Ord
 | # | Prinzip | Begründung |
 |---|---|---|
 | 1 | **Cloud verarbeitet kein HL7** | OrderEntry ist reiner Proxy. HL7-Parsing und -Konvertierung liegt ausschliesslich bei Orchestra. |
-| 2 | **Kommunikation ist outbound-only** | Der Agent baut Verbindungen zur Cloud auf — nie umgekehrt. Kein Port-Forwarding, keine Firewall-Anpassungen. |
+| 2 | **Kommunikation ist outbound-only** | Die Bridge baut Verbindungen zur Cloud auf — nie umgekehrt. Kein Port-Forwarding, keine Firewall-Anpassungen. |
 | 3 | **Orchestra ist der einzige HL7↔FHIR-Konverter** | ADT→Patient, ORU→DiagnosticReport, ServiceRequest→ORM erfolgen ausschliesslich in Orchestra. |
-| 4 | **Alle lokalen Integrationen laufen über den Agent** | Kein lokales System kommuniziert direkt mit der Cloud. Der Agent ist der einzige Zugangspunkt. |
-| 5 | **Routing über Organization GLN** | Jeder Agent ist über seinen API-Key eindeutig einer FHIR-Organization (GS1-GLN) zugeordnet. Druckjobs und ORU-Dateien werden klinikspezifisch zugestellt. |
-| 6 | **Polling statt Push** | Der Agent pollt aktiv für ausstehende Jobs. Die Cloud muss keine Verbindungen initiieren. |
+| 4 | **Alle lokalen Integrationen laufen über die Bridge** | Kein lokales System kommuniziert direkt mit der Cloud. Die Bridge ist der einzige Zugangspunkt. |
+| 5 | **Routing über Organization GLN** | Jede Bridge ist über ihren API-Key eindeutig einer FHIR-Organization (GS1-GLN) zugeordnet. Druckjobs und ORU-Dateien werden klinikspezifisch zugestellt. |
+| 6 | **Polling statt Push** | Die Bridge pollt aktiv für ausstehende Jobs. Die Cloud muss keine Verbindungen initiieren. |
 
 ---
 
@@ -39,7 +41,7 @@ Der **ZetLab Local Agent** ist die Brücke zwischen der Cloud-Infrastruktur (Ord
 
 | Komponente | Aufgabe |
 |---|---|
-| **OrderEntry** (Vercel/Docker) | Web-UI für Auftragserfassung; HL7-Proxy (kein Parsing); Agent-API (`/agent/jobs`, `/agent/status`) |
+| **OrderEntry** (Vercel/Docker) | Web-UI für Auftragserfassung; HL7-Proxy (kein Parsing); Bridge-API (`/bridge/jobs`, `/bridge/status`) |
 | **Orchestra** (Integration Engine) | Bidirektionaler HL7↔FHIR-Konverter; Subscriber auf HAPI FHIR Events; Verbindung zum LIS |
 | **HAPI FHIR** | FHIR R4 Datenspeicher für Patient, ServiceRequest, DiagnosticReport |
 
@@ -47,7 +49,7 @@ Der **ZetLab Local Agent** ist die Brücke zwischen der Cloud-Infrastruktur (Ord
 
 | Komponente | Aufgabe |
 |---|---|
-| **Local Agent** (Go Binary / Docker) | Directory Watcher für ADT; Job Poller für Druckjobs + ORU; Print Client (PDF + ZPL) |
+| **z2Lab Bridge** (Go Binary / Docker) | Directory Watcher für ADT; Job Poller für Druckjobs + ORU; Print Client (PDF + ZPL) |
 | **PIS / KIS** | Patientenverwaltungssystem; legt ADT-Dateien ab; ruft OrderEntry-Deeplink auf; liest ORU ein |
 | **Drucker** | Begleitschein-Drucker (PDF/CUPS/WinPrint); Barcode-Drucker (ZPL/Zebra/Dymo) |
 
@@ -64,13 +66,13 @@ Der **ZetLab Local Agent** ist die Brücke zwischen der Cloud-Infrastruktur (Ord
 ```mermaid
 graph TB
     subgraph CLOUD["☁️ Cloud"]
-        OE["OrderEntry\n(Vercel / Docker)\n\n/proxy/hl7/inbound\n/proxy/hl7/outbound\n/agent/jobs\n/agent/status\n/agent/token"]
+        OE["OrderEntry\n(Vercel / Docker)\n\n/proxy/hl7/inbound\n/proxy/hl7/outbound\n/bridge/jobs\n/bridge/status\n/bridge/token"]
         ORC["Orchestra\n(Integration Engine)\n\nADT → Patient\nORU → DiagnosticReport\nServiceRequest → ORM\nSubscriber auf HAPI Events"]
         FHIR["HAPI FHIR\n(Cloud)\n\nPatient\nServiceRequest\nDiagnosticReport"]
     end
 
     subgraph KLINIK["🏥 Klinik / Praxis"]
-        AGENT["Local Agent\n(Go Binary / Docker)\nGLN-identifiziert\n\n1. Dir Watcher → ADT\n2. Job Poller → Print + ORU\n3. Print Client"]
+        BRIDGE["z2Lab Bridge\n(Go Binary / Docker)\nGLN-identifiziert\n\n1. Dir Watcher → ADT\n2. Job Poller → Print + ORU\n3. Print Client"]
         PIS["PIS / KIS\n\nDeeplink-Aufruf\nADT ablegen\nORU einlesen\nBegleitschein drucken"]
         PRINTER["🖨️ Drucker\nPDF → Begleitschein\nZPL → Zebra / Dymo"]
     end
@@ -83,11 +85,11 @@ graph TB
     ORC <-->|"FHIR R4\n(bidirektional)"| FHIR
     ORC <-->|"HL7 ORM / ORU\n(bidirektional)"| LIS
 
-    AGENT -->|"HTTPS outbound only\nkein Port-Forwarding"| OE
-    OE -.->|"Jobs via Polling"| AGENT
+    BRIDGE -->|"HTTPS outbound only\nkein Port-Forwarding"| OE
+    OE -.->|"Jobs via Polling"| BRIDGE
 
-    PIS --> AGENT
-    AGENT --> PRINTER
+    PIS --> BRIDGE
+    BRIDGE --> PRINTER
     PIS -->|"Deeplink"| OE
 ```
 
@@ -97,19 +99,19 @@ graph TB
 
 ### Szenario 1 — ADT: Patient aus KIS/PIS in OrderEntry
 
-Ein Patient wird im PIS/KIS aufgenommen. Der Agent erkennt die neue ADT-Datei und überträgt sie in die Cloud. Orchestra konvertiert die HL7-Nachricht in eine FHIR-Patient-Ressource und schreibt sie in HAPI FHIR. Parallel leitet Orchestra die ADT-Nachricht auch ans LIS weiter. Der Patient erscheint sofort in der OrderEntry-Oberfläche.
+Ein Patient wird im PIS/KIS aufgenommen. Die Bridge erkennt die neue ADT-Datei und überträgt sie in die Cloud. Orchestra konvertiert die HL7-Nachricht in eine FHIR-Patient-Ressource und schreibt sie in HAPI FHIR. Parallel leitet Orchestra die ADT-Nachricht auch ans LIS weiter. Der Patient erscheint sofort in der OrderEntry-Oberfläche.
 
 ```mermaid
 sequenceDiagram
     participant PIS as PIS / KIS
-    participant AGT as Local Agent
+    participant BRG as z2Lab Bridge
     participant OE as OrderEntry
     participant ORC as Orchestra
     participant FHIR as HAPI FHIR
     participant LIS as LIS / Vianova
 
-    PIS->>AGT: HL7 ADT (A01/A08/A28/A31)\n/var/adt/*.hl7
-    AGT->>OE: POST /api/v1/proxy/hl7/inbound\n(HTTPS outbound)
+    PIS->>BRG: HL7 ADT (A01/A08/A28/A31)\n/var/adt/*.hl7
+    BRG->>OE: POST /api/v1/proxy/hl7/inbound\n(HTTPS outbound)
     OE->>ORC: weiterleiten (kein Parsing)
     par FHIR speichern
         ORC->>FHIR: FHIR Patient erstellen / updaten
@@ -123,7 +125,7 @@ sequenceDiagram
 
 ### Szenario 2 — Auftragserfassung: Deeplink → ServiceRequest → LIS → Druck
 
-Das PIS/KIS öffnet OrderEntry per Deeplink mit dem Patienten-Kontext. Der Arzt erfasst den Laborauftrag. OrderEntry persistiert den ServiceRequest in HAPI FHIR. Orchestra empfängt den neuen ServiceRequest als Subscriber, erstellt daraus eine HL7 ORM-Nachricht und sendet sie ans LIS. Gleichzeitig erstellt OrderEntry einen Druckjob, den der Agent per Polling abholt und lokal ausdruckt.
+Das PIS/KIS öffnet OrderEntry per Deeplink mit dem Patienten-Kontext. Der Arzt erfasst den Laborauftrag. OrderEntry persistiert den ServiceRequest in HAPI FHIR. Orchestra empfängt den neuen ServiceRequest als Subscriber, erstellt daraus eine HL7 ORM-Nachricht und sendet sie ans LIS. Gleichzeitig erstellt OrderEntry einen Druckjob, den die Bridge per Polling abholt und lokal ausdruckt.
 
 ```mermaid
 sequenceDiagram
@@ -132,7 +134,7 @@ sequenceDiagram
     participant FHIR as HAPI FHIR
     participant ORC as Orchestra
     participant LIS as LIS / Vianova
-    participant AGT as Local Agent
+    participant BRG as z2Lab Bridge
     participant PRN as Drucker
 
     PIS->>OE: Deeplink\n/order/new?patientId=Patient/p-123
@@ -144,21 +146,21 @@ sequenceDiagram
         ORC->>FHIR: ServiceRequest lesen (Subscriber)
         ORC->>LIS: HL7 ORM^O01\n(Auftrag mit Barcode)
     and Druckjob erstellen
-        OE->>OE: Druckjob in interner Job-Queue anlegen\n(POST /api/v1/agent/jobs/print)
+        OE->>OE: Druckjob in interner Job-Queue anlegen\n(POST /api/v1/bridge/jobs/print)
     end
-    AGT->>OE: GET /api/v1/agent/jobs\n(polling, alle 5s)
-    OE-->>AGT: Druckjob (PDF + ZPL)
-    AGT->>PRN: PDF → Begleitschein\nZPL → Barcode-Etikette
-    AGT->>OE: POST /api/v1/agent/jobs/[id]/done
+    BRG->>OE: GET /api/v1/bridge/jobs\n(polling, alle 5s)
+    OE-->>BRG: Druckjob (PDF + ZPL)
+    BRG->>PRN: PDF → Begleitschein\nZPL → Barcode-Etikette
+    BRG->>OE: POST /api/v1/bridge/jobs/[id]/done
 ```
 
-> **GLN-Routing:** Jeder Agent authentifiziert sich mit einem klinikspezifischen API-Key (`Bearer`-Token). OrderEntry liest daraus die FHIR-Organization-ID (GS1-GLN) und stellt Druckjobs ausschliesslich dem zuständigen Agenten zu.
+> **GLN-Routing:** Jede Bridge authentifiziert sich mit einem klinikspezifischen API-Key (`Bearer`-Token). OrderEntry liest daraus die FHIR-Organization-ID (GS1-GLN) und stellt Druckjobs ausschliesslich der zuständigen Bridge zu.
 
 ---
 
 ### Szenario 3 — ORU: Laborbefund zurück an Klinik
 
-Das LIS meldet einen fertigen Laborbefund als HL7 ORU^R01 an Orchestra. Orchestra verarbeitet die Nachricht auf zwei parallelen Wegen: Es konvertiert die ORU in einen FHIR DiagnosticReport (sichtbar in OrderEntry-UI) und leitet die ORU gleichzeitig als Datei über den Agent-Proxy an die Klinik zurück.
+Das LIS meldet einen fertigen Laborbefund als HL7 ORU^R01 an Orchestra. Orchestra verarbeitet die Nachricht auf zwei parallelen Wegen: Es konvertiert die ORU in einen FHIR DiagnosticReport (sichtbar in OrderEntry-UI) und leitet die ORU gleichzeitig als Datei über den Bridge-Proxy an die Klinik zurück.
 
 ```mermaid
 sequenceDiagram
@@ -166,7 +168,7 @@ sequenceDiagram
     participant ORC as Orchestra
     participant FHIR as HAPI FHIR
     participant OE as OrderEntry
-    participant AGT as Local Agent
+    participant BRG as z2Lab Bridge
     participant PIS as PIS / KIS
 
     LIS->>ORC: HL7 ORU^R01 (Befund)
@@ -175,9 +177,9 @@ sequenceDiagram
         FHIR-->>OE: Befund in UI sichtbar
     and An Klinik liefern
         ORC->>OE: HL7 ORU via /proxy/hl7/outbound
-        AGT->>OE: GET /api/v1/proxy/hl7/outbound\n(polling)
-        OE-->>AGT: HL7 ORU + PDF
-        AGT->>PIS: /var/oru/*.hl7\n/var/pdf/*.pdf
+        BRG->>OE: GET /api/v1/proxy/hl7/outbound\n(polling)
+        OE-->>BRG: HL7 ORU + PDF
+        BRG->>PIS: /var/oru/*.hl7\n/var/pdf/*.pdf
     end
 ```
 
@@ -189,19 +191,21 @@ sequenceDiagram
 
 ### ✅ Bereits in OrderEntry gebaut
 
-#### Agent API
+> **Hinweis:** Die folgenden Routes existieren aktuell noch unter `/api/v1/agent/*`. Sie werden im Folge-Refactor auf `/api/v1/bridge/*` umbenannt.
 
-| Route | Methode | Funktion |
+#### Bridge API
+
+| Route (geplant) | Methode | Funktion |
 |---|---|---|
-| `/api/v1/agent/status` | GET | Connectivity-Check, Token-Validierung, HL7-Proxy-Status |
-| `/api/v1/agent/token` | POST | JWT / PAT für Agent-Authentifizierung ausstellen |
+| `/api/v1/bridge/status` | GET | Connectivity-Check, Token-Validierung, HL7-Proxy-Status |
+| `/api/v1/bridge/token` | POST | JWT / PAT für Bridge-Authentifizierung ausstellen |
 
 #### HL7 Proxy
 
 | Route | Methode | Funktion |
 |---|---|---|
-| `/api/v1/proxy/hl7/inbound` | POST | HL7 vom Agent → Orchestra (ADT, ORU) |
-| `/api/v1/proxy/hl7/outbound` | GET | HL7 von Orchestra → Agent (ORU, Polling) |
+| `/api/v1/proxy/hl7/inbound` | POST | HL7 von der Bridge → Orchestra (ADT, ORU) |
+| `/api/v1/proxy/hl7/outbound` | GET | HL7 von Orchestra → Bridge (ORU, Polling) |
 
 #### FHIR Proxy
 
@@ -215,7 +219,7 @@ sequenceDiagram
 | `/api/v1/proxy/fhir/service-requests/[id]` | GET | Einzelauftrag |
 | `/api/v1/proxy/fhir/diagnostic-reports` | GET | Alle Befunde |
 
-#### Auth (für Agent nutzbar)
+#### Auth (für Bridge nutzbar)
 
 | Route | Methode | Funktion |
 |---|---|---|
@@ -233,7 +237,7 @@ Bereits vollständig implementiert in `src/presentation/hooks/useOrderDocuments.
 - Auto-Print nach Auftragserfassung (`OrderCreatePage.tsx`)
 - Barcodes: CODE128 via JsBarcode — Format `{orderNumber} {materialCode}`
 
-> **Hinweis:** Der Browser-Druck ist fertig. Der Agent-seitige Druck (für Kliniken ohne Browser-Zugang, Zebra-Drucker) ist noch nicht implementiert.
+> **Hinweis:** Der Browser-Druck ist fertig. Der Bridge-seitige Druck (für Kliniken ohne Browser-Zugang, Zebra-Drucker) ist noch nicht implementiert.
 
 ---
 
@@ -244,9 +248,9 @@ Bereits vollständig implementiert in `src/presentation/hooks/useOrderDocuments.
 #### 1. Print Job Queue
 
 ```
-POST /api/v1/agent/jobs/print       ← Druckjob nach Auftragserfassung erstellen
-GET  /api/v1/agent/jobs             ← Agent pollt: offene Print- + ORU-Jobs
-POST /api/v1/agent/jobs/[id]/done  ← Agent bestätigt Job abgeschlossen
+POST /api/v1/bridge/jobs/print       ← Druckjob nach Auftragserfassung erstellen
+GET  /api/v1/bridge/jobs             ← Bridge pollt: offene Print- + ORU-Jobs
+POST /api/v1/bridge/jobs/[id]/done   ← Bridge bestätigt Job abgeschlossen
 ```
 
 #### 2. ZPL-Generierung (Server-side)
@@ -254,39 +258,39 @@ POST /api/v1/agent/jobs/[id]/done  ← Agent bestätigt Job abgeschlossen
 - Barcode-Etikette als ZPL-Template für Zebra/Dymo-Drucker
 - Format: `{orderNumber} {materialCode}` (LIS-Barcode-Konvention)
 
-#### 3. Agent Registration & Management
+#### 3. Bridge Registration & Management
 
 ```
-POST   /api/v1/agent/register      ← Klinik registriert Agent → erhält API-Key
-GET    /api/v1/agent/list          ← Admin: alle registrierten Agents
-DELETE /api/v1/agent/[id]          ← Admin: Agent deaktivieren
+POST   /api/v1/bridge/register       ← Klinik registriert Bridge → erhält API-Key
+GET    /api/v1/bridge/list           ← Admin: alle registrierten Bridges
+DELETE /api/v1/bridge/[id]           ← Admin: Bridge deaktivieren
 ```
 
-#### 4. Admin UI — Agent-Verwaltung (`/admin/agents`)
+#### 4. Admin UI — Bridge-Verwaltung (`/admin/bridges`)
 
-- Übersicht registrierter Kliniken: letzter Kontakt, Agent-Version, Status
+- Übersicht registrierter Kliniken: letzter Kontakt, Bridge-Version, Status
 - Aktionen: API-Key erstellen, deaktivieren, erneuern
 
-#### 5. Druckjob-Routing — Practitioner → Abteilung → Agent ⚠️ TODO: Design-Entscheidung offen
+#### 5. Druckjob-Routing — Practitioner → Abteilung → Bridge ⚠️ TODO: Design-Entscheidung offen
 
 Beim Erstellen eines Auftrags ist ein **Practitioner** (mit GLN) bereits ausgewählt.
 Dieser Practitioner gehört via `PractitionerRole` zu einer **Location / Abteilung**.
-Jede Abteilung hat einen eigenen registrierten **Agent** mit eigenem Drucker.
+Jede Abteilung hat eine eigene registrierte **Bridge** mit eigenem Drucker.
 
-**Offene Frage:** Wie wird die Zuordnung `Practitioner → Abteilung → Agent` gespeichert?
+**Offene Frage:** Wie wird die Zuordnung `Practitioner → Abteilung → Bridge` gespeichert?
 
 **Kandidat:** `PractitionerRole.location` in HAPI FHIR — der Practitioner ist einer Location
-zugeordnet, der Agent ist für diese Location registriert. OrderEntry liest beim
-Auftragserstellen die PractitionerRole und routet den Druckjob an den zuständigen Agent.
+zugeordnet, die Bridge ist für diese Location registriert. OrderEntry liest beim
+Auftragserstellen die PractitionerRole und routet den Druckjob an die zuständige Bridge.
 
 **Zwei Routing-Modi:**
-- **Broadcast** — Druckjob geht an alle Agents der Organization (Fallback)
-- **Gezielt** — Druckjob geht an den Agent der Abteilung des erstellenden Practitioners
+- **Broadcast** — Druckjob geht an alle Bridges der Organization (Fallback)
+- **Gezielt** — Druckjob geht an die Bridge der Abteilung des erstellenden Practitioners
 
 **Muss geklärt werden:**
 - [ ] Wird `PractitionerRole.location` als Routing-Grundlage verwendet?
-- [ ] Wie wird ein Agent einer Location zugeordnet? (bei Registrierung / Admin UI)
-- [ ] Was passiert wenn kein Agent für die Location registriert ist → Broadcast oder Fehler?
+- [ ] Wie wird eine Bridge einer Location zugeordnet? (bei Registrierung / Admin UI)
+- [ ] Was passiert wenn keine Bridge für die Location registriert ist → Broadcast oder Fehler?
 
 ---
 
@@ -304,15 +308,15 @@ Aktuell ist nur das ORM-Szenario (Auftragserfassung → LIS) vorhanden.
 
 ---
 
-### Phase 3 — Agent (separates Go-Projekt)
+### Phase 3 — Bridge (separates Go-Projekt)
 
 ```
-zetlab-agent/
+z2lab-bridge/
 ├── main.go                  # Entry point, Service-Registrierung (Windows/macOS/Linux/Docker)
 ├── watcher/
 │   └── adtWatcher.go        # Directory Watcher → POST /proxy/hl7/inbound
 ├── poller/
-│   └── jobPoller.go         # GET /agent/jobs → Drucken + ORU schreiben
+│   └── jobPoller.go         # GET /bridge/jobs → Drucken + ORU schreiben
 ├── printer/
 │   ├── pdfPrinter.go        # PDF → CUPS (Linux/macOS) / WinPrint (Windows)
 │   └── zplPrinter.go        # ZPL → TCP:9100 (Zebra / Dymo RAW)
@@ -329,7 +333,7 @@ zetlab-agent/
 
 ### ⚠️ Offene Entscheidung — Go Framework-Wahl
 
-Bevor der Agent implementiert wird, muss das Go-Framework geklärt werden.
+Bevor die Bridge implementiert wird, muss das Go-Framework geklärt werden.
 
 #### Optionen
 
@@ -344,7 +348,7 @@ Bevor der Agent implementiert wird, muss das Go-Framework geklärt werden.
 #### Empfehlung zur Diskussion
 
 ```
-Für den Agent:
+Für die Bridge:
   HTTP Client  → Standard Library (net/http) — reicht für Polling
   CLI / Flags  → Cobra — für Konfiguration und Service-Commands
   Filesystem   → fsnotify — Directory Watcher
@@ -353,7 +357,7 @@ Für den Agent:
   SQLite       → modernc.org/sqlite (kein CGO nötig)
 ```
 
-**Kein HTTP-Server-Framework nötig** — der Agent ist ein Client, kein Server.
+**Kein HTTP-Server-Framework nötig** — die Bridge ist ein Client, kein Server.
 Nur der Health-Endpoint (`localhost:7890/health`) braucht einen minimalen HTTP-Server
 → Standard Library reicht.
 
@@ -364,11 +368,11 @@ Nur der Health-Endpoint (`localhost:7890/health`) braucht einen minimalen HTTP-S
 Go kompiliert für alle Plattformen aus einer einzigen Codebase:
 
 ```bash
-GOOS=windows GOARCH=amd64  go build → zetlab-agent.exe          (Klinik Windows PC)
-GOOS=linux   GOARCH=amd64  go build → zetlab-agent-linux        (Server / NUC)
-GOOS=linux   GOARCH=arm64  go build → zetlab-agent-linux-arm64  (Raspberry Pi / ARM)
-GOOS=darwin  GOARCH=amd64  go build → zetlab-agent-mac-intel    (Mac Intel)
-GOOS=darwin  GOARCH=arm64  go build → zetlab-agent-mac-m1       (Mac Apple Silicon)
+GOOS=windows GOARCH=amd64  go build → z2lab-bridge.exe          (Klinik Windows PC)
+GOOS=linux   GOARCH=amd64  go build → z2lab-bridge-linux        (Server / NUC)
+GOOS=linux   GOARCH=arm64  go build → z2lab-bridge-linux-arm64  (Raspberry Pi / ARM)
+GOOS=darwin  GOARCH=amd64  go build → z2lab-bridge-mac-intel    (Mac Intel)
+GOOS=darwin  GOARCH=arm64  go build → z2lab-bridge-mac-m1       (Mac Apple Silicon)
 ```
 
 #### Gewählte Packages
@@ -407,15 +411,15 @@ zebra_ip: 192.168.1.100
 ```
 ```bash
 # ENV Override (für Docker / Linux)
-AGENT_ORDERENTRY_URL=https://orderentry.zlz.ch
-AGENT_API_KEY=abc123
+BRIDGE_ORDERENTRY_URL=https://orderentry.zlz.ch
+BRIDGE_API_KEY=abc123
 ```
 
-**Auto-Update:** Option B — Agent prüft selbst
+**Auto-Update:** Option B — Bridge prüft selbst
 ```
 Beim Status-Poll → Server meldet aktuelle Version
     ↓
-Agent vergleicht mit eigener Version
+Bridge vergleicht mit eigener Version
     ↓
 Neue Version verfügbar?
     → Binary herunterladen (GitHub Releases)
@@ -429,37 +433,37 @@ Neue Version verfügbar?
 ```
 Go-Live Milestone:
   ✅ OrderEntry (Next.js)     → produktiv
-  ✅ ZetLab Agent             → produktiv
+  ✅ z2Lab Bridge             → produktiv
   ✅ Installer für alle Plattformen bereit:
-       Windows  → zetlab-agent-setup.exe (.msi)
-       macOS    → zetlab-agent.pkg
-       Linux    → zetlab-agent.deb / .rpm
-       Docker   → docker pull zetlab/agent
+       Windows  → z2lab-bridge-setup.exe (.msi)
+       macOS    → z2lab-bridge.pkg
+       Linux    → z2lab-bridge.deb / .rpm
+       Docker   → docker pull z2lab/bridge
 ```
 
-Das bedeutet: **Agent-Entwicklung muss parallel zu OrderEntry laufen.**
+Das bedeutet: **Bridge-Entwicklung muss parallel zu OrderEntry laufen.**
 
 ---
 
 ### Phase 4 — Admin UI
 
-#### 4. `/admin/agents`
+#### 4. `/admin/bridges`
 
-Verwaltungsseite für registrierte Agents: Status, Version, letzter Kontakt, Key-Management.
+Verwaltungsseite für registrierte Bridges: Status, Version, letzter Kontakt, Key-Management.
 
 ---
 
 ## Deployment-Varianten
 
-### Modell 1 — Cloud-Only *(ohne Agent — für einfache Integrationen)*
+### Modell 1 — Cloud-Only *(ohne Bridge — für einfache Integrationen)*
 
-Kein lokaler Agent. Alle Dienste laufen in der Cloud.
+Keine lokale Bridge. Alle Dienste laufen in der Cloud.
 
 | Funktion | Lösung |
 |---|---|
 | **Druck** | Cloud Printing / Remote Printing — Drucker ist direkt über das Internet oder VPN erreichbar |
 | **ORU-Zustellung** | SFTP — Orchestra legt ORU-Dateien auf einem SFTP-Server ab; PIS/KIS holt sie von dort ab |
-| **ADT** | Direkter FHIR-Push vom KIS/PIS in die Cloud (kein Agent-Watcher nötig) |
+| **ADT** | Direkter FHIR-Push vom KIS/PIS in die Cloud (keine Bridge-Watcher nötig) |
 
 **Einsatz:** Kliniken mit einfacher IT-Infrastruktur, Cloud-Druckern oder bestehendem SFTP-Workflow.
 
@@ -467,24 +471,24 @@ Kein lokaler Agent. Alle Dienste laufen in der Cloud.
 
 ---
 
-### Modell 2 — Agent Standard *(empfohlen für Praxen und kleine Kliniken)*
+### Modell 2 — Bridge Standard *(empfohlen für Praxen und kleine Kliniken)*
 
-Gesamte Infrastruktur (OrderEntry, Orchestra, HAPI FHIR) läuft in der Cloud. Lokal wird ausschliesslich der Agent betrieben.
+Gesamte Infrastruktur (OrderEntry, Orchestra, HAPI FHIR) läuft in der Cloud. Lokal wird ausschliesslich die Bridge betrieben.
 
 | Betriebssystem | Deployment |
 |---|---|
-| Windows | `zetlab-agent.exe` als Windows Service |
-| macOS | `zetlab-agent` als LaunchAgent |
-| Linux | `zetlab-agent` als systemd Service |
-| Docker | `docker run zetlab/agent` |
+| Windows | `z2lab-bridge.exe` als Windows Service |
+| macOS | `z2lab-bridge` als LaunchAgent |
+| Linux | `z2lab-bridge` als systemd Service |
+| Docker | `docker run z2lab/bridge` |
 
 ### Modell 3 — Hybrid *(für grosse Kliniken mit erhöhten Datenschutzanforderungen)*
 
-OrderEntry und Orchestra laufen in der Cloud. HAPI FHIR und der Agent laufen lokal — Patientendaten verlassen das Haus nicht. Die Verbindung zur Cloud erfolgt über einen ausgehenden Cloudflare Tunnel (kein Port-Forwarding).
+OrderEntry und Orchestra laufen in der Cloud. HAPI FHIR und die Bridge laufen lokal — Patientendaten verlassen das Haus nicht. Die Verbindung zur Cloud erfolgt über einen ausgehenden Cloudflare Tunnel (kein Port-Forwarding).
 
 ```
 Cloud:  OrderEntry UI + Orchestra
-Lokal:  HAPI FHIR + Agent
+Lokal:  HAPI FHIR + z2Lab Bridge
         Verbindung: Cloudflare Tunnel (outbound)
 ```
 
@@ -492,24 +496,24 @@ Lokal:  HAPI FHIR + Agent
 
 ## Konfiguration
 
-### Agent ENV-Variablen
+### Bridge ENV-Variablen
 
 | Variable | Standard | Beschreibung |
 |---|---|---|
-| `AGENT_ORDERENTRY_URL` | — | OrderEntry Cloud URL (erforderlich) |
-| `AGENT_API_KEY` | — | Klinikspezifischer API-Key / PAT (erforderlich) |
-| `AGENT_POLL_INTERVAL_MS` | `5000` | Polling-Intervall in Millisekunden |
-| `AGENT_ADT_WATCH_DIR` | `/var/adt/` | Verzeichnis für eingehende ADT HL7-Dateien |
-| `AGENT_ORU_OUTPUT_DIR` | `/var/oru/` | Verzeichnis für ausgehende ORU HL7-Dateien |
-| `AGENT_PDF_OUTPUT_DIR` | `/var/pdf/` | Verzeichnis für ausgehende PDF-Dateien |
-| `AGENT_PRINTER_NAME` | — | Druckername für Begleitschein (CUPS / WinPrint) |
-| `AGENT_ZEBRA_IP` | — | IP-Adresse des Zebra/Dymo-Druckers (optional) |
-| `AGENT_ZEBRA_PORT` | `9100` | TCP-Port für ZPL RAW-Druck |
-| `AGENT_HEALTH_PORT` | `7890` | Lokaler Health-Endpoint-Port (0 = deaktiviert) |
-| `AGENT_JOB_TIMEOUT_MS` | `30000` | Maximale Laufzeit pro Job |
-| `AGENT_RETRY_MAX_HOURS` | `24` | Maximale Retry-Dauer für fehlgeschlagene ADT-Uploads |
-| `AGENT_LOG_FILE` | `/var/log/zetlab-agent.log` | Pfad zur Audit-Log-Datei |
-| `AGENT_LOG_RETENTION_DAYS` | `30` | Aufbewahrungsdauer für Log-Einträge |
+| `BRIDGE_ORDERENTRY_URL` | — | OrderEntry Cloud URL (erforderlich) |
+| `BRIDGE_API_KEY` | — | Klinikspezifischer API-Key / PAT (erforderlich) |
+| `BRIDGE_POLL_INTERVAL_MS` | `5000` | Polling-Intervall in Millisekunden |
+| `BRIDGE_ADT_WATCH_DIR` | `/var/adt/` | Verzeichnis für eingehende ADT HL7-Dateien |
+| `BRIDGE_ORU_OUTPUT_DIR` | `/var/oru/` | Verzeichnis für ausgehende ORU HL7-Dateien |
+| `BRIDGE_PDF_OUTPUT_DIR` | `/var/pdf/` | Verzeichnis für ausgehende PDF-Dateien |
+| `BRIDGE_PRINTER_NAME` | — | Druckername für Begleitschein (CUPS / WinPrint) |
+| `BRIDGE_ZEBRA_IP` | — | IP-Adresse des Zebra/Dymo-Druckers (optional) |
+| `BRIDGE_ZEBRA_PORT` | `9100` | TCP-Port für ZPL RAW-Druck |
+| `BRIDGE_HEALTH_PORT` | `7890` | Lokaler Health-Endpoint-Port (0 = deaktiviert) |
+| `BRIDGE_JOB_TIMEOUT_MS` | `30000` | Maximale Laufzeit pro Job |
+| `BRIDGE_RETRY_MAX_HOURS` | `24` | Maximale Retry-Dauer für fehlgeschlagene ADT-Uploads |
+| `BRIDGE_LOG_FILE` | `/var/log/z2lab-bridge.log` | Pfad zur Audit-Log-Datei |
+| `BRIDGE_LOG_RETENTION_DAYS` | `30` | Aufbewahrungsdauer für Log-Einträge |
 
 ---
 
@@ -517,14 +521,14 @@ Lokal:  HAPI FHIR + Agent
 
 ### Konzept
 
-Jede Klinik erhält bei der Registrierung einen eigenen API-Key (Personal Access Token). Der Agent sendet diesen Key bei jedem Request als `Authorization: Bearer`-Header. OrderEntry identifiziert darüber die Klinik und deren FHIR-Organization (inkl. GS1-GLN). Ein Key kann jederzeit widerrufen werden, ohne andere Kliniken zu beeinflussen.
+Jede Klinik erhält bei der Registrierung einen eigenen API-Key (Personal Access Token). Die Bridge sendet diesen Key bei jedem Request als `Authorization: Bearer`-Header. OrderEntry identifiziert darüber die Klinik und deren FHIR-Organization (inkl. GS1-GLN). Ein Key kann jederzeit widerrufen werden, ohne andere Kliniken zu beeinflussen.
 
-### Request-Header des Agents
+### Request-Header der Bridge
 
 ```
-Authorization: Bearer <AGENT_API_KEY>
-X-Clinic-ID:   org-123          (FHIR Organization ID)
-X-Agent-Version: 1.2.0
+Authorization:    Bearer <BRIDGE_API_KEY>
+X-Clinic-ID:      org-123          (FHIR Organization ID)
+X-Bridge-Version: 1.2.0
 ```
 
 `X-Clinic-ID` ermöglicht klinikspezifisches Logging und Routing von Druckjobs / ORU-Dateien.
@@ -535,7 +539,7 @@ X-Agent-Version: 1.2.0
 
 ### Offline-Puffer
 
-Bei Cloud-Nichterreichbarkeit puffert der Agent ADT-Dateien lokal:
+Bei Cloud-Nichterreichbarkeit puffert die Bridge ADT-Dateien lokal:
 
 ```
 /var/adt/pending/   ← neue Dateien vom PIS
@@ -547,7 +551,7 @@ Retry-Strategie: exponentielles Backoff (5 s → 30 s → 5 min). Nach Wiederher
 
 ### Datei-Deduplizierung
 
-Jede gesendete Datei wird per SHA-256-Hash in einer lokalen SQLite-Datenbank (`/var/adt/sent.db`) markiert. Vor jedem Upload prüft der Agent, ob der Hash bereits bekannt ist — bekannte Dateien werden übersprungen.
+Jede gesendete Datei wird per SHA-256-Hash in einer lokalen SQLite-Datenbank (`/var/adt/sent.db`) markiert. Vor jedem Upload prüft die Bridge, ob der Hash bereits bekannt ist — bekannte Dateien werden übersprungen.
 
 ### Health Endpoint
 
@@ -560,26 +564,26 @@ Nur lokal erreichbar (`127.0.0.1`). Ermöglicht Docker `HEALTHCHECK` und Service
 
 ### Startup-Validierung
 
-Beim Start prüft der Agent alle Voraussetzungen, bevor er in den Polling-Loop eintritt:
+Beim Start prüft die Bridge alle Voraussetzungen, bevor sie in den Polling-Loop eintritt:
 
 ```
-[ ] AGENT_ORDERENTRY_URL erreichbar (HTTP 200 / 401)
-[ ] API-Key gültig (GET /api/v1/agent/status → 200)
+[ ] BRIDGE_ORDERENTRY_URL erreichbar (HTTP 200 / 401)
+[ ] API-Key gültig (GET /api/v1/bridge/status → 200)
 [ ] ADT_WATCH_DIR existiert und ist lesbar
 [ ] ORU_OUTPUT_DIR existiert und ist schreibbar
 [ ] PDF_OUTPUT_DIR existiert und ist schreibbar
 [ ] Drucker erreichbar (CUPS-Abfrage oder TCP-Ping auf Zebra-IP)
 ```
 
-Kritische Fehler beenden den Agent mit Exit-Code 1. Nicht-kritische Fehler (z. B. Drucker fehlt) werden geloggt; der Agent startet trotzdem.
+Kritische Fehler beenden die Bridge mit Exit-Code 1. Nicht-kritische Fehler (z. B. Drucker fehlt) werden geloggt; die Bridge startet trotzdem.
 
 ### Graceful Shutdown
 
-Der Agent fängt `SIGTERM` / `SIGINT` ab, schliesst den laufenden Job ab, sichert offene ADT-Dateien in die Pending-Queue und beendet sich sauber mit Exit-Code 0.
+Die Bridge fängt `SIGTERM` / `SIGINT` ab, schliesst den laufenden Job ab, sichert offene ADT-Dateien in die Pending-Queue und beendet sich sauber mit Exit-Code 0.
 
 ### Auto-Update
 
-Beim Status-Poll vergleicht der Agent seine Version mit der vom Server gemeldeten Mindestversion. Liegt die eigene Version darunter, wird eine kritische Warnung geloggt und eine Admin-Benachrichtigung ausgelöst.
+Beim Status-Poll vergleicht die Bridge ihre Version mit der vom Server gemeldeten Mindestversion. Liegt die eigene Version darunter, wird eine kritische Warnung geloggt und eine Admin-Benachrichtigung ausgelöst.
 
 ### Audit Log
 
@@ -600,5 +604,5 @@ Format: strukturiertes JSON oder TSV. Rotation täglich, Aufbewahrung 30 Tage (n
 |---|---|
 | `CLAUDE.md` → Orchestra Integration | JWT-Vertrag, Launch-Flow, HL7-Proxy-Regeln |
 | `src/app/api/v1/proxy/hl7/` | HL7 Proxy Routes (implementiert) |
-| `src/app/api/v1/agent/` | Agent Routes (teilweise implementiert) |
+| `src/app/api/v1/agent/` | Bridge Routes (teilweise implementiert — wird auf `/bridge/` umbenannt) |
 | `src/presentation/hooks/useOrderDocuments.ts` | Begleitschein + Barcode (Browser-seitig, fertig) |
