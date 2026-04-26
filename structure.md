@@ -1,122 +1,162 @@
-z2Lab / frontend/orderentry/src/
-�
-+-- domain/                          ? Pure business rules, no dependencies
-�   +-- entities/
-�   �   +-- AdminTask.ts
-�   �   +-- AgentJob.ts
-�   �   +-- GlnLookupResult.ts
-�   �   +-- MailMessage.ts
-�   �   +-- Order.ts / Result.ts / Patient.ts
-�   �   +-- OrgRule.ts / ReservedOrderNumber.ts
-�   �   +-- User.ts
-�   +-- factories/
-�   �   +-- OrderFactory.ts
-�   �   +-- ResultFactory.ts
-�   +-- policies/
-�   �   +-- IPolicy.ts
-�   �   +-- RolePermissionMap.ts
-�   +-- strategies/
-�   �   +-- IOrderNumberStrategy.ts
-�   �   +-- MibiStrategy.ts / RoutineStrategy.ts / PocStrategy.ts
-�   �   +-- OrderNumberStrategyRegistry.ts
-�   +-- valueObjects/
-�       +-- Identifier.ts / OrderNumber.ts
-�       +-- Permission.ts / PoolThreshold.ts
-�       +-- OrganizationRef.ts
-�
-+-- application/                     ? Use cases + interfaces, no I/O
-�   +-- interfaces/
-�   �   +-- IMailService.ts
-�   �   +-- IDeepLinkAuthStrategy.ts
-�   �   +-- repositories/
-�   �       +-- IUserRepository.ts / IOrderRepository.ts / IResultRepository.ts
-�   �       +-- IOrgRuleRepository.ts / IReservedNumberRepository.ts
-�   �       +-- IAdminTaskRepository.ts / IAgentJobRepository.ts
-�   �       +-- IAgentRegistrationRepository.ts
-�   +-- useCases/
-�   �   +-- CheckPermission.ts
-�   �   +-- CreateOrder.ts / GetOrders.ts / GetResults.ts / SearchResults.ts
-�   �   +-- GenerateOrderNumberUseCase.ts
-�   �   +-- ReserveOrderNumberUseCase.ts
-�   +-- services/
-�   �   +-- FhirAccessResolver.ts
-�   �   +-- OrderService.ts / ResultService.ts
-�   �   +-- OrganizationResolver.ts
-�   +-- adapters/
-�   �   +-- IGlnAdapter.ts
-�   �   +-- GlnAdapterV1.ts / GlnAdapterV2.ts
-�   �   +-- dto/GlnDto.ts
-�   +-- strategies/
-�       +-- PatientSearchStrategy.ts
-�
-+-- infrastructure/                  ? Implementations, I/O, frameworks
-�   +-- ServiceFactory.ts
-�   +-- api/
-�   �   +-- controllers/ (23 controllers)
-�   �   �   +-- PatientsController.ts / OrdersController.ts / ResultsController.ts
-�   �   �   +-- UsersController.ts / EnvController.ts / MailController.ts
-�   �   �   +-- NumberPoolController.ts / OrgRulesController.ts
-�   �   �   +-- AdminTasksController.ts / AdminMergeController.ts
-�   �   �   +-- GlnLookupController.ts / Hl7ProxyController.ts
-�   �   �   +-- AgentJobController.ts / AgentRegistrationController.ts / �
-�   �   +-- dto/ (18 DTOs)
-�   �   +-- gateway/
-�   �   �   +-- ApiGateway.ts            ? all v1 admin routes go through here
-�   �   �   +-- RouteRegistry.ts
-�   �   +-- middleware/
-�   �   �   +-- AccessGuard.ts
-�   �   �   +-- RequirePermission.ts
-�   �   +-- openapi.ts
-�   +-- auth/
-�   �   +-- ApiTokenService.ts / BearerAuthGuard.ts / UserJwtService.ts
-�   +-- authorization/
-�   �   +-- AuthorizationService.ts / fhirAuthConfig.ts
-�   �   +-- strategies/ (7 files)
-�   +-- config/
-�   �   +-- EnvConfig.ts               ? server-side env vars
-�   �   +-- RuntimeConfig.ts
-�   +-- db/
-�   �   +-- prismaClient.ts / DatabaseConfig.ts
-�   �   +-- SqliteMigrationRunner.ts / runMigrations.ts
-�   �   +-- prismaError.ts
-�   +-- fhir/
-�   �   +-- FhirClient.ts / FhirTypes.ts
-�   �   +-- DiagnosticReportMapper.ts / ObservationMapper.ts / PractitionerMapper.ts
-�   +-- repositories/ (9 Prisma + 2 FHIR)
-�   �   +-- PrismaUserRepository.ts / PrismaOrgRuleRepository.ts
-�   �   +-- PrismaAdminTaskRepository.ts / PrismaAgentJobRepository.ts
-�   �   +-- PrismaReservedNumberRepository.ts / PrismaTokenRepository.ts
-�   �   +-- PrismaAgentRegistrationRepository.ts
-�   �   +-- FhirOrderRepository.ts / FhirResultRepository.ts
-�   +-- mail/ gln/ logging/ metrics/ deeplink/ services/
-�
-+-- app/api/                         ? Next.js routes � should be thin
-    +-- patients/
-    �   +-- route.ts                 ? ? PatientsController
-    �   +-- [id]/
-    �       +-- route.ts             ? FHIR proxy (documented), auth added
-    �       +-- diagnostic-reports/route.ts   ? FHIR proxy, auth added
-    �       +-- service-requests/route.ts     ? FHIR proxy, auth added
-    �       +-- document-references/route.ts  ? FHIR proxy, auth added
-    �       +-- activate/route.ts    ? DIRECT_FHIR + business logic (legacy)
-    +-- service-requests/
-    �   +-- route.ts                 ? ? OrdersController
-    �   +-- [id]/route.ts            ? FHIR proxy (GET/PUT), ? controller (DELETE)
-    +-- diagnostic-reports/route.ts  ? ? ResultsController
-    +-- login/route.ts               ? BUSINESS_LOGIC (legacy, off-limits)
-    +-- signup/route.ts              ? BUSINESS_LOGIC (legacy, off-limits)
-    +-- auth/reset-password/         ? BUSINESS_LOGIC (legacy, off-limits)
-    +-- insurance-lookup/route.ts    ? EnvConfig fixed (no more process.env)
-    +-- v1/
-    �   +-- admin/
-    �   �   +-- mail/*/route.ts      ? ? apiGateway.handle()
-    �   �   +-- org-rules/*/route.ts ? ? apiGateway.handle()
-    �   �   +-- number-pool/*/route.ts ? ? apiGateway.handle()
-    �   +-- orders/number/route.ts   ? ? NumberPoolController
-    �   +-- config/service-types/route.ts ?
-    +-- � (47 more thin/re-export routes)
+# z2Lab — Source Tree (`frontend/orderentry/src/`)
 
-packages/
-+-- domain/src/        ? canonical mirror (Turbopack workaround: local copy in src/)
-+-- application/src/   ? canonical mirror
-+-- infrastructure/src/ ? canonical mirror
+> Snapshot of the Clean Architecture layout. Generated 2026-04-26.
+
+```
+src/
+├── domain/                          ← Pure business rules — no framework deps
+│   ├── entities/
+│   │   ├── AdminTask.ts
+│   │   ├── Analysis.ts
+│   │   ├── BridgeJob.ts             ← z2Lab Bridge print/ORU job
+│   │   ├── DeepLinkContext.ts
+│   │   ├── GlnLookupResult.ts
+│   │   ├── MailMessage.ts
+│   │   ├── ManagedUser.ts
+│   │   ├── Order.ts
+│   │   ├── OrgRule.ts
+│   │   ├── Patient.ts
+│   │   ├── ReservedOrderNumber.ts
+│   │   ├── Result.ts
+│   │   └── User.ts
+│   ├── factories/
+│   │   ├── OrderFactory.ts
+│   │   └── ResultFactory.ts
+│   ├── policies/
+│   │   ├── IPolicy.ts
+│   │   └── RolePermissionMap.ts
+│   ├── strategies/
+│   │   ├── IOrderNumberStrategy.ts
+│   │   ├── MibiStrategy.ts
+│   │   ├── OrderNumberStrategyRegistry.ts
+│   │   ├── PassthroughStrategy.ts
+│   │   ├── PocStrategy.ts
+│   │   └── RoutineStrategy.ts
+│   ├── useCases/                    ← Pure use cases (no I/O)
+│   ├── valueObjects/
+│   │   ├── AccessLevel.ts
+│   │   ├── Identifier.ts
+│   │   ├── OrderNumber.ts
+│   │   ├── OrganizationRef.ts
+│   │   ├── Permission.ts
+│   │   └── PoolThreshold.ts
+│   └── index.ts                     ← Public API barrel
+│
+├── application/                     ← Use cases + repository interfaces
+│   ├── adapters/                    ← API-version adapters (e.g. GLN v1/v2)
+│   ├── interfaces/
+│   │   ├── repositories/
+│   │   │   ├── IAdminTaskRepository.ts
+│   │   │   ├── IBridgeJobRepository.ts
+│   │   │   ├── IBridgeRegistrationRepository.ts
+│   │   │   ├── IOrderRepository.ts
+│   │   │   ├── IOrgRuleRepository.ts
+│   │   │   ├── IReservedNumberRepository.ts
+│   │   │   ├── IResultRepository.ts
+│   │   │   └── IUserRepository.ts
+│   │   ├── services/
+│   │   ├── IDeepLinkAuthStrategy.ts
+│   │   └── IMailService.ts
+│   ├── services/
+│   ├── strategies/                  ← e.g. PatientSearchStrategy
+│   ├── useCases/                    ← e.g. CheckPermission, GenerateOrderNumber
+│   └── index.ts
+│
+├── infrastructure/                  ← Concrete adapters + I/O
+│   ├── api/
+│   │   ├── controllers/             ← BridgeJobController, BridgeRegistrationController, …
+│   │   ├── dto/                     ← BridgeJobDto, BridgeRegistrationDto, …
+│   │   ├── gateway/                 ← ApiGateway + RouteRegistry
+│   │   ├── middleware/              ← JwtGuard, RequirePermission
+│   │   ├── HttpClient.ts
+│   │   └── openapi.ts               ← Single source of truth for OpenAPI
+│   ├── auth/                        ← BearerAuthGuard, session helpers
+│   ├── authorization/               ← Strategies (NoAuth, OAuth2)
+│   ├── config/                      ← EnvConfig, RuntimeConfig
+│   ├── db/                          ← Prisma client + migration runner
+│   ├── deeplink/                    ← DeepLinkService + AuditLogger
+│   ├── fhir/                        ← FhirClient + mappers (DiagnosticReport, …)
+│   ├── logging/                     ← Logger (slog-style)
+│   ├── mail/                        ← Nodemailer + provider matrix
+│   ├── metrics/                     ← PrometheusService
+│   ├── repositories/
+│   │   ├── PrismaBridgeJobRepository.ts
+│   │   ├── PrismaBridgeRegistrationRepository.ts
+│   │   ├── PrismaOrgRuleRepository.ts
+│   │   ├── PrismaReservedNumberRepository.ts
+│   │   └── PrismaUserRepository.ts
+│   ├── services/
+│   └── ServiceFactory.ts            ← DI root
+│
+├── presentation/                    ← React + design system
+│   ├── components/                  ← Reusable feature-level components
+│   ├── hooks/                       ← useResults, useOrders, useOrderForm, …
+│   ├── pages/                       ← Page-level components (BridgesPage, OrderCreatePage, …)
+│   └── ui/                          ← Design system (Button, Card, Badge, …)
+│
+├── shared/                          ← Framework-agnostic utilities + client config
+│   ├── config/
+│   │   └── AppConfig.ts             ← NEXT_PUBLIC_* values
+│   └── utils/
+│       ├── base64.ts
+│       └── formatDate.ts
+│
+├── app/                             ← Next.js App Router
+│   ├── account/
+│   ├── admin/
+│   │   ├── api/
+│   │   ├── bridges/                 ← Bridge management UI
+│   │   ├── env/
+│   │   ├── merge/
+│   │   ├── number-pool/
+│   │   ├── org-rules/
+│   │   ├── organizations/
+│   │   ├── tasks/
+│   │   └── users/
+│   ├── api/                         ← API routes (Next.js handlers)
+│   │   ├── v1/                      ← Versioned, current
+│   │   │   ├── admin/
+│   │   │   │   └── bridges/         ← /api/v1/admin/bridges/[id]
+│   │   │   ├── auth/
+│   │   │   ├── bridge/              ← /api/v1/bridge/{status,token,jobs,register}
+│   │   │   ├── config/
+│   │   │   ├── orders/
+│   │   │   ├── proxy/
+│   │   │   │   ├── fhir/            ← FHIR proxy routes
+│   │   │   │   └── hl7/             ← HL7 proxy (inbound/outbound)
+│   │   │   ├── users/
+│   │   │   └── …
+│   │   └── (legacy unversioned routes — login, me, launch — undocumented)
+│   ├── login/
+│   ├── order/
+│   ├── orders/
+│   ├── patient/
+│   ├── results/
+│   └── settings/
+│
+├── components/                      ← Legacy global components (AppHeader, AppSidebar, Table)
+├── lib/                             ← Legacy helpers (auth, fhir, userStore)
+├── messages/                        ← i18n (de, de-CH, en, fr, it)
+├── instrumentation.ts               ← Next.js OTel hook (edge-safe)
+├── instrumentation.node.ts          ← Node-only OTel + DB migration startup
+└── config.ts                        ← Legacy config bridge
+```
+
+---
+
+## Other top-level folders
+
+```
+z2Lab/
+├── Documentation/
+│   ├── Bridge/                      ← z2Lab Bridge architecture spec
+│   ├── Deployment/                  ← EnvironmentVariables.md, Vercel.md
+│   └── Installation/                ← Multi-phase setup guide
+├── backend/
+│   └── orchestra/                   ← OIE Juno config + FHIR seed resources
+├── devops/
+│   └── docker/                      ← Production docker-compose stack
+├── docs/                            ← Auth, FHIR, GLN, audit notes
+├── flyway/                          ← (under frontend/orderentry/) DB migrations
+└── _tmp/                            ← Backups from earlier cleanups (legacy, experiments)
+```

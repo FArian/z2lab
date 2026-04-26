@@ -8,9 +8,22 @@ Full CA-wired page components imported by Next.js `app/` routes.
 
 ## 📄 Files
 
+- 📄 [DashboardPage.tsx](./DashboardPage.tsx) — Landing dashboard
 - 📄 [ResultsPage.tsx](./ResultsPage.tsx) — Global `DiagnosticReport` results list
 - 📄 [OrdersPage.tsx](./OrdersPage.tsx) — Global `ServiceRequest` orders list
-- 📄 [UsersPage.tsx](./UsersPage.tsx) — Admin: User-Management (CRUD + FHIR-Sync)
+- 📄 [OrderCreatePage.tsx](./OrderCreatePage.tsx) — Order entry workflow (wires `useOrderCatalog`, `useOrderForm`, `useOrderDocuments`); auto-queues a Bridge print job after submission
+- 📄 [OrderFormView.tsx](./OrderFormView.tsx) — Pure presentation half of the order form (called from `OrderCreatePage`)
+- 📄 [UsersPage.tsx](./UsersPage.tsx) — Admin: User-Management (CRUD + FHIR-Sync, NAT/JUR ptype logic)
+- 📄 [RolesPage.tsx](./RolesPage.tsx) — Admin: PractitionerRole code catalogue
+- 📄 [BridgesPage.tsx](./BridgesPage.tsx) — Admin: z2Lab Bridge registrations (list, register, revoke, delete)
+- 📄 [OrganizationsPage.tsx](./OrganizationsPage.tsx) — Admin: FHIR Organization registry
+- 📄 [FhirRegistryPage.tsx](./FhirRegistryPage.tsx) — Admin: FHIR resource browser
+- 📄 [OrgRulesPage.tsx](./OrgRulesPage.tsx) — Admin: per-organisation HL7 + numbering rules
+- 📄 [NumberPoolPage.tsx](./NumberPoolPage.tsx) — Admin: pre-reserved order number pool + thresholds
+- 📄 [OrderNumbersPage.tsx](./OrderNumbersPage.tsx) — Admin: live order number generation log
+- 📄 [AdminTasksPage.tsx](./AdminTasksPage.tsx) — Admin: GLN-incomplete records + pool alerts
+- 📄 [AdminMergePage.tsx](./AdminMergePage.tsx) — Admin: merge duplicate Organizations / Practitioners
+- 📄 [AdminEnvPage.tsx](./AdminEnvPage.tsx) — Admin: ENV editor (writes `.env.local`)
 - 📄 [ApiDocsPage.tsx](./ApiDocsPage.tsx) — Admin: API-Dokumentation (Swagger + Connection Guide)
 
 ---

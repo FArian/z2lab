@@ -1,6 +1,6 @@
 # z2Lab Bridge — Architektur & Entwicklungsstand
 
-> **Hinweis (2026-04-26):** Das Produkt hieß früher „ZetLab Local Agent". Der Name wurde auf **z2Lab Bridge** geändert, um Verwechslungen mit Claude Code Sub-Agents (`.claude/agents/`) zu vermeiden. Diese Spec ist bereits auf den neuen Namen umgestellt — die zugehörigen Code-Pfade (`/api/v1/agent/*`, `admin/agents`, `AGENT_*` ENV) werden in einem Folge-Refactor ebenfalls umbenannt.
+> **Naming (2026-04-26):** Das Produkt hieß früher „ZetLab Local Agent". Der Name wurde auf **z2Lab Bridge** geändert, um Verwechslungen mit Claude Code Sub-Agents (`.claude/agents/`) zu vermeiden. Spec, Code, DB-Schema, Routes und UI sind vollständig umgestellt — siehe `.claude/memory/bridge_naming.md` für die vollständige Refactor-Bilanz.
 
 Die **z2Lab Bridge** ist die Brücke zwischen der Cloud-Infrastruktur (OrderEntry, Orchestra, HAPI FHIR) und den lokalen Systemen in Klinik, Praxis und Labor. Sie ermöglicht bidirektionalen HL7-Datenaustausch, lokalen Druck von Begleitscheinen und Barcode-Etiketten sowie die automatische Patientenübernahme aus bestehenden KIS/PIS-Systemen — ohne Firewall-Anpassungen oder Port-Forwarding.
 
@@ -191,11 +191,9 @@ sequenceDiagram
 
 ### ✅ Bereits in OrderEntry gebaut
 
-> **Hinweis:** Die folgenden Routes existieren aktuell noch unter `/api/v1/agent/*`. Sie werden im Folge-Refactor auf `/api/v1/bridge/*` umbenannt.
-
 #### Bridge API
 
-| Route (geplant) | Methode | Funktion |
+| Route | Methode | Funktion |
 |---|---|---|
 | `/api/v1/bridge/status` | GET | Connectivity-Check, Token-Validierung, HL7-Proxy-Status |
 | `/api/v1/bridge/token` | POST | JWT / PAT für Bridge-Authentifizierung ausstellen |
@@ -604,5 +602,5 @@ Format: strukturiertes JSON oder TSV. Rotation täglich, Aufbewahrung 30 Tage (n
 |---|---|
 | `CLAUDE.md` → Orchestra Integration | JWT-Vertrag, Launch-Flow, HL7-Proxy-Regeln |
 | `src/app/api/v1/proxy/hl7/` | HL7 Proxy Routes (implementiert) |
-| `src/app/api/v1/agent/` | Bridge Routes (teilweise implementiert — wird auf `/bridge/` umbenannt) |
+| `src/app/api/v1/bridge/` | Bridge Routes — vollständig implementiert |
 | `src/presentation/hooks/useOrderDocuments.ts` | Begleitschein + Barcode (Browser-seitig, fertig) |

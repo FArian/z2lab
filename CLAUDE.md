@@ -1020,7 +1020,7 @@ Set `APP_NAME=YOURAPP` once to rename every variable automatically.
 | `NEXT_PUBLIC_LAB_NAME` | Client | Display name of the laboratory (e.g. `ZLZ Zentrallabor AG`). Pass as Docker `--build-arg`. |
 | `NEXT_PUBLIC_ORDER_SERVICE_TYPES` | Client | Comma-separated service types as initial UI default. Updated at runtime via `/api/v1/config/service-types`. Pass as Docker `--build-arg`. |
 
-### Backend (`devops/docker/.env`)
+### Backend (`infrastructure/docker/.env`)
 
 | Variable | Purpose |
 |---|---|
@@ -1143,7 +1143,7 @@ const value = configOverride[key] ?? process.env[key] ?? DEFAULT[key]
 
 - The app MUST run identically in Docker and locally (dev)
 - No hardcoded ports, hostnames, or paths — always via ENV vars
-- All services defined in `devops/docker/docker-compose.yml`
+- All services defined in `infrastructure/docker/docker-compose.yml`
 
 ### Services (docker-compose)
 
@@ -1159,7 +1159,7 @@ const value = configOverride[key] ?? process.env[key] ?? DEFAULT[key]
 
 Keycloak / SMART on FHIR is reserved at the bottom of `docker-compose.yml` (commented out, ready to activate).
 
-**Domains** (all derived from `BASE_DOMAIN` in `devops/docker/.env`):
+**Domains** (all derived from `BASE_DOMAIN` in `infrastructure/docker/.env`):
 
 | Domain variable | Service | Example |
 |---|---|---|
@@ -1213,7 +1213,7 @@ Healthcare-grade security applied via Traefik middleware:
 
 ### Rules
 
-- Never use `docker run` directly — always `docker-compose` from `devops/docker/`
+- Never use `docker run` directly — always `docker-compose` from `infrastructure/docker/`
 - Never commit `.env` files — copy and edit `.env` locally, never push secrets
 - Container restart required after ENV changes (see Environment Configuration)
 - Build multi-arch: `linux/amd64` + `linux/arm64`

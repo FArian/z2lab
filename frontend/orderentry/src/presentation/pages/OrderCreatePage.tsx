@@ -224,12 +224,24 @@ export default function OrderCreatePage({ id, srId }: OrderCreatePageProps) {
       form.setSubmitMsg(`${tr("order.sent")}. IDs: ${ids.join(", ") || "ok"}`);
       form.setSubmitErr(null);
 
-      // Queue print job for z2Lab Bridge (fire-and-forget — does not block UI)
+      // Queue print job for z2Lab Bridge (fire-and-forget — does not block UI).
+      //
+      // Routing: orgId is the *clinic* (Patient.managingOrganization), so the
+      // Bridge running in that clinic — registered with the same orgFhirId —
+      // picks up the job. If the patient has no managingOrganization (e.g. a
+      // lab-internal patient), fall back to AppConfig.labOrgId so a Bridge in
+      // the lab itself can still receive it.
+      const patientOrg =
+        ((form.patientData as { managingOrganization?: { reference?: string } } | null)
+          ?.managingOrganization?.reference)
+          ?.split("/").pop() ?? undefined;
+      const printJobOrgId = patientOrg ?? AppConfig.labOrgId;
+
       void fetch("/api/v1/bridge/jobs", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          orgId:               AppConfig.labOrgId,
+          orgId:               printJobOrgId,
           documentReferenceId: docId,
           serviceRequestId:    activeSrId,
           patientId:           id,
