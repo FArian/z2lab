@@ -55,16 +55,17 @@ function asBundle(result: ResultsBundleResponse) {
 }
 
 describe("ResultsController.list()", () => {
-  it("returns 403 OperationOutcome when no org is provided", async () => {
+  it("returns Bundle without organization filter when no org is provided (admin / internal user)", async () => {
     const mockFetch = makeFetch(makeBundle([]));
     const controller = new ResultsController(FHIR_BASE, mockFetch as typeof fetch);
 
     const result = await controller.list({});
 
-    expect((result as { resourceType: string }).resourceType).toBe("OperationOutcome");
-    const outcome = result as { issue: Array<{ details?: { text?: string } }>; httpStatus?: number };
-    expect(outcome.httpStatus).toBe(403);
-    expect(outcome.issue[0]?.details?.text).toMatch(/Organisationszugang/);
+    expect((result as { resourceType: string }).resourceType).toBe("Bundle");
+    const url = (mockFetch as jest.Mock).mock.calls[0][0] as string;
+    expect(url).not.toContain("organization=");
+    expect(url).not.toContain("Patient.organization=");
+    expect(url).not.toContain("organization%3Aidentifier=");
   });
 
   it("returns FHIR Bundle with DiagnosticReport entries from a successful response", async () => {
@@ -141,7 +142,7 @@ describe("ResultsController.list()", () => {
     await controller.list({ ...ORG_QUERY, page: 3, pageSize: 10 });
 
     const url = (mockFetch as jest.Mock).mock.calls[0][0] as string;
-    expect(url).toContain("_getpagesoffset=20");
+    expect(url).toContain("_offset=20");
     expect(url).toContain("_count=10");
   });
 

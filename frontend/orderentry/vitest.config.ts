@@ -4,7 +4,10 @@ import path from "path";
 export default defineConfig({
   test: {
     globals: true,
-    environment: "jsdom",
+    // All current tests are pure logic (domain / application / infrastructure / API).
+    // No `.tsx` component tests, no `toBeInTheDocument` matchers anywhere.
+    // Per-file override: add `// @vitest-environment jsdom` at the top of a UI test.
+    environment: "node",
     setupFiles: ["./vitest.setup.ts"],
 
     include: [

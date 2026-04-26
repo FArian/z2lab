@@ -6,20 +6,13 @@
  *   - verify() — valid token, expired token, tampered signature, wrong secret, malformed
  */
 
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import { UserJwtService } from "@/infrastructure/auth/UserJwtService";
 
-const svc = new UserJwtService();
+const TEST_SECRET = "test-secret-for-unit-tests";
+const svc = new UserJwtService(TEST_SECRET);
 
 const BASE_PAYLOAD = { sub: "u-001", username: "admin", role: "admin" };
-
-beforeEach(() => {
-  process.env.AUTH_SECRET = "test-secret-for-unit-tests";
-});
-
-afterEach(() => {
-  delete process.env.AUTH_SECRET;
-});
 
 describe("UserJwtService.sign()", () => {
   it("returns a three-part dot-separated string", () => {
@@ -73,9 +66,8 @@ describe("UserJwtService.verify()", () => {
   it("returns null when signed with a different secret", () => {
     const token = svc.sign(BASE_PAYLOAD, 3600);
 
-    // Temporarily change secret so the service verifies with a different key
-    process.env.AUTH_SECRET = "different-secret";
-    expect(svc.verify(token)).toBeNull();
+    const otherSvc = new UserJwtService("different-secret");
+    expect(otherSvc.verify(token)).toBeNull();
   });
 
   it("returns null for a malformed token (< 3 parts)", () => {

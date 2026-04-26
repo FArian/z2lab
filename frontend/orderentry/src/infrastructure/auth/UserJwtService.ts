@@ -56,13 +56,21 @@ function b64urlDecode(b64: string): string {
   return Buffer.from(b64.replace(/-/g, "+").replace(/_/g, "/"), "base64").toString("utf8");
 }
 
-function getSecret(): string {
-  return EnvConfig.authSecret;
-}
-
 // ── Service ───────────────────────────────────────────────────────────────────
 
 export class UserJwtService {
+  private readonly secret: string;
+
+  /**
+   * @param secret  HMAC signing key. Defaults to EnvConfig.authSecret so the
+   *                production singleton picks it up automatically. Tests pass
+   *                an explicit value to verify wrong-secret rejection without
+   *                mutating process.env.
+   */
+  constructor(secret: string = EnvConfig.authSecret) {
+    this.secret = secret;
+  }
+
   /**
    * Sign a JWT for the given user.
    * @param payload  User identity fields (iat/exp added automatically)
@@ -77,7 +85,7 @@ export class UserJwtService {
     const payloadB64  = b64url(JSON.stringify(fullPayload));
     const signingInput = `${FIXED_HEADER}.${payloadB64}`;
     const sig = b64url(
-      crypto.createHmac("sha256", getSecret()).update(signingInput).digest(),
+      crypto.createHmac("sha256", this.secret).update(signingInput).digest(),
     );
     return `${signingInput}.${sig}`;
   }
@@ -94,7 +102,7 @@ export class UserJwtService {
     if (header !== FIXED_HEADER) return null;
 
     const expectedSig = b64url(
-      crypto.createHmac("sha256", getSecret()).update(`${header}.${payload}`).digest(),
+      crypto.createHmac("sha256", this.secret).update(`${header}.${payload}`).digest(),
     );
     if (expectedSig !== sig) return null;
 

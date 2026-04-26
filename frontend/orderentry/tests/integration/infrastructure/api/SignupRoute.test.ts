@@ -51,6 +51,8 @@ import { POST } from "@/app/api/signup/route";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
+const VALID_ORG_GLN = "7601001234567";
+
 function makeRequest(body: Record<string, unknown>) {
   return new Request("http://localhost/api/signup", {
     method: "POST",
@@ -81,10 +83,10 @@ beforeEach(() => {
 // ─────────────────────────────────────────────────────────────────────────────
 
 describe("POST /api/signup — happy path", () => {
-  it("returns 201 with user data for valid username + password", async () => {
+  it("returns 201 with user data for valid username + password + orgGln", async () => {
     m.createUser.mockResolvedValue(makeUser());
 
-    const res = await POST(makeRequest({ username: "testuser", password: "Test1234!" }));
+    const res = await POST(makeRequest({ username: "testuser", password: "Test1234!", orgGln: VALID_ORG_GLN }));
     const body = await res.json();
 
     expect(res.status).toBe(201);
@@ -92,8 +94,8 @@ describe("POST /api/signup — happy path", () => {
     expect(body.user.username).toBe("testuser");
   });
 
-  it("forwards firstName, lastName and gln to createUser as profile", async () => {
-    m.createUser.mockResolvedValue(makeUser({ profile: { firstName: "Hans", lastName: "Muster", gln: "7601002145985" } }));
+  it("forwards firstName, lastName, gln and orgGln to createUser as profile", async () => {
+    m.createUser.mockResolvedValue(makeUser({ profile: { orgGln: VALID_ORG_GLN, firstName: "Hans", lastName: "Muster", gln: "7601002145985" } }));
 
     await POST(makeRequest({
       username:  "hans.muster",
@@ -101,32 +103,33 @@ describe("POST /api/signup — happy path", () => {
       firstName: "Hans",
       lastName:  "Muster",
       gln:       "7601002145985",
+      orgGln:    VALID_ORG_GLN,
     }));
 
     expect(m.createUser).toHaveBeenCalledWith(
       "hans.muster",
       "Test1234!",
-      { firstName: "Hans", lastName: "Muster", gln: "7601002145985" },
+      { orgGln: VALID_ORG_GLN, firstName: "Hans", lastName: "Muster", gln: "7601002145985" },
     );
   });
 
-  it("calls createUser without profile when no optional fields are provided", async () => {
+  it("creates a user with only orgGln in the profile when no optional fields are provided", async () => {
     m.createUser.mockResolvedValue(makeUser());
 
-    await POST(makeRequest({ username: "testuser", password: "Test1234!" }));
+    await POST(makeRequest({ username: "testuser", password: "Test1234!", orgGln: VALID_ORG_GLN }));
 
-    expect(m.createUser).toHaveBeenCalledWith("testuser", "Test1234!", undefined);
+    expect(m.createUser).toHaveBeenCalledWith("testuser", "Test1234!", { orgGln: VALID_ORG_GLN });
   });
 
   it("includes only non-empty profile fields", async () => {
     m.createUser.mockResolvedValue(makeUser());
 
-    await POST(makeRequest({ username: "testuser", password: "Test1234!", gln: "7601002145985" }));
+    await POST(makeRequest({ username: "testuser", password: "Test1234!", orgGln: VALID_ORG_GLN, gln: "7601002145985" }));
 
     expect(m.createUser).toHaveBeenCalledWith(
       "testuser",
       "Test1234!",
-      { gln: "7601002145985" },
+      { orgGln: VALID_ORG_GLN, gln: "7601002145985" },
     );
   });
 });
@@ -137,7 +140,7 @@ describe("POST /api/signup — happy path", () => {
 
 describe("POST /api/signup — GLN validation", () => {
   it("returns 400 when GLN has fewer than 13 digits", async () => {
-    const res = await POST(makeRequest({ username: "testuser", password: "Test1234!", gln: "123" }));
+    const res = await POST(makeRequest({ username: "testuser", password: "Test1234!", orgGln: VALID_ORG_GLN, gln: "123" }));
     const body = await res.json();
 
     expect(res.status).toBe(400);
@@ -146,14 +149,14 @@ describe("POST /api/signup — GLN validation", () => {
   });
 
   it("returns 400 when GLN has more than 13 digits", async () => {
-    const res = await POST(makeRequest({ username: "testuser", password: "Test1234!", gln: "76010021459850000" }));
+    const res = await POST(makeRequest({ username: "testuser", password: "Test1234!", orgGln: VALID_ORG_GLN, gln: "76010021459850000" }));
 
     expect(res.status).toBe(400);
     expect(m.createUser).not.toHaveBeenCalled();
   });
 
   it("returns 400 when GLN contains non-digit characters", async () => {
-    const res = await POST(makeRequest({ username: "testuser", password: "Test1234!", gln: "760100214598A" }));
+    const res = await POST(makeRequest({ username: "testuser", password: "Test1234!", orgGln: VALID_ORG_GLN, gln: "760100214598A" }));
 
     expect(res.status).toBe(400);
     expect(m.createUser).not.toHaveBeenCalled();
@@ -162,10 +165,36 @@ describe("POST /api/signup — GLN validation", () => {
   it("accepts a valid 13-digit GLN", async () => {
     m.createUser.mockResolvedValue(makeUser());
 
-    const res = await POST(makeRequest({ username: "testuser", password: "Test1234!", gln: "7601002145985" }));
+    const res = await POST(makeRequest({ username: "testuser", password: "Test1234!", orgGln: VALID_ORG_GLN, gln: "7601002145985" }));
 
     expect(res.status).toBe(201);
     expect(m.createUser).toHaveBeenCalled();
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// orgGln validation (Pflicht-Feld seit Mandantentrennung)
+// ─────────────────────────────────────────────────────────────────────────────
+
+describe("POST /api/signup — orgGln validation", () => {
+  it("returns 400 when orgGln is missing", async () => {
+    const res = await POST(makeRequest({ username: "testuser", password: "Test1234!" }));
+    const body = await res.json();
+
+    expect(res.status).toBe(400);
+    expect(body.ok).toBe(false);
+    expect(body.error).toMatch(/Organisations-GLN/);
+    expect(m.createUser).not.toHaveBeenCalled();
+  });
+
+  it("returns 400 when orgGln is not exactly 13 digits", async () => {
+    const res = await POST(makeRequest({ username: "testuser", password: "Test1234!", orgGln: "123" }));
+    const body = await res.json();
+
+    expect(res.status).toBe(400);
+    expect(body.ok).toBe(false);
+    expect(body.error).toMatch(/13 Ziffern/);
+    expect(m.createUser).not.toHaveBeenCalled();
   });
 });
 
@@ -189,7 +218,7 @@ describe("POST /api/signup — error cases", () => {
   it("returns 409 when username already exists", async () => {
     m.createUser.mockRejectedValue(new Error("Username already exists"));
 
-    const res = await POST(makeRequest({ username: "testuser", password: "Test1234!" }));
+    const res = await POST(makeRequest({ username: "testuser", password: "Test1234!", orgGln: VALID_ORG_GLN }));
     const body = await res.json();
 
     expect(res.status).toBe(409);
@@ -199,7 +228,7 @@ describe("POST /api/signup — error cases", () => {
   it("returns 503 when ALLOW_LOCAL_AUTH is true", async () => {
     m.allowLocalAuth.value = true;
 
-    const res = await POST(makeRequest({ username: "testuser", password: "Test1234!" }));
+    const res = await POST(makeRequest({ username: "testuser", password: "Test1234!", orgGln: VALID_ORG_GLN }));
     const body = await res.json();
 
     expect(res.status).toBe(503);
