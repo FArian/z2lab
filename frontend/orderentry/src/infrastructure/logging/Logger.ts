@@ -99,7 +99,59 @@ function format(
   return JSON.stringify(entry);
 }
 
-// ── File appender (optional) ──────────────────────────────────────────────────
+// ── File appender + rotation ──────────────────────────────────────────────────
+//
+// Rotation policy: when the active file exceeds LOG__MAX_SIZE_MB, it is
+// renamed to `<file>.1`, the previous `.1` becomes `.2`, …, up to
+// `<file>.<LOG__MAX_FILES>`. The oldest one is deleted. The active file
+// is then truncated and writing continues.
+//
+// Numbering matches the convention used by logrotate(8) and Java logback —
+// lower index = newer log. Files are gzip-free for easy `tail`/`grep`.
+
+const _maxSizeBytes: number = (() => {
+  const raw = parseFloat(
+    process.env[`${(process.env.APP_NAME ?? "ORDERENTRY").toUpperCase()}_LOG__MAX_SIZE_MB`] ?? "10",
+  );
+  return !isNaN(raw) && raw > 0 ? Math.round(raw * 1024 * 1024) : 10 * 1024 * 1024;
+})();
+
+const _maxFiles: number = (() => {
+  const raw = parseInt(
+    process.env[`${(process.env.APP_NAME ?? "ORDERENTRY").toUpperCase()}_LOG__MAX_FILES`] ?? "10",
+    10,
+  );
+  return !isNaN(raw) && raw >= 0 ? raw : 10;
+})();
+
+function rotateIfNeeded(fs: typeof import("fs"), file: string): void {
+  let size = 0;
+  try {
+    size = fs.statSync(file).size;
+  } catch {
+    return; // file doesn't exist yet — nothing to rotate
+  }
+  if (size < _maxSizeBytes) return;
+
+  // Drop the oldest if we're at the cap
+  const oldest = `${file}.${_maxFiles}`;
+  try { fs.unlinkSync(oldest); } catch { /* may not exist */ }
+
+  // Shift .N → .(N+1) for N from maxFiles-1 down to 1
+  for (let i = _maxFiles - 1; i >= 1; i--) {
+    const src = `${file}.${i}`;
+    const dst = `${file}.${i + 1}`;
+    try { fs.renameSync(src, dst); } catch { /* may not exist */ }
+  }
+
+  // Active file → .1
+  if (_maxFiles >= 1) {
+    try { fs.renameSync(file, `${file}.1`); } catch { /* may not exist */ }
+  } else {
+    // maxFiles=0 means "no archive" — just truncate
+    try { fs.unlinkSync(file); } catch { /* ignore */ }
+  }
+}
 
 function appendToFile(line: string): void {
   if (!_logFile) return;
@@ -111,6 +163,7 @@ function appendToFile(line: string): void {
     const path = require("path") as typeof import("path");
     const dir  = path.dirname(_logFile);
     if (dir && dir !== ".") fs.mkdirSync(dir, { recursive: true });
+    rotateIfNeeded(fs, _logFile);
     fs.appendFileSync(_logFile, line + "\n", "utf8");
   } catch {
     // Swallow file errors — console logging must not be interrupted

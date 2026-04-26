@@ -94,13 +94,49 @@ Standard fields:
 
 ```bash
 # .env.local — must be a FILE path, not a directory
-ORDERENTRY_LOG__FILE=C:\tmp\zetlab.log              # Windows
-ORDERENTRY_LOG__FILE=/var/log/zetlab/zetlab.log     # Linux
+ORDERENTRY_LOG__FILE=C:\tmp\orderentry.log          # Windows
+ORDERENTRY_LOG__FILE=/var/log/orderentry.log        # Linux
+
+# Rotation (optional; defaults shown)
+ORDERENTRY_LOG__MAX_SIZE_MB=10                      # rotate at 10 MB
+ORDERENTRY_LOG__MAX_FILES=10                        # keep 10 archives
 ```
 
 > Common mistake: setting `ORDERENTRY_LOG__FILE=C:\tmp` (a directory). The logger then tries to append-write to a path that is a directory and silently fails — the `/admin/logs` view stays empty. Always use a full file path with extension.
 
-The directory is created automatically (`mkdir -p`) on first write. Restart needed after changing this env var.
+The directory is created automatically (`mkdir -p`) on first write. Restart needed after changing the file path; rotation parameters are read at module load too.
+
+### Rotation
+
+Before each write the logger checks the active file's size. When it exceeds `LOG__MAX_SIZE_MB`:
+
+1. The oldest archive (`<file>.<MAX_FILES>`) is deleted
+2. Each existing archive is shifted up one number: `.9 → .10`, `.8 → .9`, …, `.1 → .2`
+3. The active file becomes `.1`
+4. Writing continues into a fresh active file
+
+Same convention as `logrotate(8)` and Java's `logback`: lower index = newer log.
+
+```
+/var/log/
+├── orderentry.log         ← active (always being written to)
+├── orderentry.log.1       ← previous file, just rotated
+├── orderentry.log.2
+├── …
+└── orderentry.log.10      ← oldest; will be dropped on the next rotation
+```
+
+**Disk-usage upper bound:**
+
+| `MAX_SIZE_MB` | `MAX_FILES` | Worst-case usage |
+|---|---|---|
+| 10 | 10 (default) | 110 MB |
+| 50 | 5 | 300 MB |
+| 100 | 20 | 2.1 GB |
+
+Set `LOG__MAX_FILES=0` to disable archiving — the active file is then truncated when the size cap is hit.
+
+> No gzip — files are kept plain so `tail`, `grep`, and `jq` work directly without piping through `zcat`. If disk is tight, lower `MAX_SIZE_MB` instead.
 
 ---
 

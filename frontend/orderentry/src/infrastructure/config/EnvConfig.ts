@@ -186,6 +186,20 @@ export const EnvConfig = {
   /** Absolute path to append structured JSON log lines. Empty = file logging disabled. */
   logFile: str(env("LOG__FILE"), ""),
 
+  /**
+   * Maximum size in megabytes of a single log file before it is rotated.
+   * On rotation `zetlab.log` becomes `zetlab.log.1`, the previous `.1` becomes
+   * `.2`, and so on up to `LOG__MAX_FILES`. Default: 10 MB.
+   */
+  logMaxSizeMb: str(env("LOG__MAX_SIZE_MB"), "10"),
+
+  /**
+   * Maximum number of rotated files to keep on disk (in addition to the
+   * active one). When the count is exceeded the oldest is deleted.
+   * Total disk usage upper bound = MAX_SIZE_MB × (MAX_FILES + 1). Default: 10.
+   */
+  logMaxFiles: str(env("LOG__MAX_FILES"), "10"),
+
   // ── Observability ──────────────────────────────────────────────────────────
   /** Set true to activate OpenTelemetry distributed tracing. Requires tracingUrl. */
   enableTracing: bool(env("TRACING__ENABLED")),
