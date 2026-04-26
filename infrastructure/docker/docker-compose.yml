@@ -276,17 +276,28 @@ services:
         max-size: "10m"
         max-file: "3"
     environment:
-      AUTH_SECRET: ${AUTH_SECRET}               # HMAC key for session cookies
-      ALLOW_LOCAL_AUTH: ${ALLOW_LOCAL_AUTH:-false}  # Enable browser-only auth fallback
-      FHIR_BASE_URL: ${FHIR_BASE_URL}           # Internal Docker network URL to HAPI
-      SASIS_API_BASE: ${SASIS_API_BASE}         # SASIS/OFAC insurance card lookup API
-      NEXT_PUBLIC_SASIS_ENABLED: ${NEXT_PUBLIC_SASIS_ENABLED:-false}  # Show VeKa lookup UI
-      GLN_API_BASE: ${GLN_API_BASE}             # Orchestra GLN/refdata lookup API
-      NEXT_PUBLIC_GLN_ENABLED: ${NEXT_PUBLIC_GLN_ENABLED:-false}      # Show GLN lookup UI
+      # Naming convention: ORDERENTRY_<SERVICE>__<KEY>  (per CLAUDE.md "Environment Variables").
+      # Old flat names (AUTH_SECRET, FHIR_BASE_URL, …) are no longer read by EnvConfig.
+      ORDERENTRY_AUTH__SECRET:        ${ORDERENTRY_AUTH__SECRET}                   # HMAC key for session cookies
+      ORDERENTRY_AUTH__ALLOW_LOCAL:   ${ORDERENTRY_AUTH__ALLOW_LOCAL:-false}       # Enable browser-only auth fallback
+      ORDERENTRY_FHIR__BASE_URL:      ${ORDERENTRY_FHIR__BASE_URL}                 # Internal Docker network URL to HAPI
+      ORDERENTRY_SASIS__API_BASE:     ${ORDERENTRY_SASIS__API_BASE}                # SASIS/OFAC insurance card lookup API
+      ORDERENTRY_GLN__API_BASE:       ${ORDERENTRY_GLN__API_BASE}                  # Orchestra GLN/refdata lookup API
+      ORDERENTRY_METRICS__TOKEN:      ${ORDERENTRY_METRICS__TOKEN:-}               # Prometheus scrape token (empty = admin auth)
+      NEXT_PUBLIC_SASIS_ENABLED:      ${NEXT_PUBLIC_SASIS_ENABLED:-false}          # Show VeKa lookup UI (build-arg too)
+      NEXT_PUBLIC_GLN_ENABLED:        ${NEXT_PUBLIC_GLN_ENABLED:-false}            # Show GLN lookup UI (build-arg too)
     volumes:
       - ./data/orderentry/data:/app/data
     networks:
       - orderentry-orc-net
+    healthcheck:
+      # Spring Boot Actuator liveness probe — process-only, no DB/FHIR dependency.
+      # /actuator/health/liveness returns {status:"UP"} as long as Node.js is running.
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:3000/actuator/health/liveness || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
     labels:
       # Traefik routing
       - "traefik.enable=true"

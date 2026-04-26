@@ -616,6 +616,18 @@ AppConfig.searchDebounceMs  // 350
 | `GET /api/v1/admin/number-pool/thresholds` | `NumberPoolController.getThresholds()` | Get pool alert thresholds (admin) |
 | `PUT /api/v1/admin/number-pool/thresholds` | `NumberPoolController.updateThresholds()` | Update pool alert thresholds (admin) |
 | `GET /api/v1/config/service-types` | — (inline handler) | Active order service types: ENV override → FHIR ActivityDefinition.topic (5-min cache) → fallback (admin) |
+| `GET /actuator` | `ActuatorController.discovery()` | Spring Boot Actuator discovery (HAL `_links`) — public |
+| `GET /actuator/health` | `ActuatorController.healthCheck()` | Aggregated health UP/DOWN/OUT_OF_SERVICE/UNKNOWN — public; admin sees details |
+| `GET /actuator/health/liveness` | `ActuatorController.healthCheck("liveness")` | Liveness — process alive (Docker healthcheck target) |
+| `GET /actuator/health/readiness` | `ActuatorController.healthCheck("readiness")` | Readiness — DB + FHIR reachable (K8s readinessProbe) |
+| `GET /actuator/info` | `ActuatorController.info()` | App + build + runtime metadata — public |
+| `GET /actuator/metrics` | `ActuatorController.metricsList()` | List metric names (admin) |
+| `GET /actuator/metrics/{name}` | `ActuatorController.metricDetail()` | One metric's values + tags (admin) |
+| `GET /actuator/prometheus` | `ActuatorController.prometheus()` | Prometheus text format (METRICS_TOKEN or admin) |
+| `GET /actuator/loggers` | `ActuatorController.loggers()` | List loggers + supported levels (admin) |
+| `GET /actuator/loggers/{name}` | `ActuatorController.loggerByName()` | Get logger config (admin; only ROOT) |
+| `POST /actuator/loggers/{name}` | `ActuatorController.updateLogger()` | Set log level at runtime — no restart (admin; only ROOT) |
+| `GET /actuator/env` | `ActuatorController.envProperties()` | Env properties — Spring shape; reuses EnvController whitelist (admin) |
 
 ---
 
@@ -1190,7 +1202,7 @@ All services define `healthcheck` in `docker-compose.yml`:
 | `postgres` | `pg_isready -U $POSTGRES_USER` | 5 retries, 20s start |
 | `hapi-fhir` | `GET /fhir/metadata` → `200` | 60s start period (JVM warm-up) |
 | `orchestra` | `GET /Orchestra/default/RuntimeHealthMetrics/` | 180s start period (2–3 min startup) |
-| `orderentry` | `GET /api/me` → `200` or `401` | Both are healthy; `500` is not |
+| `orderentry` | `GET /actuator/health/liveness` → `200` | Spring Actuator liveness probe (does NOT depend on DB/FHIR — avoids restart loops) |
 | `portainer` | `wget http://localhost:9000` | — |
 
 ### Security
@@ -1622,6 +1634,77 @@ Next.js hat ein eingebautes webpack-Plugin das `*.node.ts` Dateien **physisch** 
 | `TRACING_URL` | — | OTLP/HTTP base URL (required when tracing enabled) |
 | `MONITORING_URL` | — | Dashboard link shown in Settings (display-only) |
 | `METRICS_TOKEN` | — | Bearer token for Prometheus scraper; unset = admin auth |
+
+---
+
+## Actuator Convention (Spring Boot Standard)
+
+Operations / observability endpoints follow the **Spring Boot Actuator** convention at `/actuator/*` — **NOT** under `/api/v1/`. This is a deliberate exception to the "all new endpoints under /api/v1/" rule.
+
+### Why outside /api/v1/
+
+- `/actuator/*` is the recognised operations standard. Monitoring tools (Spring Boot Admin, Prometheus operators, K8s probes, Grafana dashboards) expect this exact prefix.
+- These are **infrastructure** endpoints, not business APIs. Versioning them adds churn without benefit — Actuator's response shape itself is the de-facto stable contract.
+- Existing legacy paths `/api/health`, `/api/me`, `/api/metrics`, `/api/env` remain reachable for backward compatibility but are NOT the preferred surface for new integrations.
+
+### Endpoints
+
+| Endpoint | Auth | Implementation |
+|---|---|---|
+| `GET /actuator` | public | discovery — HAL `_links` listing all actuator paths |
+| `GET /actuator/health` | public | aggregated health (`UP`/`DOWN`/`OUT_OF_SERVICE`/`UNKNOWN`); 200 or 503; admin sees `details` |
+| `GET /actuator/health/liveness` | public | process-alive probe (always UP). **Used by Docker healthcheck** |
+| `GET /actuator/health/readiness` | public | DB + FHIR reachable probe (use as K8s readinessProbe) |
+| `GET /actuator/info` | public | app + build + runtime metadata (no secrets, no PII) |
+| `GET /actuator/metrics` | admin | list all metric names |
+| `GET /actuator/metrics/{name}` | admin | values + tags for one metric |
+| `GET /actuator/prometheus` | METRICS_TOKEN/admin | Prometheus text-exposition format |
+| `GET /actuator/loggers` | admin | list loggers (only `ROOT`) + supported levels |
+| `GET /actuator/loggers/{name}` | admin | get logger configuration |
+| `POST /actuator/loggers/{name}` | admin | set log level at runtime — **no restart needed** |
+| `GET /actuator/env` | admin | env properties — reuses EnvController whitelist + secret masking |
+
+### Health groups
+
+`/actuator/health` aggregates **all** indicators. The two subset endpoints filter by group:
+
+| Indicator | Group(s) | Probe |
+|---|---|---|
+| `liveness` | `liveness` | always UP — process exists |
+| `db` | `readiness` | Prisma `SELECT 1` with 2s timeout, 2s result cache |
+| `fhir` | `readiness` | `GET <fhirBaseUrl>/metadata` with 2s timeout, 5s result cache |
+
+**Aggregate rule (Spring-compatible):** `any DOWN → DOWN`, else `any OUT_OF_SERVICE → OUT_OF_SERVICE`, else `any UNKNOWN → UNKNOWN`, else `UP`.
+
+### Logger levels
+
+Spring uses `TRACE/DEBUG/INFO/WARN/ERROR/OFF`. We map:
+- `TRACE` → `debug` (we have no trace level)
+- `DEBUG` ↔ `debug`, `INFO` ↔ `info`, `WARN` ↔ `warn`, `ERROR` ↔ `error`
+- `OFF` ↔ `silent`
+
+POST `/actuator/loggers/ROOT` with `{ "configuredLevel": "DEBUG" }` writes the override to `data/config.json` (via `RuntimeConfig.saveOverrides`) AND calls `refreshLogLevel()` so the new level applies on the next log call. Send `{ "configuredLevel": null }` to reset.
+
+### File map
+
+| Layer | Files |
+|---|---|
+| Domain | `domain/entities/HealthStatus.ts`, `domain/entities/HealthCheckResult.ts` |
+| Application | `application/interfaces/health/IHealthIndicator.ts`, `application/services/HealthService.ts` |
+| Infrastructure — Indicators | `infrastructure/health/{LivenessIndicator,DatabaseHealthIndicator,FhirHealthIndicator,HealthIndicatorRegistry}.ts` |
+| Infrastructure — Controller | `infrastructure/api/controllers/ActuatorController.ts` |
+| Infrastructure — DTOs | `infrastructure/api/dto/ActuatorDto.ts` |
+| Routes | `app/actuator/{,health/,health/liveness/,health/readiness/,info/,metrics/,metrics/[name]/,prometheus/,loggers/,loggers/[name]/,env/}route.ts` |
+| RouteRegistry | `infrastructure/api/gateway/RouteRegistry.ts` → `ACTUATOR_ROUTES` |
+| OpenAPI | tag `Actuator`; per-path `servers: [{ url: "/" }]` overrides the `/api/v1` server |
+
+### Rules
+
+- **Actuator paths are NEVER under `/api/v1/`.** They live at the host root.
+- **Never let the health probe hang.** Every indicator wraps its probe in a timeout (default 2s) and caches results briefly to protect against scrape storms.
+- **Never expose secrets via `/actuator/env`.** Reuse the existing EnvController whitelist + secret masking — do not add a separate filter.
+- **Liveness must NOT depend on external systems.** Otherwise Docker would restart the container when FHIR is briefly unreachable.
+- **Docker healthcheck uses `/actuator/health/liveness`**, not `/actuator/health` — to avoid restart loops on transient FHIR/DB outages.
 
 ---
 

@@ -168,6 +168,16 @@ export const openApiSpec = {
         "Threshold breaches trigger email notifications (anti-spam: one email per level until pool is refilled). " +
         "All endpoints require admin role.",
     },
+    {
+      name: "Actuator",
+      description:
+        "Spring Boot Actuator-compatible operations endpoints exposed at `/actuator/*`. " +
+        "Used by monitoring tools (Spring Boot Admin, Prometheus operators, K8s probes). " +
+        "Public: `/actuator`, `/actuator/health[/liveness|readiness]`, `/actuator/info`. " +
+        "Admin: `/actuator/metrics[/...]`, `/actuator/loggers[/...]`, `/actuator/env`. " +
+        "`/actuator/prometheus`: METRICS_TOKEN bearer or admin. " +
+        "Note: these paths are NOT under `/api/v1/` — Actuator is a recognised observability standard.",
+    },
   ],
   paths: {
     // ── Results ───────────────────────────────────────────────────────────────
@@ -2999,6 +3009,194 @@ export const openApiSpec = {
         },
       },
     },
+
+    // ── Actuator (Spring Boot Actuator standard, NOT under /api/v1) ─────────
+    // Per-path `servers` override resolves these against the host root, not /api/v1.
+    "/actuator": {
+      servers: [{ url: "/", description: "Application root (no /api/v1 prefix)" }],
+      get: {
+        tags: ["Actuator"],
+        summary: "Discovery — list available actuator endpoints",
+        operationId: "actuatorDiscovery",
+        security: [],
+        responses: {
+          "200": { description: "OK", content: { "application/json": { schema: { $ref: "#/components/schemas/ActuatorDiscovery" } } } },
+        },
+      },
+    },
+    "/actuator/health": {
+      servers: [{ url: "/", description: "Application root (no /api/v1 prefix)" }],
+      get: {
+        tags: ["Actuator"],
+        summary: "Aggregated health (UP / DOWN / OUT_OF_SERVICE / UNKNOWN)",
+        description: "Returns 200 for UP/UNKNOWN, 503 for DOWN/OUT_OF_SERVICE. Component details visible only to admins.",
+        operationId: "actuatorHealth",
+        security: [],
+        responses: {
+          "200": { description: "Healthy", content: { "application/json": { schema: { $ref: "#/components/schemas/ActuatorHealth" } } } },
+          "503": { description: "Unhealthy", content: { "application/json": { schema: { $ref: "#/components/schemas/ActuatorHealth" } } } },
+        },
+      },
+    },
+    "/actuator/health/liveness": {
+      servers: [{ url: "/", description: "Application root (no /api/v1 prefix)" }],
+      get: {
+        tags: ["Actuator"],
+        summary: "Liveness probe — process alive",
+        description: "Always returns UP if the Node.js process is running. Used by Docker healthcheck.",
+        operationId: "actuatorLiveness",
+        security: [],
+        responses: {
+          "200": { description: "Alive", content: { "application/json": { schema: { $ref: "#/components/schemas/ActuatorHealth" } } } },
+        },
+      },
+    },
+    "/actuator/health/readiness": {
+      servers: [{ url: "/", description: "Application root (no /api/v1 prefix)" }],
+      get: {
+        tags: ["Actuator"],
+        summary: "Readiness probe — DB + FHIR reachable",
+        description: "Aggregates the readiness-tagged indicators. Use as Kubernetes readinessProbe.",
+        operationId: "actuatorReadiness",
+        security: [],
+        responses: {
+          "200": { description: "Ready", content: { "application/json": { schema: { $ref: "#/components/schemas/ActuatorHealth" } } } },
+          "503": { description: "Not ready", content: { "application/json": { schema: { $ref: "#/components/schemas/ActuatorHealth" } } } },
+        },
+      },
+    },
+    "/actuator/info": {
+      servers: [{ url: "/", description: "Application root (no /api/v1 prefix)" }],
+      get: {
+        tags: ["Actuator"],
+        summary: "App, build and runtime metadata",
+        operationId: "actuatorInfo",
+        security: [],
+        responses: {
+          "200": { description: "OK", content: { "application/json": { schema: { $ref: "#/components/schemas/ActuatorInfo" } } } },
+        },
+      },
+    },
+    "/actuator/metrics": {
+      servers: [{ url: "/", description: "Application root (no /api/v1 prefix)" }],
+      get: {
+        tags: ["Actuator"],
+        summary: "List all available metric names",
+        operationId: "actuatorMetricsList",
+        responses: {
+          "200": { description: "OK", content: { "application/json": { schema: { $ref: "#/components/schemas/ActuatorMetricsList" } } } },
+          "401": { description: "Unauthorized" },
+          "403": { description: "Forbidden — admin role required" },
+        },
+      },
+    },
+    "/actuator/metrics/{name}": {
+      servers: [{ url: "/", description: "Application root (no /api/v1 prefix)" }],
+      get: {
+        tags: ["Actuator"],
+        summary: "Values + tags for a single metric",
+        operationId: "actuatorMetricDetail",
+        parameters: [
+          { name: "name", in: "path", required: true, schema: { type: "string" }, description: "Metric name" },
+        ],
+        responses: {
+          "200": { description: "OK", content: { "application/json": { schema: { $ref: "#/components/schemas/ActuatorMetricDetail" } } } },
+          "401": { description: "Unauthorized" },
+          "403": { description: "Forbidden — admin role required" },
+          "404": { description: "Metric not found" },
+        },
+      },
+    },
+    "/actuator/prometheus": {
+      servers: [{ url: "/", description: "Application root (no /api/v1 prefix)" }],
+      get: {
+        tags: ["Actuator"],
+        summary: "Prometheus text-exposition scrape endpoint",
+        description: "Authentication: METRICS_TOKEN bearer if set, otherwise admin session/JWT/PAT.",
+        operationId: "actuatorPrometheus",
+        responses: {
+          "200": {
+            description: "OK",
+            content: {
+              "text/plain; version=0.0.4; charset=utf-8": {
+                schema: { type: "string" },
+                example: "# HELP zetlab_fhir_requests_total ...\nzetlab_fhir_requests_total{...} 42\n",
+              },
+            },
+          },
+          "401": { description: "Unauthorized" },
+        },
+      },
+    },
+    "/actuator/loggers": {
+      servers: [{ url: "/", description: "Application root (no /api/v1 prefix)" }],
+      get: {
+        tags: ["Actuator"],
+        summary: "List loggers + supported levels",
+        operationId: "actuatorLoggers",
+        responses: {
+          "200": { description: "OK", content: { "application/json": { schema: { $ref: "#/components/schemas/ActuatorLoggers" } } } },
+          "401": { description: "Unauthorized" },
+          "403": { description: "Forbidden — admin role required" },
+        },
+      },
+    },
+    "/actuator/loggers/{name}": {
+      servers: [{ url: "/", description: "Application root (no /api/v1 prefix)" }],
+      get: {
+        tags: ["Actuator"],
+        summary: "Get logger configuration",
+        operationId: "actuatorLoggerGet",
+        parameters: [
+          { name: "name", in: "path", required: true, schema: { type: "string" }, description: 'Logger name. Only "ROOT" is supported.' },
+        ],
+        responses: {
+          "200": { description: "OK", content: { "application/json": { schema: { $ref: "#/components/schemas/ActuatorLoggerConfig" } } } },
+          "401": { description: "Unauthorized" },
+          "403": { description: "Forbidden — admin role required" },
+          "404": { description: "Logger not found" },
+        },
+      },
+      post: {
+        tags: ["Actuator"],
+        summary: "Set logger level at runtime (no restart)",
+        description: "Send `{ configuredLevel: 'DEBUG' }` to set, `{ configuredLevel: null }` to reset to default. Only ROOT is supported.",
+        operationId: "actuatorLoggerUpdate",
+        parameters: [
+          { name: "name", in: "path", required: true, schema: { type: "string" }, description: 'Logger name. Only "ROOT" is supported.' },
+        ],
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: { $ref: "#/components/schemas/ActuatorLoggerUpdateRequest" },
+              example: { configuredLevel: "DEBUG" },
+            },
+          },
+        },
+        responses: {
+          "200": { description: "OK", content: { "application/json": { schema: { $ref: "#/components/schemas/ActuatorLoggerUpdateResponse" } } } },
+          "400": { description: "Invalid level" },
+          "401": { description: "Unauthorized" },
+          "403": { description: "Forbidden — admin role required" },
+          "404": { description: "Logger not found" },
+        },
+      },
+    },
+    "/actuator/env": {
+      servers: [{ url: "/", description: "Application root (no /api/v1 prefix)" }],
+      get: {
+        tags: ["Actuator"],
+        summary: "Environment properties (whitelisted)",
+        description: "Reuses the EnvController whitelist + secret masking. Secrets are never returned.",
+        operationId: "actuatorEnv",
+        responses: {
+          "200": { description: "OK", content: { "application/json": { schema: { $ref: "#/components/schemas/ActuatorEnv" } } } },
+          "401": { description: "Unauthorized" },
+          "403": { description: "Forbidden — admin role required" },
+        },
+      },
+    },
   },
 
   // ── Reusable schemas ───────────────────────────────────────────────────────
@@ -3909,6 +4107,207 @@ export const openApiSpec = {
         orderNumber: { type: "string" },
         serviceType: { type: "string", enum: ["MIBI", "ROUTINE", "POC"] },
         source:      { type: "string", enum: ["orchestra", "pool"] },
+      },
+    },
+
+    // ── Actuator schemas (Spring Boot-compatible) ────────────────────────────
+
+    ActuatorDiscovery: {
+      type: "object",
+      required: ["_links"],
+      properties: {
+        _links: {
+          type: "object",
+          additionalProperties: {
+            type: "object",
+            required: ["href", "templated"],
+            properties: {
+              href:      { type: "string" },
+              templated: { type: "boolean" },
+            },
+          },
+        },
+      },
+    },
+
+    ActuatorHealthStatus: {
+      type: "string",
+      enum: ["UP", "DOWN", "OUT_OF_SERVICE", "UNKNOWN"],
+      description: "Spring Boot Actuator health status.",
+    },
+
+    ActuatorHealthComponent: {
+      type: "object",
+      required: ["status"],
+      properties: {
+        status:  { $ref: "#/components/schemas/ActuatorHealthStatus" },
+        details: {
+          type: "object",
+          additionalProperties: true,
+          description: "Indicator-specific diagnostic data (only included for admin callers).",
+        },
+      },
+    },
+
+    ActuatorHealth: {
+      type: "object",
+      required: ["status"],
+      properties: {
+        status: { $ref: "#/components/schemas/ActuatorHealthStatus" },
+        components: {
+          type: "object",
+          additionalProperties: { $ref: "#/components/schemas/ActuatorHealthComponent" },
+        },
+      },
+    },
+
+    ActuatorInfo: {
+      type: "object",
+      required: ["app", "build", "runtime"],
+      properties: {
+        app: {
+          type: "object",
+          required: ["name", "description", "version", "labOrgId", "labName"],
+          properties: {
+            name:        { type: "string" },
+            description: { type: "string" },
+            version:     { type: "string" },
+            labOrgId:    { type: "string" },
+            labName:     { type: "string" },
+          },
+        },
+        build: {
+          type: "object",
+          required: ["time", "nodeVersion"],
+          properties: {
+            time:        { type: "string" },
+            nodeVersion: { type: "string" },
+          },
+        },
+        runtime: {
+          type: "object",
+          required: ["platform", "arch", "uptimeSec", "pid"],
+          properties: {
+            platform:  { type: "string" },
+            arch:      { type: "string" },
+            uptimeSec: { type: "integer" },
+            pid:       { type: "integer" },
+          },
+        },
+      },
+    },
+
+    ActuatorMetricsList: {
+      type: "object",
+      required: ["names"],
+      properties: {
+        names: { type: "array", items: { type: "string" } },
+      },
+    },
+
+    ActuatorMetricDetail: {
+      type: "object",
+      required: ["name", "measurements", "availableTags"],
+      properties: {
+        name:        { type: "string" },
+        description: { type: "string" },
+        baseUnit:    { type: "string" },
+        measurements: {
+          type: "array",
+          items: {
+            type: "object",
+            required: ["statistic", "value"],
+            properties: {
+              statistic: { type: "string", enum: ["VALUE", "COUNT", "TOTAL_TIME", "MAX"] },
+              value:     { type: "number" },
+            },
+          },
+        },
+        availableTags: {
+          type: "array",
+          items: {
+            type: "object",
+            required: ["tag", "values"],
+            properties: {
+              tag:    { type: "string" },
+              values: { type: "array", items: { type: "string" } },
+            },
+          },
+        },
+      },
+    },
+
+    ActuatorLoggerLevel: {
+      type: "string",
+      enum: ["TRACE", "DEBUG", "INFO", "WARN", "ERROR", "OFF"],
+      description: "Spring Boot Actuator logger level (TRACE/DEBUG map to debug; OFF maps to silent).",
+    },
+
+    ActuatorLoggerConfig: {
+      type: "object",
+      required: ["configuredLevel", "effectiveLevel"],
+      properties: {
+        configuredLevel: { $ref: "#/components/schemas/ActuatorLoggerLevel", nullable: true },
+        effectiveLevel:  { $ref: "#/components/schemas/ActuatorLoggerLevel" },
+      },
+    },
+
+    ActuatorLoggers: {
+      type: "object",
+      required: ["levels", "loggers"],
+      properties: {
+        levels: {
+          type: "array",
+          items: { $ref: "#/components/schemas/ActuatorLoggerLevel" },
+        },
+        loggers: {
+          type: "object",
+          additionalProperties: { $ref: "#/components/schemas/ActuatorLoggerConfig" },
+        },
+      },
+    },
+
+    ActuatorLoggerUpdateRequest: {
+      type: "object",
+      properties: {
+        configuredLevel: { $ref: "#/components/schemas/ActuatorLoggerLevel", nullable: true },
+      },
+    },
+
+    ActuatorLoggerUpdateResponse: {
+      type: "object",
+      required: ["ok", "configuredLevel", "effectiveLevel"],
+      properties: {
+        ok:              { type: "boolean" },
+        configuredLevel: { $ref: "#/components/schemas/ActuatorLoggerLevel", nullable: true },
+        effectiveLevel:  { $ref: "#/components/schemas/ActuatorLoggerLevel" },
+        message:         { type: "string" },
+      },
+    },
+
+    ActuatorEnv: {
+      type: "object",
+      required: ["activeProfiles", "propertySources"],
+      properties: {
+        activeProfiles: { type: "array", items: { type: "string" } },
+        propertySources: {
+          type: "array",
+          items: {
+            type: "object",
+            required: ["name", "properties"],
+            properties: {
+              name: { type: "string" },
+              properties: {
+                type: "object",
+                additionalProperties: {
+                  type: "object",
+                  required: ["value"],
+                  properties: { value: { type: "string" } },
+                },
+              },
+            },
+          },
+        },
       },
     },
 

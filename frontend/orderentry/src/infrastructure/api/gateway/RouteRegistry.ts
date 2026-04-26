@@ -154,7 +154,35 @@ export const V1_ROUTES: readonly RouteEntry[] = [
 
 ] as const;
 
+/**
+ * Actuator endpoints — Spring Boot Actuator standard, deliberately NOT under /v1.
+ *
+ * Path convention: `/actuator/*` is a recognised observability standard. Monitoring
+ * tools (Spring Boot Admin, Prometheus operators, Grafana dashboards) expect this
+ * exact prefix. They are infrastructure endpoints, not business APIs, so the
+ * `/api/v1/` rule from CLAUDE.md does not apply here.
+ *
+ * Implementations live in src/app/actuator/.
+ */
+export const ACTUATOR_ROUTES: readonly RouteEntry[] = [
+  { method: "GET",  path: "/actuator",                          version: "v1", tag: "Actuator", auth: "public", summary: "Discovery: list available actuator endpoints" },
+  { method: "GET",  path: "/actuator/health",                   version: "v1", tag: "Actuator", auth: "public", summary: "Aggregated health (UP/DOWN/UNKNOWN/OUT_OF_SERVICE)" },
+  { method: "GET",  path: "/actuator/health/liveness",          version: "v1", tag: "Actuator", auth: "public", summary: "Liveness probe — process alive" },
+  { method: "GET",  path: "/actuator/health/readiness",         version: "v1", tag: "Actuator", auth: "public", summary: "Readiness probe — DB + FHIR reachable" },
+  { method: "GET",  path: "/actuator/info",                     version: "v1", tag: "Actuator", auth: "public", summary: "App, build, and runtime metadata" },
+  { method: "GET",  path: "/actuator/metrics",                  version: "v1", tag: "Actuator", auth: "admin",  summary: "List all available metric names" },
+  { method: "GET",  path: "/actuator/metrics/:name",            version: "v1", tag: "Actuator", auth: "admin",  summary: "Values + tags for one metric" },
+  { method: "GET",  path: "/actuator/prometheus",               version: "v1", tag: "Actuator", auth: "public", summary: "Prometheus text-exposition (METRICS_TOKEN or admin)" },
+  { method: "GET",  path: "/actuator/loggers",                  version: "v1", tag: "Actuator", auth: "admin",  summary: "List loggers + supported levels" },
+  { method: "GET",  path: "/actuator/loggers/:name",            version: "v1", tag: "Actuator", auth: "admin",  summary: "Get logger configuration" },
+  { method: "POST", path: "/actuator/loggers/:name",            version: "v1", tag: "Actuator", auth: "admin",  summary: "Set logger level at runtime (no restart)" },
+  { method: "GET",  path: "/actuator/env",                      version: "v1", tag: "Actuator", auth: "admin",  summary: "Environment properties (whitelisted)" },
+] as const;
+
+/** All registered routes, including actuator. */
+export const ALL_ROUTES: readonly RouteEntry[] = [...V1_ROUTES, ...ACTUATOR_ROUTES] as const;
+
 /** Look up a route by method + path for gateway logging. */
 export function findRoute(method: string, path: string): RouteEntry | undefined {
-  return V1_ROUTES.find((r) => r.method === method && r.path === path);
+  return ALL_ROUTES.find((r) => r.method === method && r.path === path);
 }
