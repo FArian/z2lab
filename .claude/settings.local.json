@@ -1,19 +1,5 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(grep -E \"\\\\.\\(ts|tsx\\)$\")",
-      "Bash(npm run:*)",
-      "Bash(npx tsc:*)",
-      "Bash(mkdir -p \"c:\\\\Users\\\\Farhad Arian\\\\OneDrive - ZLZ Zentrallabor AG\\\\Dokumente\\\\Claude\\\\Projects\\\\OrderEntry\\\\frontend\\\\zetlab\\\\src\\\\app\\\\api\\\\patients\\\\[id]\\\\diagnostic-reports\")",
-      "Bash(mkdir -p \"c:\\\\Users\\\\Farhad Arian\\\\OneDrive - ZLZ Zentrallabor AG\\\\Dokumente\\\\Claude\\\\Projects\\\\OrderEntry\\\\frontend\\\\zetlab\\\\src\\\\app\\\\patient\\\\[id]\\\\befunde\")",
-      "Bash(node -e \"const fs = require\\('fs'\\); const c = fs.readFileSync\\('c:/Users/Farhad Arian/OneDrive - ZLZ Zentrallabor AG/Dokumente/Claude/Projects/OrderEntry/frontend/zetlab/jest.config.ts', 'utf8'\\); const m = c.match\\(/setupFiles\\\\w+/g\\); console.log\\(JSON.stringify\\(m\\)\\);\")",
-      "Bash(sed 's/\\(.*\\)//')",
-      "Bash(npm test:*)",
-      "Bash(grep -v \"^$\")",
-      "Bash(node -e ':*)"
-    ],
-    "additionalDirectories": [
-      "c:\\Users\\Farhad Arian\\OneDrive - ZLZ Zentrallabor AG\\Dokumente\\Claude\\Projects\\OrderEntry\\frontend\\zetlab\\src\\app\\api\\fhir"
-    ]
+    "allow": []
   }
 }

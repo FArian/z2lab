@@ -1,47 +1,86 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node -e \"const d=require\\('fs'\\).readFileSync\\('/dev/stdin','utf8'\\); const j=JSON.parse\\(d\\); j.concept.forEach\\(c=>console.log\\(c.code, JSON.stringify\\(c.display\\)\\)\\)\")",
-      "Bash(node -e \"const d=require\\('fs'\\).readFileSync\\('c:/Users/Farhad Arian/OneDrive - ZLZ Zentrallabor AG/Dokumente/Claude/Projects/OrderEntry/backend/orchestra/fhir/MapingCode/CodeSystem_zlz-material-codes.json','utf8'\\); const j=JSON.parse\\(d\\); j.concept.forEach\\(c=>console.log\\(c.code+' = '+c.display\\)\\)\")",
-      "Bash(node generate_fhir_resources.mjs)",
-      "Bash(node -e ':*)",
-      "Bash(node generate_conceptmap.mjs)",
-      "Bash(grep -l '\"selectNone\"' \"/c/Users/Farhad Arian/OneDrive - ZLZ Zentrallabor AG/Dokumente/Claude/Projects/OrderEntry/frontend/zetlab/src/messages/\"*.json)",
-      "Bash(npx vitest:*)",
-      "Bash(ls \"c:/Users/Farhad Arian/OneDrive - ZLZ Zentrallabor AG/Dokumente/Claude/Projects/OrderEntry/frontend/zetlab/next.config\"*)",
-      "Bash(ls \"c:/Users/Farhad Arian/OneDrive - ZLZ Zentrallabor AG/Dokumente/Claude/Projects/OrderEntry/frontend/zetlab/src/instrumentation\"*)",
+      "Bash(npm run *)",
+      "Bash(npm test *)",
+      "Bash(npm install)",
       "Bash(npm install:*)",
-      "Bash(node -e \"const r = require\\('@opentelemetry/resources'\\); console.log\\(Object.keys\\(r\\).join\\(', '\\)\\)\")",
-      "Bash(grep -v \"ZetLab AG\\\\|ZetLabLogo\\\\|ZetLabLogoProps\\\\|zetlab.ch\\\\|zetlab-data\\\\|zetlab:\\\\|zetlab_\\\\|//.*ZetLab\")",
-      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); [print\\(k,v\\) for k,v in {**d.get\\('dependencies',{}\\), **d.get\\('devDependencies',{}\\)}.items\\(\\) if any\\(x in k for x in ['jwt','jose','uuid','jsonweb']\\)]\")",
-      "Bash(python3 -c ':*)",
-      "Bash(DATABASE_URL=\"file:./data/orderentry.db\" DB_PROVIDER=\"sqlite\" npx prisma migrate dev --name init --skip-seed)",
-      "Bash(DATABASE_URL=\"file:./data/orderentry.db\" DB_PROVIDER=\"sqlite\" npx prisma migrate dev --name init)",
-      "Bash(DATABASE_URL=\"file:./data/orderentry.db\" npx prisma migrate dev --name init)",
-      "Bash(DATABASE_URL=\"file:./data/orderentry.db\" npx tsc --noEmit)",
-      "Bash(cat src/app/api/users/[id]/token/route.ts)",
-      "Bash(cat src/app/api/patients/[id]/route.ts)",
-      "Bash(cat src/app/api/patients/[id]/service-requests/route.ts)",
-      "Bash(cat src/app/api/service-requests/[id]/route.ts)",
-      "Bash(docker compose:*)",
+      "Bash(npm ci)",
+      "Bash(npx tsc *)",
+      "Bash(npx vitest *)",
+      "Bash(npx prisma *)",
+      "Bash(npx next *)",
+      "Bash(npx vercel *)",
+      "Bash(npx ts-node *)",
+      "Bash(docker compose *)",
+      "Bash(docker buildx *)",
+      "Bash(docker ps)",
+      "Bash(docker logs *)",
+      "Bash(docker inspect *)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(git branch *)",
+      "Bash(git stash list)",
+      "Bash(git describe *)",
+      "Bash(git rev-parse *)",
+      "Bash(git rev-list *)",
+      "Bash(git ls-files *)",
+      "Bash(gh pr view *)",
+      "Bash(gh pr list *)",
+      "Bash(gh pr diff *)",
+      "Bash(gh pr checks *)",
+      "Bash(gh issue view *)",
+      "Bash(gh issue list *)",
+      "Bash(gh api *)",
+      "Bash(gh run list *)",
+      "Bash(gh run view *)",
+      "Bash(node scripts/*)",
+      "Bash(node generate_fhir_resources.mjs)",
+      "Bash(node generate_conceptmap.mjs)",
+      "Bash(sqlite3 data/*.db SELECT*)",
+      "Bash(sqlite3 frontend/orderentry/data/*.db SELECT*)",
+      "Bash(curl -s http://localhost:*)",
+      "Bash(curl -fsS http://localhost:*)",
       "WebSearch",
-      "Bash(grep -n \"^| \\\\`GET /api/admin\\\\|^| \\\\`POST /api/admin\\\\|mail.*test.*route\\\\|admin.*mail\" \"c:/Users/Farhad Arian/OneDrive - ZLZ Zentrallabor AG/Dokumente/Claude/Projects/OrderEntry/CLAUDE.md\")",
-      "Bash(npx next:*)",
-      "Bash(npx vercel:*)",
-      "Read(//mnt/c/Users/Farhad Arian/OneDrive - ZLZ Zentrallabor AG/Dokumente/Claude/Projects/OrderEntry/Documentation/Installation/**)",
-      "Bash(mv 02_ValueSets.md 03_ValueSets.md)",
-      "Bash(mv 03_Practitioner.md 04_Practitioner.md)",
-      "Bash(mv 04_Patient.md 05_Patient.md)",
-      "Bash(mv 05_Testkatalog.md 06_Testkatalog.md)",
-      "Bash(npx prisma:*)",
-      "Bash(tasklist /FI \"IMAGENAME eq node.exe\")",
-      "Bash(powershell -Command \"Get-Process node -ErrorAction SilentlyContinue | Select-Object Id, ProcessName, CPU\")",
-      "Bash(powershell -Command \"Stop-Process -Id 38244, 32076 -Force -ErrorAction SilentlyContinue; Start-Sleep -Seconds 2; Get-Process node -ErrorAction SilentlyContinue | Select-Object Id, ProcessName, CPU\")",
-      "Bash(npx ts-node -e ':*)",
-      "Bash(sqlite3 data/orderentry.db \"SELECT id, username, role, isActive FROM User;\")"
-    ],
-    "additionalDirectories": [
-      "C:\\Users\\Farhad Arian\\OneDrive - ZLZ Zentrallabor AG\\Dokumente\\Claude\\Projects\\OrderEntry\\frontend\\zetlab\\__TRACKED_VAR__"
+      "WebFetch(domain:hl7.org)",
+      "WebFetch(domain:fhir.org)",
+      "WebFetch(domain:terminology.hl7.org)",
+      "WebFetch(domain:nextjs.org)",
+      "WebFetch(domain:tailwindcss.com)",
+      "WebFetch(domain:vitest.dev)",
+      "WebFetch(domain:prisma.io)",
+      "WebFetch(domain:opentelemetry.io)",
+      "WebFetch(domain:swagger.io)"
     ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/post-edit-reminder.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/stop-check-reminder.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash .claude/statusline.sh"
   }
 }
