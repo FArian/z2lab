@@ -766,6 +766,92 @@ or `exp` is in the past. All three conditions return `401`.
 
 ---
 
+## z2Lab Bridge (Local Network Companion)
+
+The **z2Lab Bridge** is the local-network daemon (separate Go binary, planned)
+that bridges the cloud (OrderEntry / Orchestra / HAPI) and on-premise systems
+in a clinic, practice, or laboratory. It moves HL7 (ADT, ORU) and prints
+Begleitscheine + barcode labels locally — without inbound firewall openings.
+
+> **Naming rule (CRITICAL):** „Bridge" in this codebase always refers to the z2Lab
+> Bridge product. **Never** confuse it with Claude Code sub-agents under
+> `.claude/agents/`. The product was renamed from „ZetLab Local Agent" to
+> „z2Lab Bridge" on 2026-04-26 — see `.claude/memory/bridge_naming.md`.
+
+### Architecture principles
+
+| # | Principle | Reason |
+|---|---|---|
+| 1 | **Cloud does not parse HL7** | OrderEntry is a pure proxy. Orchestra is the only HL7↔FHIR converter. |
+| 2 | **Outbound-only** | The Bridge initiates every connection. No port-forwarding, no firewall changes. |
+| 3 | **Polling, not push** | The Bridge polls `/api/v1/bridge/jobs` every few seconds. Cloud never opens a connection. |
+| 4 | **GLN-routed** | Each Bridge has its own API key → mapped to a FHIR Organization (GS1-GLN). Print jobs are dispatched per clinic. |
+| 5 | **No HL7 logic in the Bridge either** | The Bridge transports HL7 files only — it never parses, validates, or rewrites them. |
+
+### Bridge API (cloud-side, implemented)
+
+| Method | Path | Purpose |
+|---|---|---|
+| `GET`    | `/api/v1/bridge/status` | Connectivity check — Bridge verifies token + HL7-proxy availability |
+| `POST`   | `/api/v1/bridge/token` | Issue Bearer token (alias for `/auth/token`) |
+| `POST`   | `/api/v1/bridge/register` | Admin: register a new Bridge → returns plaintext API key (shown ONCE) |
+| `GET`    | `/api/v1/bridge/jobs` | Bridge polls pending print/ORU jobs (filtered by `orgId`, optional `locationId`) |
+| `POST`   | `/api/v1/bridge/jobs` | Create a print job (called automatically by `OrderCreatePage` after submission) |
+| `POST`   | `/api/v1/bridge/jobs/{id}/done` | Bridge confirms job completed |
+| `GET`    | `/api/v1/admin/bridges` | Admin: list all registered Bridges |
+| `PATCH`  | `/api/v1/admin/bridges/{id}` | Admin: revoke a Bridge (status → `revoked`) |
+| `DELETE` | `/api/v1/admin/bridges/{id}` | Admin: delete Bridge registration |
+
+### HL7 Proxy (used by the Bridge)
+
+| Method | Path | Direction |
+|---|---|---|
+| `POST` | `/api/v1/proxy/hl7/inbound` | Bridge → OrderEntry → Orchestra (ADT) |
+| `GET`  | `/api/v1/proxy/hl7/outbound` | Orchestra → OrderEntry → Bridge (ORU polling) |
+
+### Routing — orgId + locationId
+
+```
+/api/v1/bridge/jobs?orgId=XYZ                  → returns broadcast-only jobs
+/api/v1/bridge/jobs?orgId=XYZ&locationId=ABC   → returns location-targeted + broadcast jobs
+```
+
+A print job created with `locationId` set is delivered only to Bridges in that
+department; without `locationId` it is broadcast to all Bridges of the org.
+
+### File map (cloud-side)
+
+| Layer | Files |
+|---|---|
+| Domain | `domain/entities/BridgeJob.ts` |
+| Application | `application/interfaces/repositories/IBridgeJobRepository.ts`, `IBridgeRegistrationRepository.ts` |
+| Infrastructure — Prisma | `infrastructure/repositories/PrismaBridgeJobRepository.ts`, `PrismaBridgeRegistrationRepository.ts` |
+| Infrastructure — Controllers | `infrastructure/api/controllers/BridgeJobController.ts` (incl. ZPL generator), `BridgeRegistrationController.ts` |
+| Infrastructure — DTOs | `infrastructure/api/dto/BridgeJobDto.ts`, `BridgeRegistrationDto.ts` |
+| Routes | `app/api/v1/bridge/{status,token,jobs,register}/`, `app/api/v1/admin/bridges/` |
+| UI | `app/admin/bridges/page.tsx` → `presentation/pages/BridgesPage.tsx` |
+| DB Schema | `prisma/schema.prisma` (models `BridgeJob`, `BridgeRegistration`) |
+| DB Migrations | `flyway/migrations/{sqlite,postgresql,sqlserver}/V3__create_bridge_jobs.sql`, `V8__create_bridge_registrations.sql` (sqlite only) |
+
+### Architecture spec (full)
+
+`frontend/orderentry/tmp/bridge/README.md` — 600+ lines covering data flows,
+deployment models (Cloud-only / Bridge-Standard / Hybrid), ENV variables
+(`BRIDGE_*` namespace), Go package selection, security, resilience, audit log.
+
+### Rules
+
+- **New endpoint paths use `bridge/`, never `agent/`.** The old folders no longer exist.
+- **Never let the Bridge parse HL7.** The Bridge writes/reads files; Orchestra parses.
+- **Never bake auth into the Bridge code.** API keys are issued via `POST /api/v1/bridge/register` (admin-only) and stored as bcrypt hashes server-side.
+- **Print jobs are auto-created** in `OrderCreatePage.tsx` after order submission — fire-and-forget; failure falls back silently to browser print.
+- **ZPL format** — barcode is `{orderNumber} {materialCode}` (CODE128) — required by the LIS scanner. Do not change without LIS coordination.
+- **DB nuke history (2026-04-26):** During the rename refactor, the local SQLite
+  DB was deleted (Option B — clean migration history, no `Agent*` traces).
+  Run `npm run db:migrate:sqlite` after pulling these changes to recreate it.
+
+---
+
 ## Authentication
 
 Dual auth system:
