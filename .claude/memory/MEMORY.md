@@ -3,3 +3,4 @@
 - [Bridge-Spec Referenz](bridge_spec_reference.md) — Pfade zur vollständigen Spec und zu allen Code-Stellen.
 - [Error Monitoring Plan](error_monitoring_plan.md) — geplantes Loki+Promtail-Setup für Error/Log-Monitoring in der bestehenden Grafana-UI; Sentry/GlitchTip/Elastic verworfen, Begründung im File.
 - [CI Docker Multi-Arch (working)](ci_docker_multiarch.md) — funktionierende GH-Actions-Pipeline für amd64+arm64 mit nativen Runnern (kein QEMU). Validiert 2026-04-26.
+- [Testing Setup](testing_setup.md) — Vitest-Default `environment: "node"` (jsdom verboten als Default), ESLint `^_` Convention, UserJwtService nimmt secret per DI. Gilt für alle neuen Tests.

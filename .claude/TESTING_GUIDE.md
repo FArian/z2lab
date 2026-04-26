@@ -1,10 +1,29 @@
-# Testing Guide — ZetLab OrderEntry
+# Testing Guide — z2Lab OrderEntry
 
 ## Framework
 
-**Vitest 4** + React Testing Library 16 + jest-dom 6. The `npm test` script runs `vitest run`.
+**Vitest 4**. The `npm test` script runs `vitest run`.
 
-Config: `frontend/zetlab/vitest.config.ts` — `resolve.alias` maps `@/*` → `src/*`; test environment: `jsdom`; globals enabled.
+Config: `frontend/orderentry/vitest.config.ts` — `resolve.alias` maps `@/*` → `src/*`; globals enabled.
+
+### Default environment: `node` (NOT jsdom)
+
+`environment: "node"` is the default because:
+- No test in this repo currently uses DOM matchers (`toBeInTheDocument`, etc.).
+- jsdom@29 → cssstyle@4 → `@asamuzakjp/css-color@3.2` contains top-level await,
+  which Node 20 forbids loading via `require()` — choosing jsdom as default
+  breaks the entire test run on CI with `ERR_REQUIRE_ASYNC_MODULE`.
+
+If a future test needs the DOM, opt in **per file**:
+
+```ts
+// @vitest-environment jsdom
+import { render } from "@testing-library/react";
+import "@testing-library/jest-dom"; // import jest-dom locally, NOT in vitest.setup.ts
+```
+
+Do NOT add `@testing-library/jest-dom` to `vitest.setup.ts` globally — that
+forces jsdom to load for every test file and reintroduces the CI crash.
 
 ## Mock Usage
 

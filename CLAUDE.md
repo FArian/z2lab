@@ -941,9 +941,11 @@ See [.claude/TESTING_GUIDE.md](.claude/TESTING_GUIDE.md) for the full testing gu
 
 Quick reference:
 - Runner: Vitest (not Jest)
+- **Default `environment: "node"`** — NEVER switch to jsdom globally (jsdom@29 + Node 20 crash via top-level await; see TESTING_GUIDE for opt-in pragma)
 - Unit tests: `tests/unit/` — no I/O, no HTTP
 - Integration tests: `tests/integration/` — real objects, `vi.fn()` as fetchFn
 - Coverage: branches 70%, functions/lines/stmts 80%
+- ESLint: underscore-prefix (`_url`, `_method`, `_unused`) marks intentional non-use — do NOT add `// eslint-disable-next-line @typescript-eslint/no-unused-vars`
 
 ---
 
