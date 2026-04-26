@@ -1,3 +1,4 @@
 - [Bridge-Naming (KRITISCH)](bridge_naming.md) — Produkt heißt "z2Lab Bridge" (vorher "Agent"). NIE mit Claude Sub-Agents verwechseln. Code-Refactor 2026-04-26 abgeschlossen.
 - [z2Lab Bridge — Projekt](bridge_project.md) — geplantes Go-Binary; Brücke Cloud ↔ Klinik (HL7, Druck, ORU). Cloud-API komplett implementiert, Go-Binary noch nicht.
 - [Bridge-Spec Referenz](bridge_spec_reference.md) — Pfade zur vollständigen Spec und zu allen Code-Stellen.
+- [Error Monitoring Plan](error_monitoring_plan.md) — geplantes Loki+Promtail-Setup für Error/Log-Monitoring in der bestehenden Grafana-UI; Sentry/GlitchTip/Elastic verworfen, Begründung im File.
