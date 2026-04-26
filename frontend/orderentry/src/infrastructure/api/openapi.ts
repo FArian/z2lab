@@ -122,13 +122,6 @@ export const openApiSpec = {
         "All endpoints require admin role.",
     },
     {
-      name: "Orchestra",
-      description:
-        "OIE Juno integration — context launch from Orchestra into OrderEntry. " +
-        "Orchestra calls `POST /api/launch` with a signed HS256 JWT to create a session " +
-        "and redirect the clinician directly to the order entry screen.",
-    },
-    {
       name: "Integration",
       description:
         "Deep-link and system integration endpoints. " +
@@ -1219,74 +1212,6 @@ export const openApiSpec = {
       },
     },
 
-    // ── Orchestra / Launch ────────────────────────────────────────────────────
-    "/launch": {
-      post: {
-        tags: ["Orchestra"],
-        summary: "Orchestra context launch (JWT-secured)",
-        description:
-          "Called by OIE Juno (Orchestra) to launch OrderEntry in the context of a specific " +
-          "patient and clinician. Creates a signed session cookie and returns a redirect URL " +
-          "so the browser lands directly on the order entry screen.\n\n" +
-          "**JWT contract:**\n" +
-          "- Algorithm: `HS256`\n" +
-          "- Secret: `ORCHESTRA_JWT_SECRET` (shared between Orchestra and OrderEntry)\n" +
-          "- Issuer (`iss`): `orchestra`\n" +
-          "- Required claims: `sub`, `patientId`, `practitionerId`, `organizationId`, `exp`, `iss`\n" +
-          "- Max expiry: 5 minutes from issuance\n\n" +
-          "**Error format:** RFC 7807 Problem Details — Orchestra parses `status` and `detail`.",
-        operationId: "launch",
-        requestBody: {
-          required: true,
-          content: {
-            "application/json": {
-              schema: { $ref: "#/components/schemas/LaunchRequest" },
-              example: {
-                patientId: "Patient/p-123",
-                practitionerId: "Practitioner/prac-456",
-                organizationId: "Organization/org-789",
-                token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-              },
-            },
-          },
-        },
-        responses: {
-          "200": {
-            description: "Session created — redirect URL returned",
-            content: {
-              "application/json": {
-                schema: { $ref: "#/components/schemas/LaunchResponse" },
-                example: { redirectUrl: "/order/new?patientId=Patient%2Fp-123" },
-              },
-            },
-          },
-          "400": {
-            description: "Missing or malformed request body",
-            content: {
-              "application/json": {
-                schema: { $ref: "#/components/schemas/ProblemDetails" },
-              },
-            },
-          },
-          "401": {
-            description: "JWT invalid, expired, or missing required claims",
-            content: {
-              "application/json": {
-                schema: { $ref: "#/components/schemas/ProblemDetails" },
-                example: {
-                  type: "https://tools.ietf.org/html/rfc7807",
-                  title: "Unauthorized",
-                  status: 401,
-                  detail: "JWT signature invalid or expired",
-                  instance: "/api/launch",
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-
     // ── Admin — Registry: Organizations ──────────────────────────────────────
     "/fhir/organizations": {
       get: {
@@ -1762,40 +1687,6 @@ export const openApiSpec = {
           "400": { description: "Invalid request body" },
           "401": { description: "Not authenticated" },
           "405": { description: "Not available (Vercel)" },
-        },
-      },
-    },
-
-    // ── Mail (legacy — use /admin/mail/test or /v1/admin/mail/test) ──────────
-    "/mail/test": {
-      post: {
-        tags: ["Mail"],
-        summary: "Test mail server connection (deprecated — use /admin/mail/test)",
-        description:
-          "**Deprecated.** Use `POST /admin/mail/test` (or preferably `POST /v1/admin/mail/test`) instead.\n\n" +
-          "This path is kept for backward compatibility only and may be removed in a future version.",
-        operationId: "testMailLegacy",
-        deprecated: true,
-        security: [{ sessionCookie: [] }, { bearerAuth: [] }],
-        requestBody: {
-          required: false,
-          content: {
-            "application/json": {
-              schema: { $ref: "#/components/schemas/MailTestRequest" },
-            },
-          },
-        },
-        responses: {
-          "200": {
-            description: "Test result — see POST /admin/mail/test for full schema",
-            content: {
-              "application/json": {
-                schema: { $ref: "#/components/schemas/MailTestResponse" },
-              },
-            },
-          },
-          "401": { description: "Not authenticated" },
-          "403": { description: "Admin role required" },
         },
       },
     },
@@ -3075,71 +2966,6 @@ export const openApiSpec = {
         },
       },
     },
-    "/v2/gln-lookup": {
-      get: {
-        tags: ["External — GLN"],
-        summary: "Look up a GLN — v2 (nested structure)",
-        description:
-          "Same RefData SOAP lookup as `GET /api/gln-lookup` (v1), but returns a richer, " +
-          "nested response structure.\n\n" +
-          "**Breaking changes from v1:**\n" +
-          "- `ptype` renamed to `partnerType`\n" +
-          "- `roleType` renamed to `role`\n" +
-          "- Flat address fields moved into `address{}` object\n" +
-          "- `lastName`/`firstName` moved into `person{}` object (null for JUR)\n" +
-          "- `organization` is `null` (not `\"\"`) for NAT partners\n" +
-          "- New computed field `displayName`\n\n" +
-          "**ENV:** `REFDATA_SOAP_URL` — same endpoint as v1.",
-        operationId: "glnLookupV2",
-        security: [{ sessionCookie: [] }],
-        parameters: [
-          {
-            name: "gln",
-            in: "query",
-            required: true,
-            description: "13-digit GS1 Global Location Number",
-            schema: { type: "string", pattern: "^\\d{13}$", example: "7601000123456" },
-          },
-        ],
-        responses: {
-          "200": {
-            description: "GLN found — v2 partner data returned",
-            content: {
-              "application/json": {
-                schema: { $ref: "#/components/schemas/GlnResponseV2" },
-                examples: {
-                  nat: {
-                    summary: "Natural person (NAT)",
-                    value: {
-                      gln: "7601000123456", partnerType: "NAT", role: "HPC",
-                      displayName: "Müller Hans",
-                      person: { lastName: "Müller", firstName: "Hans" },
-                      organization: null,
-                      address: { street: "Bahnhofstrasse", streetNo: "1", zip: "8001", city: "Zürich", canton: "ZH", country: "CH" },
-                    },
-                  },
-                  jur: {
-                    summary: "Juridical entity (JUR)",
-                    value: {
-                      gln: "7601001234567", partnerType: "JUR", role: "ORG",
-                      displayName: "Hirslanden AG",
-                      person: null,
-                      organization: "Hirslanden AG",
-                      address: { street: "Witellikerstrasse", streetNo: "40", zip: "8032", city: "Zürich", canton: "ZH", country: "CH" },
-                    },
-                  },
-                },
-              },
-            },
-          },
-          "400": { description: "GLN is not 13 digits" },
-          "401": { description: "Not authenticated" },
-          "404": { description: "GLN not found in RefData" },
-          "502": { description: "SOAP call failed — network error or timeout" },
-          "503": { description: "`REFDATA_SOAP_URL` not configured" },
-        },
-      },
-    },
   },
 
   // ── Reusable schemas ───────────────────────────────────────────────────────
@@ -3172,43 +2998,6 @@ export const openApiSpec = {
           code:    { type: "string" },
           display: { type: "string" },
           system:  { type: "string" },
-        },
-      },
-      GlnResponseV2: {
-        type: "object",
-        required: ["gln", "partnerType", "role", "displayName", "person", "organization", "address"],
-        description: "v2 GLN partner response — nested structure (GET /api/v2/gln-lookup).",
-        properties: {
-          gln:          { type: "string", description: "13-digit GLN", example: "7601000123456" },
-          partnerType:  { type: "string", enum: ["NAT", "JUR", ""], description: "NAT = natural person, JUR = juridical entity" },
-          role:         { type: "string", description: "RefData role type code (e.g. HPC, ORG)", example: "HPC" },
-          displayName:  { type: "string", description: "Computed display name: 'Müller Hans' (NAT) or organisation name (JUR)" },
-          person: {
-            nullable: true,
-            description: "Person details — populated for NAT, null for JUR",
-            type: "object",
-            required: ["lastName", "firstName"],
-            properties: {
-              lastName:  { type: "string" },
-              firstName: { type: "string" },
-            },
-          },
-          organization: {
-            type: "string", nullable: true,
-            description: "Organisation name — populated for JUR, null for NAT",
-          },
-          address: {
-            type: "object",
-            required: ["street", "streetNo", "zip", "city", "canton", "country"],
-            properties: {
-              street:   { type: "string" },
-              streetNo: { type: "string" },
-              zip:      { type: "string" },
-              city:     { type: "string" },
-              canton:   { type: "string", example: "ZH" },
-              country:  { type: "string", example: "CH" },
-            },
-          },
         },
       },
       GlnLookupResult: {
@@ -3798,27 +3587,6 @@ export const openApiSpec = {
         },
       },
 
-      // ── Orchestra / Launch schemas ────────────────────────────────────────────
-
-      LaunchRequest: {
-        type: "object",
-        required: ["patientId", "practitionerId", "organizationId", "token"],
-        properties: {
-          patientId:      { type: "string", description: "FHIR relative reference, e.g. `Patient/p-123`" },
-          practitionerId: { type: "string", description: "FHIR relative reference, e.g. `Practitioner/prac-456`" },
-          organizationId: { type: "string", description: "FHIR relative reference, e.g. `Organization/org-789`" },
-          token:          { type: "string", description: "Signed HS256 JWT issued by Orchestra (`iss=orchestra`, max 5 min expiry)" },
-        },
-      },
-
-      LaunchResponse: {
-        type: "object",
-        required: ["redirectUrl"],
-        properties: {
-          redirectUrl: { type: "string", description: "Absolute path to redirect the browser to after session creation" },
-        },
-      },
-
       ProblemDetails: {
         type: "object",
         required: ["type", "title", "status", "detail", "instance"],
@@ -3828,7 +3596,7 @@ export const openApiSpec = {
           title:    { type: "string", description: "Short human-readable summary" },
           status:   { type: "integer", description: "HTTP status code" },
           detail:   { type: "string", description: "Explanation specific to this occurrence" },
-          instance: { type: "string", description: "URI reference of the specific request (e.g. `/api/launch`)" },
+          instance: { type: "string", description: "URI reference of the specific request that produced the error" },
         },
       },
 
