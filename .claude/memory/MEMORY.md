@@ -1,3 +1,4 @@
+- [Agent-Terminologie (KRITISCH)](agent_terminology.md) — "Agent" = IMMER ZetLab Local Agent (Go-Produkt), NIE Claude Sub-Agents. Vor jeder Antwort beachten.
 - [ZetLab Local Agent](agent_project.md) — geplantes Go-Binary; Brücke Cloud ↔ Klinik (HL7, Druck, ORU). Spec liegt im Repo, Server-Routes teilweise da, Go-Agent noch nicht implementiert.
 - [Agent-Spec Referenz](agent_spec_reference.md) — vollständige Architektur-Spec im Repo unter frontend/orderentry/tmp/agent/README.md
 - [Frontend-Pfad-Diskrepanz](frontend_path_mismatch.md) — Code liegt unter frontend/orderentry/, CLAUDE.md beschreibt aber frontend/zetlab/
