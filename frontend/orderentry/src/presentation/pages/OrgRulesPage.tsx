@@ -581,7 +581,7 @@ export default function OrgRulesPage({ mode = "page" }: { mode?: "page" | "tab" 
   }
 
   const inner = (
-    <div className={mode === "tab" ? "py-4" : "px-8 py-7 max-w-[1200px] mx-auto"}>
+    <div className={mode === "tab" ? "py-4" : "px-8 py-7"}>
 
       {mode === "page" && (
         <nav className="flex items-center gap-1.5 text-[12px] text-zt-text-tertiary mb-4">

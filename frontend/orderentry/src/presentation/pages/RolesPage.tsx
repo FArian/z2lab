@@ -177,7 +177,7 @@ export default function RolesPage() {
       )}
 
       <div className="flex-1 overflow-y-auto bg-zt-bg-page">
-        <div className="px-8 py-7 max-w-[900px] mx-auto">
+        <div className="px-8 py-7">
 
           {/* Breadcrumb */}
           <nav className="flex items-center gap-1.5 text-[12px] text-zt-text-tertiary mb-4">

@@ -386,7 +386,7 @@ export default function NumberPoolPage({ mode = "page" }: { mode?: "page" | "tab
   }
 
   const inner = (
-    <div className={mode === "tab" ? "space-y-7 py-4" : "px-8 py-7 max-w-[1100px] mx-auto space-y-7"}>
+    <div className={mode === "tab" ? "space-y-7 py-4" : "px-8 py-7 space-y-7"}>
 
       {mode === "page" && (
         <nav className="flex items-center gap-1.5 text-[12px] text-zt-text-tertiary">

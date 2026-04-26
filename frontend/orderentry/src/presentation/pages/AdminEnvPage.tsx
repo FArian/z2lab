@@ -233,7 +233,7 @@ export function AdminEnvPage() {
     <div className="flex flex-1 min-h-0">
       <AppSidebar />
       <div className="flex-1 overflow-y-auto bg-zt-bg-page">
-        <div className="px-8 py-7 max-w-[860px] mx-auto space-y-5">
+        <div className="px-8 py-7 space-y-5">
 
           <nav className="flex items-center gap-1.5 text-[12px] text-zt-text-tertiary">
             <BackButton />
