@@ -1520,7 +1520,13 @@ Generated statically in `src/app/api/application.wadl/route.ts` from the same re
 
 ## Observability
 
-z2Lab OrderEntry ships two opt-in observability layers: Prometheus metrics and OpenTelemetry distributed tracing.
+z2Lab OrderEntry ships three observability layers: structured JSON logging (always on), Prometheus metrics (opt-in), and OpenTelemetry distributed tracing (opt-in).
+
+### Structured Logging
+
+All server-side code uses `createLogger("ContextName")` to emit one-line JSON entries to stdout (and optionally to a log file). Four levels: `debug` / `info` / `warn` / `error`. Default level is `info`; can be changed at runtime via `POST /api/v1/config` (`LOG_LEVEL` key) **without a server restart** — the `ConfigController` calls `refreshLogLevel()` after a successful save and the new level is picked up on the next log call.
+
+Full guide with provider-by-provider examples and the `/admin/logs` viewer: [Documentation/Operations/Logging.md](Documentation/Operations/Logging.md).
 
 ### Prometheus Metrics (`GET /api/metrics`)
 

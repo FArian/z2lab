@@ -39,13 +39,45 @@ function parseLevel(raw: string): LogLevel {
   return v in LEVEL_RANK ? v : "info";
 }
 
-// ── Singleton config (read once at module load) ───────────────────────────────
+// ── Mutable runtime config ────────────────────────────────────────────────────
+//
+// LOG_LEVEL can be changed at runtime via POST /api/v1/config (which writes
+// data/config.json). The ConfigController calls refreshLogLevel() after a
+// successful save so subsequent log() calls see the new level — no restart.
+//
+// process.env always wins over the config.json override, so an explicitly
+// set ORDERENTRY_LOG__LEVEL cannot be downgraded by the GUI.
 
-const _configuredLevel: LogLevel = parseLevel(
-  process.env[`${(process.env.APP_NAME ?? "ORDERENTRY").toUpperCase()}_LOG__LEVEL`] ?? "info",
-);
+function envLogLevel(): LogLevel | null {
+  const raw = process.env[`${(process.env.APP_NAME ?? "ORDERENTRY").toUpperCase()}_LOG__LEVEL`];
+  return raw ? parseLevel(raw) : null;
+}
+
+let _currentLevel: LogLevel = envLogLevel() ?? "info";
+
 const _logFile: string | null =
   (process.env[`${(process.env.APP_NAME ?? "ORDERENTRY").toUpperCase()}_LOG__FILE`] ?? "").trim() || null;
+
+/**
+ * Re-reads the effective log level from process.env (highest priority) or the
+ * given override (typically the value just written by POST /api/v1/config).
+ * Returns the new level so callers can log a confirmation.
+ *
+ * Called from ConfigController.update() after `LOG_LEVEL` is mutated. Logger
+ * instances created earlier pick up the new level on their next emit() because
+ * they read `_currentLevel` at log time, not at construction time.
+ */
+export function refreshLogLevel(override?: string): LogLevel {
+  const fromEnv = envLogLevel();
+  const next: LogLevel = fromEnv ?? (override ? parseLevel(override) : "info");
+  _currentLevel = next;
+  return next;
+}
+
+/** Returns the level the logger would currently use for a fresh log call. */
+export function currentLogLevel(): LogLevel {
+  return _currentLevel;
+}
 
 // ── Formatter ─────────────────────────────────────────────────────────────────
 
@@ -89,12 +121,10 @@ function appendToFile(line: string): void {
 
 export class Logger {
   private readonly ctx: string;
-  private readonly minRank: number;
   private readonly traceId: string | undefined;
 
-  constructor(ctx: string, level: LogLevel = _configuredLevel, traceId?: string) {
+  constructor(ctx: string, traceId?: string) {
     this.ctx = ctx;
-    this.minRank = LEVEL_RANK[level];
     this.traceId = traceId;
   }
 
@@ -109,7 +139,7 @@ export class Logger {
    * via getActiveTraceId() — withTraceId() is only needed for manual overrides.
    */
   withTraceId(traceId: string): Logger {
-    return new Logger(this.ctx, _configuredLevel, traceId);
+    return new Logger(this.ctx, traceId);
   }
 
   private emit(
@@ -117,7 +147,9 @@ export class Logger {
     message: string,
     meta?: Record<string, unknown>,
   ): void {
-    if (LEVEL_RANK[level] < this.minRank) return;
+    // Read the current level on every call so runtime overrides
+    // (POST /api/v1/config → refreshLogLevel) take effect without restart.
+    if (LEVEL_RANK[level] < LEVEL_RANK[_currentLevel]) return;
     const line = format(level, this.ctx, message, meta, this.traceId);
     if (level === "error" || level === "warn") {
       console.error(line);

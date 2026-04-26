@@ -50,11 +50,25 @@ export class BridgeJobController {
   // ── POST /api/v1/bridge/jobs/print ─────────────────────────────────────────
 
   async createPrintJob(body: CreatePrintJobRequestDto): Promise<CreatePrintJobResponseDto> {
+    log.debug("createPrintJob: invoked", {
+      orgId:               body.orgId,
+      locationId:          body.locationId ?? null,
+      documentReferenceId: body.documentReferenceId,
+      serviceRequestId:    body.serviceRequestId,
+      patientId:           body.patientId,
+      orderNumber:         body.orderNumber,
+      specimenCount:       body.specimens?.length ?? 0,
+    });
+
     if (!body.orgId || !body.documentReferenceId || !body.orderNumber) {
+      log.warn("createPrintJob: missing required fields", {
+        hasOrgId: !!body.orgId, hasDocRef: !!body.documentReferenceId, hasOrderNumber: !!body.orderNumber,
+      });
       throw Object.assign(new Error("orgId, documentReferenceId and orderNumber are required"), { status: 400 });
     }
 
     const zpl = buildZpl(body.orderNumber, body.specimens ?? []);
+    log.debug("createPrintJob: ZPL generated", { zplLength: zpl.length, specimens: body.specimens?.length ?? 0 });
 
     const job = await this.repo.create({
       type:                "print",
@@ -67,7 +81,9 @@ export class BridgeJobController {
       zpl,
     });
 
-    log.info(`Print job created: id=${job.id} orgId=${job.orgId} locationId=${job.locationId ?? "broadcast"}`);
+    log.info(`Print job created: id=${job.id} orgId=${job.orgId} locationId=${job.locationId ?? "broadcast"}`, {
+      jobId: job.id, orgId: job.orgId, locationId: job.locationId, orderNumber: body.orderNumber,
+    });
 
     return { id: job.id, status: job.status, createdAt: job.createdAt };
   }
@@ -75,11 +91,14 @@ export class BridgeJobController {
   // ── GET /api/v1/bridge/jobs ────────────────────────────────────────────────
 
   async listJobs(orgId: string, locationId?: string): Promise<ListBridgeJobsResponseDto> {
+    log.debug("listJobs: poll request", { orgId, locationId: locationId ?? null });
     if (!orgId) {
+      log.warn("listJobs: missing orgId");
       throw Object.assign(new Error("orgId query parameter is required"), { status: 400 });
     }
 
     const jobs = await this.repo.listPending(orgId, locationId);
+    log.debug("listJobs: returning pending jobs", { orgId, locationId: locationId ?? null, count: jobs.length });
 
     const result: BridgeJobResponseDto[] = jobs.map((j) => ({
       id:                  j.id,
@@ -100,12 +119,14 @@ export class BridgeJobController {
   // ── POST /api/v1/bridge/jobs/[id]/done ─────────────────────────────────────
 
   async markDone(id: string): Promise<JobDoneResponseDto> {
+    log.debug("markDone: invoked", { jobId: id });
     if (!id) {
+      log.warn("markDone: missing job id");
       throw Object.assign(new Error("Job id is required"), { status: 400 });
     }
 
     await this.repo.markDone(id);
-    log.info(`Print job marked done: id=${id}`);
+    log.info(`Print job marked done: id=${id}`, { jobId: id });
 
     return { id, status: "done" };
   }

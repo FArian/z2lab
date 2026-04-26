@@ -20,6 +20,9 @@ import nodemailer, { type Transporter, type TransportOptions } from "nodemailer"
 import type { IMailService, MailVerifyResult } from "@/application/interfaces/IMailService";
 import type { MailMessage } from "@/domain/entities/MailMessage";
 import type { MailConfig } from "./types/MailConfig";
+import { createLogger } from "@/infrastructure/logging/Logger";
+
+const log = createLogger("NodemailerMailService");
 
 // ── Transport builder ─────────────────────────────────────────────────────────
 
@@ -93,17 +96,35 @@ export class NodemailerMailService implements IMailService {
 
   constructor(config: MailConfig) {
     this.config = config;
+    log.debug("NodemailerMailService: building transport", {
+      provider: config.provider,
+      authType: config.authType,
+      host:     config.host,
+      port:     config.port,
+      secure:   config.secure,
+      hasUser:  !!config.user,
+    });
     this.transporter = nodemailer.createTransport(buildTransportOptions(config));
+    log.debug("NodemailerMailService: transport ready");
   }
 
   isConfigured(): boolean { return true; }
 
   async verify(): Promise<MailVerifyResult> {
+    log.debug("NodemailerMailService.verify(): connecting to SMTP server", {
+      host: this.config.host, port: this.config.port, secure: this.config.secure,
+    });
     try {
+      const t0 = Date.now();
       await this.transporter.verify();
+      log.debug("NodemailerMailService.verify(): success", { durationMs: Date.now() - t0 });
       return { ok: true, message: "Mail server reachable and authentication successful" };
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Unknown error";
+      log.debug("NodemailerMailService.verify(): failed", {
+        name:    err instanceof Error ? err.name : undefined,
+        message,
+      });
       return { ok: false, message };
     }
   }
@@ -112,13 +133,26 @@ export class NodemailerMailService implements IMailService {
     const toAddress: string = typeof message.to === "string"
       ? message.to
       : Array.from(message.to).join(", ");
-    await this.transporter.sendMail({
+    log.debug("NodemailerMailService.send(): dispatching", {
+      to:         toAddress,
+      from:       message.from ?? this.config.from,
+      subject:    message.subject,
+      textLength: message.text?.length ?? 0,
+      htmlLength: message.html?.length ?? 0,
+    });
+    const t0 = Date.now();
+    const info = await this.transporter.sendMail({
       from:    message.from ?? this.config.from,
       to:      toAddress,
       replyTo: this.config.alias,
       subject: message.subject,
       text:    message.text,
       html:    message.html,
+    });
+    log.debug("NodemailerMailService.send(): accepted", {
+      messageId:   (info as { messageId?: string }).messageId,
+      response:    (info as { response?:  string }).response,
+      durationMs:  Date.now() - t0,
     });
   }
 }

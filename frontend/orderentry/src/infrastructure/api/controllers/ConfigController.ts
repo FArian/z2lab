@@ -18,7 +18,7 @@ import {
   saveOverrides,
   type SupportedKey,
 } from "@/infrastructure/config/RuntimeConfig";
-import { createLogger } from "@/infrastructure/logging/Logger";
+import { createLogger, refreshLogLevel, currentLogLevel } from "@/infrastructure/logging/Logger";
 
 const log = createLogger("ConfigController");
 import type {
@@ -106,6 +106,17 @@ export class ConfigController {
         message: `Fehler beim Speichern: ${msg}`,
         httpStatus: 500,
       };
+    }
+
+    // If LOG_LEVEL was changed, push it into the live Logger so subsequent
+    // log calls observe the new level without a server restart. process.env
+    // still wins, so an explicitly set ORDERENTRY_LOG__LEVEL is preserved.
+    if ("LOG_LEVEL" in body.overrides) {
+      const previous = currentLogLevel();
+      const next = refreshLogLevel(body.overrides["LOG_LEVEL"] ?? undefined);
+      if (next !== previous) {
+        log.info(`Log level changed at runtime: ${previous} → ${next}`);
+      }
     }
 
     return {
