@@ -835,7 +835,7 @@ department; without `locationId` it is broadcast to all Bridges of the org.
 
 ### Architecture spec (full)
 
-`frontend/orderentry/tmp/bridge/README.md` — 600+ lines covering data flows,
+[`Documentation/Bridge/README.md`](Documentation/Bridge/README.md) — 600+ lines covering data flows,
 deployment models (Cloud-only / Bridge-Standard / Hybrid), ENV variables
 (`BRIDGE_*` namespace), Go package selection, security, resilience, audit log.
 

@@ -37,4 +37,4 @@ Lokaler Daemon (Windows Service / systemd / LaunchAgent / Docker), der via HTTPS
 - Repo-Name (geplant): `z2lab-bridge/`
 - Binary-Name (geplant): `z2lab-bridge.{exe,deb,pkg,...}`
 
-**How to apply:** Bei jeder Frage zu HL7-Datenaustausch, lokalen Druckern, ADT-Übernahme oder Klinik-Integration sofort an dieses Projekt denken. Das Cloud-Pendant `/api/v1/bridge/*` und `/api/v1/proxy/hl7/*` ist gebaut — nicht von Null erfinden, sondern bestehende Routes erweitern. Vor neuem Code immer in `tmp/bridge/README.md` nachschauen, ob die Entscheidung schon dokumentiert ist.
+**How to apply:** Bei jeder Frage zu HL7-Datenaustausch, lokalen Druckern, ADT-Übernahme oder Klinik-Integration sofort an dieses Projekt denken. Das Cloud-Pendant `/api/v1/bridge/*` und `/api/v1/proxy/hl7/*` ist gebaut — nicht von Null erfinden, sondern bestehende Routes erweitern. Vor neuem Code immer in `Documentation/Bridge/README.md` nachschauen, ob die Entscheidung schon dokumentiert ist.

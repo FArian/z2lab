@@ -18,7 +18,7 @@ Vorheriger Name war „ZetLab Local Agent" — die Umbenennung wurde 2026-04-26 
 
 | Bereich | Vorher | Jetzt |
 |---|---|---|
-| Spec | `tmp/agent/README.md` | `tmp/bridge/README.md` |
+| Spec | `tmp/agent/README.md` | `Documentation/Bridge/README.md` |
 | API-Routes | `/api/v1/agent/*` | `/api/v1/bridge/*` |
 | Admin-API | `/api/v1/admin/agents/*` | `/api/v1/admin/bridges/*` |
 | Admin-UI | `/admin/agents` | `/admin/bridges` |

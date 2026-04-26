@@ -5,7 +5,7 @@ type: reference
 ---
 
 **Hauptspec (lesen vor jeder Bridge-Arbeit):**
-`frontend/orderentry/tmp/bridge/README.md` — 600+ Zeilen, vollständige Architektur, Datenflüsse (3 Mermaid-Sequenzdiagramme), Implementierungsstand, offene Entscheidungen, ENV-Variablen, Sicherheit, Resilienz.
+`Documentation/Bridge/README.md` — 600+ Zeilen, vollständige Architektur, Datenflüsse (3 Mermaid-Sequenzdiagramme), Implementierungsstand, offene Entscheidungen, ENV-Variablen, Sicherheit, Resilienz.
 
 **Cloud-seitige Routes (alle implementiert):**
 
