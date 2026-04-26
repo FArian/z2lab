@@ -1824,7 +1824,7 @@ app/api/v1/admin/mail/
 | `GET`  | `/api/v1/admin/mail/status` | admin | Current config (no secrets) |
 | `POST` | `/api/v1/admin/mail/test`   | admin | SMTP verify + optional test send |
 
-Full documentation: `src/infrastructure/mail/README.md`
+Full documentation: [Documentation/Deployment/Mail.md](Documentation/Deployment/Mail.md) — provider matrix, full ENV reference, Gmail/HIN/Office 365/Workspace setup, troubleshooting
 
 ---
 
@@ -1835,7 +1835,7 @@ Full documentation: `src/infrastructure/mail/README.md`
 Every API change MUST trigger updates to ALL four of these:
 
 1. **`src/infrastructure/api/openapi.ts`** — the authoritative spec
-2. **`src/infrastructure/mail/README.md`** (or feature README) — developer docs
+2. **`Documentation/<Feature>/README.md`** (e.g. `Documentation/Deployment/Mail.md`, `Documentation/Bridge/README.md`) — developer docs
 3. **`CLAUDE.md`** — architecture section for the affected feature
 4. **`src/infrastructure/api/gateway/RouteRegistry.ts`** — v1 route list
 
