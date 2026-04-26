@@ -378,19 +378,110 @@ ORDERENTRY_MAIL__PASSWORD=<smtp password>
 ORDERENTRY_MAIL__FROM=z2Lab OrderEntry <lab-noreply@klinik-im-park.ch>
 ```
 
-### Office 365 / Exchange Online (OAuth2)
+### Outlook / Microsoft 365 — three variants
+
+"Outlook" can mean different things; pick by account type:
+
+| Account type | Domain ends in | Recommended variant |
+|---|---|---|
+| Outlook.com / Hotmail / Live (personal) | `@outlook.com`, `@hotmail.com`, `@live.com` | A — App Password |
+| Microsoft 365 / Office 365 (business) | `@yourcompany.ch` (Microsoft 365 tenant) | B — OAuth2 (production) or C — SMTP Auth (if admin allows) |
+| Exchange on-premise | corporate `@firma.ch` with own server | D — generic SMTP |
+
+#### A. Outlook.com / Hotmail / Live (personal) — App Password
+
+Same idea as Gmail App Passwords. Requires 2-Factor Authentication.
+
+1. https://account.microsoft.com/security → **"Erweiterte Sicherheitsoptionen" / "Advanced security options"**
+2. Enable **"Zweistufige Überprüfung" / "Two-step verification"**
+3. Scroll down → **"Neues App-Kennwort erstellen" / "Create a new app password"**
+4. Microsoft shows a 16-character password ONCE — copy it
+
+```bash
+ORDERENTRY_MAIL__PROVIDER=smtp
+ORDERENTRY_MAIL__AUTH_TYPE=APP_PASSWORD
+ORDERENTRY_MAIL__HOST=smtp-mail.outlook.com
+ORDERENTRY_MAIL__PORT=587
+ORDERENTRY_MAIL__SECURE=false
+ORDERENTRY_MAIL__USER=your.address@outlook.com
+ORDERENTRY_MAIL__PASSWORD=abcdefghijklmnop
+ORDERENTRY_MAIL__FROM=z2Lab OrderEntry <your.address@outlook.com>
+```
+
+> Provider is `smtp` (not `outlook`) — the code has no dedicated Outlook path. `smtp` + `APP_PASSWORD` is the right choice.
+
+#### B. Microsoft 365 / Office 365 (business) — OAuth2 (recommended for production)
+
+Microsoft disabled basic auth for SMTP in October 2022 for most tenants — OAuth2 is the official path.
 
 ```bash
 ORDERENTRY_MAIL__PROVIDER=smtp_oauth2
 ORDERENTRY_MAIL__AUTH_TYPE=OAUTH2
 ORDERENTRY_MAIL__HOST=smtp.office365.com
 ORDERENTRY_MAIL__PORT=587
-ORDERENTRY_MAIL__USER=lab-noreply@klinik.ch
-ORDERENTRY_MAIL__OAUTH_CLIENT_ID=<azure app id>
-ORDERENTRY_MAIL__OAUTH_CLIENT_SECRET=<azure app secret>
-ORDERENTRY_MAIL__OAUTH_REFRESH_TOKEN=<refresh token>
-ORDERENTRY_MAIL__FROM=z2Lab OrderEntry <lab-noreply@klinik.ch>
+ORDERENTRY_MAIL__SECURE=false
+ORDERENTRY_MAIL__USER=lab-noreply@firma.ch
+ORDERENTRY_MAIL__OAUTH_CLIENT_ID=12345678-aaaa-bbbb-cccc-1234567890ab
+ORDERENTRY_MAIL__OAUTH_CLIENT_SECRET=Z3p8Q~xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ORDERENTRY_MAIL__OAUTH_REFRESH_TOKEN=1//0gAbCdEfGhIjKlMnOpQrStUvWxYz1234567890
+ORDERENTRY_MAIL__FROM=z2Lab OrderEntry <lab-noreply@firma.ch>
 ```
+
+**One-time Azure setup (~30 min):**
+1. **Azure Portal** → https://portal.azure.com → **Microsoft Entra ID** → **App registrations** → **New registration**
+2. Name: `z2Lab OrderEntry SMTP` → Account type: **Single tenant** → **Register**
+3. **API permissions** → **Add a permission** → **Microsoft Graph** → **Delegated** → tick `Mail.Send` and `SMTP.Send` → **Add**
+4. **Grant admin consent** for the tenant
+5. **Certificates & secrets** → **New client secret** → copy the value → use as `OAUTH_CLIENT_SECRET`
+6. **Overview** → copy **Application (client) ID** → use as `OAUTH_CLIENT_ID`
+7. Run a one-shot OAuth2 flow (e.g. via Microsoft's `oauth2-proxy`, the Azure AD CLI, or a small Node script using `msal-node`) to obtain the **refresh token** with scope `https://outlook.office.com/SMTP.Send offline_access` → use as `OAUTH_REFRESH_TOKEN`
+
+#### C. Microsoft 365 — SMTP Auth (only if your admin enabled it)
+
+Works only when the tenant admin has enabled "**Authenticated SMTP**" / "**SMTP AUTH submission**" for the mailbox. Microsoft disables this by default.
+
+```bash
+ORDERENTRY_MAIL__PROVIDER=smtp
+ORDERENTRY_MAIL__AUTH_TYPE=APP_PASSWORD
+ORDERENTRY_MAIL__HOST=smtp.office365.com
+ORDERENTRY_MAIL__PORT=587
+ORDERENTRY_MAIL__SECURE=false
+ORDERENTRY_MAIL__USER=lab-noreply@firma.ch
+ORDERENTRY_MAIL__PASSWORD=<mailbox password or app password>
+ORDERENTRY_MAIL__FROM=z2Lab OrderEntry <lab-noreply@firma.ch>
+```
+
+**Admin enables SMTP Auth** for that one mailbox (Microsoft 365 Admin Center):
+- **Users** → select the mailbox → **Mail** → **Manage email apps** → check **Authenticated SMTP**
+- Or PowerShell: `Set-CASMailbox -Identity lab-noreply@firma.ch -SmtpClientAuthenticationDisabled $false`
+
+> Microsoft does not recommend this path for production. Use OAuth2 (variant B) instead. C is acceptable for tests / migration windows only.
+
+#### D. Microsoft 365 SMTP Relay — IP allow-list, no auth (own-domain only)
+
+Sends only to addresses on **your own** Microsoft 365 domain, no auth, but the server's egress IP must be on the connector's allow-list.
+
+```bash
+ORDERENTRY_MAIL__PROVIDER=smtp
+ORDERENTRY_MAIL__AUTH_TYPE=NONE
+ORDERENTRY_MAIL__HOST=firma-ch.mail.protection.outlook.com
+ORDERENTRY_MAIL__PORT=25
+ORDERENTRY_MAIL__SECURE=false
+ORDERENTRY_MAIL__FROM=z2Lab OrderEntry <noreply@firma.ch>
+```
+
+> Set up in Microsoft 365 Admin Center → **Exchange admin center** → **Mail flow** → **Connectors** → "From your organization's email server to Microsoft 365" → enter the server's static IP. Hostname pattern: `<tenant-domain-with-dashes>.mail.protection.outlook.com`.
+
+#### Outlook-specific troubleshooting
+
+| Error | Cause | Fix |
+|---|---|---|
+| `5.7.57 Client not authenticated to send mail` | No app password set, or SMTP Auth disabled on mailbox | Use variant B (OAuth2), or have admin enable SMTP Auth (variant C) |
+| `5.7.139 Authentication unsuccessful, basic authentication is disabled` | Tenant has Basic Auth fully blocked | Switch to variant B (OAuth2). C will not work — there is no override |
+| `5.7.708 Service unavailable. Access denied, traffic not accepted from this IP` | Microsoft sees the source IP as suspicious (common from cloud hosters like Vercel) | Use a relay (variant D) or run the server from an on-prem IP |
+| Timeout on port 587 from Vercel/cloud | Some egress IPs are blocked by Microsoft | Use SendGrid/SMTP relay or HIN; production-grade Microsoft delivery from Vercel is unreliable |
+
+---
 
 ### HIN (Swiss Health Info Net) — production for patient data
 
