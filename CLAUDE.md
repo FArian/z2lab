@@ -1854,12 +1854,18 @@ Failing to update all four is a documentation violation.
 
 ```typescript
 servers: [
-  { url: "/api/v1", description: "API v1 — stable, recommended for external clients" },
-  { url: "/api",    description: "Unversioned — legacy, backward-compatible" },
+  { url: "/api/v1", description: "API v1 — stable, the only documented server" },
 ],
 ```
 
-The v1 server is listed first so Swagger UI defaults to it.
+**Only `/api/v1` is documented.** The previous spec listed an unversioned
+`/api` legacy entry as a second server — this caused Swagger UI to issue
+requests against paths like `/api/bridge/jobs` (404) instead of
+`/api/v1/bridge/jobs`. Removed 2026-04-26.
+
+Unversioned `/api/*` routes still exist in the codebase (login, me, launch,
+etc.) and remain reachable, but they are intentionally **not** documented
+in OpenAPI. New endpoints MUST be created under `/api/v1/`.
 
 ---
 

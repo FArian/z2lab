@@ -56,11 +56,7 @@ export const openApiSpec = {
   servers: [
     {
       url: "/api/v1",
-      description: "API v1 — stable, recommended for all external clients and integrations",
-    },
-    {
-      url: "/api",
-      description: "Unversioned — legacy path, maintained for backward compatibility",
+      description: "API v1 — stable, the only documented server",
     },
   ],
   tags: [
