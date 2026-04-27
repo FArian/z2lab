@@ -58,6 +58,7 @@ const SPRING_LEVELS: readonly LoggerLevel[] = [
 
 function toSpringLevel(level: LogLevel): LoggerLevel {
   switch (level) {
+    case "trace":  return "TRACE";
     case "debug":  return "DEBUG";
     case "info":   return "INFO";
     case "warn":   return "WARN";
@@ -68,7 +69,7 @@ function toSpringLevel(level: LogLevel): LoggerLevel {
 
 function toAppLevel(level: LoggerLevel): LogLevel | null {
   switch (level) {
-    case "TRACE":
+    case "TRACE": return "trace";
     case "DEBUG": return "debug";
     case "INFO":  return "info";
     case "WARN":  return "warn";

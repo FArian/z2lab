@@ -38,6 +38,7 @@ interface UserProfile {
 // ── Option lists ──────────────────────────────────────────────────────────────
 
 const LOG_LEVEL_OPTIONS: Array<{ value: ClientLogLevel; label: string }> = [
+  { value: "trace",  label: "Trace"  },
   { value: "debug",  label: "Debug"  },
   { value: "info",   label: "Info"   },
   { value: "warn",   label: "Warn"   },

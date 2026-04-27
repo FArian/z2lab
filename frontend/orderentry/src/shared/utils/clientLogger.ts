@@ -17,11 +17,12 @@
 import { RuntimeConfig, type ClientLogLevel } from "@/shared/config/RuntimeConfig";
 
 const LEVEL_RANK: Record<ClientLogLevel, number> = {
-  debug: 0,
-  info: 1,
-  warn: 2,
-  error: 3,
-  silent: 4,
+  trace:  0,
+  debug:  1,
+  info:   2,
+  warn:   3,
+  error:  4,
+  silent: 5,
 };
 
 function emit(
@@ -43,6 +44,7 @@ function emit(
   });
 
   switch (level) {
+    case "trace":
     case "debug":
       console.debug(line);
       break;
@@ -58,6 +60,7 @@ function emit(
 }
 
 export interface ClientLogger {
+  trace(message: string, meta?: Record<string, unknown>): void;
   debug(message: string, meta?: Record<string, unknown>): void;
   info(message: string, meta?: Record<string, unknown>): void;
   warn(message: string, meta?: Record<string, unknown>): void;
@@ -70,6 +73,7 @@ export interface ClientLogger {
  */
 export function createClientLogger(ctx: string): ClientLogger {
   return {
+    trace: (msg, meta) => emit("trace", ctx, msg, meta),
     debug: (msg, meta) => emit("debug", ctx, msg, meta),
     info:  (msg, meta) => emit("info",  ctx, msg, meta),
     warn:  (msg, meta) => emit("warn",  ctx, msg, meta),

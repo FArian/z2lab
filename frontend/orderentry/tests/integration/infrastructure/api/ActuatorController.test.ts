@@ -165,6 +165,27 @@ describe("ActuatorController.loggers / loggerByName / updateLogger", () => {
     // Reset for other tests
     await ctrl.updateLogger("ROOT", { configuredLevel: null });
   });
+
+  it("TRACE round-trips losslessly (set TRACE → GET shows TRACE, not DEBUG)", async () => {
+    const ctrl = new ActuatorController();
+    const set = await ctrl.updateLogger("ROOT", { configuredLevel: "TRACE" });
+    expect(set.ok).toBe(true);
+    expect(set.configuredLevel).toBe("TRACE");
+    expect(set.effectiveLevel).toBe("TRACE");
+
+    const get = ctrl.loggerByName("ROOT");
+    expect(get?.configuredLevel).toBe("TRACE");
+    expect(get?.effectiveLevel).toBe("TRACE");
+
+    // Reset for other tests
+    await ctrl.updateLogger("ROOT", { configuredLevel: null });
+  });
+
+  it("loggers() exposes all 6 Spring levels including TRACE and OFF", () => {
+    const ctrl = new ActuatorController();
+    const loggers = ctrl.loggers();
+    expect(loggers.levels).toEqual(["TRACE", "DEBUG", "INFO", "WARN", "ERROR", "OFF"]);
+  });
 });
 
 describe("ActuatorController.envProperties", () => {

@@ -19,7 +19,7 @@
 
 import { LOCALES, isLocale, type Locale } from "@/shared/config/localesConfig";
 
-export type ClientLogLevel = "debug" | "info" | "warn" | "error" | "silent";
+export type ClientLogLevel = "trace" | "debug" | "info" | "warn" | "error" | "silent";
 /**
  * Re-export of Locale as AppLanguage for backward compatibility.
  * The authoritative list of supported languages lives in localesConfig.ts.
@@ -50,7 +50,7 @@ const DEFAULTS: Readonly<RuntimeSettings> = {
 
 // ── Validators ────────────────────────────────────────────────────────────────
 
-const VALID_LEVELS: ReadonlyArray<ClientLogLevel> = ["debug", "info", "warn", "error", "silent"];
+const VALID_LEVELS: ReadonlyArray<ClientLogLevel> = ["trace", "debug", "info", "warn", "error", "silent"];
 /**
  * Derived from localesConfig.LOCALES — adding a locale there automatically
  * makes it a valid value here without touching this file.

@@ -265,7 +265,7 @@ const ENV_SCHEMA: ReadonlyArray<{
   // ── Logging ────────────────────────────────────────────────────────────────
   {
     key:             envKey("LOG__LEVEL"),
-    description:     "Minimum log level. Accepted values: debug | info | warn | error | silent",
+    description:     "Minimum log level. Accepted values: trace | debug | info | warn | error | silent",
     default:         "info",
     required:        false,
     writable:        true,

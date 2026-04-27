@@ -23,15 +23,21 @@
  */
 
 // ── Log level ordering ────────────────────────────────────────────────────────
+//
+// `trace` is the most verbose level. It exists so the Spring Boot Actuator
+// loggers endpoint can round-trip TRACE without lossy aliasing to DEBUG.
+// In our codebase trace and debug are conceptually similar — use trace for
+// per-iteration loop diagnostics that even debug would not warrant.
 
-export type LogLevel = "debug" | "info" | "warn" | "error" | "silent";
+export type LogLevel = "trace" | "debug" | "info" | "warn" | "error" | "silent";
 
 const LEVEL_RANK: Record<LogLevel, number> = {
-  debug: 0,
-  info: 1,
-  warn: 2,
-  error: 3,
-  silent: 4,
+  trace:  0,
+  debug:  1,
+  info:   2,
+  warn:   3,
+  error:  4,
+  silent: 5,
 };
 
 function parseLevel(raw: string): LogLevel {
@@ -206,10 +212,16 @@ export class Logger {
     const line = format(level, this.ctx, message, meta, this.traceId);
     if (level === "error" || level === "warn") {
       console.error(line);
+    } else if (level === "debug" || level === "trace") {
+      console.debug(line);
     } else {
       console.log(line);
     }
     appendToFile(line);
+  }
+
+  trace(message: string, meta?: Record<string, unknown>): void {
+    this.emit("trace", message, meta);
   }
 
   debug(message: string, meta?: Record<string, unknown>): void {
