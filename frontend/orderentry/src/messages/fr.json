@@ -771,6 +771,7 @@
     "refreshing": "Chargement…",
     "filterLevel": "Niveau de log",
     "levelAll": "Tous",
+    "levelTrace": "TRACE",
     "levelDebug": "DEBUG",
     "levelInfo": "INFO",
     "levelWarn": "WARN",

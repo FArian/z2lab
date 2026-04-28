@@ -16,7 +16,7 @@ import { formatDate } from "@/shared/utils/formatDate";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
-type LogLevel = "debug" | "info" | "warn" | "error" | "";
+type LogLevel = "trace" | "debug" | "info" | "warn" | "error" | "";
 
 interface LogEntry {
   time: string;
@@ -37,6 +37,7 @@ interface LogsResponse {
 
 const LEVELS: { value: LogLevel; labelKey: string }[] = [
   { value: "",      labelKey: "logs.levelAll"   },
+  { value: "trace", labelKey: "logs.levelTrace" },
   { value: "debug", labelKey: "logs.levelDebug" },
   { value: "info",  labelKey: "logs.levelInfo"  },
   { value: "warn",  labelKey: "logs.levelWarn"  },
@@ -49,6 +50,7 @@ function levelClass(level: string): string {
     case "warn":  return "text-zt-warning-text font-medium";
     case "info":  return "text-zt-info";
     case "debug": return "text-zt-text-tertiary";
+    case "trace": return "text-zt-text-tertiary opacity-70";
     default:      return "text-zt-text-secondary";
   }
 }

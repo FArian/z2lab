@@ -771,6 +771,7 @@
     "refreshing": "Lädt…",
     "filterLevel": "Log-Level",
     "levelAll": "Alle",
+    "levelTrace": "TRACE",
     "levelDebug": "DEBUG",
     "levelInfo": "INFO",
     "levelWarn": "WARN",

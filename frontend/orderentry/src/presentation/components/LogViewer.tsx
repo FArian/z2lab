@@ -35,6 +35,7 @@ interface LogsResponse {
 // ── Constants ──────────────────────────────────────────────────────────────────
 
 const LEVEL_COLORS: Record<string, string> = {
+  trace: "bg-gray-50 text-gray-500",
   debug: "bg-gray-100 text-gray-600",
   info:  "bg-blue-100 text-blue-700",
   warn:  "bg-yellow-100 text-yellow-700",
@@ -127,6 +128,7 @@ export function LogViewer() {
           aria-label={t("settings.logViewerLevel")}
         >
           <option value="">{t("settings.logViewerAllLevels")}</option>
+          <option value="trace">trace</option>
           <option value="debug">debug</option>
           <option value="info">info</option>
           <option value="warn">warn</option>

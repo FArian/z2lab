@@ -3,7 +3,7 @@
  *
  * Query parameters:
  *   tail    — number of lines to read from the end of the file (default: 200, max: 1000)
- *   level   — filter by minimum level: debug | info | warn | error (default: all)
+ *   level   — filter by minimum level: trace | debug | info | warn | error (default: all)
  *   search  — filter entries whose `msg` or `ctx` contains this string (case-insensitive)
  *
  * Response shape:
@@ -35,7 +35,7 @@ interface LogEntry {
 }
 
 const LEVEL_RANK: Record<string, number> = {
-  debug: 0, info: 1, warn: 2, error: 3,
+  trace: 0, debug: 1, info: 2, warn: 3, error: 4,
 };
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
